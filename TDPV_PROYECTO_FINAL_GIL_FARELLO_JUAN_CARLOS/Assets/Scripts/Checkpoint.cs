@@ -9,19 +9,23 @@ public class Checkpoint : MonoBehaviour
     private bool checkpoint_enabled;
     public GameObject player;
     public GameObject trigger_to_save;
+    private Animator animator;
+    private float delay;
     void Start()
     {
-       
+        animator = GetComponent<Animator>();
         checkpoint_passed = false;
         checkpoint_enabled = false;
+        delay = 0;
     }
     void Update()
     {
-
-            if (checkpoint_passed == true && checkpoint_enabled == false)
-            {
+        if (checkpoint_passed == true && checkpoint_enabled == false)
+        {
             if(Input.GetKeyUp(KeyCode.F))
             {
+                delay += Time.deltaTime;
+                animator.enabled = true;
                 checkpoint_number += 1;
                 player.gameObject.GetComponent<CharController>().Set_respawn_point(checkpoint_number);
                 trigger_to_save.gameObject.GetComponentInChildren<BoxCollider>().enabled = false; 
@@ -29,9 +33,9 @@ public class Checkpoint : MonoBehaviour
                 checkpoint_passed = false;
                 checkpoint_enabled = true;
             }
-
-            
-            }
+ 
+        }
+      
     }
       private void OnTriggerEnter(Collider other)
       {
