@@ -80,7 +80,15 @@
     <Compile Include="Assets\Scripts\ElevatorFinal.cs" />
     <Compile Include="Assets\Scripts\ElevatorSpecial.cs" />
     <Compile Include="Assets\Scripts\FalseGround.cs" />
+    <Compile Include="Assets\Scripts\FlashingLights.cs" />
     <Compile Include="Assets\Scripts\LightChange.cs" />
+    <Compile Include="Assets\Scripts\LightPathFollower.cs" />
+    <Compile Include="Assets\Scripts\LightPathFollower1.cs" />
+    <Compile Include="Assets\Scripts\LightPathFollower2.cs" />
+    <Compile Include="Assets\Scripts\LightPathFollower3.cs" />
+    <Compile Include="Assets\Scripts\LightPathFollower4.cs" />
+    <Compile Include="Assets\Scripts\LightPathFollower5.cs" />
+    <Compile Include="Assets\Scripts\LightSlide.cs" />
     <Compile Include="Assets\Scripts\ScriptToLevel02.cs" />
     <Compile Include="Assets\Scripts\TextureResize.cs" />
     <Compile Include="Assets\Scripts\TriggerForSplat.cs" />
