@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AtlasScript.cs" />
     <Compile Include="Assets\Scripts\BackgroundScroller.cs" />
     <Compile Include="Assets\Scripts\CharController.cs" />
     <Compile Include="Assets\Scripts\Checkpoint.cs" />
@@ -79,9 +80,19 @@
     <Compile Include="Assets\Scripts\ElevatorFinal.cs" />
     <Compile Include="Assets\Scripts\ElevatorSpecial.cs" />
     <Compile Include="Assets\Scripts\FalseGround.cs" />
+    <Compile Include="Assets\Scripts\FlashingLights.cs" />
+    <Compile Include="Assets\Scripts\LightChange.cs" />
+    <Compile Include="Assets\Scripts\LightPathFollower.cs" />
+    <Compile Include="Assets\Scripts\LightPathFollower1.cs" />
+    <Compile Include="Assets\Scripts\LightPathFollower2.cs" />
+    <Compile Include="Assets\Scripts\LightPathFollower3.cs" />
+    <Compile Include="Assets\Scripts\LightPathFollower4.cs" />
+    <Compile Include="Assets\Scripts\LightPathFollower5.cs" />
+    <Compile Include="Assets\Scripts\LightSlide.cs" />
     <Compile Include="Assets\Scripts\ScriptToLevel02.cs" />
     <Compile Include="Assets\Scripts\TextureResize.cs" />
     <Compile Include="Assets\Scripts\TriggerForSplat.cs" />
+    <Compile Include="Assets\Scripts\TriggerForSplatSpecial.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/USER/Documents/TDPV_PROYECTO_FINAL_GIL_FARELLO_JUAN_CARLOS/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

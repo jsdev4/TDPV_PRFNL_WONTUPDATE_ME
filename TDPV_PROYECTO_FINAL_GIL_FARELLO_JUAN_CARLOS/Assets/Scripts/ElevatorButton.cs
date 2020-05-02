@@ -6,13 +6,21 @@ public class ElevatorButton : MonoBehaviour
 {
     private bool can_use;
     public GameObject elevator;
+    public GameObject lights;
+
     void Start()
     {
+      
         can_use = false;
+
+
+
+        
     }
     void Update()
     {
-        if(can_use==true&&elevator.gameObject.GetComponent<Elevator>().Return_if_is_up()==false)
+
+        if (can_use==true&&elevator.gameObject.GetComponent<Elevator>().Return_if_is_up()==false)
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
@@ -27,6 +35,7 @@ public class ElevatorButton : MonoBehaviour
             }
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

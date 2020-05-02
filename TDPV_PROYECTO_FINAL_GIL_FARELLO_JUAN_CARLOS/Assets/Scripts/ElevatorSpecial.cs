@@ -17,6 +17,7 @@ public class ElevatorSpecial : MonoBehaviour
     private int level;
     private bool can_press;
     private float delay1;
+    private bool has_stopped;
     void Start()
     {
         can_press=true;
@@ -113,6 +114,10 @@ public class ElevatorSpecial : MonoBehaviour
                
 
             }
+            if (has_stopped == true)
+            {
+                transform.Translate(Vector3.down * 0 * Time.deltaTime);
+            }
             level = 0;
 
         }
@@ -136,6 +141,10 @@ public class ElevatorSpecial : MonoBehaviour
     public bool Return_if_on_board()
     {
         return on_board;
+    }
+    public void Set_if_stopped(bool stp)
+    {
+        has_stopped = stp;
     }
     private void OnCollisionEnter(Collision collision)
     {
