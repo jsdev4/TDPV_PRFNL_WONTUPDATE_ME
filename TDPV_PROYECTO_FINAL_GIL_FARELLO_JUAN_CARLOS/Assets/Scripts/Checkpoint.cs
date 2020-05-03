@@ -57,4 +57,11 @@ public class Checkpoint : MonoBehaviour
               checkpoint_passed = true;
           }
       }
+      private void OnTriggerExit(Collider other)
+      {
+          if (other.gameObject.CompareTag("Player"))
+          {
+             checkpoint_passed = false;
+          }
+      }
 }
