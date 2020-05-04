@@ -20,6 +20,7 @@ public class CharController : MonoBehaviour
     private int lifes;
     private int respawn_point;
     private float delay_for_interacting;
+    private float delay_for_respawn;
     public GameObject quad;
     public GameObject respawn01;
     public GameObject respawn00;
@@ -29,12 +30,13 @@ public class CharController : MonoBehaviour
     {
         respawn_point = 0;
         delay_for_interacting = 0;
+        delay_for_respawn = 0;
         has_respawned = false;
         rb = GetComponent<Rigidbody>();
         is_moving = false;
         is_jumping = false;
         is_alive = true;
-        lifes = 5;
+        lifes = 3;
         can_jump = false;
         is_interacting = false;
     }
@@ -113,8 +115,14 @@ public class CharController : MonoBehaviour
            
            if (lifes >= 1 && has_respawned == false)
            {
-                is_alive = true;
-                has_respawned = true;
+                delay_for_respawn += Time.deltaTime;
+                if (delay_for_respawn >= 3)
+                {
+                    delay_for_respawn = 0;
+                    is_moving = false;
+                    has_respawned = true;
+                    is_alive = true;
+                }
            }
         } 
         if(has_respawned==true&&respawn_point==0)

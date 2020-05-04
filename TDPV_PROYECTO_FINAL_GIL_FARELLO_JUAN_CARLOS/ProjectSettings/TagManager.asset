@@ -9,6 +9,8 @@ TagManager:
   - Box
   - TriggerForFalseGround
   - MetallicStructure
+  - NpcOnDeadZone
+  - deadZone
   layers:
   - Default
   - TransparentFX
