@@ -10,6 +10,8 @@ TagManager:
   - TriggerForFalseGround
   - MetallicStructure
   - NpcOnDeadZone
+  - deadZone
+  - HookCollider
   layers:
   - Default
   - TransparentFX
