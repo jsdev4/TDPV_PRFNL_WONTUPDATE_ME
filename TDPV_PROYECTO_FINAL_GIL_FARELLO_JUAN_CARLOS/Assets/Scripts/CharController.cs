@@ -173,5 +173,10 @@ public class CharController : MonoBehaviour
             is_jumping = false;
         }
     }
+    public void Set_if_is_on_the_hook()
+    {
+        speed = 0;
+        is_interacting = false;
+    }
 }
 
