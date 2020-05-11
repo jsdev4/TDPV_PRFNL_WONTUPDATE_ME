@@ -6,14 +6,10 @@ public class DeadZoneTrigger : MonoBehaviour
 {
 
     private bool player_is_here;
-    private bool npc_is_here;
     public GameObject player;
-    public GameObject npc;
-
     void Start()
     { 
         player_is_here = false;
-        npc_is_here = false;
     }
     void Update()
     {
@@ -29,21 +25,12 @@ public class DeadZoneTrigger : MonoBehaviour
         {
             player_is_here = true;
         }
-        if(other.gameObject.CompareTag("NpcOnDeadZone"))
-        {
-            npc_is_here = true;
-        }
-
     }
     private void OnTriggerExit(Collider other)
     {
         if(other.gameObject.CompareTag("Player"))
         {
             player_is_here = false;
-        }
-        if(other.gameObject.CompareTag("NpcOnDeadZone"))
-        {
-            npc_is_here = false;
         }
     }
 }

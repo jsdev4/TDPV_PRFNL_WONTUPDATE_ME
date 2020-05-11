@@ -15,7 +15,6 @@ public class FlashingLights : MonoBehaviour
 
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
 		if (lamp != null)

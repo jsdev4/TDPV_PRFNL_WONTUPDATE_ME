@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AtlasScript : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
         Mesh mesh = GetComponent<MeshFilter>().mesh;

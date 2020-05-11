@@ -17,7 +17,7 @@ public class CharController : MonoBehaviour
     private bool can_jump;
     private bool has_respawned;
     private bool is_interacting;
-    private int lifes;
+    public int lifes;
     private int respawn_point;
     private float delay_for_interacting;
     private float delay_for_respawn;
@@ -36,7 +36,6 @@ public class CharController : MonoBehaviour
         is_moving = false;
         is_jumping = false;
         is_alive = true;
-        lifes = 3;
         can_jump = false;
         is_interacting = false;
     }
