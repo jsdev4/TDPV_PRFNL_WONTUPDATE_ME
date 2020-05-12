@@ -6,25 +6,23 @@ public class LightSlide : MonoBehaviour
 {
     public GameObject light_to_slide;
     private Transform trnsfrm;
-    private Transform this_object;
+    public float speed_of_light;
+    private Vector3 first_pos;
     void Start()
     {
-        this_object = GetComponent<Transform>();
-        trnsfrm = light_to_slide.gameObject.GetComponent<Transform>();
+       
+       trnsfrm = light_to_slide.gameObject.GetComponent<Transform>();
+        first_pos = trnsfrm.position;
     }
-
-    // Update is called once per frame
     void Update()
     {
-        if (trnsfrm.position.x <this_object.localScale.x)
+        if (light_to_slide.gameObject.GetComponent<Transform>().localPosition.x<0.5f)
         {
-            light_to_slide.GetComponent<Transform>().Translate(Vector3.right*1*Time.deltaTime);
+            light_to_slide.gameObject.GetComponent<Transform>().Translate(Vector3.right*speed_of_light*Time.deltaTime);
         }
-        if (trnsfrm.position.x >= this_object.localScale.x)
+        if (light_to_slide.gameObject.GetComponent<Transform>().localPosition.x >= 0.5f)
         {
-            light_to_slide.GetComponent<Transform>().Translate(this_object.localScale.x*-1,0,0);
-
+            light_to_slide.gameObject.GetComponent<Transform>().position = first_pos;
         }
-
     }
 }

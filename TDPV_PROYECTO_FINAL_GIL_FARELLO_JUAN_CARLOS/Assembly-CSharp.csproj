@@ -92,7 +92,6 @@
     <Compile Include="Assets\Scripts\LightPathFollower5.cs" />
     <Compile Include="Assets\Scripts\LightSlide.cs" />
     <Compile Include="Assets\Scripts\NpcDying.cs" />
-    <Compile Include="Assets\Scripts\QuadRotationFix.cs" />
     <Compile Include="Assets\Scripts\ScriptToLevel02.cs" />
     <Compile Include="Assets\Scripts\TextureResize.cs" />
     <Compile Include="Assets\Scripts\TriggerForSplat.cs" />

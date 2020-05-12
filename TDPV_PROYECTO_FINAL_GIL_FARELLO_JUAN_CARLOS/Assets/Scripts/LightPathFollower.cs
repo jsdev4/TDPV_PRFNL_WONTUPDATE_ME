@@ -14,11 +14,9 @@ public class LightPathFollower : MonoBehaviour
 	private Vector3 startPosition;
 	private float delay;
 
-	// Use this for initialization
 	void Start()
 	{
 		delay = 0;
-		//PathNode = GetComponentInChildren<>();
 		CheckNode();
 	}
 
@@ -29,22 +27,17 @@ public class LightPathFollower : MonoBehaviour
 		CurrentPositionHolder = PathNode[CurrentNode].transform.position;
 		GetComponent<Light>().enabled = true;
 	}
-
-	// Update is called once per frame
 	void Update()
-	{
-
+	{ 
 		Timer += Time.deltaTime * MoveSpeed;
 
 		if (Player.transform.position != CurrentPositionHolder)
 		{
 
 			Player.transform.position = Vector3.Lerp(startPosition, CurrentPositionHolder, 1*Timer);
-			
 		}
 		else 
 		{
-			
 			if (CurrentNode < PathNode.Length - 1)
 			{
 				
@@ -64,13 +57,7 @@ public class LightPathFollower : MonoBehaviour
 					CurrentNode = -1;
 					delay=0;
 				}
-				
-
-				
-			}
-			
-			
-			
+			}	
 		}
 	}
 }

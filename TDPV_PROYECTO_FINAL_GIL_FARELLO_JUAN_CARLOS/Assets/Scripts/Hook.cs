@@ -7,23 +7,23 @@ public class Hook : MonoBehaviour
 {
     public bool direction;
     public float speed;
-    private Transform _transform;
+    private Transform trnsfrm;
     public GameObject player;
     private bool player_on_it;
     void Start()
     {
-        _transform = GetComponent<Transform>();
+        trnsfrm = GetComponent<Transform>();
     }
     void Update()
     {
  
         if(direction==true)
         {
-            _transform.Translate(Vector3.right * speed * Time.deltaTime);
+            trnsfrm.Translate(Vector3.right * speed * Time.deltaTime);
         }
        else
         {
-            _transform.Translate(Vector3.left * speed * Time.deltaTime);
+            trnsfrm.Translate(Vector3.left * speed * Time.deltaTime);
         }
        if(player_on_it==true)
         {

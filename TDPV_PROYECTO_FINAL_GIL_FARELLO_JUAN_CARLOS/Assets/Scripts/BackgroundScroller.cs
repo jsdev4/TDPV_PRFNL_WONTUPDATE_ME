@@ -5,7 +5,7 @@ using UnityEngine;
 public class BackgroundScroller : MonoBehaviour
 {
     public GameObject cam;
-    public float speed = 0.5f;
+    public float speed;
 
     void Update()
     {
