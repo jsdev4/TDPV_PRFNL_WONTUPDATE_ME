@@ -10,7 +10,6 @@ public class ElevatorButton01 : MonoBehaviour
     {
         can_use = false;
     }
-
     void Update()
     {
         if (can_use == true &&elevator.gameObject.GetComponent<Elevator>().Return_if_is_up()==true)

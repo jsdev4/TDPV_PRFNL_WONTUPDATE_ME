@@ -8,6 +8,10 @@ TagManager:
   - Elevator
   - Box
   - TriggerForFalseGround
+  - MetallicStructure
+  - NpcOnDeadZone
+  - deadZone
+  - HookCollider
   layers:
   - Default
   - TransparentFX

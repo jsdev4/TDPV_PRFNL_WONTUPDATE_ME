@@ -5,7 +5,6 @@ using UnityEngine;
 public class ElevatorSpecial : MonoBehaviour
 {
     private bool on_board;
-    private bool can_move;
     private float speed;
     public bool is_up;
     public GameObject trigger;
@@ -13,21 +12,16 @@ public class ElevatorSpecial : MonoBehaviour
     public GameObject trigger02;
     public GameObject trigger03;
     public GameObject trigger04;
-    private float delay;
+
     private int level;
-    private bool can_press;
-    private float delay1;
+
+    private bool has_stopped;
     void Start()
     {
-        can_press=true;
-        delay=0;
-        can_move = false;
         speed = 1;
         level = 0;
         is_up = false;
 
-       
-        delay1 = 0;
     }
 
     // Update is called once per frame
@@ -113,6 +107,10 @@ public class ElevatorSpecial : MonoBehaviour
                
 
             }
+            if (has_stopped == true)
+            {
+                transform.Translate(Vector3.down * 0 * Time.deltaTime);
+            }
             level = 0;
 
         }
@@ -136,6 +134,10 @@ public class ElevatorSpecial : MonoBehaviour
     public bool Return_if_on_board()
     {
         return on_board;
+    }
+    public void Set_if_stopped(bool stp)
+    {
+        has_stopped = stp;
     }
     private void OnCollisionEnter(Collision collision)
     {

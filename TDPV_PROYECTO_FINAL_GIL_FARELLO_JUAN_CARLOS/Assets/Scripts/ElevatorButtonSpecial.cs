@@ -27,7 +27,7 @@ public class ElevatorButtonSpecial : MonoBehaviour
        
         if (can_use == true && elevator.gameObject.GetComponent<ElevatorSpecial>().Return_if_on_board() == false)
         {
-            if (Input.GetKeyDown(KeyCode.G))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 elevator.gameObject.GetComponent<ElevatorSpecial>().Set_if_is_up(false);
                 elevator.gameObject.GetComponent<ElevatorSpecial>().Set_level(0);
