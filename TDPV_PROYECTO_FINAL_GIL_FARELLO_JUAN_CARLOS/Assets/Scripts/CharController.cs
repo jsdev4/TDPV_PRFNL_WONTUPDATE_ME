@@ -17,6 +17,7 @@ public class CharController : MonoBehaviour
     private bool can_jump;
     private bool has_respawned;
     private bool is_interacting;
+    private bool is_light_on;
     public int lifes;
     private int respawn_point;
     private float delay_for_interacting;
@@ -25,7 +26,7 @@ public class CharController : MonoBehaviour
     public GameObject respawn01;
     public GameObject respawn00;
     public GameObject respawn02;
-
+    public GameObject[] low_beam_light;
     void Start()
     {
         respawn_point = 0;
@@ -38,6 +39,7 @@ public class CharController : MonoBehaviour
         is_alive = true;
         can_jump = false;
         is_interacting = false;
+        is_light_on = false;
     }
 
     void Update()
@@ -63,6 +65,26 @@ public class CharController : MonoBehaviour
             {
                 is_moving = false;
             }
+            ///Light function--------------------------------
+            if(Input.GetKeyUp(KeyCode.L))
+            {
+                is_light_on = !is_light_on;
+            }
+            if(is_light_on==true)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    low_beam_light[i].gameObject.GetComponent<Light>().enabled = true;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    low_beam_light[i].gameObject.GetComponent<Light>().enabled = false;
+                }
+            }
+            ///endl light function----------------------------
             if (is_moving == false && is_jumping == false)
             {
                 if (is_interacting == true)
