@@ -70,20 +70,6 @@ public class CharController : MonoBehaviour
             {
                 is_light_on = !is_light_on;
             }
-            if(is_light_on==true)
-            {
-                for (int i = 0; i < 3; i++)
-                {
-                    low_beam_light[i].gameObject.GetComponent<Light>().enabled = true;
-                }
-            }
-            else
-            {
-                for (int i = 0; i < 3; i++)
-                {
-                    low_beam_light[i].gameObject.GetComponent<Light>().enabled = false;
-                }
-            }
             ///endl light function----------------------------
             if (is_moving == false && is_jumping == false)
             {
@@ -132,6 +118,7 @@ public class CharController : MonoBehaviour
         }
         if(is_alive==false)
         {
+            is_light_on = false;
             quad.gameObject.GetComponent<Animator>().Play("DyingPlayer");
            
            if (lifes >= 1 && has_respawned == false)
@@ -162,6 +149,20 @@ public class CharController : MonoBehaviour
             transform.position = respawn02.gameObject.GetComponent<Transform>().position;
             has_respawned = false;
         }
+        if (is_light_on == true)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                low_beam_light[i].gameObject.GetComponent<Light>().enabled = true;
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                low_beam_light[i].gameObject.GetComponent<Light>().enabled = false;
+            }
+        }
     }
     public void Set_if_is_dead_zone_or_dead(bool alv)
     {
@@ -182,6 +183,10 @@ public class CharController : MonoBehaviour
     {
         respawn_point = rspwn;
         is_interacting = true;
+    }
+    public void Set_if_is_interacting(bool doing_stuff)
+    {
+        is_interacting = doing_stuff;
     }
     public bool Return_if_is_on_ground()
     {
