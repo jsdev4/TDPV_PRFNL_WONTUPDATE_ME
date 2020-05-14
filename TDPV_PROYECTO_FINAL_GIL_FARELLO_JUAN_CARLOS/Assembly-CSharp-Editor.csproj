@@ -63,12 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\DynamicShadowProjector\Scripts\Editor\DrawSceneObjectEditor.cs" />
-    <Compile Include="Assets\DynamicShadowProjector\Scripts\Editor\DrawTargetObjectEditor.cs" />
-    <Compile Include="Assets\DynamicShadowProjector\Scripts\Editor\EditorBase.cs" />
-    <Compile Include="Assets\DynamicShadowProjector\Scripts\Editor\MipmappedShadowFallbackEditor.cs" />
-    <Compile Include="Assets\DynamicShadowProjector\Scripts\Editor\ProjectorShaderGUI.cs" />
-    <Compile Include="Assets\DynamicShadowProjector\Scripts\Editor\ShadowTextureRendererEditor.cs" />
+    <Compile Include="Assets\Volumetric Lights\Editor\ImageEffects\TonemappingEditor.cs" />
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>C:/Users/USER/Documents/TDPV_PROYECTO_FINAL_GIL_FARELLO_JUAN_CARLOS/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>
@@ -653,6 +648,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{C5B3A5EF-F91F-54B1-FCCA-42539F0D6F08}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{CDF52C7A-57A6-3DCF-6EB2-DB20440F9D47}</Project>
       <Name>Assembly-CSharp</Name>
