@@ -12,6 +12,8 @@ TagManager:
   - NpcOnDeadZone
   - deadZone
   - HookCollider
+  - TriggerForEnemyMovements
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\ElevatorButtonSpecial04.cs" />
     <Compile Include="Assets\Scripts\ElevatorFinal.cs" />
     <Compile Include="Assets\Scripts\ElevatorSpecial.cs" />
+    <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\Scripts\FalseGround.cs" />
     <Compile Include="Assets\Scripts\FlashingLights.cs" />
     <Compile Include="Assets\Scripts\Hook.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Assets\Scripts\NpcDying.cs" />
     <Compile Include="Assets\Scripts\ScriptToLevel02.cs" />
     <Compile Include="Assets\Scripts\TextureResize.cs" />
+    <Compile Include="Assets\Scripts\TriggerForMovements.cs" />
     <Compile Include="Assets\Scripts\TriggerForSplat.cs" />
     <Compile Include="Assets\Scripts\TriggerForSplatSpecial.cs" />
     <Compile Include="Assets\Volumetric Lights\Scripts\VolumetricLight.cs" />
