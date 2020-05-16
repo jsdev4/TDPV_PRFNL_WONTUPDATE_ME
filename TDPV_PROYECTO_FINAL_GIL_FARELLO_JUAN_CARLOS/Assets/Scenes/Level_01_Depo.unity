@@ -72968,6 +72968,7 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1 &1904212716 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5469865425445646029, guid: ed6b88d780628af4cac6f2e6459d2be5,
@@ -72981,6 +72982,8 @@ Transform:
   m_PrefabInstance: {fileID: 5469865425726542881}
   m_PrefabAsset: {fileID: 0}
 =======
+=======
+>>>>>>> Stashed changes
 --- !u!1 &1904212716
 GameObject:
   m_ObjectHideFlags: 0
@@ -73093,6 +73096,9 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 1
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 --- !u!1 &1904879071
 GameObject:
@@ -83232,7 +83238,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       value: 8
+=======
+      value: 3
+>>>>>>> Stashed changes
 =======
       value: 3
 >>>>>>> Stashed changes

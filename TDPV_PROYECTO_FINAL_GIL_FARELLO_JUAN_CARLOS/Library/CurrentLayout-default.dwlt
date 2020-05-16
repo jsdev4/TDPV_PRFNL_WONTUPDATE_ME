@@ -116,7 +116,11 @@ MonoBehaviour:
   m_MaxSize: {x: 12002, y: 8042}
   vertical: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   controlID: 8655
+=======
+  controlID: 22
+>>>>>>> Stashed changes
 =======
   controlID: 22
 >>>>>>> Stashed changes
@@ -145,7 +149,11 @@ MonoBehaviour:
   m_MaxSize: {x: 8002, y: 8042}
   vertical: 1
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   controlID: 8656
+=======
+  controlID: 23
+>>>>>>> Stashed changes
 =======
   controlID: 23
 >>>>>>> Stashed changes
@@ -174,7 +182,11 @@ MonoBehaviour:
   m_MaxSize: {x: 8002, y: 4021}
   vertical: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   controlID: 8657
+=======
+  controlID: 24
+>>>>>>> Stashed changes
 =======
   controlID: 24
 >>>>>>> Stashed changes
@@ -252,9 +264,15 @@ MonoBehaviour:
     width: 1032
     height: 271
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
   m_ActualView: {fileID: 16}
+=======
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 18}
+>>>>>>> Stashed changes
 =======
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 4000, y: 4000}
@@ -410,6 +428,7 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       scrollPos: {x: 0, y: 78}
       m_SelectedIDs: c63a0000
       m_LastClickedID: 15046
@@ -419,6 +438,8 @@ MonoBehaviour:
         m_Name: 
         m_OriginalName: 
 =======
+=======
+>>>>>>> Stashed changes
       scrollPos: {x: 0, y: 158}
       m_SelectedIDs: 44f4ffff
       m_LastClickedID: -3004
@@ -427,6 +448,9 @@ MonoBehaviour:
         m_UserAcceptedRename: 0
         m_Name: Enemies
         m_OriginalName: Enemies
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         m_EditFieldRect:
           serializedVersion: 2
@@ -435,7 +459,11 @@ MonoBehaviour:
           width: 0
           height: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         m_UserData: 0
+=======
+        m_UserData: -2866
+>>>>>>> Stashed changes
 =======
         m_UserData: -2866
 >>>>>>> Stashed changes
@@ -488,9 +516,15 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_Position:
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     m_Target: {x: 14.788228, y: 2.2474427, z: 0.12509316}
     speed: 2
     m_Value: {x: 14.788228, y: 2.2474427, z: 0.12509316}
+=======
+    m_Target: {x: 1.0565882, y: 3.421833, z: -0.75371736}
+    speed: 2
+    m_Value: {x: 1.0565882, y: 3.421833, z: -0.75371736}
+>>>>>>> Stashed changes
 =======
     m_Target: {x: 1.0565882, y: 3.421833, z: -0.75371736}
     speed: 2
@@ -542,6 +576,7 @@ MonoBehaviour:
     m_gridOpacity: 0.5
   m_Rotation:
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     m_Target: {x: 0.4206015, y: 0.009709533, z: -0.00445234, w: 0.90728706}
     speed: 2
     m_Value: {x: 0.42056164, y: 0.009708613, z: -0.004451918, w: 0.9072011}
@@ -550,6 +585,8 @@ MonoBehaviour:
     speed: 2
     m_Value: 2.7247448
 =======
+=======
+>>>>>>> Stashed changes
     m_Target: {x: 0.071012825, y: -0.025250154, z: 0.0018557949, w: 0.9972485}
     speed: 2
     m_Value: {x: 0.071006134, y: -0.025247775, z: 0.0018556202, w: 0.99715453}
@@ -557,6 +594,9 @@ MonoBehaviour:
     m_Target: 1.524745
     speed: 2
     m_Value: 1.524745
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   m_Ortho:
     m_Target: 0
@@ -749,15 +789,21 @@ MonoBehaviour:
       e33: 1
   m_PreviewAnimator: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_AnimatorController: {fileID: 9100000, guid: ee0bb4987fa637a46bbfcf16f9e3ed41,
     type: 2}
   m_BreadCrumbs:
   - m_Target: {fileID: -7867248598275731401, guid: ee0bb4987fa637a46bbfcf16f9e3ed41,
 =======
+=======
+>>>>>>> Stashed changes
   m_AnimatorController: {fileID: 9100000, guid: 7bb8b431bd9407f4881fd1ab48bdc9d4,
     type: 2}
   m_BreadCrumbs:
   - m_Target: {fileID: -6004990070156027136, guid: 7bb8b431bd9407f4881fd1ab48bdc9d4,
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
@@ -812,17 +858,23 @@ MonoBehaviour:
     m_SearchArea: 1
     m_Folders:
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 46
   m_LastFolders:
   - Assets/Scripts
 =======
+=======
+>>>>>>> Stashed changes
     - Assets/Art/Materials/EnemiesMaterials
   m_ViewMode: 1
   m_StartGridSize: 46
   m_LastFolders:
   - Assets/Art/Materials/EnemiesMaterials
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   m_LastFoldersGridSize: 46
   m_LastProjectPath: C:\Users\USER\Documents\TDPV_PROYECTO_FINAL_GIL_FARELLO_JUAN_CARLOS
@@ -830,15 +882,21 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     scrollPos: {x: 0, y: 78}
     m_SelectedIDs: e8550000
     m_LastClickedID: 21992
     m_ExpandedIDs: 00000000bc550000be550000c055000000ca9a3b
 =======
+=======
+>>>>>>> Stashed changes
     scrollPos: {x: 0, y: 120}
     m_SelectedIDs: 50590000
     m_LastClickedID: 22864
     m_ExpandedIDs: 000000005c5500005e550000d2550000d6550000da5500008258000000ca9a3b
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -868,7 +926,11 @@ MonoBehaviour:
     m_SelectedIDs: 
     m_LastClickedID: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     m_ExpandedIDs: 00000000bc550000be550000c055000000ca9a3b
+=======
+    m_ExpandedIDs: 000000005c5500005e550000
+>>>>>>> Stashed changes
 =======
     m_ExpandedIDs: 000000005c5500005e550000
 >>>>>>> Stashed changes
@@ -982,7 +1044,11 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_LastSelectedObjectID: 20550
+=======
+  m_LastSelectedObjectID: -3004
+>>>>>>> Stashed changes
 =======
   m_LastSelectedObjectID: -3004
 >>>>>>> Stashed changes
@@ -1024,7 +1090,11 @@ MonoBehaviour:
   m_PreviewWindow: {fileID: 0}
   m_LastInspectedObjectInstanceID: -1
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_LastVerticalScrollValue: 685
+=======
+  m_LastVerticalScrollValue: 454
+>>>>>>> Stashed changes
 =======
   m_LastVerticalScrollValue: 454
 >>>>>>> Stashed changes
