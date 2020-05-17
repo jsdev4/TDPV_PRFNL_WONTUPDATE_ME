@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class LightPathFollower5 : MonoBehaviour
 {
-
 	public GameObject[] PathNode;
 	public GameObject pointlight;
 	public float MoveSpeed;
@@ -14,14 +13,12 @@ public class LightPathFollower5 : MonoBehaviour
 	private Vector3 startPosition;
 	private float delay;
 	public float max_time_to_reset;
-	// Use this for initialization
 	void Start()
 	{
 		delay = 0;
 		//PathNode = GetComponentInChildren<>();
-		CheckNode();
+		//CheckNode();
 	}
-
 	void CheckNode()
 	{
 		Timer = 0;
@@ -29,25 +26,17 @@ public class LightPathFollower5 : MonoBehaviour
 		CurrentPositionHolder = PathNode[CurrentNode].transform.position;
 		GetComponent<Light>().enabled = true;
 	}
-
-	// Update is called once per frame
 	void Update()
 	{
-
 		Timer += Time.deltaTime * MoveSpeed;
-
 		if (pointlight.transform.position != CurrentPositionHolder)
 		{
-
-			pointlight.transform.position = Vector3.Lerp(startPosition, CurrentPositionHolder, 1*Timer);
-			
+			pointlight.transform.position = Vector3.Lerp(startPosition, CurrentPositionHolder, 1*Timer);	
 		}
 		else 
 		{
-			
 			if (CurrentNode < PathNode.Length - 1)
-			{
-				
+			{	
 				CurrentNode++;
 				CheckNode();
 				if(CurrentNode==0)

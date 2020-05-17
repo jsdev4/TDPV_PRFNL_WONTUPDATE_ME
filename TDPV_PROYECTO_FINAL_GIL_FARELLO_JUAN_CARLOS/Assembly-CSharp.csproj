@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\LightPathFollower3.cs" />
     <Compile Include="Assets\Scripts\LightPathFollower4.cs" />
     <Compile Include="Assets\Scripts\LightPathFollower5.cs" />
+    <Compile Include="Assets\Scripts\LightPathFollower6.cs" />
     <Compile Include="Assets\Scripts\LightSlide.cs" />
     <Compile Include="Assets\Scripts\NpcDying.cs" />
     <Compile Include="Assets\Scripts\ScriptToLevel02.cs" />

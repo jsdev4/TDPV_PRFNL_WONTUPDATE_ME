@@ -170,6 +170,10 @@ public class CharController : MonoBehaviour
         lifes -= 1;
         Debug.Log("lifes :" + lifes);
     }
+    public bool Player_is_alive()
+    {
+        return is_alive;
+    }
     public void Can_jump_on_elevator(bool jump)
     {
         can_jump = jump;
