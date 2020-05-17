@@ -160,4 +160,7 @@ public class EnemyController : MonoBehaviour
         random_to_patrol = Random.Range(0, 2);
         delay_to_random_patrol = 0;
     }
+
 }
+//note: to add energy cells, create an object with script attached, numbers of hits must be restored using a method called 
+//in cell script and the numbers of cells too.if the numbers of cells is full , no cell can be collected as well the hit times.

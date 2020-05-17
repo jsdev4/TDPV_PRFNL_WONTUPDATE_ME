@@ -23,9 +23,9 @@ public class CharController : MonoBehaviour
     private float delay_for_interacting;
     private float delay_for_respawn;
     public GameObject quad;
-    public GameObject respawn01;
-    public GameObject respawn00;
-    public GameObject respawn02;
+    public GameObject[] respawn;
+   // public GameObject respawn00;
+ //   public GameObject respawn02;
     public GameObject[] low_beam_light;
     void Start()
     {
@@ -135,18 +135,20 @@ public class CharController : MonoBehaviour
         } 
         if(has_respawned==true&&respawn_point==0)
         {
-            transform.position = respawn00.gameObject.GetComponent<Transform>().position;
-            
+            transform.position = respawn[0].gameObject.GetComponent<Transform>().position;
+            transform.Translate(0,0,-0.4f);
             has_respawned = false;
         }
         if (has_respawned == true && respawn_point == 1)
         {
-            transform.position = respawn01.gameObject.GetComponent<Transform>().position;
+            transform.position = respawn[1].gameObject.GetComponent<Transform>().position;
+            transform.Translate(0, 0, -0.4f);
             has_respawned = false;
         }
         if (has_respawned == true && respawn_point == 2)
         {
-            transform.position = respawn02.gameObject.GetComponent<Transform>().position;
+            transform.position = respawn[2].gameObject.GetComponent<Transform>().position;
+            transform.Translate(0, 0, -0.4f);
             has_respawned = false;
         }
         if (is_light_on == true)
