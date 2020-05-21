@@ -237,7 +237,7 @@ public class CharController : MonoBehaviour
     {
         can_move = _can_move;
     }
-    public int Get_number_of_lifes()
+    public int Return_number_of_lifes()
     {
         return lifes;
     }

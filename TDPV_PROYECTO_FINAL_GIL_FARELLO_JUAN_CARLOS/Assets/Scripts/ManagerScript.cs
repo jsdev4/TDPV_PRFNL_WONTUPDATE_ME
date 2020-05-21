@@ -82,6 +82,11 @@ public class ManagerScript : MonoBehaviour
                         player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
                         changed = true;
                     }
+                    if (minutes == 0 && seconds == 0)
+                    {
+                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                        changed = true;
+                    }
                 }
                 if(changed==true)
                 {
@@ -103,7 +108,7 @@ public class ManagerScript : MonoBehaviour
             player.gameObject.GetComponent<CharController>().Set_if_is_dead_zone_or_dead(false);
             out_of_time = true;
         }
-        if(out_of_time==true&&player.gameObject.GetComponent<CharController>().Get_number_of_lifes()>0)
+        if(out_of_time==true&&player.gameObject.GetComponent<CharController>().Return_number_of_lifes()>0)
         {
             time_counter_script_inside = 0;
             delay_for_reset_game += Time.deltaTime;
@@ -115,23 +120,10 @@ public class ManagerScript : MonoBehaviour
                 out_of_time = false;
             }
         }
-        if(out_of_time==true&&player.gameObject.GetComponent<CharController>().Get_number_of_lifes()==0)
+        if(out_of_time==true&&player.gameObject.GetComponent<CharController>().Return_number_of_lifes()==0)
         {
             time_counter_script_inside = 0;
             //last point qhen the player dies, from here can be added another scene or return to main menu
         }
     }
-   /* private void OnGUI()
-    {
-        GUI.skin.label.font = game_font;
-       
-        if (paused == false)
-        {
-            minutes = Mathf.FloorToInt(time_counter_script_inside / 60F);
-            seconds = Mathf.FloorToInt(time_counter_script_inside - minutes * 60);
-            string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
-            GUI.skin.label.fontSize = 50;
-            GUI.Label(new Rect((Screen.width / 2) - 130, 30, 250, 100), niceTime);
-        }
-    }*/
 }
