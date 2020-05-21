@@ -22,9 +22,11 @@ public class ManagerScript : MonoBehaviour
     public GameObject player;
     public GameObject battery_icon;
     public GameObject blacknened_background;
+    public GameObject life_icon;
     public Text text_on_screen;
     private int minutes;
     private int seconds;
+
     void Start()
     {
         time_counter_script_inside = time_counter;
@@ -32,7 +34,10 @@ public class ManagerScript : MonoBehaviour
         changed = false;
         paused = false;
         out_of_time = false;
+        
+
     }
+
     void Update()
     {
         time_counter_script_inside -= Time.deltaTime;
@@ -125,5 +130,7 @@ public class ManagerScript : MonoBehaviour
             time_counter_script_inside = 0;
             //last point qhen the player dies, from here can be added another scene or return to main menu
         }
+
+       
     }
 }

@@ -85,6 +85,7 @@
     <Compile Include="Assets\Scripts\FalseGround.cs" />
     <Compile Include="Assets\Scripts\FlashingLights.cs" />
     <Compile Include="Assets\Scripts\Hook.cs" />
+    <Compile Include="Assets\Scripts\LifeIconController.cs" />
     <Compile Include="Assets\Scripts\LightChange.cs" />
     <Compile Include="Assets\Scripts\LightPathFollower.cs" />
     <Compile Include="Assets\Scripts\LightPathFollower1.cs" />
