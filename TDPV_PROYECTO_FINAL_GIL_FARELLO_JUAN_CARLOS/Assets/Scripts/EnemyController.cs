@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public int enemy_difficulty;
     public float speed;
+    public float speed_when_spots_player;
     public bool direction;
     private bool can_attack;
 
@@ -44,7 +46,7 @@ public class EnemyController : MonoBehaviour
         translation_to_left = new Vector3(-1, 0, 0);
         this_object = GetComponent<Transform>();
         Generate_random_number();
-        Debug.Log(random_to_patrol);
+        //Debug.Log(random_to_patrol);
         delay = 0;
         Timer = 0;
         startPosition =light_gun.transform.position;
@@ -71,7 +73,7 @@ public class EnemyController : MonoBehaviour
                     Vector3 newPos = transform.position - dirToTarget;
                     rotation_sprite = new Vector3(1, 1, 1);
                     transform.localScale = rotation_sprite;
-                    transform.position = Vector3.Lerp(transform.position, newPos, 0.02f);
+                    rb.MovePosition( Vector3.Lerp(transform.position, newPos, speed_when_spots_player * Time.deltaTime));
                     Light_slider(false);
                 }
                 if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == true)
@@ -95,7 +97,7 @@ public class EnemyController : MonoBehaviour
                     Vector3 newPos = transform.position - dirToTarget;
                     rotation_sprite = new Vector3(-1, 1, 1);
                     transform.localScale = rotation_sprite;
-                    transform.position = Vector3.Lerp(transform.position, newPos, 0.02f);
+                    rb.MovePosition(Vector3.Lerp(transform.position, newPos, speed_when_spots_player * Time.deltaTime));
                     Light_slider(false);
                 }
                 if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == true)
@@ -138,12 +140,27 @@ public class EnemyController : MonoBehaviour
                     quad.gameObject.GetComponent<Animator>().Play("EnemyIdle");
                 }
             }
-            if (numbers_of_hitted == 100 || numbers_of_hitted == 200 || numbers_of_hitted == 300 || numbers_of_hitted == 400 || numbers_of_hitted == 500)
+            
+            if (enemy_difficulty==0)
             {
-                player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
-                if (player.gameObject.GetComponent<CharController>().Return_number_of_cells() == 0)
+                if (numbers_of_hitted == 100 || numbers_of_hitted == 200 || numbers_of_hitted == 300 || numbers_of_hitted == 400 || numbers_of_hitted == 500)
                 {
-                    Set_new_status();
+                    player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                    if (player.gameObject.GetComponent<CharController>().Return_number_of_cells() == 0)
+                    {
+                        Set_new_status();
+                    }
+                }
+            }
+            if (enemy_difficulty == 1)
+            { 
+                if (numbers_of_hitted == 5 || numbers_of_hitted == 10 || numbers_of_hitted == 15 || numbers_of_hitted == 20 || numbers_of_hitted == 25)
+                {
+                    player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                    if (player.gameObject.GetComponent<CharController>().Return_number_of_cells() == 0)
+                    {
+                        Set_new_status();
+                    }
                 }
             }
         }

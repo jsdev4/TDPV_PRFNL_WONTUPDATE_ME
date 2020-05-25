@@ -23,14 +23,15 @@ public class CharController : MonoBehaviour
     private int respawn_point;
     private float delay_for_interacting;
     private float delay_for_respawn;
-    private int number_of_cells;
+    private float number_of_cells;
 
     public GameObject quad;
     public GameObject[] respawn;
     public GameObject[] low_beam_light;
+    public GameObject manager;
     void Start()
     {
-        number_of_cells = 5;
+       /// number_of_cells = 5;
         respawn_point = 0;
         delay_for_interacting = 0;
         delay_for_respawn = 0;
@@ -74,6 +75,11 @@ public class CharController : MonoBehaviour
                     is_light_on = !is_light_on;
                 }
                 ///endl light function----------------------------
+                ///
+                if(Input.GetKeyUp(KeyCode.I))
+                {
+                    Increase_number_of_cells();
+                }
                 if (is_moving == false && is_jumping == false)
                 {
                     if (is_interacting == true)
@@ -120,7 +126,6 @@ public class CharController : MonoBehaviour
             {
                 is_light_on = false;
                 quad.gameObject.GetComponent<Animator>().Play("DyingPlayer");
-
                 if (lifes >= 1 && has_respawned == false)
                 {
                     delay_for_respawn += Time.deltaTime;
@@ -130,7 +135,7 @@ public class CharController : MonoBehaviour
                         is_moving = false;
                         has_respawned = true;
                         is_alive = true;
-                        number_of_cells = 5;
+                        number_of_cells = manager.gameObject.GetComponent<ManagerScript>().Get_cells_for_timer();
                     }
                 }
             }
@@ -218,11 +223,16 @@ public class CharController : MonoBehaviour
         number_of_cells -= 1;
         Debug.Log(number_of_cells);
     }
+ /*   public void Decrease_half_number_of_cells()
+    {
+        number_of_cells -= 0.5f;
+        Debug.Log(number_of_cells);
+    }*/
     public void Set_number_of_cells(int cells)
     {
         number_of_cells = cells;
     }
-    public int Return_number_of_cells()
+    public float Return_number_of_cells()
     {
         return number_of_cells;
     }
@@ -233,6 +243,10 @@ public class CharController : MonoBehaviour
     public int Return_number_of_lifes()
     {
         return lifes;
+    }
+    private void Increase_number_of_cells()
+    {
+        number_of_cells+=1;
     }
 }
 
