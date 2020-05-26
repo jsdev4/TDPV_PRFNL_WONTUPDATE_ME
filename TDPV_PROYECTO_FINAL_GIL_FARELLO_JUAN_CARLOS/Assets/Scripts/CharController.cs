@@ -223,11 +223,6 @@ public class CharController : MonoBehaviour
         number_of_cells -= 1;
         Debug.Log(number_of_cells);
     }
- /*   public void Decrease_half_number_of_cells()
-    {
-        number_of_cells -= 0.5f;
-        Debug.Log(number_of_cells);
-    }*/
     public void Set_number_of_cells(int cells)
     {
         number_of_cells = cells;

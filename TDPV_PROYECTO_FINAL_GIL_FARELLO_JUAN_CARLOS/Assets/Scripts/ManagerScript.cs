@@ -93,7 +93,10 @@ public class ManagerScript : MonoBehaviour
                 player.gameObject.GetComponent<CharController>().Set_if_player_can_move(true);
                 foreach (GameObject child in enemy)
                 {
-                    child.gameObject.SetActive(true);
+                    if (child != null)
+                    {
+                        child.gameObject.SetActive(true);
+                    }
                 }
                 battery_icon.gameObject.GetComponent<MeshRenderer>().enabled = true;
                 blacknened_background.gameObject.GetComponent<MeshRenderer>().enabled = true;
