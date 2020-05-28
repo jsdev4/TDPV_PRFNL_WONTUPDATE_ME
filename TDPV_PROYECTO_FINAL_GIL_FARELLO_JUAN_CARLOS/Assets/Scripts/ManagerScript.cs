@@ -11,6 +11,7 @@ public class ManagerScript : MonoBehaviour
     private bool paused;
     private bool changed;
     private bool out_of_time;
+    private bool run_out_of_cells;
     public GameObject[] enemy;
     public Texture aTexture;
     public Font game_font;
@@ -32,6 +33,7 @@ public class ManagerScript : MonoBehaviour
         changed = false;
         paused = false;
         out_of_time = false;
+        run_out_of_cells = false;
         if(time_counter_script_inside>0&&time_counter_script_inside<=60)
         {
             player.gameObject.GetComponent<CharController>().Set_number_of_cells(1);
@@ -115,11 +117,12 @@ public class ManagerScript : MonoBehaviour
                         player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
                         changed = true;
                     }
-                    if (minutes == 0 && seconds == 0)
+                  /*  if (minutes == 0 && seconds == 0)
                     {
                         player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
                         changed = true;
-                    }
+                    }*/
+                    //ver si poner un bool y llamar una fuincion o metodo desde acá.
                 }
                 if(changed==true)
                 {
@@ -134,11 +137,28 @@ public class ManagerScript : MonoBehaviour
                         changed = false;
                     }
                 }
+                
             }
+             if(player.gameObject.GetComponent<CharController>().Return_number_of_cells()==0&&run_out_of_cells==false)
+            {
+                if(player.gameObject.GetComponent<CharController>().Get_if_dead_by_enemy() == false)
+                {
+                    player.gameObject.GetComponent<CharController>().Set_if_is_dead_zone_or_dead(false);
+                    foreach (GameObject child in enemy)
+                    {
+                        child.gameObject.GetComponent<EnemyController>().Reset_number_of_hits();
+                    }
+                    run_out_of_cells = true;
+                   
+                }
+               
+            }
+           
         }
-        else if(time_counter_script_inside<0&&out_of_time==false)
+        
+        else if(time_counter_script_inside<=0&&out_of_time==false)
         {
-            player.gameObject.GetComponent<CharController>().Set_if_is_dead_zone_or_dead(false);
+             player.gameObject.GetComponent<CharController>().Set_if_is_dead_zone_or_dead(false);
             out_of_time = true;
         }
 
@@ -146,6 +166,7 @@ public class ManagerScript : MonoBehaviour
         //la idea es que se termine el tiempo  y pierdas indistinto que las vidas sean mas 0
         if(out_of_time==true&&player.gameObject.GetComponent<CharController>().Return_number_of_lifes()>0)
         {
+           
             time_counter_script_inside = 0;
             delay_for_reset_game += Time.deltaTime;
             if (delay_for_reset_game > 3)
@@ -169,5 +190,9 @@ public class ManagerScript : MonoBehaviour
     public int Get_cells_for_timer()
     {
         return cells_on_timer;
+    }
+    public void Reset_run_out_of_cells(bool reset)
+    {
+        run_out_of_cells = reset;
     }
 }

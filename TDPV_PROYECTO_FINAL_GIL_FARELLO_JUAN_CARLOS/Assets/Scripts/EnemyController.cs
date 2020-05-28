@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-
+using UnityEditor.Build;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -194,10 +194,16 @@ public class EnemyController : MonoBehaviour
         numbers_of_hitted++;
         // Debug.Log(numbers_of_hitted);
     }
+    public void Reset_number_of_hits()
+    {
+        numbers_of_hitted = 0;
+    }
     private void Set_new_status()
     {
         player.gameObject.GetComponent<CharController>().Set_if_is_dead_zone_or_dead(false);
+        player.gameObject.GetComponent<CharController>().Set_if_dead_by_enemy(true);
         numbers_of_hitted = 0;
+        Debug.Log(numbers_of_hitted);
     }
     private void Generate_random_number()
     {

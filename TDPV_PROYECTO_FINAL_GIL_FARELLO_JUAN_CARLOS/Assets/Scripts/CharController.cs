@@ -19,6 +19,7 @@ public class CharController : MonoBehaviour
     private bool is_interacting;
     private bool is_light_on;
     private bool can_move;
+    private bool dead_by_enemy;
     public int lifes;
     private int respawn_point;
     private float delay_for_interacting;
@@ -44,6 +45,7 @@ public class CharController : MonoBehaviour
         is_interacting = false;
         is_light_on = false;
         can_move = true;
+        dead_by_enemy = false;
     }
     void Update()
     {
@@ -75,11 +77,6 @@ public class CharController : MonoBehaviour
                     is_light_on = !is_light_on;
                 }
                 ///endl light function----------------------------
-                ///
-                if(Input.GetKeyUp(KeyCode.I))
-                {
-                    Increase_number_of_cells();
-                }
                 if (is_moving == false && is_jumping == false)
                 {
                     if (is_interacting == true)
@@ -121,6 +118,7 @@ public class CharController : MonoBehaviour
                         on_ground = false;
                     }
                 }
+                 
             }
             if (is_alive == false)
             {
@@ -136,6 +134,8 @@ public class CharController : MonoBehaviour
                         has_respawned = true;
                         is_alive = true;
                         number_of_cells = manager.gameObject.GetComponent<ManagerScript>().Get_cells_for_timer();
+                        manager.gameObject.GetComponent<ManagerScript>().Reset_run_out_of_cells(false);
+                        Set_if_dead_by_enemy(false);
                     }
                 }
             }
@@ -178,6 +178,14 @@ public class CharController : MonoBehaviour
         is_alive = alv;
         lifes -= 1;
         Debug.Log("lifes :" + lifes);
+    }
+    public void Set_if_dead_by_enemy(bool enemy)
+    {
+        dead_by_enemy = enemy;
+    }
+    public bool Get_if_dead_by_enemy()
+    {
+        return dead_by_enemy;
     }
     public bool Player_is_alive()
     {
@@ -239,9 +247,10 @@ public class CharController : MonoBehaviour
     {
         return lifes;
     }
-    private void Increase_number_of_cells()
+    public void Increase_number_of_cells()
     {
         number_of_cells+=1;
+        Debug.Log(number_of_cells);
     }
 }
 
