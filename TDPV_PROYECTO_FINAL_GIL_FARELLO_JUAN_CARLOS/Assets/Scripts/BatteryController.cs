@@ -7,13 +7,10 @@ public class BatteryController : MonoBehaviour
     private MeshRenderer battery_mesh;
     public Material[] materials;
     public GameObject player;
-    // Start is called before the first frame update
     void Start()
     {
         battery_mesh = GetComponent<MeshRenderer>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         if(player.gameObject.GetComponent<CharController>().Return_number_of_cells()==5)

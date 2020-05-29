@@ -34,6 +34,10 @@ public class LifeIconController : MonoBehaviour
             rect_transform.localScale = new Vector3(30, 30, 0);
             rect_transform.localPosition = new Vector3(-830, 350, 0);
         }
+        if(player.gameObject.GetComponent<CharController>().Return_number_of_lifes()==0)
+        {
+            life_mesh.enabled = false;
+        }
        
     }
 }

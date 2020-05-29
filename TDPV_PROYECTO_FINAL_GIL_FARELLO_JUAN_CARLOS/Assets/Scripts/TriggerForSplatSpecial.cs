@@ -9,9 +9,10 @@ public class TriggerForSplatSpecial : MonoBehaviour
     private bool stop_elevator;
     public GameObject elevator;
     public GameObject player;
-
+    private float timer;
     void Start()
     {
+        timer = 0;
         stop_elevator = false;
         splatted = false;
     }
@@ -26,8 +27,13 @@ public class TriggerForSplatSpecial : MonoBehaviour
         }
         if (stop_elevator == true)
         {
-            elevator.gameObject.GetComponent<ElevatorSpecial>().Set_if_stopped(false);
-            stop_elevator = false;
+            timer += Time.deltaTime;
+            if (timer >= 5)
+            {
+                elevator.gameObject.GetComponent<ElevatorSpecial>().Set_if_stopped(false);
+                stop_elevator = false;
+                timer = 0;
+            }
         }
     }
     private void OnTriggerEnter(Collider other)

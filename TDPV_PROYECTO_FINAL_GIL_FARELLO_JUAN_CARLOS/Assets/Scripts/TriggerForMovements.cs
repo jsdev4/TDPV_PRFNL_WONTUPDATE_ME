@@ -5,7 +5,8 @@ using UnityEngine;
 public class TriggerForMovements : MonoBehaviour
 {
     public bool direction;
-    public GameObject enemy;
+    public GameObject[] enemy;
+  
     public bool triggers_side;
     void Start()
     {
@@ -16,11 +17,16 @@ public class TriggerForMovements : MonoBehaviour
     {
         if(direction==true&&triggers_side==true)
         {
-            enemy.gameObject.GetComponent<EnemyController>().Set_direction_for_move(true);
+            for (int i = 0; i < enemy.Length; i++) {
+                enemy[i].gameObject.GetComponent<EnemyController>().Set_direction_for_move(true);
+            }
         }
         if(direction==true&&triggers_side==false)
         {
-            enemy.gameObject.GetComponent<EnemyController>().Set_direction_for_move(false);
+            for (int i = 0; i < enemy.Length; i++)
+            {
+                enemy[i].gameObject.GetComponent<EnemyController>().Set_direction_for_move(false);
+            }
         }
     }
     private void OnTriggerEnter(Collider other)

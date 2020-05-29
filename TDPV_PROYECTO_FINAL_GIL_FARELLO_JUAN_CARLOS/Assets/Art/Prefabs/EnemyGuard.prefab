@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 1752244608450895424}
   - component: {fileID: 1752244608450895455}
   - component: {fileID: 1752244608450895452}
-  m_Layer: 0
-  m_Name: EnemyGuard 1
+  - component: {fileID: 1904212723}
+  m_Layer: 8
+  m_Name: EnemyGuard
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,7 +129,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac9b57ff74ac8e45846125504e1e596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy_difficulty: 0
   speed: 5
+  speed_when_spots_player: 1.5
   direction: 1
   quad: {fileID: 1752244608928214807}
   max_distance: 6
@@ -136,6 +139,24 @@ MonoBehaviour:
   target: {fileID: 0}
   player: {fileID: 0}
   light_gun: {fileID: 1752244608751688898}
+  PathNode:
+  - {fileID: 1752244610180305467}
+  - {fileID: 1752244609374533314}
+  MoveSpeed: 1
+  max_time_to_reset: 0
+--- !u!65 &1904212723
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1752244608450895426}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1752244608751688898
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,8 +167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1752244608751688899}
   - component: {fileID: 1752244608751688897}
-  - component: {fileID: 1752244608751688896}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,8 +199,8 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.009791803, b: 0, a: 1}
-  m_Intensity: 4
+  m_Color: {r: 0.20488167, g: 0, b: 1, a: 1}
+  m_Intensity: 5
   m_Range: 5
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -222,31 +242,13 @@ Light:
   m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 5
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &1752244608751688896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1752244608751688898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f129357e5081d648b07d05d920aab12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PathNode:
-  - {fileID: 1752244610180305467}
-  - {fileID: 1752244609374533314}
-  pointlight: {fileID: 1752244608751688898}
-  MoveSpeed: 2
-  max_time_to_reset: 0
 --- !u!1 &1752244608928214807
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +262,7 @@ GameObject:
   - component: {fileID: 1752244608928214803}
   - component: {fileID: 1752244608928214802}
   - component: {fileID: 1752244608928214805}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -307,7 +309,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 86b58902c78bc6a4db5319ab9ba59888, type: 2}
+  - {fileID: 2100000, guid: 9f1dcc0733cc3d944922dda809d1af22, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -373,7 +375,7 @@ GameObject:
   - component: {fileID: 1752244609374533313}
   - component: {fileID: 1752244609374533312}
   - component: {fileID: 1752244609374533315}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TriggerForLightGun (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,7 +468,7 @@ GameObject:
   - component: {fileID: 1752244610180305462}
   - component: {fileID: 1752244610180305465}
   - component: {fileID: 1752244610180305464}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TriggerForLightGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}

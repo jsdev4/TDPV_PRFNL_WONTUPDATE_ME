@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,50 +14,55 @@ public class LightPathFollower1 : MonoBehaviour
 	int CurrentNode;
 	private Vector3 startPosition;
 	private float delay;
-	public float max_time_to_reset;
+
 	void Start()
 	{
-		delay = 0;
-		CheckNode();
+		//CurrentNode = 0;
+
 	}
 
 	void CheckNode()
 	{
 		Timer = 0;
-		startPosition = pointlight.transform.position;
-		CurrentPositionHolder = PathNode[CurrentNode].transform.position;
-		GetComponent<Light>().enabled = true;
+		startPosition = transform.position;
+		CurrentPositionHolder = PathNode[CurrentNode].gameObject.GetComponent<Transform>().position;
+
+		pointlight.gameObject.GetComponent<Light>().enabled = true;
+
 	}
 	void Update()
 	{
+
 		Timer += Time.deltaTime * MoveSpeed;
 
-		if (pointlight.transform.position != CurrentPositionHolder)
+		if (pointlight.gameObject.GetComponent<Transform>().position != CurrentPositionHolder)
 		{
 
-			pointlight.transform.position = Vector3.Lerp(startPosition, CurrentPositionHolder, 1*Timer);
+			pointlight.gameObject.GetComponent<Transform>().position = Vector3.Lerp(startPosition, CurrentPositionHolder, 1 * Timer);
 		}
-		else 
+		else
 		{
 			if (CurrentNode < PathNode.Length - 1)
 			{
+
 				CurrentNode++;
 				CheckNode();
-				if(CurrentNode==0)
+				if (CurrentNode == 0)
 				{
-					GetComponent<Light>().enabled = false;
+					pointlight.gameObject.GetComponent<Light>().enabled = false;
 				}
 			}
-			if (CurrentNode== PathNode.Length -1)
+			if (CurrentNode == PathNode.Length - 1)
 			{
 				delay += Time.deltaTime;
-				if(delay>=max_time_to_reset)
+				if (delay >= 2)
 				{
-					
+
 					CurrentNode = -1;
-					delay=0;
-				}	
+					delay = 0;
+				}
 			}
 		}
+
 	}
 }

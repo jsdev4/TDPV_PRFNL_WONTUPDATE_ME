@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/*
+ * NOT USED FOR NOW*/
+
 
 public class LightPathFollower6 : MonoBehaviour
 {
-
 	public GameObject[] PathNode;
 	public GameObject pointlight;
 	public float MoveSpeed;
@@ -15,7 +17,6 @@ public class LightPathFollower6 : MonoBehaviour
 	private float delay;
 	public float max_time_to_reset;
 	private bool check_node;
-	// Use this for initialization
 	void Start()
 	{
 		delay = 0;
@@ -30,23 +31,18 @@ public class LightPathFollower6 : MonoBehaviour
 	public void CheckNode()
 	{
 		Timer = 0;
-		startPosition = pointlight.transform.position;
-		CurrentPositionHolder = PathNode[CurrentNode].transform.position;
+		startPosition = pointlight.transform.localPosition;
+		CurrentPositionHolder = PathNode[CurrentNode].transform.localPosition;
 		GetComponent<Light>().enabled = true;
 	}
-
-	// Update is called once per frame
 	void Update()
 	{
-		if (check_node == true)
-		{
-			GetComponent<Light>().enabled = true;
 			Timer += Time.deltaTime * MoveSpeed;
 
-			if (pointlight.transform.position != CurrentPositionHolder)
+			if (pointlight.transform.localPosition != CurrentPositionHolder)
 			{
 
-				pointlight.transform.position = Vector3.Lerp(startPosition, CurrentPositionHolder, 1 * Timer);
+				pointlight.transform.localPosition = Vector3.Lerp(startPosition, CurrentPositionHolder, 1 * Timer);
 
 			}
 			else
@@ -72,14 +68,19 @@ public class LightPathFollower6 : MonoBehaviour
 						delay = 0;
 					}
 				}
+			
 			}
+
+		if (check_node == true)
+		{
+			GetComponent<Light>().enabled = true;
 		}
 		else
 		{
 			GetComponent<Light>().enabled = false;
-			CurrentPositionHolder = PathNode[0].transform.position;
-			pointlight.transform.position = PathNode[0].transform.position;
-			
+		//	CurrentPositionHolder = PathNode[0].transform.position;
+		//	pointlight.transform.position = PathNode[0].transform.position;
+
 		}
 	}
 	public void Set_checkNode(bool check)

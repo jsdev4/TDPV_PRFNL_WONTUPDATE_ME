@@ -6,7 +6,7 @@ public class ElevatorFinal : MonoBehaviour
 {
 
     private bool on_board;
-    private float speed;
+    public float speed;
     public bool is_up;
     public GameObject trigger;
     public GameObject trigger01;
@@ -16,7 +16,6 @@ public class ElevatorFinal : MonoBehaviour
     void Start()
     {
         on_board = false;
-        speed = 1;
         has_stopped = false;
     }
     void Update()

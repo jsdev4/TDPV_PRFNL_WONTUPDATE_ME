@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class LightPathFollower : MonoBehaviour
 {
 
 	public GameObject[] PathNode;
-	public GameObject Player;
+	public GameObject pointlight;
 	public float MoveSpeed;
 	float Timer;
 	static Vector3 CurrentPositionHolder;
@@ -16,48 +17,52 @@ public class LightPathFollower : MonoBehaviour
 
 	void Start()
 	{
-		delay = 0;
-		CheckNode();
+		//CurrentNode = 0;
+
 	}
 
 	void CheckNode()
 	{
 		Timer = 0;
-		startPosition = Player.transform.position;
-		CurrentPositionHolder = PathNode[CurrentNode].transform.position;
-		GetComponent<Light>().enabled = true;
+		startPosition =transform.position;
+		CurrentPositionHolder = PathNode[CurrentNode].gameObject.GetComponent<Transform>().position;
+
+		pointlight.gameObject.GetComponent<Light>().enabled=true;
+
 	}
 	void Update()
-	{ 
-		Timer += Time.deltaTime * MoveSpeed;
+	{
 
-		if (Player.transform.position != CurrentPositionHolder)
-		{
+			Timer += Time.deltaTime * MoveSpeed;
 
-			Player.transform.position = Vector3.Lerp(startPosition, CurrentPositionHolder, 1*Timer);
-		}
-		else 
-		{
-			if (CurrentNode < PathNode.Length - 1)
+			if (pointlight.gameObject.GetComponent<Transform>().position != CurrentPositionHolder)
 			{
-				
-				CurrentNode++;
-				CheckNode();
-				if(CurrentNode==0)
+
+				pointlight.gameObject.GetComponent<Transform>().position = Vector3.Lerp(startPosition, CurrentPositionHolder, 1 * Timer);
+			}
+			else
+			{
+				if (CurrentNode < PathNode.Length-1)
 				{
-					GetComponent<Light>().enabled = false;
+
+					CurrentNode++;
+					CheckNode();
+					if (CurrentNode == 0)
+					{
+						pointlight.gameObject.GetComponent<Light>().enabled = false;
+					}
+				}
+				if (CurrentNode == PathNode.Length-1)
+				{
+					delay += Time.deltaTime;
+					if (delay >= 2)
+					{
+
+						CurrentNode = -1;
+						delay = 0;
+					}
 				}
 			}
-			if (CurrentNode== PathNode.Length -1)
-			{
-				delay += Time.deltaTime;
-				if(delay>=2)
-				{
-					
-					CurrentNode = -1;
-					delay=0;
-				}
-			}	
-		}
+
 	}
 }

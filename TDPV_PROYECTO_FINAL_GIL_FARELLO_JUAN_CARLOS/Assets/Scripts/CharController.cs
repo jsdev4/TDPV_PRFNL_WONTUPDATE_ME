@@ -19,20 +19,20 @@ public class CharController : MonoBehaviour
     private bool is_interacting;
     private bool is_light_on;
     private bool can_move;
+    private bool dead_by_enemy;
     public int lifes;
     private int respawn_point;
     private float delay_for_interacting;
     private float delay_for_respawn;
-
-    private int number_of_cells;
+    private float number_of_cells;
 
     public GameObject quad;
     public GameObject[] respawn;
     public GameObject[] low_beam_light;
+    public GameObject manager;
     void Start()
     {
-
-        number_of_cells = 5;
+       /// number_of_cells = 5;
         respawn_point = 0;
         delay_for_interacting = 0;
         delay_for_respawn = 0;
@@ -45,14 +45,13 @@ public class CharController : MonoBehaviour
         is_interacting = false;
         is_light_on = false;
         can_move = true;
+        dead_by_enemy = false;
     }
-
     void Update()
     {
         Vector3 translation = new Vector3(Input.GetAxisRaw("Horizontal"), 0,0);
         if (can_move == true)
         {
-
             if (is_alive == true)
             {
                 rb.MovePosition(transform.position + translation * speed * Time.deltaTime);
@@ -88,15 +87,12 @@ public class CharController : MonoBehaviour
                         {
                             delay_for_interacting = 0;
                             is_interacting = false;
-
                         }
-
                     }
                     if (is_interacting == false)
                     {
                         quad.gameObject.GetComponent<Animator>().Play("IdlePlayer");
                     }
-
                 }
                 if (is_moving == true && is_jumping == false)
                 {
@@ -122,12 +118,12 @@ public class CharController : MonoBehaviour
                         on_ground = false;
                     }
                 }
+                 
             }
             if (is_alive == false)
             {
                 is_light_on = false;
                 quad.gameObject.GetComponent<Animator>().Play("DyingPlayer");
-
                 if (lifes >= 1 && has_respawned == false)
                 {
                     delay_for_respawn += Time.deltaTime;
@@ -137,7 +133,9 @@ public class CharController : MonoBehaviour
                         is_moving = false;
                         has_respawned = true;
                         is_alive = true;
-                        number_of_cells = 5;
+                        number_of_cells = manager.gameObject.GetComponent<ManagerScript>().Get_cells_for_timer();
+                        manager.gameObject.GetComponent<ManagerScript>().Reset_run_out_of_cells(false);
+                        Set_if_dead_by_enemy(false);
                     }
                 }
             }
@@ -180,6 +178,14 @@ public class CharController : MonoBehaviour
         is_alive = alv;
         lifes -= 1;
         Debug.Log("lifes :" + lifes);
+    }
+    public void Set_if_dead_by_enemy(bool enemy)
+    {
+        dead_by_enemy = enemy;
+    }
+    public bool Get_if_dead_by_enemy()
+    {
+        return dead_by_enemy;
     }
     public bool Player_is_alive()
     {
@@ -229,7 +235,7 @@ public class CharController : MonoBehaviour
     {
         number_of_cells = cells;
     }
-    public int Return_number_of_cells()
+    public float Return_number_of_cells()
     {
         return number_of_cells;
     }
@@ -240,6 +246,11 @@ public class CharController : MonoBehaviour
     public int Return_number_of_lifes()
     {
         return lifes;
+    }
+    public void Increase_number_of_cells()
+    {
+        number_of_cells+=1;
+        Debug.Log(number_of_cells);
     }
 }
 
