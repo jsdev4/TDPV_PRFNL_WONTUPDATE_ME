@@ -5,10 +5,15 @@ using UnityEngine;
 public class ElevatorButtonSpecial01 : MonoBehaviour
 {
     private bool can_use;
+    private bool going_move;
+    public float max_time;
+    private float delay_for_elevator;
+    public GameObject player;
     public GameObject elevator;
     void Start()
     {
         can_use = false;
+        going_move = false;
     }
 
     void Update()
@@ -17,8 +22,18 @@ public class ElevatorButtonSpecial01 : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-
-                elevator.gameObject.GetComponent<ElevatorSpecial>().Set_level(2);
+                player.gameObject.GetComponent<CharController>().Set_if_is_interacting(true);
+                going_move = true;
+            }
+            if(going_move==true)
+            {
+                delay_for_elevator += Time.deltaTime;
+                if (delay_for_elevator >= max_time)
+                {
+                    elevator.gameObject.GetComponent<ElevatorSpecial>().Set_level(2);
+                    delay_for_elevator = 0;
+                    going_move = false;
+                }
             }
         }
 
