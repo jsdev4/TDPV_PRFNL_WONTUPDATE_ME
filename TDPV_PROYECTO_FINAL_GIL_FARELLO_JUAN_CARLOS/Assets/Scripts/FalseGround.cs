@@ -10,6 +10,7 @@ public class FalseGround : MonoBehaviour
     private Vector3 respawnpoint;
     private Vector3 displacement;
     private float delay;
+    public float time_for_falling;
     private bool has_touched_the_trigger;
     void Start()
     {
@@ -29,7 +30,7 @@ public class FalseGround : MonoBehaviour
         if(on_board==true)
         {
             delay += Time.deltaTime;
-            if (delay > 2)
+            if (delay > time_for_falling)
             {
                     rb.isKinematic =false;
                 rb.transform.Translate(displacement);
