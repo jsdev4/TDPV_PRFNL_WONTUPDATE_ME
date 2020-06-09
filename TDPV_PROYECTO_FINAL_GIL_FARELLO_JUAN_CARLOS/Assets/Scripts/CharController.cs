@@ -21,6 +21,7 @@ public class CharController : MonoBehaviour
     private bool can_move;
     private bool dead_by_enemy;
     private bool on_the_hook;
+    private bool on_the_special_hook;
     private bool flipped;
     public int lifes;
     private int respawn_point;
@@ -136,16 +137,12 @@ public class CharController : MonoBehaviour
                     quad.gameObject.GetComponent<Animator>().Play("ElectrifiedPlayer");
                     rb.useGravity = false;
                 }
+            
                 else
-                {
+				{
                     rb.useGravity = true;
-                }
-                /*    if (on_the_hook == true)
-                    {
-                        quad.gameObject.GetComponent<Animator>().Play("ElectrifiedPlayer");
-
-
-                    }  */
+				}
+             
                 /*   if (Input.GetKeyDown(KeyCode.Space)&&flipped==true)
                     {
                         rb.AddForce(Vector3.right * jump_speed, ForceMode.Impulse);
@@ -277,10 +274,12 @@ public class CharController : MonoBehaviour
     }
     public void Set_if_is_on_the_hook(bool electrified)
     {
-       // quad.gameObject.GetComponent<Animator>().Play("ElectrifiedPlayer");
-        on_the_hook = electrified;
-       
+        on_the_hook = electrified;  
     }
+    public void Set_if_is_on_the_special_hook(bool electrified)
+	{
+        on_the_special_hook = electrified;
+	}
     public bool Return_if_is_fffffflipped()
 	{
         return flipped;

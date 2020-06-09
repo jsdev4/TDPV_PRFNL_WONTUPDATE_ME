@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Hook : MonoBehaviour
 {
-    public int hook;
+    public int hook_number;
     public bool direction;
     public float speed;
     private Transform trnsfrm;
@@ -28,9 +28,11 @@ public class Hook : MonoBehaviour
          {
             trnsfrm.Translate(Vector3.left * speed * Time.deltaTime);
          }
-         if (hook==0&&player_on_it == true)
+         if (hook_number==0&&player_on_it == true)
          {
             hooks[1].SetActive(false);
+            hooks[2].SetActive(false);
+            hooks[3].SetActive(false);
             player.gameObject.GetComponent<CharController>().Set_if_is_on_the_hook(true);
             player.gameObject.GetComponent<Rigidbody>().MovePosition(currentPosfixed);
             if (Input.GetKeyUp(KeyCode.F))
@@ -48,15 +50,18 @@ public class Hook : MonoBehaviour
                 player_on_it = false; 
             }        
         }      
-        if (player_on_it == false)  
+        if (hook_number==0&&player_on_it == false)  
         {       
             player.gameObject.GetComponent<CharController>().Set_if_is_on_the_hook(false);
-            hooks[1].SetActive(true);    
+            hooks[1].SetActive(true);
+            hooks[2].SetActive(true);
+            hooks[3].SetActive(true);
         }
-        if (hook == 1 && player_on_it == true)
+        if (hook_number==1 && player_on_it == true)
         {
             hooks[0].SetActive(false);
-                
+            hooks[2].SetActive(false);
+            hooks[3].SetActive(false);
             player.gameObject.GetComponent<CharController>().Set_if_is_on_the_hook(true);
             player.gameObject.GetComponent<Rigidbody>().MovePosition(currentPosfixed);
             if (Input.GetKeyUp(KeyCode.F))
@@ -73,11 +78,14 @@ public class Hook : MonoBehaviour
                 player.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.left * 7.5f, ForceMode.Impulse);
                 player_on_it = false;
             }   
-            if (player_on_it == false)
-            {
-                player.gameObject.GetComponent<CharController>().Set_if_is_on_the_hook(false);
-                hooks[0].SetActive(true);
-            }
+            
+        }
+        if (hook_number==1&&player_on_it == false)
+        {
+            player.gameObject.GetComponent<CharController>().Set_if_is_on_the_hook(false);
+            hooks[0].SetActive(true);
+            hooks[2].SetActive(true);
+            hooks[3].SetActive(true);
         }
     }
     private void OnCollisionEnter(Collision collision)

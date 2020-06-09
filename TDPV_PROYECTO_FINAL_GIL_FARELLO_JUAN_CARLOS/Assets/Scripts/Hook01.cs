@@ -6,63 +6,117 @@ using UnityEngine;
 public class Hook01 : MonoBehaviour
 {
     private bool direction;
-    public float speed;
+    public int hook_number;
     private Transform trnsfrm;
     public GameObject player;
     private bool player_on_it;
-    void Start()
+    public GameObject[] hooks;
+    public GameObject[] PathNode;
+    public GameObject hook;
+    public float MoveSpeed;
+    private float firstPosZ_player;
+    float Timer;
+    static Vector3 CurrentPositionHolder;
+    int CurrentNode;
+    private Vector3 startPosition;
+    private float delay;
+    public float max_time_to_reset;
+    void Start()//////////////////////////////////////////modificar y poner una caja!
     {
+        firstPosZ_player = player.gameObject.GetComponent<Transform>().position.z;
+        direction = true;
         trnsfrm = GetComponent<Transform>();
     }
     void Update()
     {
         Vector3 currentPos = trnsfrm.position;
         Vector3 currentPosfixed = new Vector3(currentPos.x, currentPos.y - 2f, currentPos.z);
+        Vector3 newPlayerPos = new Vector3(player.gameObject.GetComponent<Transform>().position.x, player.gameObject.GetComponent<Transform>().position.y, firstPosZ_player);
         if (direction == true)
         {
-            trnsfrm.Translate(Vector3.right * speed * Time.deltaTime);
+            Timer += Time.deltaTime * MoveSpeed;
+            if (hook.gameObject.GetComponent<Transform>().position != CurrentPositionHolder)
+            {
+                hook.gameObject.GetComponent<Transform>().position = Vector3.Lerp(startPosition, CurrentPositionHolder, 1 * Timer);
+            }
+            else
+            {
+                if (CurrentNode < PathNode.Length - 1)
+                {
+                    CurrentNode++;
+                    CheckNode();
+                }
+                if (CurrentNode == PathNode.Length - 1)
+                {
+                    delay += Time.deltaTime;
+                    if (delay >= max_time_to_reset)
+                    {
+                        CurrentNode = -1;
+                        delay = 0;
+                    }
+                }
+            }
         }
-        else
+        if (hook_number==2&&player_on_it == true)
         {
-            trnsfrm.Translate(Vector3.left * speed * Time.deltaTime);
-        }
-        if (player_on_it == true)
-        {
+            hooks[0].SetActive(false);
+            hooks[1].SetActive(false);
+            hooks[3].SetActive(false);
+            player.gameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePositionZ;
             player.gameObject.GetComponent<CharController>().Set_if_is_on_the_hook(true);
             player.gameObject.GetComponent<Rigidbody>().MovePosition(currentPosfixed);
-            if (Input.GetKeyUp(KeyCode.F))
+            if (CurrentNode > 0 && CurrentNode < 2)
             {
-                player_on_it = false;
+                if (Input.GetKeyUp(KeyCode.F))
+                {
+                    player_on_it = false;
+                }
+                if (Input.GetKeyUp(KeyCode.Space) && player.gameObject.GetComponent<CharController>().Return_if_is_fffffflipped() == true)
+                {
+                    player.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.right * 7.5f, ForceMode.Impulse);
+                    player_on_it = false;
+                }
+                if (Input.GetKeyUp(KeyCode.Space) && player.gameObject.GetComponent<CharController>().Return_if_is_fffffflipped() == false)
+                {
+                    player.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.left * 7.5f, ForceMode.Impulse);
+                    player_on_it = false;
+                }
             }
-            if (Input.GetKeyUp(KeyCode.Space) && player.gameObject.GetComponent<CharController>().Return_if_is_fffffflipped() == true)
+            if (CurrentNode >3 && CurrentNode < 6)
             {
-                player.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.right * 7.5f, ForceMode.Impulse);
-                player_on_it = false;
-            }
-            if (Input.GetKeyUp(KeyCode.Space) && player.gameObject.GetComponent<CharController>().Return_if_is_fffffflipped() == false)
-            {
-                player.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.left * 7.5f, ForceMode.Impulse);
-                player_on_it = false;
+                if (player.gameObject.GetComponent<Transform>().position.z < 1.5f && player.gameObject.GetComponent<Transform>().position.z > -1.5f)
+                {            
+                    if (Input.GetKeyUp(KeyCode.F))
+                    {
+                        player_on_it = false;
+                        player.gameObject.GetComponent<Transform>().position = newPlayerPos;
+                        player.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                        player.gameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePositionX;
+                        player.gameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePositionY;                     
+                    }
+                }
             }
         }
-        if (player_on_it == false)
+        if (hook_number==2&&player_on_it == false)
         {
+            hooks[0].SetActive(true);
+            hooks[1].SetActive(true);
+            hooks[3].SetActive(true);
             player.gameObject.GetComponent<CharController>().Set_if_is_on_the_hook(false);
         }
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("HookCollider"))
-        {
-            direction = !direction;
-        }
+
         if (collision.collider.CompareTag("Player"))
         {
             player_on_it = true;
         }
     }
-    public void set_if_player_is_on_it(bool on_it)
+    void CheckNode()
     {
-        player_on_it = on_it;
+        Timer = 0;
+        startPosition = transform.position;
+        CurrentPositionHolder = PathNode[CurrentNode].gameObject.GetComponent<Transform>().position;
     }
 }

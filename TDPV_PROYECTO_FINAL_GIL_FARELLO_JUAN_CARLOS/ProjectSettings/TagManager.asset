@@ -15,6 +15,7 @@ TagManager:
   - TriggerForEnemyMovements
   - Enemy
   - TriggerForSplat
+  - Cylinder
   layers:
   - Default
   - TransparentFX
