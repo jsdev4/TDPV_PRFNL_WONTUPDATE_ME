@@ -16,6 +16,7 @@ TagManager:
   - Enemy
   - TriggerForSplat
   - Cylinder
+  - TriggerForDisplacement
   layers:
   - Default
   - TransparentFX

@@ -102,6 +102,8 @@
     <Compile Include="Assets\Scripts\ManagerScript.cs" />
     <Compile Include="Assets\Scripts\MortalBox.cs" />
     <Compile Include="Assets\Scripts\NpcDying.cs" />
+    <Compile Include="Assets\Scripts\ObjectDisplacementController.cs" />
+    <Compile Include="Assets\Scripts\ObjectRotorController.cs" />
     <Compile Include="Assets\Scripts\RespawnableObjectOnFalseGround.cs" />
     <Compile Include="Assets\Scripts\ScriptToLevel02.cs" />
     <Compile Include="Assets\Scripts\TextureResize.cs" />
