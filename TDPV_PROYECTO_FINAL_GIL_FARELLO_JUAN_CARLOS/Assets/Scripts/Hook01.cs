@@ -17,12 +17,13 @@ public class Hook01 : MonoBehaviour
     private float firstPosZ_player;
     float Timer;
     static Vector3 CurrentPositionHolder;
-    int CurrentNode;
+    public int CurrentNode;
     private Vector3 startPosition;
     private float delay;
     public float max_time_to_reset;
     void Start()//////////////////////////////////////////modificar y poner una caja!
     {
+       
         firstPosZ_player = player.gameObject.GetComponent<Transform>().position.z;
         direction = true;
         trnsfrm = GetComponent<Transform>();

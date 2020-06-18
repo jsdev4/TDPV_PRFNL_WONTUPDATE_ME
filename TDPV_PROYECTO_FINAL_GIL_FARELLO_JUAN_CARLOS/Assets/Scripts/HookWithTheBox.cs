@@ -14,7 +14,7 @@ public class HookWithTheBox : MonoBehaviour
     public GameObject hook;
     public GameObject player;
     public GameObject[] PathNode;
-    int CurrentNode;
+    public int CurrentNode;
     void Start()
     {
         
