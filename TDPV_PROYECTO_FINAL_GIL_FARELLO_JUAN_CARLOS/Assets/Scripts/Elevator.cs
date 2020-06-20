@@ -6,17 +6,18 @@ public class Elevator : MonoBehaviour
 {
 
     private bool on_board;
-    private float speed;
+    public float speed_up;
+    public float speed_down;
     public bool is_up;
     public GameObject trigger;
     public GameObject trigger01;
-    
+
     private bool has_stopped;
     public bool is_final_elevator;
     void Start()
     {
        on_board = false;
-        speed = 1;
+        //speed = 1;
     }
 
     void Update()
@@ -26,7 +27,8 @@ public class Elevator : MonoBehaviour
         {
             if (transform.position.y <= (trigger01.transform.position.y))
             {
-                transform.Translate(Vector3.up * speed * Time.deltaTime);
+                transform.Translate(Vector3.up * speed_up * Time.deltaTime);
+               
                 if (is_final_elevator == true)
                 {
                    
@@ -45,7 +47,7 @@ public class Elevator : MonoBehaviour
             {
                 if (has_stopped == false)
                 {
-                    transform.Translate(Vector3.down * speed * Time.deltaTime);
+                    transform.Translate(Vector3.down * speed_down * Time.deltaTime);
                 }
             }
             if (transform.position.y  == trigger.transform.position.y+sizeVec.y )
