@@ -20,6 +20,9 @@ public class CharController : MonoBehaviour
     private bool is_light_on;
     private bool can_move;
     private bool dead_by_enemy;
+    private bool on_the_hook;
+    private bool on_the_special_hook;
+    private bool flipped;
     public int lifes;
     private int respawn_point;
     private float delay_for_interacting;
@@ -30,6 +33,7 @@ public class CharController : MonoBehaviour
     public GameObject[] respawn;
     public GameObject[] low_beam_light;
     public GameObject manager;
+    public GameObject hook;
     void Start()
     {
        /// number_of_cells = 5;
@@ -46,6 +50,8 @@ public class CharController : MonoBehaviour
         is_light_on = false;
         can_move = true;
         dead_by_enemy = false;
+        on_the_hook = false;
+        flipped = true;
     }
     void Update()
     {
@@ -57,12 +63,14 @@ public class CharController : MonoBehaviour
                 rb.MovePosition(transform.position + translation * speed * Time.deltaTime);
                 if (Input.GetKey(KeyCode.A))
                 {
+                    flipped = false;
                     is_moving = true;
                     rotation_sprite = new Vector3(-1, 1, 1);
                     transform.localScale = rotation_sprite;
                 }
                 if (Input.GetKey(KeyCode.D))
                 {
+                    flipped = true;
                     is_moving = true;
                     rotation_sprite = new Vector3(1, 1, 1);
                     transform.localScale = rotation_sprite;
@@ -93,6 +101,10 @@ public class CharController : MonoBehaviour
                     {
                         quad.gameObject.GetComponent<Animator>().Play("IdlePlayer");
                     }
+                   /* if(on_the_hook==true)
+					{
+                        quad.gameObject.GetComponent<Animator>().Play("ElectrifiedPlayer");
+                    }*/
                 }
                 if (is_moving == true && is_jumping == false)
                 {
@@ -100,11 +112,13 @@ public class CharController : MonoBehaviour
                 }
                 if (can_jump == false)
                 {
-                    if (is_jumping == true)
+                    if (is_jumping == true && on_the_hook == false)
                     {
                         quad.gameObject.GetComponent<Animator>().Play("JumpPlayer");
                     }
                 }
+             /*      */
+                
                 if (on_ground == true)
                 {
                     if (Input.GetKeyDown(KeyCode.Space))
@@ -118,7 +132,44 @@ public class CharController : MonoBehaviour
                         on_ground = false;
                     }
                 }
-                 
+                if (on_the_hook == true)
+                {
+                    quad.gameObject.GetComponent<Animator>().Play("ElectrifiedPlayer");
+                    rb.useGravity = false;
+                }
+            
+                else
+				{
+                    rb.useGravity = true;
+				}
+             
+                /*   if (Input.GetKeyDown(KeyCode.Space)&&flipped==true)
+                    {
+                        rb.AddForce(Vector3.right * jump_speed, ForceMode.Impulse);
+
+                    }
+                    if (Input.GetKeyUp(KeyCode.Space)&&flipped==true)
+                    {
+                        hook.gameObject.GetComponent<Hook>().set_if_player_is_on_it(false);
+                        Set_if_is_on_the_hook(false);
+                        is_jumping = true;
+                        on_ground = false;
+                    }
+                    if (Input.GetKeyDown(KeyCode.Space) && flipped == false)
+                    {
+                        rb.AddForce(Vector3.left * jump_speed, ForceMode.Impulse);
+
+                    }
+                    if (Input.GetKeyUp(KeyCode.Space)&&flipped==false)
+                    {
+                        hook.gameObject.GetComponent<Hook>().set_if_player_is_on_it(false);
+                        Set_if_is_on_the_hook(false);
+                        is_jumping = true;
+                        on_ground = false;
+                    }
+                }*/
+
+
             }
             if (is_alive == false)
             {
@@ -221,11 +272,18 @@ public class CharController : MonoBehaviour
             is_jumping = false;
         }
     }
-    public void Set_if_is_on_the_hook()
+    public void Set_if_is_on_the_hook(bool electrified)
     {
-        speed = 0;
-        is_interacting = false;
+        on_the_hook = electrified;  
     }
+    public void Set_if_is_on_the_special_hook(bool electrified)
+	{
+        on_the_special_hook = electrified;
+	}
+    public bool Return_if_is_fffffflipped()
+	{
+        return flipped;
+	}
     public void Decrease_number_of_cells()
     {
         number_of_cells -= 1;
@@ -252,5 +310,6 @@ public class CharController : MonoBehaviour
         number_of_cells+=1;
         Debug.Log(number_of_cells);
     }
+   
 }
 
