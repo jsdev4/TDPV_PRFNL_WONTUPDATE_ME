@@ -7,20 +7,15 @@ public class DeadZoneTrigger : MonoBehaviour
 
     private bool player_is_here;
     public GameObject player;
-    
     void Start()
-    {
-
+    { 
         player_is_here = false;
-
     }
-
-    // Update is called once per frame
     void Update()
     {
         if(player_is_here==true)
         {
-            player.gameObject.GetComponent<CharController>().Set_if_is_dead_zone_or_dead(false);
+             player.gameObject.GetComponent<CharController>().Set_if_is_dead_zone_or_dead(false);
             player_is_here = false;
         }
     }

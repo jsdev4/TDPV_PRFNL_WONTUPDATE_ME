@@ -5,29 +5,24 @@ using UnityEngine;
 public class ElevatorSpecial : MonoBehaviour
 {
     private bool on_board;
-    private bool can_move;
-    private float speed;
+    public float speed_up;
+    public float speed_down;
     public bool is_up;
     public GameObject trigger;
     public GameObject trigger01;
     public GameObject trigger02;
     public GameObject trigger03;
     public GameObject trigger04;
-    private float delay;
+
     private int level;
-    private bool can_press;
-    private float delay1;
+
+    private bool has_stopped;
     void Start()
     {
-        can_press=true;
-        delay=0;
-        can_move = false;
-        speed = 1;
+       
         level = 0;
         is_up = false;
 
-       
-        delay1 = 0;
     }
 
     // Update is called once per frame
@@ -42,7 +37,7 @@ public class ElevatorSpecial : MonoBehaviour
 
                 if (transform.position.y <= (trigger01.transform.position.y))
                 {
-                    transform.Translate(Vector3.up * speed * Time.deltaTime);
+                    transform.Translate(Vector3.up * speed_up * Time.deltaTime);
                 
                 }
                 if (transform.position.y == (trigger01.transform.position.y))
@@ -57,7 +52,7 @@ public class ElevatorSpecial : MonoBehaviour
 
                 if (transform.position.y <= (trigger02.transform.position.y))
                 {
-                    transform.Translate(Vector3.up * speed * Time.deltaTime);
+                    transform.Translate(Vector3.up * speed_up * Time.deltaTime);
 
                 }
                 if (transform.position.y == (trigger02.transform.position.y))
@@ -71,7 +66,7 @@ public class ElevatorSpecial : MonoBehaviour
 
                 if (transform.position.y <= trigger03.transform.position.y)
                 {
-                    transform.Translate(Vector3.up * speed * Time.deltaTime);
+                    transform.Translate(Vector3.up * speed_up * Time.deltaTime);
                 }
                 if (transform.position.y == trigger03.transform.position.y)
                 {
@@ -84,7 +79,7 @@ public class ElevatorSpecial : MonoBehaviour
                 //  is_up = true;
                 if (transform.position.y <= trigger04.transform.position.y)
                 {
-                    transform.Translate(Vector3.up * speed * Time.deltaTime);
+                    transform.Translate(Vector3.up * speed_up * Time.deltaTime);
                 }
                 if (transform.position.y == trigger04.transform.position.y)
                 {
@@ -102,18 +97,24 @@ public class ElevatorSpecial : MonoBehaviour
        {
             if (transform.position.y > trigger.transform.position.y&&transform.position.y>trigger.transform.position.y+sizeVec.y)
             {
-
-                transform.Translate(Vector3.down * speed * Time.deltaTime);
+                if (has_stopped == false)
+                {
+                    transform.Translate(Vector3.down * speed_down * Time.deltaTime);
+                }
             }
 
             if (transform.position.y == trigger.transform.position.y+sizeVec.y)
             {
 
                 transform.Translate(Vector3.down * 0 * Time.deltaTime);
-               
+                level = 0;
 
             }
-            level = 0;
+            if (has_stopped == true)
+            {
+                transform.Translate(Vector3.down * 0 * Time.deltaTime);
+            }
+           
 
         }
     }
@@ -136,6 +137,10 @@ public class ElevatorSpecial : MonoBehaviour
     public bool Return_if_on_board()
     {
         return on_board;
+    }
+    public void Set_if_stopped(bool stp)
+    {
+        has_stopped = stp;
     }
     private void OnCollisionEnter(Collision collision)
     {
