@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\ElevatorSpecial.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
     <Compile Include="Assets\Scripts\FalseGround.cs" />
+    <Compile Include="Assets\Scripts\FinalLevel03Hook.cs" />
     <Compile Include="Assets\Scripts\FlashingLights.cs" />
     <Compile Include="Assets\Scripts\Hook.cs" />
     <Compile Include="Assets\Scripts\Hook01.cs" />
