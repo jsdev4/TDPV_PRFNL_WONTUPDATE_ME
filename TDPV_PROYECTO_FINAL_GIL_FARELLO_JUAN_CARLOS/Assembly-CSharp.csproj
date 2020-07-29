@@ -106,6 +106,7 @@
     <Compile Include="Assets\Scripts\ManagingDataPc.cs" />
     <Compile Include="Assets\Scripts\MiniGameManager.cs" />
     <Compile Include="Assets\Scripts\MortalBox.cs" />
+    <Compile Include="Assets\Scripts\NpcController.cs" />
     <Compile Include="Assets\Scripts\NpcDying.cs" />
     <Compile Include="Assets\Scripts\ObjectDisplacementController.cs" />
     <Compile Include="Assets\Scripts\ObjectRotorController.cs" />
