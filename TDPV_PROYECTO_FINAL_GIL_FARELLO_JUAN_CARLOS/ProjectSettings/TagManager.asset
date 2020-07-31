@@ -17,6 +17,9 @@ TagManager:
   - TriggerForSplat
   - Cylinder
   - TriggerForDisplacement
+  - Wall
+  - Glass
+  - Desktop
   layers:
   - Default
   - TransparentFX
