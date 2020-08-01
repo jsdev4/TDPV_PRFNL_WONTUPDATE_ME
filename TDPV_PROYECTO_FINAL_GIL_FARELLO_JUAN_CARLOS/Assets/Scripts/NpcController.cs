@@ -36,7 +36,6 @@ public class NpcController : MonoBehaviour
 		
         if(random_to_move==0)
 		{
-            Debug.Log("adction is 0");
             quad.gameObject.GetComponent<Animator>().Play("femaleNpcIdle");
             if(direction==false)
 			{
@@ -51,23 +50,19 @@ public class NpcController : MonoBehaviour
 	    }
         else if (random_to_move==1)
 		{
-            Debug.Log("adction is 1");
             quad.gameObject.GetComponent<Animator>().Play("femaleNpcWalking");
             if (direction == false)
 			{
                 rb.MovePosition(transform.position + translation_to_left * speed * Time.deltaTime);
                 rotation_sprite = new Vector3(-1, 1, 1);
                 transform.localScale = rotation_sprite;
-
             }
             if (direction == true)
             {
                 rb.MovePosition(transform.position + translation * speed * Time.deltaTime);
                 rotation_sprite = new Vector3(1, 1, 1);
                 transform.localScale = rotation_sprite;
-
-            }
-            
+            }  
 		}
     }
     private void Generate_direction()

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -34,9 +35,16 @@ public class ManagerScript : MonoBehaviour
     private Color32 unselect_color;
     private Color32 select_color;
 
-
-    void Start()
+    public GameObject fader;
+	void Awake()
+	{
+        fader.SetActive(true);
+        fader.gameObject.GetComponent<FaderScript>().Set_the_fade_out();
+    }
+	void Start()
     {
+
+       
         //condition for the returning from other scenes
         if (ManagerKeeper.get_if_returned() == true)
         {
@@ -48,6 +56,7 @@ public class ManagerScript : MonoBehaviour
         //else
         else
         {
+            
             time_counter_script_inside = time_counter;
         }
         delay_for_reset_game = 0;

@@ -83,6 +83,7 @@
     <Compile Include="Assets\Scripts\ElevatorFinal.cs" />
     <Compile Include="Assets\Scripts\ElevatorSpecial.cs" />
     <Compile Include="Assets\Scripts\EnemyController.cs" />
+    <Compile Include="Assets\Scripts\FaderScript.cs" />
     <Compile Include="Assets\Scripts\FalseGround.cs" />
     <Compile Include="Assets\Scripts\FinalLevel03Hook.cs" />
     <Compile Include="Assets\Scripts\FlashingLights.cs" />
@@ -112,11 +113,14 @@
     <Compile Include="Assets\Scripts\ObjectRotorController.cs" />
     <Compile Include="Assets\Scripts\RespawnableObjectOnFalseGround.cs" />
     <Compile Include="Assets\Scripts\ScriptToLevel02.cs" />
+    <Compile Include="Assets\Scripts\ScriptToLevel04.cs" />
     <Compile Include="Assets\Scripts\SwitchToMiniScene.cs" />
     <Compile Include="Assets\Scripts\TextureResize.cs" />
     <Compile Include="Assets\Scripts\TriggerForMovements.cs" />
     <Compile Include="Assets\Scripts\TriggerForSplat.cs" />
     <Compile Include="Assets\Scripts\TriggerForSplatSpecial.cs" />
+    <Compile Include="Assets\Scripts\TriggerToFinalPart.cs" />
+    <Compile Include="Assets\Scripts\TriggerToFinalPartExit.cs" />
     <Compile Include="Assets\Volumetric Lights\Scripts\VolumetricLight.cs" />
     <Compile Include="Assets\Volumetric Lights\Scripts\VolumetricLightRenderer.cs" />
     <None Include="Assets\Volumetric Lights\Shaders\VolumetricLight.shader" />
