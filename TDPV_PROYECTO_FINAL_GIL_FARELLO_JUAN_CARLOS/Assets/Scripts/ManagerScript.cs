@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -33,9 +34,31 @@ public class ManagerScript : MonoBehaviour
     private int option;
     private Color32 unselect_color;
     private Color32 select_color;
-    void Start()
+
+    public GameObject fader;
+	void Awake()
+	{
+        fader.SetActive(true);
+        fader.gameObject.GetComponent<FaderScript>().Set_the_fade_out();
+    }
+	void Start()
     {
-        time_counter_script_inside = time_counter;
+
+       
+        //condition for the returning from other scenes
+        if (ManagerKeeper.get_if_returned() == true)
+        {
+            time_counter_script_inside = ManagerKeeper.Get_old_time_script_inside();
+            player.gameObject.GetComponent<Transform>().position = ManagerKeeper.Get_old_players_position();
+            player.gameObject.GetComponent<CharController>().Set_lifes(ManagerKeeper.Get_old_number_of_lifes());
+            player.gameObject.GetComponent<CharController>().Keep_respawn_point(ManagerKeeper.Get_old_respawn_point());
+        }
+        //else
+        else
+        {
+            
+            time_counter_script_inside = time_counter;
+        }
         delay_for_reset_game = 0;
         changed = false;
         paused = false;
@@ -211,6 +234,10 @@ public class ManagerScript : MonoBehaviour
             //last point qhen the player dies, from here can be added another scene or return to main menu
         }
     }
+    public float Set_current_time()
+	{
+        return time_counter_script_inside;
+	}
     public int Get_cells_for_timer()
     {
         return cells_on_timer;
@@ -219,4 +246,8 @@ public class ManagerScript : MonoBehaviour
     {
         run_out_of_cells = reset;
     }
+    public void Set_pause(bool psd)
+	{
+        paused = psd;
+	}
 }
