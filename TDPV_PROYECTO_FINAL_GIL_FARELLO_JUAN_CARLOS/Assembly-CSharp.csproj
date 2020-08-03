@@ -105,13 +105,16 @@
     <Compile Include="Assets\Scripts\ManagerKeeper.cs" />
     <Compile Include="Assets\Scripts\ManagerScript.cs" />
     <Compile Include="Assets\Scripts\ManagingDataPc.cs" />
-    <Compile Include="Assets\Scripts\MiniGameManager.cs" />
     <Compile Include="Assets\Scripts\MortalBox.cs" />
     <Compile Include="Assets\Scripts\NpcController.cs" />
     <Compile Include="Assets\Scripts\NpcDying.cs" />
     <Compile Include="Assets\Scripts\ObjectDisplacementController.cs" />
     <Compile Include="Assets\Scripts\ObjectRotorController.cs" />
     <Compile Include="Assets\Scripts\PacPunkScripts\CharControllerForPacPunk.cs" />
+    <Compile Include="Assets\Scripts\PacPunkScripts\PacPunkManager.cs" />
+    <Compile Include="Assets\Scripts\PacPunkScripts\SpecialIconsController.cs" />
+    <Compile Include="Assets\Scripts\PacPunkScripts\TriggerForRespawnOnSide.cs" />
+    <Compile Include="Assets\Scripts\PacPunkScripts\WaitingIconBall.cs" />
     <Compile Include="Assets\Scripts\RespawnableObjectOnFalseGround.cs" />
     <Compile Include="Assets\Scripts\ScriptToLevel02.cs" />
     <Compile Include="Assets\Scripts\ScriptToLevel04.cs" />

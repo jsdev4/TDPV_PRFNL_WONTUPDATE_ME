@@ -20,6 +20,7 @@ TagManager:
   - Wall
   - Glass
   - Desktop
+  - TriggerForRespawn
   layers:
   - Default
   - TransparentFX
