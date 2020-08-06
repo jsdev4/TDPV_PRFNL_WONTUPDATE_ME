@@ -21,6 +21,7 @@ TagManager:
   - Glass
   - Desktop
   - TriggerForRespawn
+  - WaitingIconBall
   layers:
   - Default
   - TransparentFX
