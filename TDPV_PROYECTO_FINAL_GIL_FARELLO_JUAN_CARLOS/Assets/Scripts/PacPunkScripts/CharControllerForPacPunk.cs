@@ -7,30 +7,37 @@ public class CharControllerForPacPunk : MonoBehaviour
     public float speed;
     public float jump_speed;
     private bool on_ground;
-    private bool is_jumping;
+  
     private bool can_move;
     private bool is_alive;
     private bool can_eat_enemies;
     private int lifes;
+    private Vector3 firstPos;
+    private Transform trnsfrm;
     private Rigidbody rb;
     public GameObject quad;
+    
     void Start()
     {
-        lifes = 1;
+        lifes =3;
+        trnsfrm = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
         can_move = true;
         is_alive = true;
         can_eat_enemies = false;
+        firstPos = trnsfrm.position;
     }
     void Update()
     {
-        float translationX =Input.GetAxis("Horizontal")*speed*Time.deltaTime;
-        float translation = Input.GetAxis("Vertical") * speed* Time.deltaTime;
-        transform.Translate(translationX, 0, translation);
+       
         if (can_move==true)
 		{
             if(is_alive==true)
 			{
+                quad.gameObject.GetComponent<Animator>().Play("pacpunkIdle");
+                float translationX = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+                float translation = Input.GetAxis("Vertical") * speed * Time.deltaTime;
+                transform.Translate(translationX, 0, translation);
                 if (Input.GetKey(KeyCode.A))
 				{
                     quad.gameObject.GetComponent<Transform>().localScale=new Vector3(-1, 1, 1);
@@ -47,19 +54,7 @@ public class CharControllerForPacPunk : MonoBehaviour
                 {
                   
                 }
-                if(on_ground==true)
-				{
-                    if(Input.GetKeyDown(KeyCode.Space))
-					{
-                        is_jumping = true;
-                        rb.AddForce(Vector3.up * jump_speed ,ForceMode.Impulse);
-					}
-                    if(Input.GetKeyUp(KeyCode.Space))
-					{
-                        is_jumping = true;
-                        on_ground = false;
-					}
-				}
+                
                
             }
 		}
@@ -73,13 +68,24 @@ public class CharControllerForPacPunk : MonoBehaviour
 
 		}
     }
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.collider.CompareTag("ground") )
-        {
-            on_ground = true;
-            is_jumping = false;
-        }
-    }
+    public void Set_if_player_die(bool move,bool alive)
+	{
+        can_move = move;
+        is_alive = alive;
+       
+	}
+    public void Set_initial_pos()
+	{
+        trnsfrm.position = firstPos;
+	}
+    public int Return_number_of_lifes()
+	{
+        return lifes;
+	}
+    public void Decrease_life()
+	{
+        lifes -= 1;
+        Debug.Log("life is" + lifes);
+	}
 }
 
