@@ -20,6 +20,9 @@ TagManager:
   - Wall
   - Glass
   - Desktop
+  - TriggerForRespawn
+  - WaitingIconBall
+  - SpecialIcon
   layers:
   - Default
   - TransparentFX

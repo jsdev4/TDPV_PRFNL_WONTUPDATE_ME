@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level_03_Lab.unity
     guid: 5189677c74c35184ea0d0deb22db4fed
   - enabled: 1
+    path: Assets/Scenes/Level_04_Stereo_City.unity
+    guid: e9d08c7c4ce3b624db9e450b9c64037a
+  - enabled: 1
     path: Assets/Scenes/Pac_Punk.unity
     guid: 8d559e7f7b05d25499c84a57341184d8
   m_configObjects: {}
