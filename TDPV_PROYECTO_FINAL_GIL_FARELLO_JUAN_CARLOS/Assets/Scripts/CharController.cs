@@ -7,9 +7,8 @@ public class CharController : MonoBehaviour
 {
     public float speed;
     public float jump_speed;
-    
     private Vector3 rotation_sprite;
-    bool on_ground;
+    private bool on_ground;
     private Rigidbody rb;
     private bool is_moving;
     private bool is_jumping;
@@ -21,16 +20,12 @@ public class CharController : MonoBehaviour
     private bool can_move;
     private bool dead_by_enemy;
     private bool on_the_hook;
-    private bool on_the_special_hook;
     private bool flipped;
     public int lifes;
     private int respawn_point;
     private float delay_for_interacting;
     private float delay_for_respawn;
     private float number_of_cells;
-
-    private bool played_pac_punk;
-    private bool won_the_pac_punk;
     public GameObject quad;
     public GameObject[] respawn;
     public GameObject[] low_beam_light;
@@ -54,9 +49,6 @@ public class CharController : MonoBehaviour
         dead_by_enemy = false;
         on_the_hook = false;
         flipped = true;
-
-        played_pac_punk = false;
-        won_the_pac_punk = false;
     }
     void Update()
     {
@@ -136,7 +128,6 @@ public class CharController : MonoBehaviour
                     quad.gameObject.GetComponent<Animator>().Play("ElectrifiedPlayer");
                     rb.useGravity = false;
                 }
-            
                 else
 				{
                     rb.useGravity = true;
@@ -256,10 +247,6 @@ public class CharController : MonoBehaviour
     {
         on_the_hook = electrified;  
     }
-    public void Set_if_is_on_the_special_hook(bool electrified)
-	{
-        on_the_special_hook = electrified;
-	}
     public bool Return_if_is_fffffflipped()
 	{
         return flipped;
@@ -294,17 +281,5 @@ public class CharController : MonoBehaviour
         number_of_cells+=1;
         Debug.Log(number_of_cells);
     }
-
-    public void Return_to_level_after_pac_punk(bool he_played,bool he_won)
-	{
-        played_pac_punk = he_played;
-        won_the_pac_punk = he_won;
-
-        if(played_pac_punk==true&&won_the_pac_punk==false)
-		{
-            transform.position = transform.position;
-		}
-	}
-   
 }
 

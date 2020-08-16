@@ -8,7 +8,6 @@ public class enemyGhostController : MonoBehaviour
 {
     private bool hit_the_player;
     private bool to_respawn;
-    private bool can_enemy_move;
     private float timer;
     public float min_distance;
     private Vector3 firstPos;
@@ -23,7 +22,6 @@ public class enemyGhostController : MonoBehaviour
     void Start()
     {
         timer = 0;
-        can_enemy_move = true;
         to_respawn = false;
         hit_the_player = false;
         quad_trnsfrm=GetComponentInChildren<Transform>();
@@ -34,31 +32,24 @@ public class enemyGhostController : MonoBehaviour
     }
 
     void Update()
-    {
-       
+    {  
         quad_trnsfrm.LookAt(enemy_ghost_reference);
         float distance = Vector3.Distance(transform.position, player.gameObject.GetComponent<Transform>().position);
-            if (pac_punk_manager.gameObject.GetComponent<PacPunkManager>().Get_if_special_icon_collected() == false)
+        if (pac_punk_manager.gameObject.GetComponent<PacPunkManager>().Get_if_special_icon_collected() == false)
+        {
+            if (hit_the_player == false)
             {
-
-                if (hit_the_player == false)
-                {
-                    quad_animator.Play("enemyghostIdle");
-                    if (distance < min_distance)
-                    {
-
-                        ghost.SetDestination(player.gameObject.GetComponent<Transform>().position);
-                    }
-                }
-                if (hit_the_player == true)
-                {
-                    pac_punk_manager.gameObject.GetComponent<PacPunkManager>().Set_if_player_die();
-                //sets enemy to zero speed for everyone
-                //call to manager
-                
-               
-                }
+               quad_animator.Play("enemyghostIdle");
+               if (distance < min_distance)
+               {
+                    ghost.SetDestination(player.gameObject.GetComponent<Transform>().position);
+               }
             }
+            if (hit_the_player == true)
+            {
+                pac_punk_manager.gameObject.GetComponent<PacPunkManager>().Set_if_player_die();
+            }
+        }
             if (pac_punk_manager.gameObject.GetComponent<PacPunkManager>().Get_if_special_icon_collected() == true)
             {
 
@@ -69,11 +60,12 @@ public class enemyGhostController : MonoBehaviour
                 }
                 if (hit_the_player == true)
                 {
+                pac_punk_manager.gameObject.GetComponent<PacPunkManager>().Increase_enemy_hitted();
                     box.enabled = false;
                     transform.position = safeHouse.gameObject.GetComponent<Transform>().position;
                     to_respawn = true;
-                  
-                }
+                hit_the_player = false;
+            }
             }
             if (to_respawn == true)
             {
@@ -81,8 +73,6 @@ public class enemyGhostController : MonoBehaviour
                 if (timer >= 5)
                 {
                     box.enabled = true;
-
-                hit_the_player = false;
                 timer = 0;
                 to_respawn = false;
             }
@@ -96,7 +86,6 @@ public class enemyGhostController : MonoBehaviour
             hit_the_player = true;
 		}
 	}
-
     public void Set_initial_pos()
 	{
         transform.position = firstPos;
@@ -105,4 +94,9 @@ public class enemyGhostController : MonoBehaviour
 	{
         hit_the_player = false;
 	}
+    public bool Return_if_enemy_hit_the_player()
+	{
+        return hit_the_player;
+	}
+    
 }

@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Pac_Punk.unity
+- path: Assets/Scenes/Level_04_Stereo_City.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

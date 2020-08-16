@@ -1,35 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class CharControllerForPacPunk : MonoBehaviour
 {
     public float speed;
     public float jump_speed;
-    private bool on_ground;
-  
     private bool can_move;
     private bool is_alive;
-    private bool can_eat_enemies;
+    private bool moving_up;
+    private bool moving_down;
     private int lifes;
     private Vector3 firstPos;
     private Transform trnsfrm;
-    private Rigidbody rb;
     public GameObject quad;
     
     void Start()
     {
         lifes =3;
         trnsfrm = GetComponent<Transform>();
-        rb = GetComponent<Rigidbody>();
         can_move = true;
         is_alive = true;
-        can_eat_enemies = false;
+        moving_up = false;
+        moving_down = false;
         firstPos = trnsfrm.position;
     }
     void Update()
     {
-       
         if (can_move==true)
 		{
             if(is_alive==true)
@@ -46,16 +44,22 @@ public class CharControllerForPacPunk : MonoBehaviour
                 {
                     quad.gameObject.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
                 }
-                if (Input.GetKey(KeyCode.W))
+                if(Input.GetKeyDown(KeyCode.W))
+				{
+                    moving_up = true;
+				}
+                if (Input.GetKeyDown(KeyCode.S))
                 {
-                  
+                    moving_down = true;
                 }
-                if (Input.GetKey(KeyCode.S))
+                if (Input.GetKeyUp(KeyCode.W))
                 {
-                  
+                    moving_up = false;
                 }
-                
-               
+                if (Input.GetKeyUp(KeyCode.S))
+                {
+                    moving_down = false;
+                }
             }
 		}
         if(can_move==false)
@@ -64,15 +68,19 @@ public class CharControllerForPacPunk : MonoBehaviour
 			{
                 quad.gameObject.GetComponent<Animator>().Play("pacpunkdying");
 			}
-
-
+		}
+        if(can_move==false)
+		{
+            if(is_alive==true)
+			{
+                quad.gameObject.GetComponent<Animator>().Play("pacpunkIdle");
+            }
 		}
     }
-    public void Set_if_player_die(bool move,bool alive)
+    public void Set_if_player_is_alive(bool move,bool alive)
 	{
         can_move = move;
         is_alive = alive;
-       
 	}
     public void Set_initial_pos()
 	{
@@ -86,6 +94,10 @@ public class CharControllerForPacPunk : MonoBehaviour
 	{
         lifes -= 1;
         Debug.Log("life is" + lifes);
+	}
+    public bool Set_moving_up()
+	{
+        return moving_up;
 	}
 }
 

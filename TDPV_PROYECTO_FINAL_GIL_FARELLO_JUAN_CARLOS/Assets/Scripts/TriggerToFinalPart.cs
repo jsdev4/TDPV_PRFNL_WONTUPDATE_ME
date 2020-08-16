@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class TriggerToFinalPart : MonoBehaviour
 {
     private bool on_the_trigger;
@@ -12,8 +11,6 @@ public class TriggerToFinalPart : MonoBehaviour
     {
         on_the_trigger = false;
     }
-
-    
     void Update()
     {
         if(on_the_trigger==true)
@@ -22,14 +19,12 @@ public class TriggerToFinalPart : MonoBehaviour
 			{
                 fader.SetActive(true);
                 player.gameObject.GetComponent<CharController>().Set_if_is_interacting(true);
-                
 			}
             if (fader.gameObject.GetComponent<FaderScript>().Return_animation_complete() == true)
             {
                 player.gameObject.GetComponent<Transform>().position = respawn_point.gameObject.GetComponent<Transform>().position;
             }
         }
-       
     }
 	private void OnTriggerEnter(Collider other)
 	{

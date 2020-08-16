@@ -40,7 +40,7 @@ public class SpecialIconsController : MonoBehaviour
         }
         if (collected==true)
 		{
-            manager.gameObject.GetComponent<PacPunkManager>().Set_special_icon_collected();
+            manager.gameObject.GetComponent<PacPunkManager>().Increase_special_icon_collected();
             Destroy(gameObject);
 		}
     }

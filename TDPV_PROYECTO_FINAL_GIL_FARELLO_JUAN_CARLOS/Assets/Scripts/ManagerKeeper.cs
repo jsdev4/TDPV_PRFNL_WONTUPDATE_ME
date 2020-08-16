@@ -10,7 +10,9 @@ public static class ManagerKeeper
 	private static float cells;
 	private static float time_inside;
 	private static int respawn_point_number;
-	private static bool has_returned;
+	private static bool other_scene;
+	private static bool mini_game_completed;
+	private static int respawn_point_when_back;
 	public static void Set_values(Vector3 pos,int current_lifes, float current_cells,int rspwn)
 	{
 		player_position = pos;
@@ -22,13 +24,13 @@ public static class ManagerKeeper
 	{
 		time_inside = current_time_inside;
 	}
-	public static void Is_in_other_scene(bool returned)
+	public static void Is_in_other_scene(bool other)
 	{
-		has_returned = returned;
+		other_scene = other;
 	}
-	public static bool get_if_returned()
+	public static bool Get_if_other_scene()
 	{
-		return has_returned;
+		return other_scene;
 	}
 	public static Vector3 Get_old_players_position()
 	{
@@ -49,6 +51,22 @@ public static class ManagerKeeper
 	public static float Get_old_time_script_inside()
 	{
 		return time_inside;
+	}
+	public static void Set_if_mini_game_was_completed(bool completed)
+	{
+		mini_game_completed = completed;
+	}
+	public static bool Get_if_mini_game_completed()
+	{
+		return mini_game_completed;
+	}
+	public static void Set_respawn_point(int point)
+	{
+		respawn_point_when_back = point;
+	}
+	public static int Get_respawn_point()
+	{
+		return respawn_point_when_back;
 	}
 }
 
