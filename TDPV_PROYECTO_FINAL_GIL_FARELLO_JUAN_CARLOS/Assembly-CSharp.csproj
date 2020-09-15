@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\BioCellController.cs" />
     <Compile Include="Assets\Scripts\CharController.cs" />
     <Compile Include="Assets\Scripts\Checkpoint.cs" />
+    <Compile Include="Assets\Scripts\CherryTreeController.cs" />
     <Compile Include="Assets\Scripts\DeadZoneTrigger.cs" />
     <Compile Include="Assets\Scripts\DeadZoneTrigger01.cs" />
     <Compile Include="Assets\Scripts\Elevator.cs" />
