@@ -125,6 +125,7 @@
     <Compile Include="Assets\Scripts\StopLightsController.cs" />
     <Compile Include="Assets\Scripts\SwitchToMiniScene.cs" />
     <Compile Include="Assets\Scripts\TextureResize.cs" />
+    <Compile Include="Assets\Scripts\TrainController.cs" />
     <Compile Include="Assets\Scripts\TriggerForMovements.cs" />
     <Compile Include="Assets\Scripts\TriggerForSplat.cs" />
     <Compile Include="Assets\Scripts\TriggerForSplatSpecial.cs" />

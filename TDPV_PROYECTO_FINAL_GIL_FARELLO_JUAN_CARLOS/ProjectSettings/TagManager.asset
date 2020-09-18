@@ -23,6 +23,7 @@ TagManager:
   - TriggerForRespawn
   - WaitingIconBall
   - SpecialIcon
+  - TrainLimit
   layers:
   - Default
   - TransparentFX
