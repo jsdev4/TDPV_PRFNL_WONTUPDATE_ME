@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 111d1a67b4ea7074ea45a34ee262a446
+guid: 1f877879899707948a3e12f49f35b73b
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material
-    second: {fileID: 2100000, guid: a87abc021b93994428d698aa7591d2c9, type: 2}
+    second: {fileID: 2100000, guid: feaf23af44b14c845a0f348b04e63ca4, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: metallic_estructure_street
-    second: {fileID: 2800000, guid: 94f93afc646cffa4eaccdc7a1a47111f, type: 3}
+    second: {fileID: 2800000, guid: 798d607f4e9578e4289773ef6aabac2b, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0

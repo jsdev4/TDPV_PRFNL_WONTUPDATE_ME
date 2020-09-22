@@ -5,6 +5,8 @@ using UnityEngine;
 public class StopLightsController : MonoBehaviour
 {
     private float delay;
+    private float sincro_delay;
+    public float max_sincro_delay;
     private bool ascendent;
     private int j;
     private ArrayList light_list;
@@ -16,6 +18,7 @@ public class StopLightsController : MonoBehaviour
     {
         delay = 0;
         j = 0;
+        sincro_delay = 0;
         ascendent = true;
         colorHex00 = "#FF0000";
         colorHex01 = "#FFC600";
@@ -27,54 +30,60 @@ public class StopLightsController : MonoBehaviour
     
     void Update()
     {
-        
-        if (ascendent == true)
+        sincro_delay += Time.deltaTime;
+        if (sincro_delay>=max_sincro_delay)
         {
-            delay += Time.deltaTime;
-            if (delay >= 5f && j == 0)
+            if (ascendent == true)
             {
-                StartCoroutine("ChangeLight");
-                j++;
-                delay = 0;
-            }
-            if (delay >= 1.5f && j == 1)
-            {
-                StartCoroutine("ChangeLight");
-                j++;
-                delay = 0;
+                delay += Time.deltaTime;
+                if (delay >= 5f && j == 0)
+                {
+                    StartCoroutine("ChangeLight");
+                    j++;
+                    delay = 0;
+                }
+                if (delay >= 1.5f && j == 1)
+                {
+                    StartCoroutine("ChangeLight");
+                    j++;
+                    delay = 0;
+
+                }
+                if (delay >= 3.5f && j == 2)
+                {
+                    //Debug.Log(j);
+                    delay = 0;
+                    ascendent = false;
+                }
 
             }
-            if (delay >= 3.5f && j == 2)
+            if (ascendent == false)
             {
-                Debug.Log(j);
-                delay = 0;
-                ascendent = false;
-            }
-            
-        }
-        if(ascendent==false)
-		{
-            delay += Time.deltaTime;
-            if(j==2)
-			{
-                StartCoroutine("ChangeLight");
-                Debug.Log("j is here" + j);
-                j--;
-                delay = 0;
-            }
-            if (delay >= 1.5f && j == 1)
-            {
+                delay += Time.deltaTime;
+                if (j == 2)
+                {
+                    StartCoroutine("ChangeLight");
+                    // Debug.Log("j " + j);
+                    j--;
+                    delay = 0;
+                }
+                if (delay >= 1.5f && j == 1)
+                {
 
-                StartCoroutine("ChangeLight");
-                j--;
-                delay = 0;
+                    StartCoroutine("ChangeLight");
+                    j--;
+                    delay = 0;
+                }
+                if (j == 0)
+                {
+                    delay = 0;
+                    ascendent = true;
+                    sincro_delay = 0;
+                }
             }
-            if (j == 0)
-            {
-                delay = 0;
-                ascendent = true;
-            }
+           
         }
+       
 		
     }
     IEnumerator ChangeLight()
