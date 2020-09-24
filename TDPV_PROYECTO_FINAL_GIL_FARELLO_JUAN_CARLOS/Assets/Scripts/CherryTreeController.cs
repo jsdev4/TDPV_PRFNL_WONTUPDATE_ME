@@ -26,7 +26,7 @@ public class CherryTreeController : MonoBehaviour
 		{
            
             random_delay = Random.Range(min_range,max_range  );
-            Debug.Log(random_delay);
+            //Debug.Log(random_delay);
             timer += Time.deltaTime;
             if(timer>=random_delay)
 			{

@@ -21,6 +21,7 @@ public class CharController : MonoBehaviour
     private bool dead_by_enemy;
     private bool on_the_hook;
     private bool flipped;
+    private bool move_z_axis;
     public int lifes;
     private int respawn_point;
     private float delay_for_interacting;
@@ -31,6 +32,7 @@ public class CharController : MonoBehaviour
     public GameObject[] low_beam_light;
     public GameObject manager;
     public GameObject hook;
+
     void Start()
     {
        /// number_of_cells = 5;
@@ -49,6 +51,7 @@ public class CharController : MonoBehaviour
         dead_by_enemy = false;
         on_the_hook = false;
         flipped = true;
+        move_z_axis = false;
     }
     void Update()
     {
@@ -185,6 +188,7 @@ public class CharController : MonoBehaviour
                     low_beam_light[i].gameObject.GetComponent<Light>().enabled = false;
                 }
             }
+           
         }
     }
     public void Set_if_is_dead_zone_or_dead(bool alv)
@@ -281,5 +285,10 @@ public class CharController : MonoBehaviour
         number_of_cells+=1;
         Debug.Log(number_of_cells);
     }
+
+    public void Move_on_z_axis()
+	{
+
+	}
 }
 
