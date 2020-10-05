@@ -32,4 +32,11 @@ public class BuildingEntrance : MonoBehaviour
             player_here = true;
 		}
 	}
+    private void OnTriggerExit(Collider other)
+	{
+        if(other.CompareTag("Player"))
+		{
+            player_here = false;
+		}
+	}
 }

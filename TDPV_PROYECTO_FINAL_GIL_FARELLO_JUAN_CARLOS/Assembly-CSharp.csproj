@@ -124,6 +124,7 @@
     <Compile Include="Assets\Scripts\RespawnableObjectOnFalseGround.cs" />
     <Compile Include="Assets\Scripts\ScriptToLevel02.cs" />
     <Compile Include="Assets\Scripts\ScriptToLevel04.cs" />
+    <Compile Include="Assets\Scripts\ScriptToLevel05.cs" />
     <Compile Include="Assets\Scripts\StopLightsController.cs" />
     <Compile Include="Assets\Scripts\SwitchToMiniScene.cs" />
     <Compile Include="Assets\Scripts\TextureResize.cs" />
