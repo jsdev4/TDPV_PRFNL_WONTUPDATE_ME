@@ -93,6 +93,8 @@
     <Compile Include="Assets\Scripts\Hook01.cs" />
     <Compile Include="Assets\Scripts\Hook02.cs" />
     <Compile Include="Assets\Scripts\HookWithTheBox.cs" />
+    <Compile Include="Assets\Scripts\HookWithTheBox01.cs" />
+    <Compile Include="Assets\Scripts\HookWithTheBox02.cs" />
     <Compile Include="Assets\Scripts\IntermitentLight.cs" />
     <Compile Include="Assets\Scripts\LifeIconController.cs" />
     <Compile Include="Assets\Scripts\LightChange.cs" />
@@ -108,6 +110,7 @@
     <Compile Include="Assets\Scripts\ManagerScript.cs" />
     <Compile Include="Assets\Scripts\ManagingDataPc.cs" />
     <Compile Include="Assets\Scripts\MortalBox.cs" />
+    <Compile Include="Assets\Scripts\MortalBox01.cs" />
     <Compile Include="Assets\Scripts\NpcController.cs" />
     <Compile Include="Assets\Scripts\NpcDying.cs" />
     <Compile Include="Assets\Scripts\ObjectDisplacementController.cs" />

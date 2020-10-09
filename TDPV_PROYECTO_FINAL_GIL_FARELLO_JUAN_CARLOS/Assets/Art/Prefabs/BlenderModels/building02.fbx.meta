@@ -30,15 +30,35 @@ ModelImporter:
       name: Material.004
     second: {fileID: 2100000, guid: c9de9db503b95854b9ad6f2fd2e7c812, type: 2}
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.005
+    second: {fileID: 2100000, guid: d52403b9919b64043ac6e5ce15f4469f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.006
+    second: {fileID: 2100000, guid: 73b83825563592c46ba09d374843d963, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.007
+    second: {fileID: 2100000, guid: 35f286330531f354a8e5304d75e3030d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.008
+    second: {fileID: 2100000, guid: cdfe1c660801c154b854058621446713, type: 2}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: border02
-    second: {fileID: 2800000, guid: 90fe08af44f6174478c66f6fc368ae6f, type: 3}
+    second: {fileID: 2800000, guid: ba1335e71e001d64185e193c0a949c9e, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: building02
-    second: {fileID: 2800000, guid: f83992d124f7cbe42b41123642a767a6, type: 3}
+    second: {fileID: 2800000, guid: 2b9ab903c8676ec42836a9c0a0f4ec66, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
@@ -48,12 +68,12 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: buildingFront
-    second: {fileID: 2800000, guid: 0978ae1a5630cec43b1bd08d09fae946, type: 3}
+    second: {fileID: 2800000, guid: 2f202337f07d4dd4daec3a5a95578729, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: entrance02
-    second: {fileID: 2800000, guid: 671aa725a77f65e48966745985a17ebe, type: 3}
+    second: {fileID: 2800000, guid: 8756a1cbf461d194990098c5bfa0aaad, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0
