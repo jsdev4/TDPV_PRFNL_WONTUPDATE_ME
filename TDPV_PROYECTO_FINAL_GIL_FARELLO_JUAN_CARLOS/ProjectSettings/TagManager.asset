@@ -17,6 +17,13 @@ TagManager:
   - TriggerForSplat
   - Cylinder
   - TriggerForDisplacement
+  - Wall
+  - Glass
+  - Desktop
+  - TriggerForRespawn
+  - WaitingIconBall
+  - SpecialIcon
+  - TrainLimit
   layers:
   - Default
   - TransparentFX

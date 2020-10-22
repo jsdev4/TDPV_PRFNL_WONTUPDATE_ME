@@ -7,9 +7,8 @@ public class CharController : MonoBehaviour
 {
     public float speed;
     public float jump_speed;
-    
     private Vector3 rotation_sprite;
-    bool on_ground;
+    private bool on_ground;
     private Rigidbody rb;
     private bool is_moving;
     private bool is_jumping;
@@ -21,23 +20,23 @@ public class CharController : MonoBehaviour
     private bool can_move;
     private bool dead_by_enemy;
     private bool on_the_hook;
-    private bool on_the_special_hook;
     private bool flipped;
+    private bool move_z_axis;
     public int lifes;
     private int respawn_point;
     private float delay_for_interacting;
     private float delay_for_respawn;
     private float number_of_cells;
-
     public GameObject quad;
     public GameObject[] respawn;
     public GameObject[] low_beam_light;
     public GameObject manager;
     public GameObject hook;
+
     void Start()
     {
        /// number_of_cells = 5;
-        respawn_point = 0;
+      //  respawn_point = 0;
         delay_for_interacting = 0;
         delay_for_respawn = 0;
         has_respawned = false;
@@ -52,6 +51,7 @@ public class CharController : MonoBehaviour
         dead_by_enemy = false;
         on_the_hook = false;
         flipped = true;
+        move_z_axis = false;
     }
     void Update()
     {
@@ -101,10 +101,6 @@ public class CharController : MonoBehaviour
                     {
                         quad.gameObject.GetComponent<Animator>().Play("IdlePlayer");
                     }
-                   /* if(on_the_hook==true)
-					{
-                        quad.gameObject.GetComponent<Animator>().Play("ElectrifiedPlayer");
-                    }*/
                 }
                 if (is_moving == true && is_jumping == false)
                 {
@@ -117,8 +113,6 @@ public class CharController : MonoBehaviour
                         quad.gameObject.GetComponent<Animator>().Play("JumpPlayer");
                     }
                 }
-             /*      */
-                
                 if (on_ground == true)
                 {
                     if (Input.GetKeyDown(KeyCode.Space))
@@ -137,39 +131,10 @@ public class CharController : MonoBehaviour
                     quad.gameObject.GetComponent<Animator>().Play("ElectrifiedPlayer");
                     rb.useGravity = false;
                 }
-            
                 else
 				{
                     rb.useGravity = true;
 				}
-             
-                /*   if (Input.GetKeyDown(KeyCode.Space)&&flipped==true)
-                    {
-                        rb.AddForce(Vector3.right * jump_speed, ForceMode.Impulse);
-
-                    }
-                    if (Input.GetKeyUp(KeyCode.Space)&&flipped==true)
-                    {
-                        hook.gameObject.GetComponent<Hook>().set_if_player_is_on_it(false);
-                        Set_if_is_on_the_hook(false);
-                        is_jumping = true;
-                        on_ground = false;
-                    }
-                    if (Input.GetKeyDown(KeyCode.Space) && flipped == false)
-                    {
-                        rb.AddForce(Vector3.left * jump_speed, ForceMode.Impulse);
-
-                    }
-                    if (Input.GetKeyUp(KeyCode.Space)&&flipped==false)
-                    {
-                        hook.gameObject.GetComponent<Hook>().set_if_player_is_on_it(false);
-                        Set_if_is_on_the_hook(false);
-                        is_jumping = true;
-                        on_ground = false;
-                    }
-                }*/
-
-
             }
             if (is_alive == false)
             {
@@ -184,6 +149,7 @@ public class CharController : MonoBehaviour
                         is_moving = false;
                         has_respawned = true;
                         is_alive = true;
+                        //number of cells are time dependent
                         number_of_cells = manager.gameObject.GetComponent<ManagerScript>().Get_cells_for_timer();
                         manager.gameObject.GetComponent<ManagerScript>().Reset_run_out_of_cells(false);
                         Set_if_dead_by_enemy(false);
@@ -222,6 +188,7 @@ public class CharController : MonoBehaviour
                     low_beam_light[i].gameObject.GetComponent<Light>().enabled = false;
                 }
             }
+           
         }
     }
     public void Set_if_is_dead_zone_or_dead(bool alv)
@@ -256,6 +223,14 @@ public class CharController : MonoBehaviour
         respawn_point = rspwn;
         is_interacting = true;
     }
+    public void Keep_respawn_point(int rspwn)
+	{
+        respawn_point = rspwn;
+	}
+    public int Return_number_of_respawn_point()
+	{
+        return respawn_point;
+	}
     public void Set_if_is_interacting(bool doing_stuff)
     {
         is_interacting = doing_stuff;
@@ -276,10 +251,6 @@ public class CharController : MonoBehaviour
     {
         on_the_hook = electrified;  
     }
-    public void Set_if_is_on_the_special_hook(bool electrified)
-	{
-        on_the_special_hook = electrified;
-	}
     public bool Return_if_is_fffffflipped()
 	{
         return flipped;
@@ -289,7 +260,7 @@ public class CharController : MonoBehaviour
         number_of_cells -= 1;
         Debug.Log(number_of_cells);
     }
-    public void Set_number_of_cells(int cells)
+    public void Set_number_of_cells(float cells)
     {
         number_of_cells = cells;
     }
@@ -301,6 +272,10 @@ public class CharController : MonoBehaviour
     {
         can_move = _can_move;
     }
+    public void Set_lifes(int current_lifes)
+	{
+        lifes = current_lifes;
+	}
     public int Return_number_of_lifes()
     {
         return lifes;
@@ -310,6 +285,10 @@ public class CharController : MonoBehaviour
         number_of_cells+=1;
         Debug.Log(number_of_cells);
     }
-   
+
+    public void Move_on_z_axis()
+	{
+
+	}
 }
 
