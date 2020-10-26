@@ -68,8 +68,10 @@
     <Compile Include="Assets\Scripts\BatteryController.cs" />
     <Compile Include="Assets\Scripts\BioCellController.cs" />
     <Compile Include="Assets\Scripts\BuildingEntrance.cs" />
+    <Compile Include="Assets\Scripts\CarController.cs" />
     <Compile Include="Assets\Scripts\CharController.cs" />
     <Compile Include="Assets\Scripts\Checkpoint.cs" />
+    <Compile Include="Assets\Scripts\CheckpointMainSV.cs" />
     <Compile Include="Assets\Scripts\CherryTreeController.cs" />
     <Compile Include="Assets\Scripts\DeadZoneTrigger.cs" />
     <Compile Include="Assets\Scripts\DeadZoneTrigger01.cs" />

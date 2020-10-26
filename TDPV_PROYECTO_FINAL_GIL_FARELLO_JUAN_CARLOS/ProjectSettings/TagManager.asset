@@ -24,6 +24,9 @@ TagManager:
   - WaitingIconBall
   - SpecialIcon
   - TrainLimit
+  - TriggerToStopCar
+  - TriggerForCarDetection
+  - TriggerToStopCarRight
   layers:
   - Default
   - TransparentFX
@@ -34,7 +37,7 @@ TagManager:
   - 
   - 
   - Enemies
-  - 
+  - cars
   - 
   - 
   - 
