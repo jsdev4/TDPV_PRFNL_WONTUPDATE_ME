@@ -159,6 +159,17 @@ public class EnemyController : MonoBehaviour
                         }
                     }
                 }
+                /*if (enemy_difficulty == 2)
+                {
+                    if (numbers_of_hitted == 3 || numbers_of_hitted == 8 || numbers_of_hitted == 13 || numbers_of_hitted == 18 || numbers_of_hitted == 23)
+                    {
+                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                        if (player.gameObject.GetComponent<CharController>().Return_number_of_cells() == 0)
+                        {
+                            Set_new_status();
+                        }
+                    }
+                }*/
             }
             if(ManagerKeeper.Get_if_other_scene()==true)//to avoid enemy hit played when entering the minigame level03
 			{
@@ -168,6 +179,14 @@ public class EnemyController : MonoBehaviour
             if (ManagerKeeper.Get_if_mini_game_completed()==true||ManagerKeeper.Get_if_mini_game_completed()==false)//to avoid enemy hit played when entering the minigame level03
             {
 
+                can_attack = true;
+            }
+            if(ManagerKeeper.Return_if_is_ed102_enteroing_some_place()==true)//to avoid enemies hit the player when entering some place
+			{
+                can_attack = false;
+			}
+            if (ManagerKeeper.Return_if_is_ed102_enteroing_some_place() == false)
+            {
                 can_attack = true;
             }
         }

@@ -56,4 +56,8 @@ public class FaderScript : MonoBehaviour
 	{
         playing_fade_in = true;
 	}
+    public void Set_animation_complete(bool is_complete)
+	{
+        animation_complete = is_complete;
+	}
 }

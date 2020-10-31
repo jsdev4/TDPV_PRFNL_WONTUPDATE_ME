@@ -174,6 +174,7 @@ public class CharController : MonoBehaviour
                 transform.Translate(0, 0, -0.4f);
                 has_respawned = false;
             }
+            //respawnpoint for level04.
             if (has_respawned == true && respawn_point == 3)
             {
                 transform.position = respawn[0].gameObject.GetComponent<Transform>().position;
@@ -182,10 +183,17 @@ public class CharController : MonoBehaviour
             }
             if (has_respawned == true && respawn_point == 4)
             {
-                respawn_point = 1;
-               //back to second respawn point
+                transform.position = respawn[1].gameObject.GetComponent<Transform>().position;
+                transform.Translate(0, 0, 0.4f);
+                has_respawned = false;
             }
-           
+            if (has_respawned == true && respawn_point == 5)
+            {
+                transform.position = respawn[1].gameObject.GetComponent<Transform>().position;
+                transform.Translate(0, 0, 0.4f);
+                has_respawned = false;
+            }
+
             if (is_light_on == true)
             {
                 for (int i = 0; i < 3; i++)
