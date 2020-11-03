@@ -29,6 +29,7 @@ public class MortalBox : MonoBehaviour
 		if(collision.collider.CompareTag("Player"))
 		{
             hit_the_player = true;
+			//Debug.Log("touched");
 		}
 	}
 	private void OnCollisionExit(Collision collision)

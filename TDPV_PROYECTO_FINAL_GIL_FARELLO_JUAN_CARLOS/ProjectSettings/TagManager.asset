@@ -17,6 +17,17 @@ TagManager:
   - TriggerForSplat
   - Cylinder
   - TriggerForDisplacement
+  - Wall
+  - Glass
+  - Desktop
+  - TriggerForRespawn
+  - WaitingIconBall
+  - SpecialIcon
+  - TrainLimit
+  - TriggerToStopCar
+  - TriggerForCarDetection
+  - TriggerToStopCarRight
+  - TriggerForPedestrian
   layers:
   - Default
   - TransparentFX
@@ -27,8 +38,8 @@ TagManager:
   - 
   - 
   - Enemies
-  - 
-  - 
+  - cars
+  - pedestrian
   - 
   - 
   - 

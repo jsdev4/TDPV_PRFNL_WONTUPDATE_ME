@@ -8,22 +8,21 @@ public class EnemyController : MonoBehaviour
     public int enemy_difficulty;
     public float speed;
     public float speed_when_spots_player;
+    private float delay_to_random_patrol;
+    private float delay_for_dead;
+    public float max_distance;
+    public float min_distance;
     public bool direction;
     private bool can_attack;
     private bool enemy_alive;
-    private float delay_for_dead;
-    private Rigidbody rb;
-    public GameObject quad;
     private Vector3 translation;
     private Vector3 translation_to_left;
     private Vector3 rotation_sprite;
     private int random_to_patrol;
     private int numbers_of_hitted;
-
-    private float delay_to_random_patrol;
-    public float max_distance;
-    public float min_distance;
-
+   
+    private Rigidbody rb;
+    public GameObject quad;
     public Transform target;
     private Transform this_object;
     public GameObject player;
@@ -49,18 +48,10 @@ public class EnemyController : MonoBehaviour
         translation_to_left = new Vector3(-1, 0, 0);
         this_object = GetComponent<Transform>();
         Generate_random_number();
-        //Debug.Log(random_to_patrol);
         delay = 0;
         Timer = 0;
         startPosition =light_gun.transform.position;
         CurrentPositionHolder = PathNode[CurrentNode].transform.position;
-    }
-    public void CheckNode()
-    {
-        Timer = 0;
-        startPosition = light_gun.transform.localPosition;
-        CurrentPositionHolder = PathNode[CurrentNode].transform.localPosition;
-        light_gun.gameObject.GetComponent<Light>().enabled = true;
     }
     void Update()
     {
@@ -168,6 +159,35 @@ public class EnemyController : MonoBehaviour
                         }
                     }
                 }
+                /*if (enemy_difficulty == 2)
+                {
+                    if (numbers_of_hitted == 3 || numbers_of_hitted == 8 || numbers_of_hitted == 13 || numbers_of_hitted == 18 || numbers_of_hitted == 23)
+                    {
+                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                        if (player.gameObject.GetComponent<CharController>().Return_number_of_cells() == 0)
+                        {
+                            Set_new_status();
+                        }
+                    }
+                }*/
+            }
+            if(ManagerKeeper.Get_if_other_scene()==true)//to avoid enemy hit played when entering the minigame level03
+			{
+                
+                can_attack = false;
+			}
+            if (ManagerKeeper.Get_if_mini_game_completed()==true||ManagerKeeper.Get_if_mini_game_completed()==false)//to avoid enemy hit played when entering the minigame level03
+            {
+
+                can_attack = true;
+            }
+            if(ManagerKeeper.Return_if_is_ed102_enteroing_some_place()==true)//to avoid enemies hit the player when entering some place
+			{
+                can_attack = false;
+			}
+            if (ManagerKeeper.Return_if_is_ed102_enteroing_some_place() == false)
+            {
+                can_attack = true;
             }
         }
         if(enemy_alive==false)
@@ -180,11 +200,17 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+    public void CheckNode()
+    {
+        Timer = 0;
+        startPosition = light_gun.transform.localPosition;
+        CurrentPositionHolder = PathNode[CurrentNode].transform.localPosition;
+        light_gun.gameObject.GetComponent<Light>().enabled = true;
+    }
     public void Set_if_can_attack(bool attack_player)
     {
        can_attack=attack_player;
     }
-
     public void Set_direction_for_move(bool dir)
     {
         direction = dir;
@@ -192,7 +218,6 @@ public class EnemyController : MonoBehaviour
     private void Increase_number_of_hits()
     {
         numbers_of_hitted++;
-        // Debug.Log(numbers_of_hitted);
     }
     public void Reset_number_of_hits()
     {
@@ -252,7 +277,6 @@ public class EnemyController : MonoBehaviour
     {
         enemy_alive = alv;
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("TriggerForSplat"))
