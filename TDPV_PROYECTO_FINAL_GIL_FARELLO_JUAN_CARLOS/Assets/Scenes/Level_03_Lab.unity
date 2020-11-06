@@ -19728,12 +19728,12 @@ PrefabInstance:
     - target: {fileID: 5812256297455239834, guid: d410dc65927b2914c828ef5c70d286e4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 52.2
+      value: -6.44
       objectReference: {fileID: 0}
     - target: {fileID: 5812256297455239834, guid: d410dc65927b2914c828ef5c70d286e4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.3
+      value: 4.23
       objectReference: {fileID: 0}
     - target: {fileID: 5812256297455239834, guid: d410dc65927b2914c828ef5c70d286e4,
         type: 3}
@@ -76218,8 +76218,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3efa8581512a6d9428a71e02483037f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  is_static_npc: 0
+  in_level04: 0
+  is_male_npc: 0
   speed: 2
   delay: 3
+  direction: 0
   quad: {fileID: 985372607}
 --- !u!54 &1388538207
 Rigidbody:
@@ -94422,8 +94426,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3efa8581512a6d9428a71e02483037f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  is_static_npc: 0
+  in_level04: 0
+  is_male_npc: 0
   speed: 2
   delay: 3
+  direction: 0
   quad: {fileID: 2069464371}
 --- !u!54 &1709698555
 Rigidbody:
