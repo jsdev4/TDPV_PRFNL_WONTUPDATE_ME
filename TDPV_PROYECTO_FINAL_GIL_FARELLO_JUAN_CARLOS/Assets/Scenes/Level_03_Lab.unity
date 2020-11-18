@@ -104063,6 +104063,11 @@ PrefabInstance:
       propertyPath: special_computer_mini_game
       value: 
       objectReference: {fileID: 748479206}
+    - target: {fileID: 5907811442761580930, guid: 6a1319bfc2c048e46becc4892e376a7b,
+        type: 3}
+      propertyPath: time_counter
+      value: 600
+      objectReference: {fileID: 0}
     - target: {fileID: 5907811442761580931, guid: 6a1319bfc2c048e46becc4892e376a7b,
         type: 3}
       propertyPath: m_LocalPosition.x

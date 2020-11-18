@@ -39384,6 +39384,11 @@ PrefabInstance:
       propertyPath: lights
       value: 
       objectReference: {fileID: 1490121885}
+    - target: {fileID: 5907811442761580930, guid: 6a1319bfc2c048e46becc4892e376a7b,
+        type: 3}
+      propertyPath: time_counter
+      value: 600
+      objectReference: {fileID: 0}
     - target: {fileID: 5907811442761580931, guid: 6a1319bfc2c048e46becc4892e376a7b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -77033,7 +77038,7 @@ PrefabInstance:
     - target: {fileID: 1752244608450895452, guid: e35b3bc320c87f44084eb0d1ea87615c,
         type: 3}
       propertyPath: enemy_difficulty
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1752244608450895452, guid: e35b3bc320c87f44084eb0d1ea87615c,
         type: 3}

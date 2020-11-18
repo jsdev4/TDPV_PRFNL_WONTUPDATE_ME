@@ -195,7 +195,18 @@ public class ManagerScript : MonoBehaviour
                 return_text.gameObject.GetComponent<Text>().enabled = false;
                 if (changed == false)
                 {
+                    if (minutes == 8 && seconds == 0)
+                    {
+                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                        changed = true;
+                    }
                     if (minutes == 4 && seconds == 0)
+                    {
+                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                        changed = true;
+                    }
+                    //first code is commented to test 10 minutes game
+                    /*if (minutes == 4 && seconds == 0)
                     {
                         player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
                         changed = true;
@@ -204,7 +215,7 @@ public class ManagerScript : MonoBehaviour
                     {
                         player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
                         changed = true;
-                    }
+                    }*/
                   /*  if (minutes == 0 && seconds == 0)
                     {
                         player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
@@ -214,7 +225,17 @@ public class ManagerScript : MonoBehaviour
                 }
                 if(changed==true)
                 {
-                    if(minutes==3&&seconds==0)
+                    if (minutes ==6 && seconds == 0)
+                    {
+                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                        changed = false;
+                    }
+                    if (minutes == 2 && seconds == 0)
+                    {
+                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                        changed = false;
+                    }
+                   /* if (minutes==3&&seconds==0)
                     {
                         player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
                         changed = false;
@@ -223,7 +244,7 @@ public class ManagerScript : MonoBehaviour
                     {
                         player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
                         changed = false;
-                    }
+                    }*/
                 }    
             }
              if(player.gameObject.GetComponent<CharController>().Return_number_of_cells()==0&&run_out_of_cells==false)
