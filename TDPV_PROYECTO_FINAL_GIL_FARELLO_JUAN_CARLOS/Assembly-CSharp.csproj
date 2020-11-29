@@ -75,6 +75,7 @@
     <Compile Include="Assets\Scripts\CheckpointMainSV.cs" />
     <Compile Include="Assets\Scripts\CheckpointVendingMachine.cs" />
     <Compile Include="Assets\Scripts\CherryTreeController.cs" />
+    <Compile Include="Assets\Scripts\CraneController.cs" />
     <Compile Include="Assets\Scripts\DeadZoneTrigger.cs" />
     <Compile Include="Assets\Scripts\DeadZoneTrigger01.cs" />
     <Compile Include="Assets\Scripts\Elevator.cs" />

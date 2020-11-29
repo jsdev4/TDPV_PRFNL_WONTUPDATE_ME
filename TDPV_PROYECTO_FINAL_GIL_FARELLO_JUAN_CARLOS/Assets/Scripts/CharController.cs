@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class CharController : MonoBehaviour
 {
     public float speed;
+    private float reset_speed;
+    public float speed_on_z_axis;
     public float jump_speed;
     private Vector3 rotation_sprite;
     private bool on_ground;
@@ -52,15 +54,18 @@ public class CharController : MonoBehaviour
         on_the_hook = false;
         flipped = true;
         move_z_axis = false;
+        reset_speed = speed;
     }
     void Update()
     {
-        Vector3 translation = new Vector3(Input.GetAxisRaw("Horizontal"), 0,0);
+        Vector3 translation = new Vector3(Input.GetAxis("Horizontal"), 0, (Input.GetAxis("Vertical")));
+      //  Vector3 translation_on_z = new Vector3(0, 0,(Input.GetAxisRaw("Vertical")));
         if (can_move == true)
         {
             if (is_alive == true)
             {
                 rb.MovePosition(transform.position + translation * speed * Time.deltaTime);
+                //rb.MovePosition(transform.position + translation_on_z * (speed/3) * Time.deltaTime);
                 if (Input.GetKey(KeyCode.A))
                 {
                     flipped = false;
@@ -75,8 +80,19 @@ public class CharController : MonoBehaviour
                     rotation_sprite = new Vector3(1, 1, 1);
                     transform.localScale = rotation_sprite;
                 }
+                if(Input.GetKeyDown(KeyCode.W)||Input.GetKeyDown(KeyCode.S))
+				{
+                    is_moving = true;
+                    speed =speed_on_z_axis;
+                   
+				}
                 if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
                 {
+                    is_moving = false;
+                }
+                if(Input.GetKeyUp(KeyCode.W)||Input.GetKeyUp(KeyCode.S))
+				{
+                    speed =reset_speed;
                     is_moving = false;
                 }
                 ///Light function--------------------------------
@@ -266,7 +282,9 @@ public class CharController : MonoBehaviour
             on_ground = true;
             is_jumping = false;
         }
+       
     }
+	
     public void Set_if_is_on_the_hook(bool electrified)
     {
         on_the_hook = electrified;  

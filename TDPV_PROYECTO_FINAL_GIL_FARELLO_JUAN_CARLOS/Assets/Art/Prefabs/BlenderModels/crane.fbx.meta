@@ -12,18 +12,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material.001
-    second: {fileID: 2100000, guid: c29bcc10b53a705418f7bf5590376b25, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: Material.002
-    second: {fileID: 2100000, guid: c48cb52904497ca4580f151b256ce742, type: 2}
+    second: {fileID: 2100000, guid: 9cc984b6173a2f543ba9af5f146a52fb, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.003
-    second: {fileID: 2100000, guid: dafcbb2763904174696d1b9dd128b2b8, type: 2}
+    second: {fileID: 2100000, guid: 359d2956584365e438c34ca712253df6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -38,7 +33,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.006
-    second: {fileID: 2100000, guid: 359d2956584365e438c34ca712253df6, type: 2}
+    second: {fileID: 2100000, guid: f4513f99ce3e54d4eb878e026130749a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -48,7 +43,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.008
-    second: {fileID: 2100000, guid: f4513f99ce3e54d4eb878e026130749a, type: 2}
+    second: {fileID: 2100000, guid: c48cb52904497ca4580f151b256ce742, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -58,57 +53,62 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material.010
-    second: {fileID: 2100000, guid: 9cc984b6173a2f543ba9af5f146a52fb, type: 2}
+    second: {fileID: 2100000, guid: c29bcc10b53a705418f7bf5590376b25, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.011
+    second: {fileID: 2100000, guid: dafcbb2763904174696d1b9dd128b2b8, type: 2}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: crane_base
-    second: {fileID: 2800000, guid: 07781b7f7010a02458b8e48cd7dfa168, type: 3}
+    second: {fileID: 2800000, guid: 8177afc5fcfc2ef449601c08943b0253, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: crane_cab
-    second: {fileID: 2800000, guid: 7a3a9cb177dbb774596fc5d541e371eb, type: 3}
+    second: {fileID: 2800000, guid: 4c08b13c3a3a4034182e1430129042b6, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: crane_cab_front
-    second: {fileID: 2800000, guid: abb5693f7bba5fb408222d1eabad2579, type: 3}
+    second: {fileID: 2800000, guid: f40a64dd488c2b7419febea7901215d4, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: crane_cab_side
-    second: {fileID: 2800000, guid: 76a0f4ed20127e6499b19c11cdea4508, type: 3}
+    second: {fileID: 2800000, guid: f56dc4c796638f7439b61f6181abc841, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: crane_cab_side_01
-    second: {fileID: 2800000, guid: 23c6ce85152e409478b2cac7e428d809, type: 3}
+    second: {fileID: 2800000, guid: 9de5eafd42a47c0418c82a58072430de, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: crane_center_wheel
-    second: {fileID: 2800000, guid: cf37bfd7e02ed9c409353e98dd605cab, type: 3}
+    second: {fileID: 2800000, guid: 0093babf73ee8df4e8c9601caa2a3b6f, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: crane_engine_vent
-    second: {fileID: 2800000, guid: 2b54713a6ea8cbf4aba5c98ce6f19fc3, type: 3}
+    second: {fileID: 2800000, guid: bfe7132e97b1efd49b891e0a6d8e5e65, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: crane_rotor
-    second: {fileID: 2800000, guid: 7ed0bd87d53f1334ca5e8c50b58ee600, type: 3}
+    second: {fileID: 2800000, guid: aec7eac267494d84aa96580e68e0728d, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: crane_wheel
-    second: {fileID: 2800000, guid: 3b2768c4f793a4c46ba8441a4e2a329b, type: 3}
+    second: {fileID: 2800000, guid: 375303d2e85c79b4d82386e96daa2fe1, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: crane_wheel_support
-    second: {fileID: 2800000, guid: 28de5068c9843ad4abe580d5e907ac63, type: 3}
+    second: {fileID: 2800000, guid: f82743791d1c44148be8a4d2d5c4dde2, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0

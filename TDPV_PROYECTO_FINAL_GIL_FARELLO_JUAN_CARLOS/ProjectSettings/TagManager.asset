@@ -28,6 +28,8 @@ TagManager:
   - TriggerForCarDetection
   - TriggerToStopCarRight
   - TriggerForPedestrian
+  - TriggerToCraneDisplacement
+  - crane
   layers:
   - Default
   - TransparentFX
