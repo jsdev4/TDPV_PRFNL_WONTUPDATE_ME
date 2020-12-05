@@ -101,6 +101,7 @@
     <Compile Include="Assets\Scripts\HookWithTheBox.cs" />
     <Compile Include="Assets\Scripts\HookWithTheBox01.cs" />
     <Compile Include="Assets\Scripts\HookWithTheBox02.cs" />
+    <Compile Include="Assets\Scripts\HookZaxis.cs" />
     <Compile Include="Assets\Scripts\IntermitentLight.cs" />
     <Compile Include="Assets\Scripts\LifeIconController.cs" />
     <Compile Include="Assets\Scripts\LightChange.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Assets\Scripts\TriggerForMovements.cs" />
     <Compile Include="Assets\Scripts\TriggerForSplat.cs" />
     <Compile Include="Assets\Scripts\TriggerForSplatSpecial.cs" />
+    <Compile Include="Assets\Scripts\TriggerForWheelSplat.cs" />
     <Compile Include="Assets\Scripts\TriggerToFinalPart.cs" />
     <Compile Include="Assets\Scripts\TriggerToFinalPartExit.cs" />
     <Compile Include="Assets\Volumetric Lights\Scripts\VolumetricLight.cs" />

@@ -42,8 +42,8 @@ TagManager:
   - Enemies
   - cars
   - pedestrian
-  - 
-  - 
+  - LimitMovements
+  - Objects
   - 
   - 
   - 
