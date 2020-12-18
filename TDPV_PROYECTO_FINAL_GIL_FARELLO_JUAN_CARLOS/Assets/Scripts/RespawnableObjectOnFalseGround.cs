@@ -8,28 +8,30 @@ public class RespawnableObjectOnFalseGround : MonoBehaviour
 	private bool has_touched_the_trigger;
 	private float delay;
 	private float delay_for_respawn;
+	public float time_for_falling;
+	private Quaternion original_rotation;
 	private Vector3 respawnPoint;
-	private Rigidbody rb;
+	private Transform transform0;
+	//private Rigidbody rb;
 	public GameObject false_ground;
     void Start()
     {
-		rb = GetComponent<Rigidbody>();
+		//rb = GetComponent<Rigidbody>();
 		delay = 0;
 		delay_for_respawn = 0;
         on_board = false;
 		has_touched_the_trigger = false;
 		respawnPoint = GetComponent<Transform>().position;
-    }
-
-    // Update is called once per frame
+		transform0 = GetComponent<Transform>();
+		original_rotation = transform0.rotation;
+	}
     void Update()
     {
         if(on_board==true)
 		{
 			delay += Time.deltaTime;
-			if (delay > 2)
+			if (delay > time_for_falling)
 			{
-				rb.isKinematic = false;
 				false_ground.gameObject.GetComponent<Rigidbody>().isKinematic = false;
 			}
 		}
@@ -42,14 +44,8 @@ public class RespawnableObjectOnFalseGround : MonoBehaviour
 			delay_for_respawn += Time.deltaTime;
 			if(delay_for_respawn>2)
 			{
-				transform.position = respawnPoint;
-				transform.rotation = Quaternion.Euler(0, 0, 0);
-				false_ground.gameObject.GetComponent<FalseGround>().Reset_Object();
-				rb.isKinematic = true;
-				delay_for_respawn = 0;
-				has_touched_the_trigger = false;
+				Reset_Object();
 			}
-
 		}
     }
 	private void OnCollisionEnter(Collision collision)
@@ -72,5 +68,12 @@ public class RespawnableObjectOnFalseGround : MonoBehaviour
 		{
 			has_touched_the_trigger = true;
 		}
+	}
+	public void Reset_Object()
+	{
+		transform.position = respawnPoint;
+		transform.rotation = original_rotation; 
+		delay_for_respawn = 0;
+		has_touched_the_trigger = false;
 	}
 }

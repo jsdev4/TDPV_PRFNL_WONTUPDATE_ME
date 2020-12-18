@@ -98,6 +98,7 @@
     <Compile Include="Assets\Scripts\Hook.cs" />
     <Compile Include="Assets\Scripts\Hook01.cs" />
     <Compile Include="Assets\Scripts\Hook02.cs" />
+    <Compile Include="Assets\Scripts\HookStandardMovement2Colliders.cs" />
     <Compile Include="Assets\Scripts\HookWithTheBox.cs" />
     <Compile Include="Assets\Scripts\HookWithTheBox01.cs" />
     <Compile Include="Assets\Scripts\HookWithTheBox02.cs" />

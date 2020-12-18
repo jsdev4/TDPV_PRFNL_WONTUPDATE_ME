@@ -30,6 +30,7 @@ TagManager:
   - TriggerForPedestrian
   - TriggerToCraneDisplacement
   - crane
+  - WalkableObject
   layers:
   - Default
   - TransparentFX

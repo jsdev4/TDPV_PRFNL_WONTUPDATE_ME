@@ -67,6 +67,7 @@ public class CraneController : MonoBehaviour
         }
 		else
 		{
+            delay_the_boolean = true;
             current_speed = 0;
 		}
     }

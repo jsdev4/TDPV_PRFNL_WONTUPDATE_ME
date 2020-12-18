@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TriggerForWheelSplat : MonoBehaviour
 {
+    private float timer;
     private bool splatted;
     private bool stopped;
     private BoxCollider bx;
@@ -14,6 +15,7 @@ public class TriggerForWheelSplat : MonoBehaviour
         bx = GetComponent<BoxCollider>();
         splatted = false;
         stopped = false;
+        timer = 0;
     }
 
     // Update is called once per frame
@@ -24,6 +26,12 @@ public class TriggerForWheelSplat : MonoBehaviour
             player.gameObject.GetComponent<CharController>().Set_if_is_dead_zone_or_dead(false);
             stopped = true;
            
+			/*else
+			{
+                GetComponentInParent<CraneController>().Set_if_splatted_something(false);
+                bx.enabled = true;
+                splatted = false;
+            }*/
         }
         if(splatted==true&&stopped==true)
 		{

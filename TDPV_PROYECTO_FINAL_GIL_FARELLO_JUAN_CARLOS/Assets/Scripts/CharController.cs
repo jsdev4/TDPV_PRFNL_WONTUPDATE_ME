@@ -277,7 +277,7 @@ public class CharController : MonoBehaviour
     }
     private void OnCollisionStay(Collision collision)
     {
-        if(collision.collider.CompareTag("ground")||collision.collider.CompareTag("Elevator")||collision.collider.CompareTag("Box")||collision.collider.CompareTag("MetallicStructure"))
+        if(collision.collider.CompareTag("ground")||collision.collider.CompareTag("Elevator")||collision.collider.CompareTag("Box")||collision.collider.CompareTag("MetallicStructure")||collision.collider.CompareTag("WalkableObject"))
         {
             on_ground = true;
             is_jumping = false;

@@ -12,12 +12,9 @@ public class HookZaxis : MonoBehaviour
     {
         trnsfrm = GetComponent<Transform>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         Vector3 currentPos = trnsfrm.position;
-      //  Vector3 currentPosfixed = new Vector3(currentPos.x, currentPos.y - 2f, currentPos.z);
         if (direction == true)
         {
             trnsfrm.Translate(Vector3.down * speed * Time.deltaTime);
