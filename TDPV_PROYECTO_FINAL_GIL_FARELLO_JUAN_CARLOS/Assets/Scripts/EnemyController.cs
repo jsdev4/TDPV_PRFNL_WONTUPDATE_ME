@@ -5,25 +5,25 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public bool enable_on_screen;
     public int enemy_difficulty;
     public float speed;
     public float speed_when_spots_player;
+    private float delay_to_random_patrol;
+    private float delay_for_dead;
+    public float max_distance;
+    public float min_distance;
     public bool direction;
     private bool can_attack;
     private bool enemy_alive;
-    private float delay_for_dead;
-    private Rigidbody rb;
-    public GameObject quad;
     private Vector3 translation;
     private Vector3 translation_to_left;
     private Vector3 rotation_sprite;
     private int random_to_patrol;
     private int numbers_of_hitted;
-
-    private float delay_to_random_patrol;
-    public float max_distance;
-    public float min_distance;
-
+   
+    private Rigidbody rb;
+    public GameObject quad;
     public Transform target;
     private Transform this_object;
     public GameObject player;
@@ -38,6 +38,7 @@ public class EnemyController : MonoBehaviour
     private float delay;
     public float max_time_to_reset;
     private bool check_node;
+   
     void Start()
     {
         enemy_alive =true;
@@ -49,11 +50,161 @@ public class EnemyController : MonoBehaviour
         translation_to_left = new Vector3(-1, 0, 0);
         this_object = GetComponent<Transform>();
         Generate_random_number();
-        //Debug.Log(random_to_patrol);
         delay = 0;
         Timer = 0;
         startPosition =light_gun.transform.position;
         CurrentPositionHolder = PathNode[CurrentNode].transform.position;
+    }
+    void Update()
+    {
+        
+        if (enable_on_screen == true)
+        {
+            if (enemy_alive == true)
+            {
+                float distance = Vector3.Distance(transform.position, target.position);
+                if (can_attack == true)
+                {
+                    if (distance < max_distance && this_object.position.x < player.gameObject.GetComponent<Transform>().position.x)
+                    {
+                        if (distance > min_distance)
+                        {
+                            quad.gameObject.GetComponent<Animator>().Play("EnemyRunning");
+                            Vector3 dirToTarget = transform.position - player.transform.position;
+                            Vector3 newPos = transform.position - dirToTarget;
+                            rotation_sprite = new Vector3(1, 1, 1);
+                            transform.localScale = rotation_sprite;
+                            rb.MovePosition(Vector3.Lerp(transform.position, newPos, speed_when_spots_player * Time.deltaTime));
+                            Light_slider(false);
+                        }
+                        if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == true)
+                        {
+                            quad.gameObject.GetComponent<Animator>().Play("EnemyAttacking");
+                            Light_slider(true);
+                            Increase_number_of_hits();
+                        }
+                        else if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == false)
+                        {
+                            quad.gameObject.GetComponent<Animator>().Play("EnemyIdle");
+                            Light_slider(false);
+                        }
+                    }
+                    else if (distance < max_distance && this_object.position.x > player.gameObject.GetComponent<Transform>().position.x)
+                    {
+                        if (distance > min_distance)
+                        {
+                            quad.gameObject.GetComponent<Animator>().Play("EnemyRunning");
+                            Vector3 dirToTarget = transform.position - player.transform.position;
+                            Vector3 newPos = transform.position - dirToTarget;
+                            rotation_sprite = new Vector3(-1, 1, 1);
+                            transform.localScale = rotation_sprite;
+                            rb.MovePosition(Vector3.Lerp(transform.position, newPos, speed_when_spots_player * Time.deltaTime));
+                            Light_slider(false);
+                        }
+                        if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == true)
+                        {
+                            quad.gameObject.GetComponent<Animator>().Play("EnemyAttacking");
+                            Light_slider(true);
+                            Increase_number_of_hits();
+                        }
+                        else if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == false)
+                        {
+                            quad.gameObject.GetComponent<Animator>().Play("EnemyIdle");
+                            Light_slider(false);
+                        }
+                    }
+                    else
+                    {
+                        delay_to_random_patrol += Time.deltaTime;
+                        if (delay_to_random_patrol >= 3)
+                        {
+                            Generate_random_number();
+                        }
+                        if (random_to_patrol == 1)
+                        {
+                            quad.gameObject.GetComponent<Animator>().Play("EnemyRunning");
+                            if (direction == true)
+                            {
+                                rb.MovePosition(transform.position + translation * speed * Time.deltaTime);
+                                rotation_sprite = new Vector3(1, 1, 1);
+                                transform.localScale = rotation_sprite;
+                            }
+                            else
+                            {
+                                rb.MovePosition(transform.position + translation_to_left * speed * Time.deltaTime);
+                                rotation_sprite = new Vector3(-1, 1, 1);
+                                transform.localScale = rotation_sprite;
+                            }
+                        }
+                        else
+                        {
+                            quad.gameObject.GetComponent<Animator>().Play("EnemyIdle");
+                        }
+                    }
+
+                    if (enemy_difficulty == 0)
+                    {
+                        if (numbers_of_hitted == 100 || numbers_of_hitted == 200 || numbers_of_hitted == 300 || numbers_of_hitted == 400 || numbers_of_hitted == 500)
+                        {
+                            player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                            if (player.gameObject.GetComponent<CharController>().Return_number_of_cells() == 0)
+                            {
+                                Set_new_status();
+                            }
+                        }
+                    }
+                    if (enemy_difficulty == 1)
+                    {
+                        if (numbers_of_hitted == 5 || numbers_of_hitted == 10 || numbers_of_hitted == 15 || numbers_of_hitted == 20 || numbers_of_hitted == 25)
+                        {
+                            player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                            if (player.gameObject.GetComponent<CharController>().Return_number_of_cells() == 0)
+                            {
+                                Set_new_status();
+                            }
+                        }
+                    }
+                    /*if (enemy_difficulty == 2)
+                    {
+                        if (numbers_of_hitted == 3 || numbers_of_hitted == 8 || numbers_of_hitted == 13 || numbers_of_hitted == 18 || numbers_of_hitted == 23)
+                        {
+                            player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                            if (player.gameObject.GetComponent<CharController>().Return_number_of_cells() == 0)
+                            {
+                                Set_new_status();
+                            }
+                        }
+                    }*/
+                }
+                if (ManagerKeeper.Get_if_other_scene() == true)//to avoid enemy hit played when entering the minigame level03
+                {
+
+                    can_attack = false;
+                }
+                if (ManagerKeeper.Get_if_mini_game_completed() == true || ManagerKeeper.Get_if_mini_game_completed() == false)//to avoid enemy hit played when entering the minigame level03
+                {
+
+                    can_attack = true;
+                }
+                if (ManagerKeeper.Return_if_is_ed102_enteroing_some_place() == true)//to avoid enemies hit the player when entering some place
+                {
+                    can_attack = false;
+                }
+                if (ManagerKeeper.Return_if_is_ed102_enteroing_some_place() == false)
+                {
+                    can_attack = true;
+                }
+            }
+            if (enemy_alive == false)
+            {
+                delay_for_dead += Time.deltaTime;
+                quad.gameObject.GetComponent<Animator>().Play("EnemyDying");
+                if (delay_for_dead >= 1.5f)
+                {
+                    Destroy(gameObject);
+                }
+            }
+        }
     }
     public void CheckNode()
     {
@@ -62,129 +213,10 @@ public class EnemyController : MonoBehaviour
         CurrentPositionHolder = PathNode[CurrentNode].transform.localPosition;
         light_gun.gameObject.GetComponent<Light>().enabled = true;
     }
-    void Update()
-    {
-        if (enemy_alive == true)
-        {
-            float distance = Vector3.Distance(transform.position, target.position);
-            if (can_attack == true)
-            {
-                if (distance < max_distance && this_object.position.x < player.gameObject.GetComponent<Transform>().position.x)
-                {
-                    if (distance > min_distance)
-                    {
-                        quad.gameObject.GetComponent<Animator>().Play("EnemyRunning");
-                        Vector3 dirToTarget = transform.position - player.transform.position;
-                        Vector3 newPos = transform.position - dirToTarget;
-                        rotation_sprite = new Vector3(1, 1, 1);
-                        transform.localScale = rotation_sprite;
-                        rb.MovePosition(Vector3.Lerp(transform.position, newPos, speed_when_spots_player * Time.deltaTime));
-                        Light_slider(false);
-                    }
-                    if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == true)
-                    {
-                        quad.gameObject.GetComponent<Animator>().Play("EnemyAttacking");
-                        Light_slider(true);
-                        Increase_number_of_hits();
-                    }
-                    else if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == false)
-                    {
-                        quad.gameObject.GetComponent<Animator>().Play("EnemyIdle");
-                        Light_slider(false);
-                    }
-                }
-                else if (distance < max_distance && this_object.position.x > player.gameObject.GetComponent<Transform>().position.x)
-                {
-                    if (distance > min_distance)
-                    {
-                        quad.gameObject.GetComponent<Animator>().Play("EnemyRunning");
-                        Vector3 dirToTarget = transform.position - player.transform.position;
-                        Vector3 newPos = transform.position - dirToTarget;
-                        rotation_sprite = new Vector3(-1, 1, 1);
-                        transform.localScale = rotation_sprite;
-                        rb.MovePosition(Vector3.Lerp(transform.position, newPos, speed_when_spots_player * Time.deltaTime));
-                        Light_slider(false);
-                    }
-                    if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == true)
-                    {
-                        quad.gameObject.GetComponent<Animator>().Play("EnemyAttacking");
-                        Light_slider(true);
-                        Increase_number_of_hits();
-                    }
-                    else if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == false)
-                    {
-                        quad.gameObject.GetComponent<Animator>().Play("EnemyIdle");
-                        Light_slider(false);
-                    }
-                }
-                else
-                {
-                    delay_to_random_patrol += Time.deltaTime;
-                    if (delay_to_random_patrol >= 3)
-                    {
-                        Generate_random_number();
-                    }
-                    if (random_to_patrol == 1)
-                    {
-                        quad.gameObject.GetComponent<Animator>().Play("EnemyRunning");
-                        if (direction == true)
-                        {
-                            rb.MovePosition(transform.position + translation * speed * Time.deltaTime);
-                            rotation_sprite = new Vector3(1, 1, 1);
-                            transform.localScale = rotation_sprite;
-                        }
-                        else
-                        {
-                            rb.MovePosition(transform.position + translation_to_left * speed * Time.deltaTime);
-                            rotation_sprite = new Vector3(-1, 1, 1);
-                            transform.localScale = rotation_sprite;
-                        }
-                    }
-                    else
-                    {
-                        quad.gameObject.GetComponent<Animator>().Play("EnemyIdle");
-                    }
-                }
-
-                if (enemy_difficulty == 0)
-                {
-                    if (numbers_of_hitted == 100 || numbers_of_hitted == 200 || numbers_of_hitted == 300 || numbers_of_hitted == 400 || numbers_of_hitted == 500)
-                    {
-                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
-                        if (player.gameObject.GetComponent<CharController>().Return_number_of_cells() == 0)
-                        {
-                            Set_new_status();
-                        }
-                    }
-                }
-                if (enemy_difficulty == 1)
-                {
-                    if (numbers_of_hitted == 5 || numbers_of_hitted == 10 || numbers_of_hitted == 15 || numbers_of_hitted == 20 || numbers_of_hitted == 25)
-                    {
-                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
-                        if (player.gameObject.GetComponent<CharController>().Return_number_of_cells() == 0)
-                        {
-                            Set_new_status();
-                        }
-                    }
-                }
-            }
-        }
-        if(enemy_alive==false)
-        {
-            delay_for_dead+=Time.deltaTime;
-            quad.gameObject.GetComponent<Animator>().Play("EnemyDying");
-            if (delay_for_dead>=1.5f)
-            {
-                Destroy(gameObject);
-            }
-        }
-    }
     public void Set_if_can_attack(bool attack_player)
     {
        can_attack=attack_player;
     }
-
     public void Set_direction_for_move(bool dir)
     {
         direction = dir;
@@ -192,7 +224,6 @@ public class EnemyController : MonoBehaviour
     private void Increase_number_of_hits()
     {
         numbers_of_hitted++;
-        // Debug.Log(numbers_of_hitted);
     }
     public void Reset_number_of_hits()
     {
@@ -252,7 +283,6 @@ public class EnemyController : MonoBehaviour
     {
         enemy_alive = alv;
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("TriggerForSplat"))
@@ -266,5 +296,15 @@ public class EnemyController : MonoBehaviour
         {
             enemy_alive = true;
         }
+    }
+	private void OnBecameVisible()
+	{
+        enable_on_screen = true;
+        Debug.Log("is visible");
+	}
+    private void OnBecameInvisible()
+    {
+        enable_on_screen = false;
+        Debug.Log("is not visible");
     }
 }

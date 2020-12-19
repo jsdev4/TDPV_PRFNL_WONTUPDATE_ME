@@ -6,7 +6,7 @@ public class FaderScript : MonoBehaviour
 {
     private Animator anim;
     public GameObject player;
-
+    private bool playing_fade_in;
     private bool playing_fade_out;
 
 
@@ -23,6 +23,11 @@ public class FaderScript : MonoBehaviour
 		{
             anim.Play("Fade_out");
             playing_fade_out = false;
+        }
+        if (playing_fade_in == true)
+        {
+            anim.Play("Fade_in");
+            playing_fade_in = false;
         }
 
     }
@@ -47,5 +52,12 @@ public class FaderScript : MonoBehaviour
     public bool Return_animation_complete()
 	{
         return animation_complete;
+	}public void Set_fade_in()
+	{
+        playing_fade_in = true;
+	}
+    public void Set_animation_complete(bool is_complete)
+	{
+        animation_complete = is_complete;
 	}
 }

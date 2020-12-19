@@ -20,6 +20,17 @@ TagManager:
   - Wall
   - Glass
   - Desktop
+  - TriggerForRespawn
+  - WaitingIconBall
+  - SpecialIcon
+  - TrainLimit
+  - TriggerToStopCar
+  - TriggerForCarDetection
+  - TriggerToStopCarRight
+  - TriggerForPedestrian
+  - TriggerToCraneDisplacement
+  - crane
+  - WalkableObject
   layers:
   - Default
   - TransparentFX
@@ -30,10 +41,10 @@ TagManager:
   - 
   - 
   - Enemies
-  - 
-  - 
-  - 
-  - 
+  - cars
+  - pedestrian
+  - LimitMovements
+  - Objects
   - 
   - 
   - 

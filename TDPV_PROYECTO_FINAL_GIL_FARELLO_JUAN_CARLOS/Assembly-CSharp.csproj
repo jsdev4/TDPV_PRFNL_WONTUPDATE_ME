@@ -47,6 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Unity/VSTU</UnityProjectGenerator>
+    <UnityProjectGeneratorVersion>4.8.2.0</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2019.3.9f1</UnityVersion>
@@ -67,8 +68,14 @@
     <Compile Include="Assets\Scripts\BackgroundScroller.cs" />
     <Compile Include="Assets\Scripts\BatteryController.cs" />
     <Compile Include="Assets\Scripts\BioCellController.cs" />
+    <Compile Include="Assets\Scripts\BuildingEntrance.cs" />
+    <Compile Include="Assets\Scripts\CarController.cs" />
     <Compile Include="Assets\Scripts\CharController.cs" />
     <Compile Include="Assets\Scripts\Checkpoint.cs" />
+    <Compile Include="Assets\Scripts\CheckpointMainSV.cs" />
+    <Compile Include="Assets\Scripts\CheckpointVendingMachine.cs" />
+    <Compile Include="Assets\Scripts\CherryTreeController.cs" />
+    <Compile Include="Assets\Scripts\CraneController.cs" />
     <Compile Include="Assets\Scripts\DeadZoneTrigger.cs" />
     <Compile Include="Assets\Scripts\DeadZoneTrigger01.cs" />
     <Compile Include="Assets\Scripts\Elevator.cs" />
@@ -87,10 +94,15 @@
     <Compile Include="Assets\Scripts\FalseGround.cs" />
     <Compile Include="Assets\Scripts\FinalLevel03Hook.cs" />
     <Compile Include="Assets\Scripts\FlashingLights.cs" />
+    <Compile Include="Assets\Scripts\FlashingLights01.cs" />
     <Compile Include="Assets\Scripts\Hook.cs" />
     <Compile Include="Assets\Scripts\Hook01.cs" />
     <Compile Include="Assets\Scripts\Hook02.cs" />
+    <Compile Include="Assets\Scripts\HookStandardMovement2Colliders.cs" />
     <Compile Include="Assets\Scripts\HookWithTheBox.cs" />
+    <Compile Include="Assets\Scripts\HookWithTheBox01.cs" />
+    <Compile Include="Assets\Scripts\HookWithTheBox02.cs" />
+    <Compile Include="Assets\Scripts\HookZaxis.cs" />
     <Compile Include="Assets\Scripts\IntermitentLight.cs" />
     <Compile Include="Assets\Scripts\LifeIconController.cs" />
     <Compile Include="Assets\Scripts\LightChange.cs" />
@@ -105,21 +117,33 @@
     <Compile Include="Assets\Scripts\ManagerKeeper.cs" />
     <Compile Include="Assets\Scripts\ManagerScript.cs" />
     <Compile Include="Assets\Scripts\ManagingDataPc.cs" />
-    <Compile Include="Assets\Scripts\MiniGameManager.cs" />
     <Compile Include="Assets\Scripts\MortalBox.cs" />
+    <Compile Include="Assets\Scripts\MortalBox01.cs" />
     <Compile Include="Assets\Scripts\NpcController.cs" />
     <Compile Include="Assets\Scripts\NpcDying.cs" />
     <Compile Include="Assets\Scripts\ObjectDisplacementController.cs" />
     <Compile Include="Assets\Scripts\ObjectRotorController.cs" />
+    <Compile Include="Assets\Scripts\PacPunkScripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\PacPunkScripts\CharControllerForPacPunk.cs" />
+    <Compile Include="Assets\Scripts\PacPunkScripts\LifeIconControllerPacPunk.cs" />
+    <Compile Include="Assets\Scripts\PacPunkScripts\PacPunkManager.cs" />
+    <Compile Include="Assets\Scripts\PacPunkScripts\SpecialIconsController.cs" />
+    <Compile Include="Assets\Scripts\PacPunkScripts\TriggerForRespawnOnSide.cs" />
+    <Compile Include="Assets\Scripts\PacPunkScripts\WaitingIconBall.cs" />
+    <Compile Include="Assets\Scripts\PacPunkScripts\enemyGhostController.cs" />
+    <Compile Include="Assets\Scripts\RelocatePlayerOnLevel.cs" />
     <Compile Include="Assets\Scripts\RespawnableObjectOnFalseGround.cs" />
     <Compile Include="Assets\Scripts\ScriptToLevel02.cs" />
     <Compile Include="Assets\Scripts\ScriptToLevel04.cs" />
+    <Compile Include="Assets\Scripts\ScriptToLevel05.cs" />
+    <Compile Include="Assets\Scripts\StopLightsController.cs" />
     <Compile Include="Assets\Scripts\SwitchToMiniScene.cs" />
     <Compile Include="Assets\Scripts\TextureResize.cs" />
+    <Compile Include="Assets\Scripts\TrainController.cs" />
     <Compile Include="Assets\Scripts\TriggerForMovements.cs" />
     <Compile Include="Assets\Scripts\TriggerForSplat.cs" />
     <Compile Include="Assets\Scripts\TriggerForSplatSpecial.cs" />
+    <Compile Include="Assets\Scripts\TriggerForWheelSplat.cs" />
     <Compile Include="Assets\Scripts\TriggerToFinalPart.cs" />
     <Compile Include="Assets\Scripts\TriggerToFinalPartExit.cs" />
     <Compile Include="Assets\Volumetric Lights\Scripts\VolumetricLight.cs" />

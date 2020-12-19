@@ -86961,6 +86961,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1094636882, guid: 6a1319bfc2c048e46becc4892e376a7b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 31.400024
+      objectReference: {fileID: 0}
     - target: {fileID: 5907811442008014174, guid: 6a1319bfc2c048e46becc4892e376a7b,
         type: 3}
       propertyPath: player
@@ -86991,6 +86995,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1505109218}
+    - target: {fileID: 5907811442761580930, guid: 6a1319bfc2c048e46becc4892e376a7b,
+        type: 3}
+      propertyPath: time_counter
+      value: 600
+      objectReference: {fileID: 0}
     - target: {fileID: 5907811442761580931, guid: 6a1319bfc2c048e46becc4892e376a7b,
         type: 3}
       propertyPath: m_LocalPosition.x

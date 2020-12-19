@@ -1,10 +1,11 @@
-﻿using System;
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+
 using UnityEngine.UI;
-using UnityScript.Steps;
+
 
 public class ManagerScript : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class ManagerScript : MonoBehaviour
     private bool changed;
     private bool out_of_time;
     private bool run_out_of_cells;
+    private bool has_respawned_from_mini_game;
     public GameObject[] enemy;
     public Texture aTexture;
     public Font game_font;
@@ -25,6 +27,8 @@ public class ManagerScript : MonoBehaviour
     public GameObject battery_icon;
     public GameObject blacknened_background;
     public GameObject life_icon;
+    public GameObject[] respawn_point;
+    public GameObject special_computer_mini_game;
     public Text text_on_screen;
     public Text continue_text;
     public Text return_text;
@@ -32,6 +36,7 @@ public class ManagerScript : MonoBehaviour
     private int seconds;
     private int cells_on_timer;
     private int option;
+
     private Color32 unselect_color;
     private Color32 select_color;
 
@@ -44,19 +49,45 @@ public class ManagerScript : MonoBehaviour
 	void Start()
     {
 
-       
+        has_respawned_from_mini_game = false;
         //condition for the returning from other scenes
-        if (ManagerKeeper.get_if_returned() == true)
+       if (ManagerKeeper.Get_if_other_scene() == true&&ManagerKeeper.Get_if_mini_game_completed()==false)
         {
             time_counter_script_inside = ManagerKeeper.Get_old_time_script_inside();
+            special_computer_mini_game.gameObject.GetComponent<BoxCollider>().enabled = false;
             player.gameObject.GetComponent<Transform>().position = ManagerKeeper.Get_old_players_position();
             player.gameObject.GetComponent<CharController>().Set_lifes(ManagerKeeper.Get_old_number_of_lifes());
             player.gameObject.GetComponent<CharController>().Keep_respawn_point(ManagerKeeper.Get_old_respawn_point());
         }
-        //else
-        else
-        {
+        if(ManagerKeeper.Get_if_other_scene()==true&&ManagerKeeper.Get_if_mini_game_completed()==true)
+		{
+            Debug.Log(ManagerKeeper.Get_respawn_point());               
+                time_counter_script_inside = ManagerKeeper.Get_old_time_script_inside();
+            special_computer_mini_game.gameObject.GetComponent<BoxCollider>().enabled = false;
+            player.gameObject.GetComponent<CharController>().Keep_respawn_point(ManagerKeeper.Get_old_respawn_point());
+                
+                has_respawned_from_mini_game = true;
             
+            if (ManagerKeeper.Get_respawn_point() == 0)
+            {
+                player.gameObject.GetComponent<Transform>().position = respawn_point[0].gameObject.GetComponent<Transform>().position;
+            }
+            if (ManagerKeeper.Get_respawn_point() == 1)
+            {
+                player.gameObject.GetComponent<Transform>().position = respawn_point[1].gameObject.GetComponent<Transform>().position;
+            }
+            if (ManagerKeeper.Get_respawn_point() == 2)
+            {
+                player.gameObject.GetComponent<Transform>().position = respawn_point[2].gameObject.GetComponent<Transform>().position;
+            }
+            if (ManagerKeeper.Get_respawn_point() == 3)
+            {
+                player.gameObject.GetComponent<Transform>().position = respawn_point[3].gameObject.GetComponent<Transform>().position;
+            }
+        }
+        //else
+        else if(ManagerKeeper.Get_if_other_scene() == false && ManagerKeeper.Get_if_mini_game_completed() == true|| ManagerKeeper.Get_if_other_scene() == false && ManagerKeeper.Get_if_mini_game_completed() == false)
+        {
             time_counter_script_inside = time_counter;
         }
         delay_for_reset_game = 0;
@@ -164,7 +195,18 @@ public class ManagerScript : MonoBehaviour
                 return_text.gameObject.GetComponent<Text>().enabled = false;
                 if (changed == false)
                 {
+                    if (minutes == 8 && seconds == 0)
+                    {
+                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                        changed = true;
+                    }
                     if (minutes == 4 && seconds == 0)
+                    {
+                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                        changed = true;
+                    }
+                    //first code is commented to test 10 minutes game
+                    /*if (minutes == 4 && seconds == 0)
                     {
                         player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
                         changed = true;
@@ -173,7 +215,7 @@ public class ManagerScript : MonoBehaviour
                     {
                         player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
                         changed = true;
-                    }
+                    }*/
                   /*  if (minutes == 0 && seconds == 0)
                     {
                         player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
@@ -183,7 +225,17 @@ public class ManagerScript : MonoBehaviour
                 }
                 if(changed==true)
                 {
-                    if(minutes==3&&seconds==0)
+                    if (minutes ==6 && seconds == 0)
+                    {
+                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                        changed = false;
+                    }
+                    if (minutes == 2 && seconds == 0)
+                    {
+                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                        changed = false;
+                    }
+                   /* if (minutes==3&&seconds==0)
                     {
                         player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
                         changed = false;
@@ -192,7 +244,7 @@ public class ManagerScript : MonoBehaviour
                     {
                         player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
                         changed = false;
-                    }
+                    }*/
                 }    
             }
              if(player.gameObject.GetComponent<CharController>().Return_number_of_cells()==0&&run_out_of_cells==false)
