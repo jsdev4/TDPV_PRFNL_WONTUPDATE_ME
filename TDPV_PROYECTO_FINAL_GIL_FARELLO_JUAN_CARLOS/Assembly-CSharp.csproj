@@ -134,6 +134,7 @@
     <Compile Include="Assets\Scripts\RelocatePlayerOnLevel.cs" />
     <Compile Include="Assets\Scripts\RespawnableObjectOnFalseGround.cs" />
     <Compile Include="Assets\Scripts\ScriptToLevel02.cs" />
+    <Compile Include="Assets\Scripts\ScriptToLevel03.cs" />
     <Compile Include="Assets\Scripts\ScriptToLevel04.cs" />
     <Compile Include="Assets\Scripts\ScriptToLevel05.cs" />
     <Compile Include="Assets\Scripts\StopLightsController.cs" />
