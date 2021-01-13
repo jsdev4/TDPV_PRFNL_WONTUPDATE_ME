@@ -11,53 +11,47 @@ public class Elevator : MonoBehaviour
     public bool is_up;
     public GameObject trigger;
     public GameObject trigger01;
-
     private bool has_stopped;
     public bool is_final_elevator;
+    private Rigidbody rb;
+    private Transform trnsfrm;
     void Start()
     {
        on_board = false;
-        //speed = 1;
+        trnsfrm = GetComponent<Transform>();
+        rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-         Vector3 sizeVec = trigger.GetComponent<Collider>().bounds.size;
+        Vector3 sizeVec = trigger.GetComponent<Collider>().bounds.size;
+        Vector3 sizeVec01 = trigger01.GetComponent<Collider>().bounds.size;
         if (is_up == true)
         {
-            if (transform.position.y <= (trigger01.transform.position.y))
+            if (trnsfrm.position.y <= trigger01.transform.position.y+sizeVec01.y/2)
             {
-                transform.Translate(Vector3.up * speed_up * Time.deltaTime);
-               
-                if (is_final_elevator == true)
-                {
-                   
-                }
+                rb.MovePosition(trnsfrm.position + trnsfrm.up * speed_up * Time.fixedDeltaTime);
             }
         }
-        if(transform.position.y==trigger01.transform.position.y)
+        if(transform.position.y==trigger01.transform.position.y+sizeVec01.y/2)
         {
-            transform.Translate(Vector3.up * 0 * Time.deltaTime);
+            rb.MovePosition(trnsfrm.position + trnsfrm.up * 0 * Time.fixedDeltaTime);
             is_up = true;
         }
-
         if (is_up == false)
-        {
-            if (transform.position.y > trigger.transform.position.y&&transform.position.y>trigger.transform.position.y+sizeVec.y && has_stopped == false)
+        { 
+            if (trnsfrm.position.y > trigger.transform.position.y+sizeVec.y/2&&has_stopped == false)
             {
-                if (has_stopped == false)
-                {
-                    transform.Translate(Vector3.down * speed_down * Time.deltaTime);
-                }
+                rb.MovePosition(trnsfrm.position - trnsfrm.up * speed_down * Time.fixedDeltaTime);
             }
-            if (transform.position.y  == trigger.transform.position.y+sizeVec.y )
+            if (transform.position.y  == trigger.transform.position.y+sizeVec.y/4 )
             {
-                transform.Translate(Vector3.down *0 * Time.deltaTime);
+                rb.MovePosition(trnsfrm.position - trnsfrm.up * 0 * Time.fixedDeltaTime);
                 is_up = false;
             }
             if (has_stopped == true )
             {
-                transform.Translate(Vector3.down * 0 * Time.deltaTime);
+                rb.MovePosition(trnsfrm.position - trnsfrm.up * speed_down * Time.fixedDeltaTime);
             }  
         } 
     }

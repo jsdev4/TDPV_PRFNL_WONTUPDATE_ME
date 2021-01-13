@@ -202,6 +202,8 @@ public class EnemyController : MonoBehaviour
                 if (delay_for_dead >= 1.5f)
                 {
                     Destroy(gameObject);
+                    Debug.Log("Enemy is dead");
+                    delay_for_dead = 0;
                 }
             }
         }
