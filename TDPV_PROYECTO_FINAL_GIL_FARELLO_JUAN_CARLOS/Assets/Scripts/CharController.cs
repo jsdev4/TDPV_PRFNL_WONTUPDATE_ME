@@ -32,7 +32,7 @@ public class CharController : MonoBehaviour
     public GameObject[] respawn;
     public GameObject[] low_beam_light;
     public GameObject manager;
-    public GameObject hook;
+    //public GameObject hook;
 
     void Start()
     {
