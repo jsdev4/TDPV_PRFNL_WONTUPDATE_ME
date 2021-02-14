@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class CharControllerForPacPunk : MonoBehaviour
@@ -8,6 +9,8 @@ public class CharControllerForPacPunk : MonoBehaviour
     public float jump_speed;
     private bool can_move;
     private bool is_alive;
+    private bool moving_up;
+    private bool moving_down;
     private int lifes;
     private Vector3 firstPos;
     private Transform trnsfrm;
@@ -19,6 +22,8 @@ public class CharControllerForPacPunk : MonoBehaviour
         trnsfrm = GetComponent<Transform>();
         can_move = true;
         is_alive = true;
+        moving_up = false;
+        moving_down = false;
         firstPos = trnsfrm.position;
     }
     void Update()
@@ -38,6 +43,22 @@ public class CharControllerForPacPunk : MonoBehaviour
                 if (Input.GetKey(KeyCode.D))
                 {
                     quad.gameObject.GetComponent<Transform>().localScale = new Vector3(1, 1, 1);
+                }
+                if(Input.GetKeyDown(KeyCode.W))
+				{
+                    moving_up = true;
+				}
+                if (Input.GetKeyDown(KeyCode.S))
+                {
+                    moving_down = true;
+                }
+                if (Input.GetKeyUp(KeyCode.W))
+                {
+                    moving_up = false;
+                }
+                if (Input.GetKeyUp(KeyCode.S))
+                {
+                    moving_down = false;
                 }
             }
 		}
@@ -73,6 +94,10 @@ public class CharControllerForPacPunk : MonoBehaviour
 	{
         lifes -= 1;
         Debug.Log("life is" + lifes);
+	}
+    public bool Set_moving_up()
+	{
+        return moving_up;
 	}
 }
 

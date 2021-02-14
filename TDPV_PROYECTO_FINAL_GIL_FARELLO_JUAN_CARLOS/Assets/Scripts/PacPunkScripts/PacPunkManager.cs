@@ -30,6 +30,8 @@ public class PacPunkManager : MonoBehaviour
     public GameObject game_completed_screen;
     public GameObject game_over_screen;
     public GameObject fader;
+    public GameObject life_icon;
+    public GameObject score_text;
     public Text screen_score;
     private string score_string;
     void Awake()
@@ -72,6 +74,8 @@ public class PacPunkManager : MonoBehaviour
         }
         if (game_started == true)
         {
+            life_icon.SetActive(true);
+            score_text.SetActive(true);
             timer_for_enemies_on_start_level += Time.deltaTime;
             if(timer_for_enemies_on_start_level>=2f)
 			{
@@ -107,6 +111,8 @@ public class PacPunkManager : MonoBehaviour
             if (icons_collected == numberOfTaggedObjects + numberOfSpecialTaggedObject)
             {
                 Keep_characters_static();
+                life_icon.SetActive(false);
+                score_text.SetActive(false);
                 game_completed_screen.SetActive(true);
                 ManagerKeeper.Set_if_mini_game_was_completed(true);
                 if (Input.GetKeyUp(KeyCode.Return))
@@ -136,6 +142,8 @@ public class PacPunkManager : MonoBehaviour
                     if (timer_to_back_to_level03 >=3f&&timer_to_back_to_level03<=5f)
                     {
                         fader.SetActive(false);
+                        life_icon.SetActive(false);
+                        score_text.SetActive(false);
                         game_over_screen.SetActive(true);
                     }
                     if (timer_to_back_to_level03 >5)
@@ -164,6 +172,8 @@ public class PacPunkManager : MonoBehaviour
                 if (timer_to_back_to_level03 >= 3f && timer_to_back_to_level03 <= 5f)
                 {
                     fader.SetActive(false);
+                    life_icon.SetActive(false);
+                    score_text.SetActive(false);
                     game_over_screen.SetActive(true);
                 }
                 if (timer_to_back_to_level03 > 5)
@@ -177,13 +187,13 @@ public class PacPunkManager : MonoBehaviour
 	{
         icons_collected += 1;
         score += 10;
-        Debug.Log(icons_collected);
+       // Debug.Log(icons_collected);
 	}
     public void Increase_special_icon_collected()
 	{
         icons_collected += 1;
         score += 10;
-        Debug.Log("special icon is collected");
+       // Debug.Log("special icon is collected");
         special_icon_collected = true;
 	}
     public void Increase_enemy_hitted()
