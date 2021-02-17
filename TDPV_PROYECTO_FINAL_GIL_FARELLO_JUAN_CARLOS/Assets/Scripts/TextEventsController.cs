@@ -32,4 +32,8 @@ public class TextEventsController : MonoBehaviour
 	{
         return to_next_level;
 	}
+    public void Set_text_out_false()
+	{
+        to_next_level = false;
+	}
 }

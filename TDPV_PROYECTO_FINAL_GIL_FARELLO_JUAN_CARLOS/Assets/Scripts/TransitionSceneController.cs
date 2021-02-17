@@ -6,22 +6,21 @@ using UnityEngine.UI;
 public class TransitionSceneController : MonoBehaviour
 {
     private float timer;
-    private bool start_timer;
+    private bool key_was_pressed;
     public GameObject[]screen_text;
     public bool is_press_text;
-    private Color32 select_color;
+    public bool is_game_over_scene_final;
     private bool to_main_menu;
     public bool is_game_over_scene;
     void Start()
     {
         timer = 0;
-        start_timer = false;
+       key_was_pressed = false;
         to_main_menu = false;
-        select_color = new Color32(72, 58, 176, 255);
     }
     void Update()
     {
-        if (is_game_over_scene == false)
+        if (is_game_over_scene == false)////code for transition scene
         {
             if (screen_text[1].gameObject.GetComponent<TextEventsController>().Return_if_start_timer() == true)
             {
@@ -30,13 +29,30 @@ public class TransitionSceneController : MonoBehaviour
                 {
                     if (Input.GetKeyUp(KeyCode.Return))
                     {
+                        key_was_pressed = true;
                         screen_text[0].gameObject.GetComponent<Animator>().Play("TextControllerOut");
                         screen_text[1].gameObject.GetComponent<Animator>().Play("PressTextOut");
                     }
                 }
             }
         }
-        else
+        if (is_game_over_scene_final == true)////code for game over final
+        {
+            if (screen_text[1].gameObject.GetComponent<TextEventsController>().Return_if_start_timer() == true)
+            {
+                timer += Time.deltaTime;
+                if (timer >= 1f)
+                {
+                    if (Input.GetKeyUp(KeyCode.Escape))
+                    {
+                        screen_text[0].gameObject.GetComponent<Animator>().Play("GameOverFadeOut");
+                        screen_text[1].gameObject.GetComponent<Animator>().Play("ToMainMenuOutInBlue");
+                        to_main_menu = true;
+                    }
+                }
+            }
+        }
+        else if(is_game_over_scene==true&&is_game_over_scene_final==false)//code fot game over with retry
         {
             if (screen_text[2].gameObject.GetComponent<TextEventsController>().Return_if_start_timer() == true)
             {
@@ -53,6 +69,7 @@ public class TransitionSceneController : MonoBehaviour
                     }
                     if (Input.GetKeyUp(KeyCode.Escape))
                     {
+                        to_main_menu = true;
                         screen_text[0].gameObject.GetComponent<Animator>().Play("GameOverFadeOut");
                         screen_text[1].gameObject.GetComponent<Animator>().Play("PressTextFadeOut");
                         screen_text[2].gameObject.GetComponent<Animator>().Play("ToMainMenuOutInBlue");
@@ -90,4 +107,8 @@ public class TransitionSceneController : MonoBehaviour
             //to main menu, falta crear scene y testear
 		}
     }
+    public bool Return_if_key_was_pressed()
+	{
+        return key_was_pressed;
+	}
 }

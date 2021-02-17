@@ -18,7 +18,7 @@ public class ManagerScript : MonoBehaviour
     private bool changed;
     private bool out_of_time;
     private bool run_out_of_cells;
-    private bool has_respawned_from_mini_game;
+    private bool to_main_menu;
     private bool go_to_retry;
     public GameObject[] enemy;
     public Texture aTexture;
@@ -51,8 +51,7 @@ public class ManagerScript : MonoBehaviour
     }
 	void Start()
     {
-
-        has_respawned_from_mini_game = false;
+        to_main_menu = false;
         //condition for the returning from other scenes
        if (ManagerKeeper.Get_if_other_scene() == true&&ManagerKeeper.Get_if_mini_game_completed()==false)
         {
@@ -68,9 +67,6 @@ public class ManagerScript : MonoBehaviour
                 time_counter_script_inside = ManagerKeeper.Get_old_time_script_inside();
             special_computer_mini_game.gameObject.GetComponent<BoxCollider>().enabled = false;
             player.gameObject.GetComponent<CharController>().Keep_respawn_point(ManagerKeeper.Get_old_respawn_point());
-                
-                has_respawned_from_mini_game = true;
-            
             if (ManagerKeeper.Get_respawn_point() == 0)
             {
                 player.gameObject.GetComponent<Transform>().position = respawn_point[0].gameObject.GetComponent<Transform>().position;
@@ -100,7 +96,6 @@ public class ManagerScript : MonoBehaviour
         run_out_of_cells = false;
         go_to_retry = false;
         option = 0;
-        //
         timer_to_restart_level = 0;
         select_color= new Color32(72, 58, 176,255);
         unselect_color = new Color32(149,13,76,255);
@@ -139,7 +134,8 @@ public class ManagerScript : MonoBehaviour
             {
                 if (Input.GetKeyUp(KeyCode.P))
                 {
-                    paused = !paused;
+                    option = 0;
+                    paused = !paused; 
                 }
                 if (paused == true)
                 {
@@ -171,12 +167,16 @@ public class ManagerScript : MonoBehaviour
                     if (option == 1)
                     {
                         return_text.gameObject.GetComponent<Text>().color = select_color;
-                        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow))
+                        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow)&&to_main_menu==false)
                         {
                             option = 0;
                             return_text.gameObject.GetComponent<Text>().color = unselect_color;
                         }
-                        //from here, main menu scene must be added
+                        if(Input.GetKeyUp(KeyCode.Return))
+						{
+                            to_main_menu = true;
+                            paused = false;
+                        }
                     }
                 }
                 if (paused == false)
@@ -213,7 +213,6 @@ public class ManagerScript : MonoBehaviour
                             player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
                             changed = true;
                         }
-
                     }
                     if (changed == true)
                     {
@@ -227,7 +226,6 @@ public class ManagerScript : MonoBehaviour
                             player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
                             changed = false;
                         }
-
                     }
                     if (player.gameObject.GetComponent<CharController>().Return_number_of_cells() == 0 && run_out_of_cells == false)
                     {
@@ -238,14 +236,13 @@ public class ManagerScript : MonoBehaviour
                             {
                                 child.gameObject.GetComponent<EnemyController>().Reset_number_of_hits();
                             }
-
                             run_out_of_cells = true;
                         }
                     }
                     if (player.gameObject.GetComponent<CharController>().Get_if_go_to_retry()==true&&go_to_retry==false)
                     {  
                         ManagerKeeper.Decrease_number_of_tries();
-                        Debug.Log("number is aaaaaaaaaaaaa " + ManagerKeeper.Get_number_of_tries_availables());
+                       // Debug.Log("number is aaaaaaaaaaaaa " + ManagerKeeper.Get_number_of_tries_availables());
                         player.gameObject.GetComponent<CharController>().Set_if_go_to_retry(false);
                         go_to_retry = true;
                     } 
@@ -264,6 +261,22 @@ public class ManagerScript : MonoBehaviour
                                     SceneManager.LoadScene("Game_Over_Scene");
                                 }
                             }
+                        }
+                    }
+                    if (to_main_menu == true)
+                    {
+                        gray_quad_for_pause.gameObject.GetComponent<MeshRenderer>().enabled = true;
+                        foreach (GameObject child in enemy)
+                        {
+                            if (child != null)
+                            {
+                                child.gameObject.SetActive(false);
+                            }
+                        }
+                        fader.SetActive(true);
+                        if (fader.gameObject.GetComponent<FaderScript>().Return_animation_complete() == true)
+                        {
+                            SceneManager.LoadScene("Main_Menu");
                         }
                     }
                 }
@@ -288,16 +301,27 @@ public class ManagerScript : MonoBehaviour
                 {
                     time_counter_script_inside = 0;
                     ManagerKeeper.Decrease_number_of_tries();
-                    Debug.Log(ManagerKeeper.Get_number_of_tries_availables());
+                    //Debug.Log(ManagerKeeper.Get_number_of_tries_availables());
                 }
-            }
-           
+            }   
         }
         else
 		{
-            ////ver si poner un cuadro de fondo oscuro o poner una escena que redirija al menu principal
-            ///restaurar el valor predeterminado del managerkeeper de los reintentos.
-		}
+            timer_to_restart_level += Time.deltaTime;
+            if (timer_to_restart_level > 3f)
+            {
+                for (int i = 0; i < 1; i++)
+                {
+                    fader.SetActive(true);
+                }
+                if (fader.gameObject.GetComponent<FaderScript>().Return_animation_complete() == true)
+                {
+                    {
+                        SceneManager.LoadScene("Main_Menu");
+                    }
+                }
+            }
+        }
     }
     public float Set_current_time()
 	{
