@@ -54,14 +54,16 @@ public class TransitionSceneController : MonoBehaviour
         }
         else if(is_game_over_scene==true&&is_game_over_scene_final==false)//code fot game over with retry
         {
-            if (screen_text[2].gameObject.GetComponent<TextEventsController>().Return_if_start_timer() == true)
+            Debug.Log("tries are " + ManagerKeeper.Get_number_of_tries_availables());
+            Debug.Log("number of reached level is " + ManagerKeeper.Get_number_of_reached_level());
+            if (screen_text[1].gameObject.GetComponent<TextEventsController>().Return_if_start_timer() == true)
             {
                 timer += Time.deltaTime;
                 if (timer >= 1f)
                 {
                     if (Input.GetKeyUp(KeyCode.Return))
                     {
-                       
+                        to_main_menu = false;
                         screen_text[0].gameObject.GetComponent<Animator>().Play("GameOverFadeOut");
                         screen_text[1].gameObject.GetComponent<Animator>().Play("PressTextOutInBlue");
                         screen_text[2].gameObject.GetComponent<Animator>().Play("ToMainMenuOut");
@@ -87,6 +89,10 @@ public class TransitionSceneController : MonoBehaviour
             if (ManagerKeeper.Get_number_of_reached_level() == 1)
             {
                 SceneManager.LoadScene("Level_02_Factory");
+            }
+            if (ManagerKeeper.Get_number_of_reached_level() == 2)
+            {
+                SceneManager.LoadScene("Level_03_Lab");
             }
             if (ManagerKeeper.Get_number_of_reached_level() == 3)
             {

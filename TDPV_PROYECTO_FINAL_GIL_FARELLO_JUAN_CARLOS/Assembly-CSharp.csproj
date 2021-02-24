@@ -74,7 +74,6 @@
     <Compile Include="Assets\Scripts\Checkpoint.cs" />
     <Compile Include="Assets\Scripts\CheckpointMainSV.cs" />
     <Compile Include="Assets\Scripts\CheckpointVendingMachine.cs" />
-    <Compile Include="Assets\Scripts\CherryTreeController.cs" />
     <Compile Include="Assets\Scripts\CraneController.cs" />
     <Compile Include="Assets\Scripts\DeadZoneTrigger.cs" />
     <Compile Include="Assets\Scripts\DeadZoneTrigger01.cs" />
@@ -94,6 +93,7 @@
     <Compile Include="Assets\Scripts\FaderScript.cs" />
     <Compile Include="Assets\Scripts\FalseGround.cs" />
     <Compile Include="Assets\Scripts\FinalLevel03Hook.cs" />
+    <Compile Include="Assets\Scripts\FinalSceneController.cs" />
     <Compile Include="Assets\Scripts\FlashingLights.cs" />
     <Compile Include="Assets\Scripts\FlashingLights01.cs" />
     <Compile Include="Assets\Scripts\Hook.cs" />

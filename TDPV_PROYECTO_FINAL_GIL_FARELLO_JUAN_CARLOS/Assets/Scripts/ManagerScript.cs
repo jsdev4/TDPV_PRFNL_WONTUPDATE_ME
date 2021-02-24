@@ -317,7 +317,7 @@ public class ManagerScript : MonoBehaviour
                 if (fader.gameObject.GetComponent<FaderScript>().Return_animation_complete() == true)
                 {
                     {
-                        SceneManager.LoadScene("Main_Menu");
+                        SceneManager.LoadScene("Game_Over_Scene_Final");
                     }
                 }
             }
