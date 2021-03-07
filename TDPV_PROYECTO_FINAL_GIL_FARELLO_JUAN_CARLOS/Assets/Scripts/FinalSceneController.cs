@@ -14,7 +14,6 @@ public class FinalSceneController : MonoBehaviour
     private Animator anim;
     private Transform trnsfrm;
     public GameObject cam;
-
     public GameObject fader;
     public GameObject outland_guy;
     public GameObject first_text;
@@ -38,8 +37,6 @@ public class FinalSceneController : MonoBehaviour
         trnsfrm = GetComponent<Transform>();
         anim.Play("Ed102_running_final_scene");
         outland_guy.gameObject.GetComponent<Animator>().Play("OutlandGuyIdle");
-       /* first_text_outland_guy.gameObject.GetComponent<Animator>().enabled = false;
-        second_text.gameObject.GetComponent<Animator>().enabled = false;*/
     }
     void Update()
     {
@@ -139,7 +136,7 @@ public class FinalSceneController : MonoBehaviour
 	}
     IEnumerator To_the_main_menu()
 	{
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(10);
         SceneManager.LoadScene("Main_Menu");
 	}
 }
