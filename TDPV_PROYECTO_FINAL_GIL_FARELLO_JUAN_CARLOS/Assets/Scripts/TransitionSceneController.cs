@@ -15,7 +15,7 @@ public class TransitionSceneController : MonoBehaviour
     void Start()
     {
         timer = 0;
-       key_was_pressed = false;
+        key_was_pressed = false;
         to_main_menu = false;
     }
     void Update()
@@ -109,8 +109,7 @@ public class TransitionSceneController : MonoBehaviour
         }
         if (screen_text[1].gameObject.GetComponent<TextEventsController>().Return_if_to_next_scene() == true && to_main_menu == true)
 		{
-            SceneManager.LoadScene("Main_Menu");
-            //to main menu, falta crear scene y testear
+            SceneManager.LoadScene("MainMenu");
 		}
     }
     public bool Return_if_key_was_pressed()

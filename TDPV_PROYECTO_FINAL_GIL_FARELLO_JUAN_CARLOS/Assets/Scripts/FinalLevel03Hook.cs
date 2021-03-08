@@ -37,7 +37,7 @@ public class FinalLevel03Hook : MonoBehaviour
            // trnsfrm.transform.position = Vector3.SmoothDamp(trnsfrm.position, last_object.gameObject.GetComponent<Transform>().position, ref speed, 0.8f);
               rb.MovePosition(Vector3.Lerp(start_position, last_object.gameObject.GetComponent<Transform>().position, speed * timer));
            // trnsfrm.transform.position = Vector3.Lerp(start_position, last_object.gameObject.GetComponent<Transform>().position, speed * timer);
-          player.gameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePositionZ;
+            player.gameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePositionZ;
             player.gameObject.GetComponent<CharController>().Set_if_is_on_the_hook(true);
             player.gameObject.GetComponent<Rigidbody>().MovePosition(currentPosFixed);
             wall_to_remove.gameObject.SetActive(false);

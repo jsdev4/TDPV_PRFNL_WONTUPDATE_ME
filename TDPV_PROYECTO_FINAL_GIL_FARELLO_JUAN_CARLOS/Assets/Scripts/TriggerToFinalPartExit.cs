@@ -10,8 +10,6 @@ public class TriggerToFinalPartExit : MonoBehaviour
     {
         
     }
-
-    // Update is called once per frame
     void Update()
     {
         if(player_here==true)

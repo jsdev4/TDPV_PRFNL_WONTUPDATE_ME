@@ -18,7 +18,6 @@ public class TrainController : MonoBehaviour
         current_speed = 0;
         trnsfrm = GetComponent<Transform>();
     }
-
     void Update()
     {
         Vector3 left = new Vector3(-1, 1, 1);

@@ -9,8 +9,6 @@ public class FinalSceneController : MonoBehaviour
     private bool Ed_stopped_the_idle;
     private bool key_pressed;
     private bool Ed102_has_saluted;
-    private bool start_timer;
-    private float timer;
     private Animator anim;
     private Transform trnsfrm;
     public GameObject cam;
@@ -24,8 +22,6 @@ public class FinalSceneController : MonoBehaviour
 	{
         fader.SetActive(true);
         fader.gameObject.GetComponent<FaderScript>().Set_the_fade_out();
-        timer = 0;
-        start_timer = false;
     }
 	void Start()
     {
@@ -44,8 +40,7 @@ public class FinalSceneController : MonoBehaviour
 		{
             first_text.gameObject.GetComponent<Animator>().enabled = true;
             first_text.gameObject.GetComponent<Animator>().Play("finalScene_firstText");  
-		}
-     
+		} 
         if (trnsfrm.position.x>=37f)
 		{
             cam.transform.parent = null;
@@ -84,9 +79,6 @@ public class FinalSceneController : MonoBehaviour
                     Ed_stopped_the_idle = false;
                 }
 			}
-           
-
-
         }
         if(key_pressed==true&&Ed_stopped_the_idle==false)
 		{
@@ -137,6 +129,6 @@ public class FinalSceneController : MonoBehaviour
     IEnumerator To_the_main_menu()
 	{
         yield return new WaitForSeconds(10);
-        SceneManager.LoadScene("Main_Menu");
+        SceneManager.LoadScene("MainMenu");
 	}
 }
