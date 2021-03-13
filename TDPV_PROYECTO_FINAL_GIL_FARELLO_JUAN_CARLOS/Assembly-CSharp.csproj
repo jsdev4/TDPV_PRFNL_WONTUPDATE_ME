@@ -103,6 +103,10 @@
     <Compile Include="Assets\Scripts\HookWithTheBox01.cs" />
     <Compile Include="Assets\Scripts\HookWithTheBox02.cs" />
     <Compile Include="Assets\Scripts\HookZaxis.cs" />
+    <Compile Include="Assets\Scripts\InteractiveTextController.cs" />
+    <Compile Include="Assets\Scripts\InteractiveTextController02.cs" />
+    <Compile Include="Assets\Scripts\InteractiveTextControllerForLevelPlaces.cs" />
+    <Compile Include="Assets\Scripts\InteractiveTextDisplayForLevelPlaces01.cs" />
     <Compile Include="Assets\Scripts\IntermitentLight.cs" />
     <Compile Include="Assets\Scripts\LevelCompleteTextController.cs" />
     <Compile Include="Assets\Scripts\LifeIconController.cs" />

@@ -1,25 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class ElevatorButton : MonoBehaviour
 {
     private bool can_use;
     private bool going_move;
     public float max_time;
     private float delay_for_elevator;
+
     public GameObject elevator;
-  // public GameObject lights;
+    public GameObject text;
     public GameObject player;
+    
     void Start()
-    {  
+    {
         can_use = false;
         going_move = false;
+       
+     
     }
     void Update()
     {
         if (can_use==true&&elevator.gameObject.GetComponent<Elevator>().Return_if_is_up()==false)
         {
+
+
+           
+
             if (Input.GetKeyDown(KeyCode.F))
             {
                 
@@ -56,11 +64,13 @@ public class ElevatorButton : MonoBehaviour
             }
         }
     }
+   
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             can_use = true;
+            text.gameObject.GetComponent<InteractiveTextController02>().Set_if_display(true);
         }
     }
     private void OnTriggerExit(Collider other)
@@ -68,6 +78,7 @@ public class ElevatorButton : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             can_use = false;
+            text.gameObject.GetComponent<InteractiveTextController02>().Set_if_display(false);
         }
     }
 }

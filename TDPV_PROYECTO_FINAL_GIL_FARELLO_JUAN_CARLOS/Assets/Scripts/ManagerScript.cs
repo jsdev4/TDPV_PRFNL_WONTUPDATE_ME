@@ -20,6 +20,7 @@ public class ManagerScript : MonoBehaviour
     private bool run_out_of_cells;
     private bool to_main_menu;
     private bool go_to_retry;
+    public int number_of_level;//comment for security purposes
     public GameObject[] enemy;
     public Texture aTexture;
     public Font game_font;
@@ -52,8 +53,33 @@ public class ManagerScript : MonoBehaviour
 	void Start()
     {
         to_main_menu = false;
+        if (number_of_level == 0)
+		{
+            ManagerKeeper.Set_current_level(0);
+		}
+        if (number_of_level == 1)
+        {
+            ManagerKeeper.Set_current_level(1);
+        }
+        if (number_of_level == 2)
+        {
+            ManagerKeeper.Set_current_level(2);
+        }
+        if (number_of_level == 3)
+        {
+            ManagerKeeper.Set_current_level(3);
+        }
+        if (number_of_level == 4)
+        {
+            ManagerKeeper.Set_current_level(4);
+        }
+        if (number_of_level == 5)
+        {
+            ManagerKeeper.Set_current_level(5);
+        }
+
         //condition for the returning from other scenes
-       if (ManagerKeeper.Get_if_other_scene() == true&&ManagerKeeper.Get_if_mini_game_completed()==false)
+        if (ManagerKeeper.Get_if_other_scene() == true&&ManagerKeeper.Get_if_mini_game_completed()==false)
         {
             time_counter_script_inside = ManagerKeeper.Get_old_time_script_inside();
             special_computer_mini_game.gameObject.GetComponent<BoxCollider>().enabled = false;
@@ -276,7 +302,7 @@ public class ManagerScript : MonoBehaviour
                         fader.SetActive(true);
                         if (fader.gameObject.GetComponent<FaderScript>().Return_animation_complete() == true)
                         {
-                            SceneManager.LoadScene("Main_Menu");
+                            SceneManager.LoadScene("MainMenu");
                         }
                     }
                 }

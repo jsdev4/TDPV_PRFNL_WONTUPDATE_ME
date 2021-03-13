@@ -10,6 +10,8 @@ public class CharController : MonoBehaviour
     public float speed_on_z_axis;
     public float jump_speed;
     private Vector3 rotation_sprite;
+    private Vector3 velocity = new Vector3(0, 0, 0);
+    public float smoothTime;
     private bool on_ground;
     private Rigidbody rb;
     private bool is_moving;
@@ -33,6 +35,7 @@ public class CharController : MonoBehaviour
     public GameObject[] low_beam_light;
     public GameObject manager;
     //public GameObject hook;
+
 
     public bool go_to_retry;
     void Start()
@@ -71,14 +74,14 @@ public class CharController : MonoBehaviour
                         flipped = false;
                         is_moving = true;
                         rotation_sprite = new Vector3(-1, 1, 1);
-                        transform.localScale = rotation_sprite;
+                        transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime,10);
                     }
                     if (Input.GetKey(KeyCode.D))
                     {
                         flipped = true;
                         is_moving = true;
                         rotation_sprite = new Vector3(1, 1, 1);
-                        transform.localScale = rotation_sprite;
+                        transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime,10);
                     }
                     if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                     {
@@ -122,11 +125,13 @@ public class CharController : MonoBehaviour
                     {
                         is_jumping = true;
                         rb.AddForce(Vector3.up * jump_speed, ForceMode.Impulse);
+                       
                     }
                     if (Input.GetKeyUp(KeyCode.Space))
                     {
                         is_jumping = true;
                         on_ground = false;
+                       
                     }
                     if (is_moving == true && is_jumping == false)
                     {
@@ -145,12 +150,12 @@ public class CharController : MonoBehaviour
                     if(Input.GetKey(KeyCode.A))
 					{
                         rotation_sprite = new Vector3(-1, 1, 1);
-                        transform.localScale = rotation_sprite;
+                        transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime,10);
                     }
                     if (Input.GetKey(KeyCode.D))
                     {
                         rotation_sprite = new Vector3(1, 1, 1);
-                        transform.localScale = rotation_sprite;
+                        transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime,10);
                     }
                     if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
                     {

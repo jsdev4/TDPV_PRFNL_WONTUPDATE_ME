@@ -99,5 +99,9 @@ public static class ManagerKeeper
 	{
 		number_of_level = 0;
 	}
+	public static void Set_current_level(int lvl)
+	{
+		number_of_level = lvl;
+	}
 }
 

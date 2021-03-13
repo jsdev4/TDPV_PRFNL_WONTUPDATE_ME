@@ -36,7 +36,7 @@ public class FinalSceneController : MonoBehaviour
     }
     void Update()
     {
-        if(trnsfrm.position.x<=30f)
+        if(trnsfrm.position.x<=32f)
 		{
             first_text.gameObject.GetComponent<Animator>().enabled = true;
             first_text.gameObject.GetComponent<Animator>().Play("finalScene_firstText");  
