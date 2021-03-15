@@ -5,61 +5,93 @@ using UnityEngine;
 public class CarController : MonoBehaviour
 {
     public GameObject[] PathNode;
-
-	//private Transform trnsfrm;
 	public  GameObject car;
+	public GameObject trigger_for_detection;
     private Vector3 CurrentPositionHolder;
     public int CurrentNode;
     private Vector3 startPosition;
-    public float delay;
-
-    public float max_speed;
+	public float max_speed;
     public float acceleration;
-    private float timer;
-    float Timer;
-	public int number;
+	private float current_speed;
+	private bool touched;
+	public GameObject trigger;
+	public bool is_car_to_right;
     void Start()
     {
-		//CurrentNode = 2;
+		touched = false;
     }
 
 	void CheckNode()
 	{
-		Timer = 0;
+		current_speed = 0;
 		startPosition = car.gameObject.GetComponent<Transform>().position;
 		CurrentPositionHolder = PathNode[CurrentNode].gameObject.GetComponent<Transform>().position;
 	}
-		void Update()
+	void Update()
+	{
+		if (touched == true)
 		{
-			Timer += Time.deltaTime * max_speed;
-
+			//Debug.Log("speed is o");
+			if(trigger.gameObject.GetComponent<BoxCollider>().enabled==false)
+			{
+				touched = false;
+			}
+		}
+		if (touched == false)
+		{
+			trigger_for_detection.SetActive(false);
+			current_speed += acceleration * Time.deltaTime;
+			if (current_speed > max_speed)
+			{
+				current_speed = max_speed;
+			}
 			if (car.gameObject.GetComponent<Transform>().position != CurrentPositionHolder)
 			{
-
-				car.gameObject.GetComponent<Transform>().position = Vector3.Lerp(startPosition, CurrentPositionHolder, 1 * Timer);
+				
+				car.gameObject.GetComponent<Transform>().position = Vector3.Lerp(car.gameObject.GetComponent<Transform>().position, CurrentPositionHolder, 1 * current_speed);
 			}
 			else
 			{
-			
-				if (CurrentNode < PathNode.Length - 1)
-				{
-
+				if (CurrentNode < PathNode.Length-1)
+				{		
 					CurrentNode++;
 					CheckNode();
-
 				}
-				if (CurrentNode == PathNode.Length - 1)
-				{
-					//delay += Time.deltaTime;
-					if (Timer >=delay)
-					{
-
-						CurrentNode = -1;
-						Timer = 0;
-					}
+				if (CurrentNode == PathNode.Length-1 )
+				{ 
+					CurrentNode = -1;
 				}
 			}
-			
 		}
+	}
+	private void OnTriggerEnter(Collider other)
+	{
+		if(other.CompareTag("TriggerToStopCar")&&is_car_to_right==false)
+		{
+			touched = true;
+			current_speed = 0;
+			trigger_for_detection.SetActive(true);
+		}
+		if (other.CompareTag("TriggerForCarDetection") && is_car_to_right == false)
+		{
+			touched = true;
+			current_speed = 0;
+		}
+		if (other.CompareTag("TriggerToStopCarRight") && is_car_to_right == true)
+		{
+			touched = true;
+			current_speed = 0;
+			trigger_for_detection.SetActive(true);
+		}
+		if (other.CompareTag("TriggerForCarDetection") && is_car_to_right == true)
+		{
+			touched = true;
+			current_speed = 0;
+		}
+	}
+	public void Set_touched(bool tchd)
+	{
+		touched = tchd;
+	}
 }
 

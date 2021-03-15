@@ -9,6 +9,7 @@ public class FalseGround : MonoBehaviour
     private Transform transform0;
     private Vector3 respawnPoint;
     private Vector3 displacement;
+    private Quaternion original_rotation;
     private float delay;
     private float delay_for_respawn;
     public float time_for_falling;
@@ -26,6 +27,7 @@ public class FalseGround : MonoBehaviour
         rb.isKinematic = true;
         respawnPoint = transform0.position;
         displacement = new Vector3(0, 0, speed_on_z_axis * Time.deltaTime);
+        original_rotation = transform0.rotation;
     }
     void Update()
     {
@@ -48,11 +50,7 @@ public class FalseGround : MonoBehaviour
             delay_for_respawn += Time.deltaTime;
             if (delay_for_respawn > 2)
             {
-                transform.position = respawnPoint;
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-                rb.isKinematic = true;
-                delay_for_respawn = 0;
-                has_touched_the_trigger = false;
+                Reset_Object();
             }
         }
     }
@@ -80,7 +78,7 @@ public class FalseGround : MonoBehaviour
     public void Reset_Object()
     {
         transform.position = respawnPoint;
-        transform.rotation = Quaternion.Euler(0, 0, 0);
+        transform.rotation = original_rotation;
         rb.isKinematic = true;
         delay_for_respawn = 0;
         has_touched_the_trigger = false;

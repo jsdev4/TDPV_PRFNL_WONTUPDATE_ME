@@ -4,20 +4,17 @@ using UnityEngine;
 
 public class TriggerForSplat : MonoBehaviour
 {
-
     private bool splatted;
-   private bool enemy_splatted;
+    private bool enemy_splatted;
     private bool stop_elevator;
     public GameObject elevator;
     public GameObject player;
-   // public GameObject[] enemy;
     private float timer;
     void Start()
     {
         timer = 0;
         stop_elevator = false;
         splatted = false;
-      // enemy_splatted = false;
     }
     void Update()
     {
@@ -28,12 +25,16 @@ public class TriggerForSplat : MonoBehaviour
             splatted = false;
             stop_elevator = true;
         }
-       if(enemy_splatted==true&&elevator.gameObject.GetComponent<Elevator>().Return_if_is_up()==false)
+         if(enemy_splatted==true&&elevator.gameObject.GetComponent<Elevator>().Return_if_is_up()==false)
         {
             elevator.gameObject.GetComponent<Elevator>().Set_if_stopped(true);
-           
-            enemy_splatted = false;
-            stop_elevator = true;
+            timer += Time.deltaTime;
+            if (timer >= 1.5f)
+            {
+                enemy_splatted = false;
+                elevator.gameObject.GetComponent<Elevator>().Set_if_stopped(false);
+                timer = 0;
+            }
         }
         if(stop_elevator==true)
         {
@@ -52,6 +53,10 @@ public class TriggerForSplat : MonoBehaviour
         {
             splatted = true;
         }
+        if(other.CompareTag("Enemy"))
+		{
+           enemy_splatted = true;
+		}
     }
     private void OnTriggerExit(Collider other)
     {

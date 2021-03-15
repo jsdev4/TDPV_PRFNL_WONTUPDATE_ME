@@ -5,7 +5,7 @@ using UnityEngine;
 public class FaderScript : MonoBehaviour
 {
     private Animator anim;
-    public GameObject player;
+    //public GameObject player;
     private bool playing_fade_in;
     private bool playing_fade_out;
 
@@ -55,5 +55,9 @@ public class FaderScript : MonoBehaviour
 	}public void Set_fade_in()
 	{
         playing_fade_in = true;
+	}
+    public void Set_animation_complete(bool is_complete)
+	{
+        animation_complete = is_complete;
 	}
 }

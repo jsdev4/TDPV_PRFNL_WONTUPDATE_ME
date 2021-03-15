@@ -13,6 +13,9 @@ public static class ManagerKeeper
 	private static bool other_scene;
 	private static bool mini_game_completed;
 	private static int respawn_point_when_back;
+	private static bool entering_some_place;
+	private static int number_of_tries=2;
+	private static int number_of_level = 0;
 	public static void Set_values(Vector3 pos,int current_lifes, float current_cells,int rspwn)
 	{
 		player_position = pos;
@@ -67,6 +70,38 @@ public static class ManagerKeeper
 	public static int Get_respawn_point()
 	{
 		return respawn_point_when_back;
+	}
+	public static void Is_ed102_entering_some_place(bool entering)
+	{
+		entering_some_place = entering;
+	}
+	public static bool Return_if_is_ed102_enteroing_some_place()
+	{
+		return entering_some_place;
+	}
+	public static void Decrease_number_of_tries()
+	{
+		number_of_tries -= 1;
+	}
+	public static int Get_number_of_tries_availables()
+	{
+		return number_of_tries;
+	}
+	public static void Increase_number_of_level()
+	{
+		number_of_level += 1;
+	}
+	public static int Get_number_of_reached_level()
+	{
+		return number_of_level; 
+	}
+	public static void Reset_number_of_level()
+	{
+		number_of_level = 0;
+	}
+	public static void Set_current_level(int lvl)
+	{
+		number_of_level = lvl;
 	}
 }
 

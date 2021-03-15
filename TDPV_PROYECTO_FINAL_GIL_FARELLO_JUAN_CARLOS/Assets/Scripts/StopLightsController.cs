@@ -15,6 +15,7 @@ public class StopLightsController : MonoBehaviour
     private string colorHex02;
     //  private Light light_bulb;
     public GameObject trigger_to_stop_car;
+   // public GameObject car;
     void Start()
     {
         delay = 0;
@@ -47,7 +48,13 @@ public class StopLightsController : MonoBehaviour
                 {
                     if (trigger_to_stop_car != null)
                     {
-                        trigger_to_stop_car.SetActive(false);
+                        // trigger_to_stop_car.SetActive(false);
+                        //  trigger_to_stop_car.gameObject.GetComponent<BoxCollider>().enabled = false;
+                        /*    for (int i = 0; i < 7; i++)
+                            {
+                                car[i].gameObject.GetComponent<CarController>().Set_touched(false);
+                            }*/
+                        trigger_to_stop_car.gameObject.GetComponent<BoxCollider>().enabled = false;
                     }
                     StartCoroutine("ChangeLight");
                     j++;
@@ -83,7 +90,9 @@ public class StopLightsController : MonoBehaviour
                 {
                     if (trigger_to_stop_car != null)
                     {
-                        trigger_to_stop_car.SetActive(true);
+                        //trigger_to_stop_car.SetActive(true);
+                        // trigger_to_stop_car.gameObject.GetComponent<BoxCollider>().enabled = true;
+                        trigger_to_stop_car.gameObject.GetComponent<BoxCollider>().enabled = true;
                     }
                     delay = 0;
                     ascendent = true;

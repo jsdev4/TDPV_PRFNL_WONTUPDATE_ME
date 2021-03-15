@@ -24,6 +24,14 @@ TagManager:
   - WaitingIconBall
   - SpecialIcon
   - TrainLimit
+  - TriggerToStopCar
+  - TriggerForCarDetection
+  - TriggerToStopCarRight
+  - TriggerForPedestrian
+  - TriggerToCraneDisplacement
+  - crane
+  - WalkableObject
+  - AvoidableObject
   layers:
   - Default
   - TransparentFX
@@ -34,11 +42,11 @@ TagManager:
   - 
   - 
   - Enemies
-  - 
-  - 
-  - 
-  - 
-  - 
+  - cars
+  - pedestrian
+  - LimitMovements
+  - Objects
+  - TriggerToStopEnemies
   - 
   - 
   - 
