@@ -64,20 +64,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\AtlasScript.cs" />
     <Compile Include="Assets\Scripts\BackgroundScroller.cs" />
     <Compile Include="Assets\Scripts\BatteryController.cs" />
     <Compile Include="Assets\Scripts\BioCellController.cs" />
     <Compile Include="Assets\Scripts\BuildingEntrance.cs" />
+    <Compile Include="Assets\Scripts\CameraFollowerScript.cs" />
     <Compile Include="Assets\Scripts\CarController.cs" />
     <Compile Include="Assets\Scripts\CharController.cs" />
     <Compile Include="Assets\Scripts\Checkpoint.cs" />
     <Compile Include="Assets\Scripts\CheckpointMainSV.cs" />
     <Compile Include="Assets\Scripts\CheckpointVendingMachine.cs" />
-    <Compile Include="Assets\Scripts\CherryTreeController.cs" />
     <Compile Include="Assets\Scripts\CraneController.cs" />
     <Compile Include="Assets\Scripts\DeadZoneTrigger.cs" />
     <Compile Include="Assets\Scripts\DeadZoneTrigger01.cs" />
+    <Compile Include="Assets\Scripts\Ed102AnimController.cs" />
     <Compile Include="Assets\Scripts\Elevator.cs" />
     <Compile Include="Assets\Scripts\ElevatorButton.cs" />
     <Compile Include="Assets\Scripts\ElevatorButton01.cs" />
@@ -93,6 +93,7 @@
     <Compile Include="Assets\Scripts\FaderScript.cs" />
     <Compile Include="Assets\Scripts\FalseGround.cs" />
     <Compile Include="Assets\Scripts\FinalLevel03Hook.cs" />
+    <Compile Include="Assets\Scripts\FinalSceneController.cs" />
     <Compile Include="Assets\Scripts\FlashingLights.cs" />
     <Compile Include="Assets\Scripts\FlashingLights01.cs" />
     <Compile Include="Assets\Scripts\Hook.cs" />
@@ -103,17 +104,17 @@
     <Compile Include="Assets\Scripts\HookWithTheBox01.cs" />
     <Compile Include="Assets\Scripts\HookWithTheBox02.cs" />
     <Compile Include="Assets\Scripts\HookZaxis.cs" />
+    <Compile Include="Assets\Scripts\InteractiveTextController.cs" />
+    <Compile Include="Assets\Scripts\InteractiveTextController02.cs" />
+    <Compile Include="Assets\Scripts\InteractiveTextControllerForLevelPlaces.cs" />
+    <Compile Include="Assets\Scripts\InteractiveTextDisplayForLevelPlaces01.cs" />
     <Compile Include="Assets\Scripts\IntermitentLight.cs" />
+    <Compile Include="Assets\Scripts\LevelCompleteTextController.cs" />
     <Compile Include="Assets\Scripts\LifeIconController.cs" />
     <Compile Include="Assets\Scripts\LightChange.cs" />
     <Compile Include="Assets\Scripts\LightPathFollower.cs" />
-    <Compile Include="Assets\Scripts\LightPathFollower1.cs" />
-    <Compile Include="Assets\Scripts\LightPathFollower2.cs" />
-    <Compile Include="Assets\Scripts\LightPathFollower3.cs" />
-    <Compile Include="Assets\Scripts\LightPathFollower4.cs" />
-    <Compile Include="Assets\Scripts\LightPathFollower5.cs" />
-    <Compile Include="Assets\Scripts\LightPathFollower6.cs" />
     <Compile Include="Assets\Scripts\LightSlide.cs" />
+    <Compile Include="Assets\Scripts\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\ManagerKeeper.cs" />
     <Compile Include="Assets\Scripts\ManagerScript.cs" />
     <Compile Include="Assets\Scripts\ManagingDataPc.cs" />
@@ -131,16 +132,14 @@
     <Compile Include="Assets\Scripts\PacPunkScripts\TriggerForRespawnOnSide.cs" />
     <Compile Include="Assets\Scripts\PacPunkScripts\WaitingIconBall.cs" />
     <Compile Include="Assets\Scripts\PacPunkScripts\enemyGhostController.cs" />
-    <Compile Include="Assets\Scripts\RelocatePlayerOnLevel.cs" />
     <Compile Include="Assets\Scripts\RespawnableObjectOnFalseGround.cs" />
-    <Compile Include="Assets\Scripts\ScriptToLevel02.cs" />
-    <Compile Include="Assets\Scripts\ScriptToLevel03.cs" />
-    <Compile Include="Assets\Scripts\ScriptToLevel04.cs" />
-    <Compile Include="Assets\Scripts\ScriptToLevel05.cs" />
+    <Compile Include="Assets\Scripts\ScriptToLevelTransition.cs" />
+    <Compile Include="Assets\Scripts\ScriptToLevelTransition01.cs" />
     <Compile Include="Assets\Scripts\StopLightsController.cs" />
     <Compile Include="Assets\Scripts\SwitchToMiniScene.cs" />
-    <Compile Include="Assets\Scripts\TextureResize.cs" />
+    <Compile Include="Assets\Scripts\TextEventsController.cs" />
     <Compile Include="Assets\Scripts\TrainController.cs" />
+    <Compile Include="Assets\Scripts\TransitionSceneController.cs" />
     <Compile Include="Assets\Scripts\TriggerForMovements.cs" />
     <Compile Include="Assets\Scripts\TriggerForSplat.cs" />
     <Compile Include="Assets\Scripts\TriggerForSplatSpecial.cs" />

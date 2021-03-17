@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TriggerForSplatSpecial : MonoBehaviour
 {
-
     private bool splatted;
     private bool stop_elevator;
     public GameObject elevator;

@@ -13,7 +13,7 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: chair_hard_cushion
-    second: {fileID: 2800000, guid: 21aaa23d2702b7d4b9be9f7b5d4f9e90, type: 3}
+    second: {fileID: 2800000, guid: 2282e69522de7ee4eb8f6e294473d7f1, type: 3}
   materials:
     materialImportMode: 1
     materialName: 0

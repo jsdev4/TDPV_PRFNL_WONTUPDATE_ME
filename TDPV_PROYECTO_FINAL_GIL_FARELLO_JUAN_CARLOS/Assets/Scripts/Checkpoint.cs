@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Checkpoint : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Checkpoint : MonoBehaviour
     private Animator animator;
     private Light computer_light;
     private float delay;
+    public Text[] very_interactive_text;
 
     void Start()
     {
@@ -20,12 +22,16 @@ public class Checkpoint : MonoBehaviour
         checkpoint_passed = false;
         checkpoint_enabled = false;
         delay = 0;
+        very_interactive_text[0].CrossFadeAlpha(0.0f, 0.05f, false);
+        very_interactive_text[1].CrossFadeAlpha(0.0f, 0.05f, false);
     }
     void Update()
     {
         if (checkpoint_passed == true && checkpoint_enabled == false)
         {
-            if(Input.GetKeyUp(KeyCode.F))
+           
+            very_interactive_text[0].CrossFadeAlpha(1.0f, .075f, false);
+            if (Input.GetKeyUp(KeyCode.F))
             {
                 
                 animator.enabled = true;
@@ -39,8 +45,11 @@ public class Checkpoint : MonoBehaviour
             }
  
         }
-        if(checkpoint_passed==false&&checkpoint_enabled==true)
+        
+            if (checkpoint_passed==false&&checkpoint_enabled==true)
         {
+            very_interactive_text[0].CrossFadeAlpha(0f, .5f, false);
+            very_interactive_text[1].CrossFadeAlpha(0f, .5f, false);
             delay += Time.deltaTime;
             if(delay>=1)
             {
@@ -48,7 +57,17 @@ public class Checkpoint : MonoBehaviour
             }
             
         }
-      
+        if (checkpoint_passed == false && checkpoint_enabled == false)
+        {
+            very_interactive_text[0].CrossFadeAlpha(0f, .5f, false);
+        }
+
+
+        if (checkpoint_passed == true && checkpoint_enabled == true)
+        {
+            very_interactive_text[1].CrossFadeAlpha(1.0f, .075f, false);
+        }
+
     }
       private void OnTriggerEnter(Collider other)
       {

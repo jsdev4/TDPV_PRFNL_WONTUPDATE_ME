@@ -5,11 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class CharController : MonoBehaviour
 {
+    private float timer_for_particle_emission;
     public float speed;
     private float reset_speed;
     public float speed_on_z_axis;
     public float jump_speed;
     private Vector3 rotation_sprite;
+    private Vector3 velocity = new Vector3(0, 0, 0);
+    public float smoothTime;
     private bool on_ground;
     private Rigidbody rb;
     private bool is_moving;
@@ -23,6 +26,7 @@ public class CharController : MonoBehaviour
     private bool dead_by_enemy;
     private bool on_the_hook;
     private bool flipped;
+    private bool emit_particles;
     public int lifes;
     private int respawn_point;
     private float delay_for_interacting;
@@ -32,8 +36,10 @@ public class CharController : MonoBehaviour
     public GameObject[] respawn;
     public GameObject[] low_beam_light;
     public GameObject manager;
-    public GameObject hook;
+    public ParticleSystem particles;
 
+   
+    public bool go_to_retry;
     void Start()
     {
         delay_for_interacting = 0;
@@ -51,6 +57,13 @@ public class CharController : MonoBehaviour
         on_the_hook = false;
         flipped = true;
         reset_speed = speed;
+        go_to_retry = false;
+        //
+       var em = particles.emission;
+        em.enabled =false;
+
+        emit_particles = false;
+        timer_for_particle_emission = 0;
     }
     void Update()
     {
@@ -67,14 +80,14 @@ public class CharController : MonoBehaviour
                         flipped = false;
                         is_moving = true;
                         rotation_sprite = new Vector3(-1, 1, 1);
-                        transform.localScale = rotation_sprite;
+                        transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime,10);
                     }
                     if (Input.GetKey(KeyCode.D))
                     {
                         flipped = true;
                         is_moving = true;
                         rotation_sprite = new Vector3(1, 1, 1);
-                        transform.localScale = rotation_sprite;
+                        transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime,10);
                     }
                     if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                     {
@@ -111,18 +124,23 @@ public class CharController : MonoBehaviour
                         }
                         if (is_interacting == false)
                         {
+                           
                             quad.gameObject.GetComponent<Animator>().Play("IdlePlayer");
+                            
                         }
                     }
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
+                       
                         is_jumping = true;
                         rb.AddForce(Vector3.up * jump_speed, ForceMode.Impulse);
+                       
                     }
                     if (Input.GetKeyUp(KeyCode.Space))
                     {
                         is_jumping = true;
                         on_ground = false;
+                       
                     }
                     if (is_moving == true && is_jumping == false)
                     {
@@ -135,10 +153,37 @@ public class CharController : MonoBehaviour
                             quad.gameObject.GetComponent<Animator>().Play("JumpPlayer");
                         }
                     }
+                    if(emit_particles==true)
+					{
+                        var em = particles.emission;
+                        em.enabled = true;
+                        particles.Play(true);
+                       
+                            emit_particles = false;
+                            
+						
+                    }
+                    timer_for_particle_emission = 0;
                 }
                 if (on_ground==false)
 				{
-                    
+                    timer_for_particle_emission += Time.deltaTime;
+                    Debug.Log(timer_for_particle_emission);
+                    if (timer_for_particle_emission > 1.5f)
+                    {
+                        emit_particles = true;
+                        //timer_for_particle_emission = 0;
+                    }
+                    if(Input.GetKey(KeyCode.A))
+					{
+                        rotation_sprite = new Vector3(-1, 1, 1);
+                        transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime,10);
+                    }
+                    if (Input.GetKey(KeyCode.D))
+                    {
+                        rotation_sprite = new Vector3(1, 1, 1);
+                        transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime,10);
+                    }
                     if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
                     {
                         is_moving = false;
@@ -177,9 +222,16 @@ public class CharController : MonoBehaviour
                         //number of cells are time dependent
                         number_of_cells = manager.gameObject.GetComponent<ManagerScript>().Get_cells_for_timer();
                         manager.gameObject.GetComponent<ManagerScript>().Reset_run_out_of_cells(false);
+                      
+
                         Set_if_dead_by_enemy(false);
                     }
                 }
+                else
+				{
+                    go_to_retry = true;
+				}
+			
             }
             if (has_respawned == true && respawn_point == 0)
             {
@@ -287,15 +339,28 @@ public class CharController : MonoBehaviour
     {
         if(collision.collider.CompareTag("ground")||collision.collider.CompareTag("Elevator")||collision.collider.CompareTag("Box")||collision.collider.CompareTag("MetallicStructure")||collision.collider.CompareTag("WalkableObject"))
         {
+            
+
+
             on_ground = true;
             is_jumping = false;
         }
 
     }
-    private void OnCollisionExit(Collision collision)
+/*	private void OnCollisionEnter(Collision collision)
+	{
+        if (collision.collider.CompareTag("ground") || collision.collider.CompareTag("Elevator") || collision.collider.CompareTag("Box") || collision.collider.CompareTag("MetallicStructure") || collision.collider.CompareTag("WalkableObject"))
+        {
+            var em = particles.emission;
+            em.enabled = true;
+            particles.Play(true);
+        }
+    }*/
+	private void OnCollisionExit(Collision collision)
     {
         if (collision.collider.CompareTag("ground") || collision.collider.CompareTag("Elevator") || collision.collider.CompareTag("Box") || collision.collider.CompareTag("MetallicStructure") || collision.collider.CompareTag("WalkableObject"))
         {
+           
             on_ground =false;
             is_jumping = true;
         }
@@ -341,9 +406,13 @@ public class CharController : MonoBehaviour
         Debug.Log(number_of_cells);
     }
 
-    public void Move_on_z_axis()
+    public bool Get_if_go_to_retry()
 	{
-
+        return go_to_retry;
+	}
+    public void Set_if_go_to_retry(bool rtry)
+	{
+        go_to_retry= rtry;
 	}
 }
 

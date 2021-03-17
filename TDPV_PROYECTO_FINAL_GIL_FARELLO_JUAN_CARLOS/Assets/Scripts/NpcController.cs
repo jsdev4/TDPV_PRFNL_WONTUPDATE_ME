@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NpcController : MonoBehaviour
 {
+    private bool on_screen;
     public bool is_static_npc;
     public bool in_level04;
     public bool is_male_npc;
@@ -27,46 +28,93 @@ public class NpcController : MonoBehaviour
     }
     void Update()
     {
-        if (is_static_npc == false)
+        if (on_screen == true)
         {
-            timer += Time.deltaTime;
-            if (timer >= delay)
+            if (is_static_npc == false)
             {
-               // Generate_direction();
-                if (in_level04 == false)
+                timer += Time.deltaTime;
+                if (timer >= delay)
+                {
+                    // Generate_direction();
+                    if (in_level04 == false)
+                    {
+                        Generate_direction();
+                        Generate_action();
+                    }
+                    else
+                    {
+                        //direction=false;
+                    }
+                    timer = 0;
+                }
+                if (is_male_npc == true)
+                {
+                    quad.gameObject.GetComponent<Animator>().Play("maleNpcWalking");
+                    if (direction == false)
+                    {
+                        rb.MovePosition(transform.position + translation_to_left * speed * Time.deltaTime);
+                        rotation_sprite = new Vector3(-1, 1, 1);
+                        transform.localScale = rotation_sprite;
+                    }
+                    if (direction == true)
+                    {
+                        rb.MovePosition(transform.position + translation * speed * Time.deltaTime);
+                        rotation_sprite = new Vector3(1, 1, 1);
+                        transform.localScale = rotation_sprite;
+                    }
+                }
+                if (random_to_move == 0)
+                {
+                    if (is_male_npc == false)
+                    {
+                        quad.gameObject.GetComponent<Animator>().Play("femaleNpcIdle");
+                    }
+
+                    if (direction == false)
+                    {
+                        rotation_sprite = new Vector3(-1, 1, 1);
+                        transform.localScale = rotation_sprite;
+                    }
+                    else
+                    {
+                        rotation_sprite = new Vector3(1, 1, 1);
+                        transform.localScale = rotation_sprite;
+                    }
+                }
+                else if (random_to_move == 1)
+                {
+                    quad.gameObject.GetComponent<Animator>().Play("femaleNpcWalking");
+                    if (direction == false)
+                    {
+                        rb.MovePosition(transform.position + translation_to_left * speed * Time.deltaTime);
+                        rotation_sprite = new Vector3(-1, 1, 1);
+                        transform.localScale = rotation_sprite;
+                    }
+                    if (direction == true)
+                    {
+                        rb.MovePosition(transform.position + translation * speed * Time.deltaTime);
+                        rotation_sprite = new Vector3(1, 1, 1);
+                        transform.localScale = rotation_sprite;
+                    }
+                }
+            }
+            else
+            {
+                timer += Time.deltaTime;
+                if (timer >= delay)
                 {
                     Generate_direction();
-                    Generate_action();
+                    // Generate_action();
+                    timer = 0;
                 }
-				else
-				{
-                    //direction=false;
-				}
-                timer = 0;
-            }
-            if (is_male_npc == true)
-            {
-                quad.gameObject.GetComponent<Animator>().Play("maleNpcWalking");
-                if (direction == false)
-                {
-                    rb.MovePosition(transform.position + translation_to_left * speed * Time.deltaTime);
-                    rotation_sprite = new Vector3(-1, 1, 1);
-                    transform.localScale = rotation_sprite;
-                }
-                if (direction == true)
-                {
-                    rb.MovePosition(transform.position + translation * speed * Time.deltaTime);
-                    rotation_sprite = new Vector3(1, 1, 1);
-                    transform.localScale = rotation_sprite;
-                }
-            }
-            if (random_to_move == 0)
-            {
                 if (is_male_npc == false)
                 {
                     quad.gameObject.GetComponent<Animator>().Play("femaleNpcIdle");
                 }
-                
+                if (is_male_npc == true)
+                {
+                    quad.gameObject.GetComponent<Animator>().Play("maleNpcIdle");
+                }
                 if (direction == false)
                 {
                     rotation_sprite = new Vector3(-1, 1, 1);
@@ -77,50 +125,6 @@ public class NpcController : MonoBehaviour
                     rotation_sprite = new Vector3(1, 1, 1);
                     transform.localScale = rotation_sprite;
                 }
-            }
-            else if (random_to_move == 1)
-            {
-                quad.gameObject.GetComponent<Animator>().Play("femaleNpcWalking");
-                if (direction == false)
-                {
-                    rb.MovePosition(transform.position + translation_to_left * speed * Time.deltaTime);
-                    rotation_sprite = new Vector3(-1, 1, 1);
-                    transform.localScale = rotation_sprite;
-                }
-                if (direction == true)
-                {
-                    rb.MovePosition(transform.position + translation * speed * Time.deltaTime);
-                    rotation_sprite = new Vector3(1, 1, 1);
-                    transform.localScale = rotation_sprite;
-                }
-            }
-        }
-		else
-		{
-            timer += Time.deltaTime;
-            if (timer >= delay)
-            {
-                Generate_direction();
-               // Generate_action();
-                timer = 0;
-            }
-            if (is_male_npc ==false)
-            {
-                quad.gameObject.GetComponent<Animator>().Play("femaleNpcIdle");
-            }
-            if (is_male_npc == true)
-            {
-                quad.gameObject.GetComponent<Animator>().Play("maleNpcIdle");
-            }
-            if (direction == false)
-            {
-                rotation_sprite = new Vector3(-1, 1, 1);
-                transform.localScale = rotation_sprite;
-            }
-            else
-            {
-                rotation_sprite = new Vector3(1, 1, 1);
-                transform.localScale = rotation_sprite;
             }
         }
     }
@@ -153,9 +157,19 @@ public class NpcController : MonoBehaviour
 	}//add another tag named trigger eg
 	private void OnTriggerEnter(Collider other)
 	{
-		if(other.CompareTag("TriggerForPedestrian"))
+		if(other.CompareTag("TriggerForPedestrian")||other.CompareTag("AvoidableObject")||other.CompareTag("MetallicStructure"))
 		{
             direction = !direction;
 		}
+	}
+	private void OnBecameVisible()
+	{
+        on_screen = true;
+     //   Debug.Log("npc is on screen");
+	}
+	private void OnBecameInvisible()
+	{
+        on_screen = false;
+      ///  Debug.Log("npc is not on screen");
 	}
 }

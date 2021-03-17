@@ -21,25 +21,28 @@ public class Hook02 : MonoBehaviour
     private Vector3 startPosition;
     private float delay;
     public float max_time_to_reset;
+    public GameObject[] level_limits_for_deactivation;
+    private Rigidbody rb;
     void Start()
     {
         firstPosZ_player = player.gameObject.GetComponent<Transform>().position.z;
         direction = true;
         trnsfrm = GetComponent<Transform>();
+        rb = GetComponent<Rigidbody>();
     }
-    void Update()
+    void FixedUpdate()
     {
-        Vector3 currentPos = trnsfrm.position;
+        Vector3 currentPos = rb.position;
         Vector3 currentPosfixed = new Vector3(currentPos.x, currentPos.y - 2f, currentPos.z);
         Vector3 newPlayerPos = new Vector3(player.gameObject.GetComponent<Transform>().position.x, player.gameObject.GetComponent<Transform>().position.y, firstPosZ_player);
         if (direction == true)
         {
-            Timer += Time.deltaTime * MoveSpeed;
+            Timer += Time.fixedDeltaTime * MoveSpeed;
 
-            if (hook.gameObject.GetComponent<Transform>().position != CurrentPositionHolder)
+            if (hook.gameObject.GetComponent<Rigidbody>().position != CurrentPositionHolder)
             {
 
-                hook.gameObject.GetComponent<Transform>().position = Vector3.Lerp(startPosition, CurrentPositionHolder, 1 * Timer);
+                hook.gameObject.GetComponent<Rigidbody>().position = Vector3.Lerp(startPosition, CurrentPositionHolder, 1 * Timer);
             }
             else
             {
@@ -53,7 +56,7 @@ public class Hook02 : MonoBehaviour
                 }
                 if (CurrentNode == PathNode.Length - 1)
                 {
-                    delay += Time.deltaTime;
+                    delay += Time.fixedDeltaTime;
                     if (delay >= max_time_to_reset)
                     {
 
@@ -68,7 +71,11 @@ public class Hook02 : MonoBehaviour
             hooks[0].SetActive(false);
             hooks[1].SetActive(false);
             hooks[2].SetActive(false);
-            player.gameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePositionZ;
+            for (int i = 0; i < 3; i++)
+            {
+                level_limits_for_deactivation[i].gameObject.GetComponent<BoxCollider>().enabled = false;
+            }
+         
             player.gameObject.GetComponent<CharController>().Set_if_is_on_the_hook(true);
             player.gameObject.GetComponent<Rigidbody>().MovePosition(currentPosfixed);
             if (CurrentNode > 0 && CurrentNode < 2)
@@ -97,9 +104,9 @@ public class Hook02 : MonoBehaviour
                     {
                         player_on_it = false;
                         player.gameObject.GetComponent<Transform>().position = newPlayerPos;
-                        player.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                      /*  player.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                         player.gameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePositionX;
-                        player.gameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePositionY;
+                        player.gameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePositionY;*/
 
                     }
                 }
@@ -110,6 +117,10 @@ public class Hook02 : MonoBehaviour
             hooks[0].SetActive(true);
             hooks[1].SetActive(true);
             hooks[2].SetActive(true);
+            for (int i = 0; i < 3; i++)
+            {
+                level_limits_for_deactivation[i].gameObject.GetComponent<BoxCollider>().enabled = true;
+            }
             player.gameObject.GetComponent<CharController>().Set_if_is_on_the_hook(false);
         }
     }

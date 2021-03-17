@@ -10,29 +10,35 @@ public class ElevatorFinal : MonoBehaviour
     public bool is_up;
     public GameObject trigger;
     public GameObject trigger01;
-    public GameObject no_fall_box;
-
+    public GameObject[] no_fall_box;
+    private Rigidbody rb;
+    private Transform trnsfrm;
     private bool has_stopped;
     void Start()
     {
         on_board = false;
         has_stopped = false;
+        trnsfrm = GetComponent<Transform>();
+        rb = GetComponent<Rigidbody>();
     }
-    void Update()
+    void FixedUpdate()
     {
         Vector3 sizeVec = trigger.GetComponent<Collider>().bounds.size;
         if (is_up == true)
         {
             if (transform.position.y <= (trigger01.transform.position.y))
             {
-                transform.Translate(Vector3.up * speed * Time.deltaTime);
-                no_fall_box.gameObject.GetComponent<BoxCollider>().enabled = true;
+                rb.MovePosition(trnsfrm.position + trnsfrm.up * speed * Time.fixedDeltaTime);
+                for (int i = 0; i < 3; i++)
+                {
+                    no_fall_box[i].gameObject.GetComponent<BoxCollider>().enabled = true;
+                }
 
             }
         }
         if (transform.position.y == trigger01.transform.position.y)
         {
-            transform.Translate(Vector3.up * 0 * Time.deltaTime);
+            rb.MovePosition(trnsfrm.position + trnsfrm.up * 0 * Time.fixedDeltaTime);
             is_up = true;
         }
 
@@ -40,17 +46,17 @@ public class ElevatorFinal : MonoBehaviour
         {
             if (transform.position.y > trigger.transform.position.y && transform.position.y > trigger.transform.position.y + sizeVec.y && has_stopped == false)
             {
-                transform.Translate(Vector3.down * speed * Time.deltaTime);
+                rb.MovePosition(trnsfrm.position- trnsfrm.up * speed * Time.fixedDeltaTime);
             }
 
             if (transform.position.y == trigger.transform.position.y + sizeVec.y)
             {
-                transform.Translate(Vector3.down * 0 * Time.deltaTime);
+                rb.MovePosition(trnsfrm.position - trnsfrm.up * 0 * Time.fixedDeltaTime);
                 is_up = false;
             }
             if (has_stopped == true)
             {
-                transform.Translate(Vector3.down * 0 * Time.deltaTime);
+                rb.MovePosition(trnsfrm.position - trnsfrm.up * 0 * Time.fixedDeltaTime);
             }
         }
 

@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: e00f2505ef5d26544914930323e3548c
+  - enabled: 1
     path: Assets/Scenes/Level_01_Depo.unity
     guid: 02d716f43d193f94cb00449ecb9925b3
   - enabled: 1
@@ -23,4 +26,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level_05_The_Outlands.unity
     guid: 736ea0ae8e7a29946a34c88fe04e0fe2
+  - enabled: 1
+    path: Assets/Scenes/TransitionScene.unity
+    guid: a0a525e8a1ad81343bb90854592c768d
+  - enabled: 1
+    path: Assets/Scenes/Game_Over_Scene.unity
+    guid: ff012458fbf5ff04b9ba6592031b45c9
+  - enabled: 1
+    path: Assets/Scenes/Game_Over_Scene_Final.unity
+    guid: c831a5588d9afc341b9376f6f736e9ec
+  - enabled: 1
+    path: Assets/Scenes/Final_Scene.unity
+    guid: 99afe2e85afccce408e011e6c51df2fd
   m_configObjects: {}
