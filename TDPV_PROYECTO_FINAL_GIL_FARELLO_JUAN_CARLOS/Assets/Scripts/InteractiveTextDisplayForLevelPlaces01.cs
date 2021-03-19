@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class InteractiveTextDisplayForLevelPlaces01 : MonoBehaviour
 {
-	//private bool on_trigger;
     public Text text;
     void Start()
     {

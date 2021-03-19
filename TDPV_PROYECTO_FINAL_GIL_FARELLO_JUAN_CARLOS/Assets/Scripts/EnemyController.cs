@@ -58,10 +58,13 @@ public class EnemyController : MonoBehaviour
         startPosition =light_gun.transform.position;
         CurrentPositionHolder = PathNode[CurrentNode].transform.position;
 
+        if (particles != null)
+        {
             var em = particles.emission;
             em.enabled = false;
-		
-        emit_particles = false;
+
+            emit_particles = false;
+        }
     }
     void Update()
     {

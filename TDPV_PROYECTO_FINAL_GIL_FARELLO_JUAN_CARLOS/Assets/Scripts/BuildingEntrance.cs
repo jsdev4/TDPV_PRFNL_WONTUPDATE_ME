@@ -44,7 +44,10 @@ public class BuildingEntrance : MonoBehaviour
 		if(other.CompareTag("Player"))
 		{
             player_here = true;
-            text.gameObject.GetComponent<InteractiveTextController02>().Set_if_display(true);
+            if (text != null)
+            {
+                text.gameObject.GetComponent<InteractiveTextController02>().Set_if_display(true);
+            }
 		}
 	}
     private void OnTriggerExit(Collider other)
@@ -52,7 +55,10 @@ public class BuildingEntrance : MonoBehaviour
         if(other.CompareTag("Player"))
 		{
             player_here = false;
-            text.gameObject.GetComponent<InteractiveTextController02>().Set_if_display(false);
+            if (text != null)
+            {
+                text.gameObject.GetComponent<InteractiveTextController02>().Set_if_display(false);
+            }
         }
 	}
 }

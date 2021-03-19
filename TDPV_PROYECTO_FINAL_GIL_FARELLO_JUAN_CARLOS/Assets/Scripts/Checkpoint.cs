@@ -14,7 +14,7 @@ public class Checkpoint : MonoBehaviour
     private Light computer_light;
     private float delay;
     public Text[] very_interactive_text;
-
+    public GameObject manager;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -27,47 +27,61 @@ public class Checkpoint : MonoBehaviour
     }
     void Update()
     {
-        if (checkpoint_passed == true && checkpoint_enabled == false)
+        if (manager.gameObject.GetComponent<ManagerScript>().Return_if_paused() == false)
         {
            
-            very_interactive_text[0].CrossFadeAlpha(1.0f, .075f, false);
-            if (Input.GetKeyUp(KeyCode.F))
+            if (checkpoint_passed == true && checkpoint_enabled == false)
             {
-                
-                animator.enabled = true;
-                checkpoint_number += 1;
-                player.gameObject.GetComponent<CharController>().Set_respawn_point(checkpoint_number);
-                trigger_to_save.gameObject.GetComponentInChildren<BoxCollider>().enabled = false;
-             
-                Debug.Log("checkppoint :" + checkpoint_number);
-                checkpoint_passed = false;
-                checkpoint_enabled = true;
+                very_interactive_text[0].enabled = true;
+                very_interactive_text[0].CrossFadeAlpha(1.0f, .075f, false);
+                if (Input.GetKeyUp(KeyCode.F))
+                {
+
+                    animator.enabled = true;
+                    checkpoint_number += 1;
+                    player.gameObject.GetComponent<CharController>().Set_respawn_point(checkpoint_number);
+                    trigger_to_save.gameObject.GetComponentInChildren<BoxCollider>().enabled = false;
+
+                    Debug.Log("checkppoint :" + checkpoint_number);
+                    checkpoint_passed = false;
+                    checkpoint_enabled = true;
+                }
+
             }
- 
-        }
-        
-            if (checkpoint_passed==false&&checkpoint_enabled==true)
-        {
-            very_interactive_text[0].CrossFadeAlpha(0f, .5f, false);
-            very_interactive_text[1].CrossFadeAlpha(0f, .5f, false);
-            delay += Time.deltaTime;
-            if(delay>=1)
+
+            if (checkpoint_passed == false && checkpoint_enabled == true)
             {
-                computer_light.enabled = true;
+                very_interactive_text[0].enabled = true;
+                very_interactive_text[1].enabled = true;
+                very_interactive_text[0].CrossFadeAlpha(0f, .5f, false);
+                very_interactive_text[1].CrossFadeAlpha(0f, .5f, false);
+                delay += Time.deltaTime;
+                if (delay >= 1)
+                {
+                    computer_light.enabled = true;
+                }
+
             }
-            
-        }
-        if (checkpoint_passed == false && checkpoint_enabled == false)
-        {
-            very_interactive_text[0].CrossFadeAlpha(0f, .5f, false);
-        }
+            if (checkpoint_passed == false && checkpoint_enabled == false)
+            {
+                very_interactive_text[0].enabled = true;
+                very_interactive_text[0].CrossFadeAlpha(0f, .5f, false);
+            }
 
 
-        if (checkpoint_passed == true && checkpoint_enabled == true)
-        {
-            very_interactive_text[1].CrossFadeAlpha(1.0f, .075f, false);
+            if (checkpoint_passed == true && checkpoint_enabled == true)
+            {
+                very_interactive_text[0].enabled = true;
+                very_interactive_text[1].CrossFadeAlpha(1.0f, .075f, false);
+            }
         }
-
+        else
+		{
+            for (int i = 0; i < very_interactive_text.Length; i++)
+            {
+                very_interactive_text[i].enabled = false;
+            }
+        }
     }
       private void OnTriggerEnter(Collider other)
       {

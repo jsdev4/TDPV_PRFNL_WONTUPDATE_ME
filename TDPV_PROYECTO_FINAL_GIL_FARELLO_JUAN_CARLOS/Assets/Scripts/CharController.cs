@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class CharController : MonoBehaviour
 {
     private float timer_for_particle_emission;
+    private float timer_for_jump;
     public float speed;
     private float reset_speed;
     public float speed_on_z_axis;
@@ -42,6 +43,7 @@ public class CharController : MonoBehaviour
     public bool go_to_retry;
     void Start()
     {
+        timer_for_jump = 0;
         delay_for_interacting = 0;
         delay_for_respawn = 0;
         has_respawned = false;
@@ -49,7 +51,7 @@ public class CharController : MonoBehaviour
         is_moving = false;
         is_jumping = false;
         is_alive = true;
-        can_jump = false;
+        can_jump = true;
         is_interacting = false;
         is_light_on = false;
         can_move = true;
@@ -129,18 +131,23 @@ public class CharController : MonoBehaviour
                             
                         }
                     }
-                    if (Input.GetKeyDown(KeyCode.Space))
+                    if (can_jump == true)
                     {
-                       
-                        is_jumping = true;
-                        rb.AddForce(Vector3.up * jump_speed, ForceMode.Impulse);
-                       
-                    }
-                    if (Input.GetKeyUp(KeyCode.Space))
-                    {
-                        is_jumping = true;
-                        on_ground = false;
-                       
+                        timer_for_jump = 0;
+                       // Debug.Log("time is " + timer_for_jump);
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
+
+                            is_jumping = true;
+                            rb.AddForce(Vector3.up * jump_speed, ForceMode.Impulse);
+
+                        }
+                        if (Input.GetKeyUp(KeyCode.Space))
+                        {
+                            is_jumping = true;
+                            on_ground = false;
+                            can_jump = false;
+                        }
                     }
                     if (is_moving == true && is_jumping == false)
                     {
@@ -148,9 +155,17 @@ public class CharController : MonoBehaviour
                     }
                     if (can_jump == false)
                     {
+                        timer_for_jump += Time.deltaTime;
+                        if (timer_for_jump > 1f)
+                        {
+                            can_jump = true;
+
+                        }
                         if (is_jumping == true && on_the_hook == false)
                         {
                             quad.gameObject.GetComponent<Animator>().Play("JumpPlayer");
+                            
+                           
                         }
                     }
                     if(emit_particles==true)
@@ -167,12 +182,13 @@ public class CharController : MonoBehaviour
                 }
                 if (on_ground==false)
 				{
+                   
                     timer_for_particle_emission += Time.deltaTime;
-                    Debug.Log(timer_for_particle_emission);
+                   // Debug.Log(timer_for_particle_emission);
                     if (timer_for_particle_emission > 1.5f)
                     {
                         emit_particles = true;
-                        //timer_for_particle_emission = 0;
+                        
                     }
                     if(Input.GetKey(KeyCode.A))
 					{

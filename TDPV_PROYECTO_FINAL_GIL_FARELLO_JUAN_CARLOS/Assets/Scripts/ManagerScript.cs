@@ -169,9 +169,12 @@ public class ManagerScript : MonoBehaviour
                     player.gameObject.GetComponent<CharController>().Set_if_player_can_move(false);
                     foreach (GameObject child in enemy)
                     {
-                        child.gameObject.SetActive(false);
+                        if (child != null)
+                        {
+                            child.gameObject.SetActive(false);
+                        }
                     }
-                    for(int i=0;i<objects_to_hide_when_paused.Length;i++)
+                   for(int i=0;i<objects_to_hide_when_paused.Length;i++)
 					{
                         objects_to_hide_when_paused[i].SetActive(false);
 					}
@@ -372,5 +375,9 @@ public class ManagerScript : MonoBehaviour
     public void Set_pause(bool psd)
 	{
         paused = psd;
+	}
+    public bool Return_if_paused()
+	{
+        return paused;
 	}
 }

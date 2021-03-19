@@ -6,7 +6,7 @@ public class InteractiveTextController02 : MonoBehaviour
 {
     private bool display_text;
     private Text text;
-   // public GameObject[] objects_for_text_display;
+    public GameObject manager;
     void Start()
     {
         display_text = false;
@@ -17,12 +17,19 @@ public class InteractiveTextController02 : MonoBehaviour
     
     void Update()
     {
-        if(display_text==true)
+        if(display_text==true&& manager.gameObject.GetComponent<ManagerScript>().Return_if_paused() == false)
 		{
+            text.enabled = true;
             text.CrossFadeAlpha(1f, 0.075f, false);
         }
-        else
+        
+        if(display_text == true && manager.gameObject.GetComponent<ManagerScript>().Return_if_paused() == true)
 		{
+            text.enabled = false;
+            Debug.Log("hide me ");
+        }
+        if(display_text==false)
+        {
             text.CrossFadeAlpha(0f, 0.5f, false);
         }
     }
