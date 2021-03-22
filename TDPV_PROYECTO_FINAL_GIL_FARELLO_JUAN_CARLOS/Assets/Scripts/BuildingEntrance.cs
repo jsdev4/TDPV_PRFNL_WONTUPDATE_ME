@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class BuildingEntrance : MonoBehaviour
 {
     public GameObject player;
     public GameObject respawnPoint;
     public GameObject fader;
     private bool player_here;
+    public Text text;
     void Start()
     {
         player_here = false;
@@ -43,6 +44,10 @@ public class BuildingEntrance : MonoBehaviour
 		if(other.CompareTag("Player"))
 		{
             player_here = true;
+            if (text != null)
+            {
+                text.gameObject.GetComponent<InteractiveTextController02>().Set_if_display(true);
+            }
 		}
 	}
     private void OnTriggerExit(Collider other)
@@ -50,6 +55,10 @@ public class BuildingEntrance : MonoBehaviour
         if(other.CompareTag("Player"))
 		{
             player_here = false;
-		}
+            if (text != null)
+            {
+                text.gameObject.GetComponent<InteractiveTextController02>().Set_if_display(false);
+            }
+        }
 	}
 }

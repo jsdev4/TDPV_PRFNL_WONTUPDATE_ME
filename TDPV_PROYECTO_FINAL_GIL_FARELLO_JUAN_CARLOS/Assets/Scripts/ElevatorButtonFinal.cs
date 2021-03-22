@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ElevatorButtonFinal : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class ElevatorButtonFinal : MonoBehaviour
     private float delay_for_elevator;
     public GameObject player;
     public GameObject elevator;
+    public GameObject text;
     void Start()
     {
         can_use = false;
@@ -19,6 +21,7 @@ public class ElevatorButtonFinal : MonoBehaviour
     {
         if (can_use == true && elevator.gameObject.GetComponent<ElevatorFinal>().Return_if_is_up() == false)
         {
+           
             if (Input.GetKeyDown(KeyCode.F))
             {
                 player.gameObject.GetComponent<CharController>().Set_if_is_interacting(true);
@@ -42,12 +45,14 @@ public class ElevatorButtonFinal : MonoBehaviour
                 elevator.gameObject.GetComponent<ElevatorFinal>().Set_if_is_up(false);
             }
         }
+
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             can_use = true;
+            text.gameObject.GetComponent<InteractiveTextController02>().Set_if_display(true);
         }
     }
     private void OnTriggerExit(Collider other)
@@ -55,6 +60,7 @@ public class ElevatorButtonFinal : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             can_use = false;
+            text.gameObject.GetComponent<InteractiveTextController02>().Set_if_display(false);
         }
     }
 }

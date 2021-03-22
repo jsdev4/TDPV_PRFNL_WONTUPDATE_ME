@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -12,11 +12,15 @@ public class ManagerScript : MonoBehaviour
     public float time_counter;
     private float time_counter_script_inside;
     private float delay_for_reset_game;
+    //
+    private float timer_to_restart_level;
     private bool paused;
     private bool changed;
     private bool out_of_time;
     private bool run_out_of_cells;
-    private bool has_respawned_from_mini_game;
+    private bool to_main_menu;
+    private bool go_to_retry;
+    public int number_of_level;//comment for security purposes
     public GameObject[] enemy;
     public Texture aTexture;
     public Font game_font;
@@ -39,7 +43,7 @@ public class ManagerScript : MonoBehaviour
 
     private Color32 unselect_color;
     private Color32 select_color;
-
+    public GameObject[] objects_to_hide_when_paused;
     public GameObject fader;
 	void Awake()
 	{
@@ -48,10 +52,34 @@ public class ManagerScript : MonoBehaviour
     }
 	void Start()
     {
+        to_main_menu = false;
+        if (number_of_level == 0)
+		{
+            ManagerKeeper.Set_current_level(0);
+		}
+        if (number_of_level == 1)
+        {
+            ManagerKeeper.Set_current_level(1);
+        }
+        if (number_of_level == 2)
+        {
+            ManagerKeeper.Set_current_level(2);
+        }
+        if (number_of_level == 3)
+        {
+            ManagerKeeper.Set_current_level(3);
+        }
+        if (number_of_level == 4)
+        {
+            ManagerKeeper.Set_current_level(4);
+        }
+        if (number_of_level == 5)
+        {
+            ManagerKeeper.Set_current_level(5);
+        }
 
-        has_respawned_from_mini_game = false;
         //condition for the returning from other scenes
-       if (ManagerKeeper.Get_if_other_scene() == true&&ManagerKeeper.Get_if_mini_game_completed()==false)
+        if (ManagerKeeper.Get_if_other_scene() == true&&ManagerKeeper.Get_if_mini_game_completed()==false)
         {
             time_counter_script_inside = ManagerKeeper.Get_old_time_script_inside();
             special_computer_mini_game.gameObject.GetComponent<BoxCollider>().enabled = false;
@@ -65,9 +93,6 @@ public class ManagerScript : MonoBehaviour
                 time_counter_script_inside = ManagerKeeper.Get_old_time_script_inside();
             special_computer_mini_game.gameObject.GetComponent<BoxCollider>().enabled = false;
             player.gameObject.GetComponent<CharController>().Keep_respawn_point(ManagerKeeper.Get_old_respawn_point());
-                
-                has_respawned_from_mini_game = true;
-            
             if (ManagerKeeper.Get_respawn_point() == 0)
             {
                 player.gameObject.GetComponent<Transform>().position = respawn_point[0].gameObject.GetComponent<Transform>().position;
@@ -95,7 +120,9 @@ public class ManagerScript : MonoBehaviour
         paused = false;
         out_of_time = false;
         run_out_of_cells = false;
+        go_to_retry = false;
         option = 0;
+        timer_to_restart_level = 0;
         select_color= new Color32(72, 58, 176,255);
         unselect_color = new Color32(149,13,76,255);
 ;        if(time_counter_script_inside>0&&time_counter_script_inside<=60)
@@ -126,164 +153,211 @@ public class ManagerScript : MonoBehaviour
     }
     void Update()
     {
-        time_counter_script_inside -= Time.deltaTime;
-        if (time_counter_script_inside > 0)
+        if (ManagerKeeper.Get_number_of_tries_availables() > 0)
         {
-            if (Input.GetKeyUp(KeyCode.P))
+            time_counter_script_inside -= Time.deltaTime;
+            if (time_counter_script_inside > 0)
             {
-                paused = !paused;
-            }
-            if (paused == true)
-            {
-                Time.timeScale = 0;
-                player.gameObject.GetComponent<CharController>().Set_if_player_can_move(false);
-                foreach (GameObject child in enemy)
+                if (Input.GetKeyUp(KeyCode.P))
                 {
-                    child.gameObject.SetActive(false);
+                    option = 0;
+                    paused = !paused; 
                 }
-                blacknened_background.gameObject.GetComponent<MeshRenderer>().enabled = false;
-                gray_quad_for_pause.gameObject.GetComponent<MeshRenderer>().enabled = true;
-                lights.SetActive(false);
-                pause_text.gameObject.GetComponent<Text>().enabled = true;
-                continue_text.gameObject.GetComponent<Text>().enabled = true;
-                return_text.gameObject.GetComponent<Text>().enabled = true;
-                if (option == 0)
+                if (paused == true)
                 {
-                    continue_text.gameObject.GetComponent<Text>().color = select_color;
-                    if(Input.GetKeyUp(KeyCode.S)||Input.GetKeyUp(KeyCode.DownArrow))
-                    {
-                        option = 1;
-                        continue_text.gameObject.GetComponent<Text>().color = unselect_color;
-                    }
-                    if(Input.GetKeyUp(KeyCode.Return))
-                    {
-                        paused = false;
-                    }
-                }
-                if(option==1)
-                {
-                    return_text.gameObject.GetComponent<Text>().color = select_color;
-                    if(Input.GetKeyUp(KeyCode.W)||Input.GetKeyUp(KeyCode.UpArrow))
-                    {
-                        option = 0;
-                        return_text.gameObject.GetComponent<Text>().color = unselect_color;
-                    }
-                    //from here, main menu scene must be added
-                }
-            }
-            if (paused == false)
-            {
-                Time.timeScale = 1;
-                minutes = Mathf.FloorToInt(time_counter_script_inside / 60F);
-                seconds = Mathf.FloorToInt(time_counter_script_inside - minutes * 60);
-                string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
-                text_on_screen.text = niceTime;
-                player.gameObject.GetComponent<CharController>().Set_if_player_can_move(true);
-                foreach (GameObject child in enemy)
-                {
-                    if (child != null)
-                    {
-                        child.gameObject.SetActive(true);
-                    }
-                }
-                battery_icon.gameObject.GetComponent<MeshRenderer>().enabled = true;
-                blacknened_background.gameObject.GetComponent<MeshRenderer>().enabled = true;
-                lights.SetActive(true);
-                gray_quad_for_pause.gameObject.GetComponent<MeshRenderer>().enabled = false;
-                pause_text.gameObject.GetComponent<Text>().enabled = false;
-                continue_text.gameObject.GetComponent<Text>().enabled =false;
-                return_text.gameObject.GetComponent<Text>().enabled = false;
-                if (changed == false)
-                {
-                    if (minutes == 8 && seconds == 0)
-                    {
-                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
-                        changed = true;
-                    }
-                    if (minutes == 4 && seconds == 0)
-                    {
-                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
-                        changed = true;
-                    }
-                    //first code is commented to test 10 minutes game
-                    /*if (minutes == 4 && seconds == 0)
-                    {
-                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
-                        changed = true;
-                    }
-                    if (minutes == 2 && seconds == 0)
-                    {
-                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
-                        changed = true;
-                    }*/
-                  /*  if (minutes == 0 && seconds == 0)
-                    {
-                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
-                        changed = true;
-                    }*/
-                    //ver si poner un bool y llamar una fuincion o metodo desde acá.
-                }
-                if(changed==true)
-                {
-                    if (minutes ==6 && seconds == 0)
-                    {
-                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
-                        changed = false;
-                    }
-                    if (minutes == 2 && seconds == 0)
-                    {
-                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
-                        changed = false;
-                    }
-                   /* if (minutes==3&&seconds==0)
-                    {
-                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
-                        changed = false;
-                    }
-                    if (minutes == 1 && seconds == 0)
-                    {
-                        player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
-                        changed = false;
-                    }*/
-                }    
-            }
-             if(player.gameObject.GetComponent<CharController>().Return_number_of_cells()==0&&run_out_of_cells==false)
-            {
-                if(player.gameObject.GetComponent<CharController>().Get_if_dead_by_enemy() == false)
-                {
-                    player.gameObject.GetComponent<CharController>().Set_if_is_dead_zone_or_dead(false);
+                    Time.timeScale = 0;
+                    player.gameObject.GetComponent<CharController>().Set_if_player_can_move(false);
                     foreach (GameObject child in enemy)
                     {
-                        child.gameObject.GetComponent<EnemyController>().Reset_number_of_hits();
+                        if (child != null)
+                        {
+                            child.gameObject.SetActive(false);
+                        }
                     }
-                    run_out_of_cells = true;
-                   
+                   for(int i=0;i<objects_to_hide_when_paused.Length;i++)
+					{
+                        objects_to_hide_when_paused[i].SetActive(false);
+					}
+                    blacknened_background.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    gray_quad_for_pause.gameObject.GetComponent<MeshRenderer>().enabled = true;
+                    lights.SetActive(false);
+                    pause_text.gameObject.GetComponent<Text>().enabled = true;
+                    continue_text.gameObject.GetComponent<Text>().enabled = true;
+                    return_text.gameObject.GetComponent<Text>().enabled = true;
+                    if (option == 0)
+                    {
+                        continue_text.gameObject.GetComponent<Text>().color = select_color;
+                        if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow))
+                        {
+                            option = 1;
+                            continue_text.gameObject.GetComponent<Text>().color = unselect_color;
+                        }
+                        if (Input.GetKeyUp(KeyCode.Return))
+                        {
+                            paused = false;
+                        }
+                    }
+                    if (option == 1)
+                    {
+                        return_text.gameObject.GetComponent<Text>().color = select_color;
+                        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow)&&to_main_menu==false)
+                        {
+                            option = 0;
+                            return_text.gameObject.GetComponent<Text>().color = unselect_color;
+                        }
+                        if(Input.GetKeyUp(KeyCode.Return))
+						{
+                            to_main_menu = true;
+                            paused = false;
+                        }
+                    }
                 }
-               
+                if (paused == false)
+                {
+                    Time.timeScale = 1;
+                    minutes = Mathf.FloorToInt(time_counter_script_inside / 60F);
+                    seconds = Mathf.FloorToInt(time_counter_script_inside - minutes * 60);
+                    string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
+                    text_on_screen.text = niceTime;
+                    player.gameObject.GetComponent<CharController>().Set_if_player_can_move(true);
+                    foreach (GameObject child in enemy)
+                    {
+                        if (child != null)
+                        {
+                            child.gameObject.SetActive(true);
+                        }
+                    }
+                    for (int i = 0; i < objects_to_hide_when_paused.Length; i++)
+                    {
+                        objects_to_hide_when_paused[i].SetActive(true);
+                    }
+                    battery_icon.gameObject.GetComponent<MeshRenderer>().enabled = true;
+                    blacknened_background.gameObject.GetComponent<MeshRenderer>().enabled = true;
+                    lights.SetActive(true);
+                    gray_quad_for_pause.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                    pause_text.gameObject.GetComponent<Text>().enabled = false;
+                    continue_text.gameObject.GetComponent<Text>().enabled = false;
+                    return_text.gameObject.GetComponent<Text>().enabled = false;
+                    if (changed == false)
+                    {
+                        if (minutes == 8 && seconds == 0)
+                        {
+                            player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                            changed = true;
+                        }
+                        if (minutes == 4 && seconds == 0)
+                        {
+                            player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                            changed = true;
+                        }
+                    }
+                    if (changed == true)
+                    {
+                        if (minutes == 6 && seconds == 0)
+                        {
+                            player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                            changed = false;
+                        }
+                        if (minutes == 2 && seconds == 0)
+                        {
+                            player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
+                            changed = false;
+                        }
+                    }
+                    if (player.gameObject.GetComponent<CharController>().Return_number_of_cells() == 0 && run_out_of_cells == false)
+                    {
+                        if (player.gameObject.GetComponent<CharController>().Get_if_dead_by_enemy() == false)
+                        {
+                            player.gameObject.GetComponent<CharController>().Set_if_is_dead_zone_or_dead(false);
+                            foreach (GameObject child in enemy)
+                            {
+                                child.gameObject.GetComponent<EnemyController>().Reset_number_of_hits();
+                            }
+                            run_out_of_cells = true;
+                        }
+                    }
+                    if (player.gameObject.GetComponent<CharController>().Get_if_go_to_retry()==true&&go_to_retry==false)
+                    {  
+                        ManagerKeeper.Decrease_number_of_tries();
+                       // Debug.Log("number is aaaaaaaaaaaaa " + ManagerKeeper.Get_number_of_tries_availables());
+                        player.gameObject.GetComponent<CharController>().Set_if_go_to_retry(false);
+                        go_to_retry = true;
+                    } 
+                    if(go_to_retry==true)
+					{
+                        timer_to_restart_level += Time.deltaTime;
+                        if (timer_to_restart_level > 3f)
+                        {
+                            for (int i = 0; i < 1; i++)
+                            {
+                                fader.SetActive(true);
+                            }
+                            if(fader.gameObject.GetComponent<FaderScript>().Return_animation_complete()==true)
+							{
+                                {
+                                    SceneManager.LoadScene("Game_Over_Scene");
+                                }
+                            }
+                        }
+                    }
+                    if (to_main_menu == true)
+                    {
+                        gray_quad_for_pause.gameObject.GetComponent<MeshRenderer>().enabled = true;
+                        foreach (GameObject child in enemy)
+                        {
+                            if (child != null)
+                            {
+                                child.gameObject.SetActive(false);
+                            }
+                        }
+                        fader.SetActive(true);
+                        if (fader.gameObject.GetComponent<FaderScript>().Return_animation_complete() == true)
+                        {
+                            SceneManager.LoadScene("MainMenu");
+                        }
+                    }
+                }
             }
-           
-        }
-        else if(time_counter_script_inside<=0&&out_of_time==false)
-        {
-             player.gameObject.GetComponent<CharController>().Set_if_is_dead_zone_or_dead(false);
-            out_of_time = true;
-        }
-        if(out_of_time==true&&player.gameObject.GetComponent<CharController>().Return_number_of_lifes()>0)
-        { 
-            time_counter_script_inside = 0;
-            delay_for_reset_game += Time.deltaTime;
-            if (delay_for_reset_game > 3)
+            else if (time_counter_script_inside <= 0 && out_of_time == false)
             {
-                time_counter_script_inside = time_counter;
-                time_counter -= Time.deltaTime;
-                delay_for_reset_game = 0;
-                out_of_time = false;    
-            }
+                player.gameObject.GetComponent<CharController>().Set_if_is_dead_zone_or_dead(false);
+                out_of_time = true;
+                if (out_of_time == true && player.gameObject.GetComponent<CharController>().Return_number_of_lifes() > 0)
+                {
+                    time_counter_script_inside = 0;
+                    delay_for_reset_game += Time.deltaTime;
+                    if (delay_for_reset_game > 3)
+                    {
+                        time_counter_script_inside = time_counter;
+                        time_counter -= Time.deltaTime;
+                        delay_for_reset_game = 0;
+                        out_of_time = false;
+                    }
+                }
+                if (out_of_time == true && player.gameObject.GetComponent<CharController>().Return_number_of_lifes() == 0)
+                {
+                    time_counter_script_inside = 0;
+                    ManagerKeeper.Decrease_number_of_tries();
+                    //Debug.Log(ManagerKeeper.Get_number_of_tries_availables());
+                }
+            }   
         }
-        if(out_of_time==true&&player.gameObject.GetComponent<CharController>().Return_number_of_lifes()==0)
-        {
-            time_counter_script_inside = 0;
-            //last point qhen the player dies, from here can be added another scene or return to main menu
+        else
+		{
+            timer_to_restart_level += Time.deltaTime;
+            if (timer_to_restart_level > 3f)
+            {
+                for (int i = 0; i < 1; i++)
+                {
+                    fader.SetActive(true);
+                }
+                if (fader.gameObject.GetComponent<FaderScript>().Return_animation_complete() == true)
+                {
+                    {
+                        SceneManager.LoadScene("Game_Over_Scene_Final");
+                    }
+                }
+            }
         }
     }
     public float Set_current_time()
@@ -301,5 +375,9 @@ public class ManagerScript : MonoBehaviour
     public void Set_pause(bool psd)
 	{
         paused = psd;
+	}
+    public bool Return_if_paused()
+	{
+        return paused;
 	}
 }

@@ -9,7 +9,6 @@ public class TriggerForWheelSplat : MonoBehaviour
     private bool stopped;
     private BoxCollider bx;
     public GameObject player;
- 
     void Start()
     {
         bx = GetComponent<BoxCollider>();
@@ -17,30 +16,19 @@ public class TriggerForWheelSplat : MonoBehaviour
         stopped = false;
         timer = 0;
     }
-
-    // Update is called once per frame
     void Update()
     {
         if(splatted==true&&stopped==false)
 		{
             player.gameObject.GetComponent<CharController>().Set_if_is_dead_zone_or_dead(false);
             stopped = true;
-           
-			/*else
-			{
-                GetComponentInParent<CraneController>().Set_if_splatted_something(false);
-                bx.enabled = true;
-                splatted = false;
-            }*/
         }
         if(splatted==true&&stopped==true)
 		{
             GetComponentInParent<CraneController>().Set_if_splatted_something(true);
-
             if (player.gameObject.GetComponent<CharController>().Player_is_alive() == false)
             {
                 bx.enabled = false;
-
             }
             else
             {
@@ -50,8 +38,6 @@ public class TriggerForWheelSplat : MonoBehaviour
                 stopped = false;
             }
         }
-      
-
     }
 	private void OnTriggerEnter(Collider other)
 	{

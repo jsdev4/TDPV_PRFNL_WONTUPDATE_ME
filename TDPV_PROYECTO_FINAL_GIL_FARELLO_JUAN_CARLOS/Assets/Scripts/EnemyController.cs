@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    private Vector3 velocity = new Vector3(0, 0, 0);
+    public float smoothTime;
     public bool enable_on_screen;
     public int enemy_difficulty;
     public float speed;
@@ -38,7 +40,8 @@ public class EnemyController : MonoBehaviour
     private float delay;
     public float max_time_to_reset;
     private bool check_node;
-   
+    private bool emit_particles;
+    public ParticleSystem particles;
     void Start()
     {
         enemy_alive =true;
@@ -54,6 +57,14 @@ public class EnemyController : MonoBehaviour
         Timer = 0;
         startPosition =light_gun.transform.position;
         CurrentPositionHolder = PathNode[CurrentNode].transform.position;
+
+        if (particles != null)
+        {
+            var em = particles.emission;
+            em.enabled = false;
+
+            emit_particles = false;
+        }
     }
     void Update()
     {
@@ -73,7 +84,7 @@ public class EnemyController : MonoBehaviour
                             Vector3 dirToTarget = transform.position - player.transform.position;
                             Vector3 newPos = transform.position - dirToTarget;
                             rotation_sprite = new Vector3(1, 1, 1);
-                            transform.localScale = rotation_sprite;
+                            transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime, 10);
                             rb.MovePosition(Vector3.Lerp(transform.position, newPos, speed_when_spots_player * Time.deltaTime));
                             Light_slider(false);
                         }
@@ -97,7 +108,7 @@ public class EnemyController : MonoBehaviour
                             Vector3 dirToTarget = transform.position - player.transform.position;
                             Vector3 newPos = transform.position - dirToTarget;
                             rotation_sprite = new Vector3(-1, 1, 1);
-                            transform.localScale = rotation_sprite;
+                            transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime, 10);
                             rb.MovePosition(Vector3.Lerp(transform.position, newPos, speed_when_spots_player * Time.deltaTime));
                             Light_slider(false);
                         }
@@ -127,13 +138,13 @@ public class EnemyController : MonoBehaviour
                             {
                                 rb.MovePosition(transform.position + translation * speed * Time.deltaTime);
                                 rotation_sprite = new Vector3(1, 1, 1);
-                                transform.localScale = rotation_sprite;
+                                transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime, 10);
                             }
                             else
                             {
                                 rb.MovePosition(transform.position + translation_to_left * speed * Time.deltaTime);
                                 rotation_sprite = new Vector3(-1, 1, 1);
-                                transform.localScale = rotation_sprite;
+                                transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime, 10);
                             }
                         }
                         else
@@ -199,6 +210,11 @@ public class EnemyController : MonoBehaviour
             {
                 delay_for_dead += Time.deltaTime;
                 quad.gameObject.GetComponent<Animator>().Play("EnemyDying");
+  
+                   
+
+               
+                
                 if (delay_for_dead >= 1.5f)
                 {
                     Destroy(gameObject);
@@ -290,23 +306,30 @@ public class EnemyController : MonoBehaviour
         if(other.CompareTag("TriggerForSplat"))
         {
             enemy_alive = false;
+            if (particles != null)
+            {
+                var em01 = particles.emission;
+                em01.enabled = true;
+                particles.Play();
+            }
+
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if(other.CompareTag("TriggerForSplat"))
         {
-            enemy_alive = true;
+            //enemy_alive = true;
         }
     }
 	private void OnBecameVisible()
 	{
         enable_on_screen = true;
-        Debug.Log("is visible");
+      //  Debug.Log("is visible");
 	}
     private void OnBecameInvisible()
     {
         enable_on_screen = false;
-        Debug.Log("is not visible");
+   //     Debug.Log("is not visible");
     }
 }
