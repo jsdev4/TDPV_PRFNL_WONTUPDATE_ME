@@ -42,6 +42,7 @@ public class EnemyController : MonoBehaviour
     private bool check_node;
     private bool emit_particles;
     public ParticleSystem particles;
+    public AudioSource[] enemy_sounds;
     void Start()
     {
         enemy_alive =true;
@@ -311,6 +312,7 @@ public class EnemyController : MonoBehaviour
                 var em01 = particles.emission;
                 em01.enabled = true;
                 particles.Play();
+                enemy_sounds[0].Play();
             }
 
         }

@@ -38,8 +38,8 @@ public class CharController : MonoBehaviour
     public GameObject[] low_beam_light;
     public GameObject manager;
     public ParticleSystem particles;
-
-   
+    public AudioSource[] hit_sound;
+    public AudioSource switch_light;
     public bool go_to_retry;
     void Start()
     {
@@ -110,6 +110,7 @@ public class CharController : MonoBehaviour
                     if (Input.GetKeyUp(KeyCode.L))
                     {
                         is_light_on = !is_light_on;
+                        switch_light.Play();
                     }
                     ///endl light function----------------------------
                     if (is_moving == false && is_jumping == false)
@@ -173,10 +174,8 @@ public class CharController : MonoBehaviour
                         var em = particles.emission;
                         em.enabled = true;
                         particles.Play(true);
-                       
-                            emit_particles = false;
-                            
-						
+                        emit_particles = false;
+                        hit_sound[1].Play();
                     }
                     timer_for_particle_emission = 0;
                 }
@@ -363,20 +362,23 @@ public class CharController : MonoBehaviour
         }
 
     }
-/*	private void OnCollisionEnter(Collision collision)
+	private void OnCollisionEnter(Collision collision)
 	{
         if (collision.collider.CompareTag("ground") || collision.collider.CompareTag("Elevator") || collision.collider.CompareTag("Box") || collision.collider.CompareTag("MetallicStructure") || collision.collider.CompareTag("WalkableObject"))
         {
-            var em = particles.emission;
-            em.enabled = true;
-            particles.Play(true);
+            //hit_sound.Play();
         }
-    }*/
+        if(collision.collider.CompareTag("Wall"))
+		{
+            hit_sound[0].Play();
+        }
+    }
 	private void OnCollisionExit(Collision collision)
     {
         if (collision.collider.CompareTag("ground") || collision.collider.CompareTag("Elevator") || collision.collider.CompareTag("Box") || collision.collider.CompareTag("MetallicStructure") || collision.collider.CompareTag("WalkableObject"))
         {
-           
+
+            
             on_ground =false;
             is_jumping = true;
         }

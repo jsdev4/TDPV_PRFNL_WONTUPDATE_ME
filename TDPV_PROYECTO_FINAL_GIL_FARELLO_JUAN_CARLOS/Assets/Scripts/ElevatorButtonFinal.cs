@@ -12,10 +12,12 @@ public class ElevatorButtonFinal : MonoBehaviour
     public GameObject player;
     public GameObject elevator;
     public GameObject text;
+    private AudioSource button_sound;
     void Start()
     {
         can_use = false;
         going_move = false;
+        button_sound = GetComponentInChildren<AudioSource>();
     }
     void Update()
     {
@@ -24,6 +26,7 @@ public class ElevatorButtonFinal : MonoBehaviour
            
             if (Input.GetKeyDown(KeyCode.F))
             {
+                button_sound.Play();
                 player.gameObject.GetComponent<CharController>().Set_if_is_interacting(true);
                 going_move = true;
             }
@@ -42,6 +45,7 @@ public class ElevatorButtonFinal : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
+
                 elevator.gameObject.GetComponent<ElevatorFinal>().Set_if_is_up(false);
             }
         }

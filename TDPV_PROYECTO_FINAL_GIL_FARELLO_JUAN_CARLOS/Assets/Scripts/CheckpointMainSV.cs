@@ -15,6 +15,7 @@ public class CheckpointMainSV : MonoBehaviour
     public GameObject[] trigger_to_save;
     public Text[] very_interactive_text;
     public GameObject manager;
+    public AudioSource keyboard_sound;
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -42,6 +43,7 @@ public class CheckpointMainSV : MonoBehaviour
                         trigger_to_save[i].gameObject.GetComponent<BoxCollider>().enabled = false;
                     }
                     anim.Play("main_sv_unlocked");
+                    keyboard_sound.Play();
                     gameObject.GetComponentInChildren<Light>().color = newCol;
                     Debug.Log("pressed0");
                     checkpoint_passed = false;

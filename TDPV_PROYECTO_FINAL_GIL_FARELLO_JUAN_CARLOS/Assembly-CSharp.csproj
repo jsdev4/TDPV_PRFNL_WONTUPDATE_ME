@@ -133,6 +133,7 @@
     <Compile Include="Assets\Scripts\PacPunkScripts\WaitingIconBall.cs" />
     <Compile Include="Assets\Scripts\PacPunkScripts\enemyGhostController.cs" />
     <Compile Include="Assets\Scripts\RespawnableObjectOnFalseGround.cs" />
+    <Compile Include="Assets\Scripts\ScriptForPlayingSound.cs" />
     <Compile Include="Assets\Scripts\ScriptToLevelTransition.cs" />
     <Compile Include="Assets\Scripts\ScriptToLevelTransition01.cs" />
     <Compile Include="Assets\Scripts\StopLightsController.cs" />

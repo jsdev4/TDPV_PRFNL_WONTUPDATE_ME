@@ -12,6 +12,7 @@ public class CheckpointVendingMachine : MonoBehaviour
     public GameObject soda_object;
     public Text[] very_interactive_text;
     public GameObject manager;
+    public AudioSource keyboard_sound;
     private float delay;
     void Start()
     {
@@ -40,6 +41,7 @@ public class CheckpointVendingMachine : MonoBehaviour
                     Debug.Log("checkppoint :" + checkpoint_number);
                     checkpoint_passed = false;
                     checkpoint_enabled = true;
+                    keyboard_sound.Play();
                 }
             }
             if (checkpoint_passed == false && checkpoint_enabled == true)

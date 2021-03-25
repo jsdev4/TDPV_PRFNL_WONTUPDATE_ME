@@ -9,6 +9,7 @@ public class Ed102AnimController : MonoBehaviour
     private Animator anim;
     public GameObject screen_object;
     public GameObject computer;
+    public AudioSource[] sounds;
     void Start()
     {
         key_was_pressed = false;
@@ -29,6 +30,7 @@ public class Ed102AnimController : MonoBehaviour
         {
             anim.Play("Ed102pcing_and_later_runnning");
             computer.gameObject.GetComponent<Animator>().Play("VintageComputerSSShutdown");
+            sounds[0].Stop();
             if(computer.gameObject.GetComponent<TextEventsController>().Return_if_to_next_scene()==true)
 			{
                 computer.gameObject.GetComponentInChildren<Light>().enabled = false;
