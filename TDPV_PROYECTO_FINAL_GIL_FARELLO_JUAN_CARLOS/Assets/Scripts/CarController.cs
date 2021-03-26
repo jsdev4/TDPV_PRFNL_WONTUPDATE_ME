@@ -16,9 +16,12 @@ public class CarController : MonoBehaviour
 	private bool touched;
 	public GameObject trigger;
 	public bool is_car_to_right;
+	public GameObject manager;
+	private AudioSource car_sound;
     void Start()
     {
 		touched = false;
+		car_sound = GetComponent<AudioSource>();
     }
 
 	void CheckNode()
@@ -29,39 +32,50 @@ public class CarController : MonoBehaviour
 	}
 	void Update()
 	{
-		if (touched == true)
+		if (manager.gameObject.GetComponent<ManagerScript>().Return_if_paused() == false)
 		{
-			//Debug.Log("speed is o");
-			if(trigger.gameObject.GetComponent<BoxCollider>().enabled==false)
+			if (touched == true)
 			{
-				touched = false;
+				car_sound.volume = 0.05f;
+				
+				//Debug.Log("speed is o");
+				if (trigger.gameObject.GetComponent<BoxCollider>().enabled == false)
+				{
+					touched = false;
+				}
+			}
+			if (touched == false)
+			{
+				trigger_for_detection.SetActive(false);
+				current_speed += acceleration * Time.deltaTime;
+				car_sound.volume = 0.15f;
+				///car_sound.Play();
+				if (current_speed > max_speed)
+				{
+					current_speed = max_speed;
+				}
+				if (car.gameObject.GetComponent<Transform>().position != CurrentPositionHolder)
+				{
+
+					car.gameObject.GetComponent<Transform>().position = Vector3.Lerp(car.gameObject.GetComponent<Transform>().position, CurrentPositionHolder, 1 * current_speed);
+				}
+				else
+				{
+					if (CurrentNode < PathNode.Length - 1)
+					{
+						CurrentNode++;
+						CheckNode();
+					}
+					if (CurrentNode == PathNode.Length - 1)
+					{
+						CurrentNode = -1;
+					}
+				}
 			}
 		}
-		if (touched == false)
+		else
 		{
-			trigger_for_detection.SetActive(false);
-			current_speed += acceleration * Time.deltaTime;
-			if (current_speed > max_speed)
-			{
-				current_speed = max_speed;
-			}
-			if (car.gameObject.GetComponent<Transform>().position != CurrentPositionHolder)
-			{
-				
-				car.gameObject.GetComponent<Transform>().position = Vector3.Lerp(car.gameObject.GetComponent<Transform>().position, CurrentPositionHolder, 1 * current_speed);
-			}
-			else
-			{
-				if (CurrentNode < PathNode.Length-1)
-				{		
-					CurrentNode++;
-					CheckNode();
-				}
-				if (CurrentNode == PathNode.Length-1 )
-				{ 
-					CurrentNode = -1;
-				}
-			}
+			car_sound.volume = 0;
 		}
 	}
 	private void OnTriggerEnter(Collider other)
