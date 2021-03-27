@@ -18,10 +18,13 @@ public class CarController : MonoBehaviour
 	public bool is_car_to_right;
 	public GameObject manager;
 	private AudioSource car_sound;
+	private bool sound_on;
     void Start()
     {
+		sound_on = false;
 		touched = false;
 		car_sound = GetComponent<AudioSource>();
+		car_sound.Play();
     }
 
 	void CheckNode()
@@ -34,6 +37,7 @@ public class CarController : MonoBehaviour
 	{
 		if (manager.gameObject.GetComponent<ManagerScript>().Return_if_paused() == false)
 		{
+			car_sound.enabled = true;
 			if (touched == true)
 			{
 				car_sound.volume = 0.05f;
@@ -75,8 +79,9 @@ public class CarController : MonoBehaviour
 		}
 		else
 		{
-			car_sound.volume = 0;
+			car_sound.enabled = false;
 		}
+		
 	}
 	private void OnTriggerEnter(Collider other)
 	{
@@ -107,5 +112,6 @@ public class CarController : MonoBehaviour
 	{
 		touched = tchd;
 	}
+	
 }
 

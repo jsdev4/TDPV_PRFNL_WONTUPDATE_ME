@@ -40,6 +40,7 @@ public class CharController : MonoBehaviour
     public ParticleSystem particles;
     public AudioSource[] hit_sound;
     public AudioSource switch_light;
+    public AudioSource discharging_sound;
     public bool go_to_retry;
     void Start()
     {
@@ -177,7 +178,7 @@ public class CharController : MonoBehaviour
                         emit_particles = false;
                         hit_sound[1].Play();
                     }
-                    timer_for_particle_emission = 0;
+                    //timer_for_particle_emission = 0;
                 }
                 if (on_ground==false)
 				{
@@ -364,7 +365,7 @@ public class CharController : MonoBehaviour
     }
 	private void OnCollisionEnter(Collision collision)
 	{
-        if (collision.collider.CompareTag("ground") || collision.collider.CompareTag("Elevator") || collision.collider.CompareTag("Box") || collision.collider.CompareTag("MetallicStructure") || collision.collider.CompareTag("WalkableObject"))
+        if (collision.collider.CompareTag("ground") || collision.collider.CompareTag("Elevator") || collision.collider.CompareTag("MetallicStructure"))
         {
             //hit_sound.Play();
         }
@@ -372,20 +373,42 @@ public class CharController : MonoBehaviour
 		{
             hit_sound[0].Play();
         }
+        if(collision.collider.CompareTag("Box"))
+		{
+            hit_sound[2].Play();
+		}
+        if( collision.collider.CompareTag("WalkableObject"))
+		{
+
+            hit_sound[3].Play();
+		}
+
+
     }
 	private void OnCollisionExit(Collision collision)
     {
-        if (collision.collider.CompareTag("ground") || collision.collider.CompareTag("Elevator") || collision.collider.CompareTag("Box") || collision.collider.CompareTag("MetallicStructure") || collision.collider.CompareTag("WalkableObject"))
+        if (collision.collider.CompareTag("ground") || collision.collider.CompareTag("Elevator") || collision.collider.CompareTag("Box") || collision.collider.CompareTag("MetallicStructure"))
         {
 
-            
+            timer_for_particle_emission = 0;
             on_ground =false;
             is_jumping = true;
         }
+        if (collision.collider.CompareTag("WalkableObject"))
+		{
+            hit_sound[3].Stop();
+		}
 
     }
+	private void OnTriggerEnter(Collider other)
+	{
+        if (other.CompareTag("TriggerForSplat"))
+        {
+            hit_sound[1].Play();
+        }
+    }
 
-    public void Set_if_is_on_the_hook(bool electrified)
+	public void Set_if_is_on_the_hook(bool electrified)
     {
         on_the_hook = electrified;  
     }
@@ -395,8 +418,9 @@ public class CharController : MonoBehaviour
 	}
     public void Decrease_number_of_cells()
     {
+        discharging_sound.Play();
         number_of_cells -= 1;
-        Debug.Log(number_of_cells);
+       // Debug.Log(number_of_cells);
     }
     public void Set_number_of_cells(float cells)
     {
