@@ -213,11 +213,11 @@ public class EnemyController : MonoBehaviour
             {
                 delay_for_dead += Time.deltaTime;
                 quad.gameObject.GetComponent<Animator>().Play("EnemyDying");
-  
-                   
-
-               
                 
+
+
+
+
                 if (delay_for_dead >= 1.5f)
                 {
                     Destroy(gameObject);
@@ -329,7 +329,10 @@ public class EnemyController : MonoBehaviour
                 particles.Play();
                 enemy_sounds[0].Play();
             }
-
+            if (enemy_sounds[2] != null)
+            {
+                enemy_sounds[2].Play();
+            }
         }
     }
     private void OnTriggerExit(Collider other)

@@ -41,6 +41,7 @@ public class CharController : MonoBehaviour
     public AudioSource[] hit_sound;
     public AudioSource switch_light;
     public AudioSource discharging_sound;
+    public AudioSource fully_discharged;
     public bool go_to_retry;
     void Start()
     {
@@ -305,6 +306,7 @@ public class CharController : MonoBehaviour
     }
     public void Set_if_is_dead_zone_or_dead(bool alv)
     {
+        fully_discharged.Play();
         is_alive = alv;
         lifes -= 1;
         Debug.Log("lifes :" + lifes);
