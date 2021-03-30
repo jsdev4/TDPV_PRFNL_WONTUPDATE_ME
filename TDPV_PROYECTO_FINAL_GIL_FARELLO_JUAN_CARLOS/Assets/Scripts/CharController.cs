@@ -355,11 +355,8 @@ public class CharController : MonoBehaviour
     }
     private void OnCollisionStay(Collision collision)
     {
-        if(collision.collider.CompareTag("ground")||collision.collider.CompareTag("Elevator")||collision.collider.CompareTag("Box")||collision.collider.CompareTag("MetallicStructure")||collision.collider.CompareTag("WalkableObject"))
+        if(collision.collider.CompareTag("ground")||collision.collider.CompareTag("Elevator")||collision.collider.CompareTag("Box")||collision.collider.CompareTag("MetallicStructure")||collision.collider.CompareTag("WalkableObject")||collision.collider.CompareTag("Cylinder")||collision.collider.CompareTag("bootle"))
         {
-            
-
-
             on_ground = true;
             is_jumping = false;
         }
@@ -381,8 +378,15 @@ public class CharController : MonoBehaviour
 		}
         if( collision.collider.CompareTag("WalkableObject"))
 		{
-
             hit_sound[3].Play();
+		}
+        if(collision.collider.CompareTag("Cylinder"))
+		{
+            hit_sound[4].Play();
+		}
+        if (collision.collider.CompareTag("bootle"))
+        {
+            hit_sound[5].Play();
 		}
 
 

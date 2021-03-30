@@ -136,7 +136,10 @@ public class EnemyController : MonoBehaviour
                         }
                         if (random_to_patrol == 1)
                         {
-                            quad.gameObject.GetComponent<Animator>().Play("EnemyRunning");
+                            if (quad.gameObject.GetComponent<Animator>().enabled == true)//newly added condition
+                            {
+                                quad.gameObject.GetComponent<Animator>().Play("EnemyRunning");
+                            }
                             if (direction == true)
                             {
                                 rb.MovePosition(transform.position + translation * speed * Time.deltaTime);
@@ -152,7 +155,10 @@ public class EnemyController : MonoBehaviour
                         }
                         else
                         {
-                            quad.gameObject.GetComponent<Animator>().Play("EnemyIdle");
+                            if (quad.gameObject.GetComponent<Animator>().enabled == true)//added condition
+                            {
+                                quad.gameObject.GetComponent<Animator>().Play("EnemyIdle");
+                            }
                         }
                     }
 
