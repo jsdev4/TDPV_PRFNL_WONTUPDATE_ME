@@ -115,7 +115,7 @@ MonoBehaviour:
   m_MinSize: {x: 579, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 16
+  controlID: 6461
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_MinSize: {x: 303, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 17
+  controlID: 6462
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_MinSize: {x: 303, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 18
+  controlID: 6463
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -267,8 +267,8 @@ MonoBehaviour:
     y: 0
     width: 331
     height: 635
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -394,23 +394,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 3865060040660600
-      m_LastClickedID: 419128
-      m_ExpandedIDs: 3037fffff03cffff70fbffffc0360000383b0000963f0000c63f0000784300001e440000d64400002c49000036540000121d060060210600
+      m_SelectedIDs: 0a960000
+      m_LastClickedID: 0
+      m_ExpandedIDs: 8065feff046bfeff726dfeff4871feff907bfeff609efefffea8feff38befeff4660ffff9e69ffff5cf8ffff70fbffffe4700400f4ec050052f30500c8fb050074590700425a0700525d0700805d0700ae5d0700905e0700aa5f0700b66307009465070000660700ca6a0700fa6c0700386e07004e6e0700b86e07003c700700b27007004273070026740700a87407008a75070036760700da7a0700487b07005c7b0700e07c0700e47d0700d28a0700ca2a0800a2310800883408001c37080000380800ea3808007a3a0800b2400800de400800a84408008e460800c2460800ea46080082480800164d0800964f0800aa4f0800b44f0800dc4f08006a50080084500800d65008006e520800a05e08007ca208006eab080096ba0800bccb0800cccb0800f8cb0800fecb080018cc080024cc080032cc08001edb0800b4e80800e0e808008cee080096ee0800eeee08009af00800ccf20800b6f3080048f408007cf6080086f608001cf808002cfb0800fcfd0800acfe0800dafe080080ff080096ff08005c000900fc000900720109004606090090070900380a0900c01d09003a2409008e380900465209005452090056520900a6520900de520900e65209009e6709007a6a0900
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Lamp (40)
+        m_OriginalName: Lamp (40)
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 487096
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 8}
       m_SearchString: 
@@ -456,9 +456,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 35.6229, y: 8.681089, z: -16.98214}
+    m_Target: {x: 11.601738, y: 15.420312, z: 18.785631}
     speed: 2
-    m_Value: {x: 35.6229, y: 8.681083, z: -16.982119}
+    m_Value: {x: 11.601738, y: 15.420312, z: 18.785631}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -504,13 +504,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.13932447, y: 0.021385923, z: -0.0029968205, w: -0.99002314}
+    m_Target: {x: 0.13785535, y: 0.11176289, z: 0.01566899, w: -0.98401654}
     speed: 2
-    m_Value: {x: -0.13488618, y: -0.012783701, z: 0.0017531712, w: -0.9907771}
+    m_Value: {x: 0.1393292, y: 0.11173763, z: 0.015836395, w: -0.98379433}
   m_Size:
-    m_Target: 2.0845785
+    m_Target: 19.004927
     speed: 2
-    m_Value: 2.0845785
+    m_Value: 18.186533
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1250,34 +1250,34 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Art/Sound/Outlands
+    - Assets/Scenes
   m_ViewMode: 1
   m_StartGridSize: 46
   m_LastFolders:
-  - Assets/Art/Sound/Outlands
+  - Assets/Scenes
   m_LastFoldersGridSize: 46
   m_LastProjectPath: C:\Users\USER\Documents\TDPV_PROYECTO_FINAL_GIL_FARELLO_JUAN_CARLOS
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 199}
-    m_SelectedIDs: cc890000
-    m_LastClickedID: 35276
-    m_ExpandedIDs: 000000008087000082870000c489000000ca9a3b
+    m_SelectedIDs: 44940000
+    m_LastClickedID: 37956
+    m_ExpandedIDs: 0000000096920000989200003294000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Outlands
-      m_OriginalName: Outlands
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 35276
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_SearchString: 
@@ -1291,7 +1291,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000008087000082870000
+    m_ExpandedIDs: 00000000969200009892000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1401,7 +1401,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 15700
+  m_LastSelectedObjectID: 294456
 --- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1439,7 +1439,7 @@ MonoBehaviour:
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 360
+  m_LastVerticalScrollValue: 0
 --- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
