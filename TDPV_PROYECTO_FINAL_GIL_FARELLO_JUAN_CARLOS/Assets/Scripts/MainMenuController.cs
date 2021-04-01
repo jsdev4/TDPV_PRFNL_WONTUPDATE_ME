@@ -29,6 +29,7 @@ public class MainMenuController : MonoBehaviour
     private Vector3 targetPosition02;
     private Vector3 targetPosition03;
     private Vector3 targetPosition04;
+    public AudioSource[] interface_sound;
     void Start()
     {
         screen_number = 0;
@@ -57,11 +58,13 @@ public class MainMenuController : MonoBehaviour
                 screen_text[0].gameObject.GetComponent<Text>().color = select_color;
                 if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow))
                 {
+                    interface_sound[0].Play();
                     option = 1;
                     screen_text[0].gameObject.GetComponent<Text>().color = unselect_color;
                 }
                 if (Input.GetKeyUp(KeyCode.Return))
                 {
+                    interface_sound[2].Play();
                     key_pressed = true;
                 }
                 if (key_pressed == true)
@@ -87,12 +90,14 @@ public class MainMenuController : MonoBehaviour
                 {
                     if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow))
                     {
+                        interface_sound[0].Play();
                         option = 0;
                         timer = 0;
                         screen_text[1].gameObject.GetComponent<Text>().color = unselect_color;
                     }
                     if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow))
                     {
+                        interface_sound[0].Play();
                         option = 2;
                         timer = 0;
                         screen_text[1].gameObject.GetComponent<Text>().color = unselect_color;
@@ -100,7 +105,7 @@ public class MainMenuController : MonoBehaviour
                 }
                 if (Input.GetKeyUp(KeyCode.Return))
                 {
-                    
+                    interface_sound[2].Play();
                     screen[2].SetActive(true);
                     key_pressed = true;  
                 }
@@ -127,12 +132,14 @@ public class MainMenuController : MonoBehaviour
                 {
                     if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow))
                     {
+                        interface_sound[0].Play();
                         timer = 0;
                         option = 1;
                         screen_text[2].gameObject.GetComponent<Text>().color = unselect_color;
                     }
                     if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow))
                     {
+                        interface_sound[0].Play();
                         timer = 0;
                         option = 3;
                         screen_text[2].gameObject.GetComponent<Text>().color = unselect_color;
@@ -141,7 +148,7 @@ public class MainMenuController : MonoBehaviour
                 if(Input.GetKeyUp(KeyCode.Return))
 				{
                     key_pressed = true;
-                        
+                    interface_sound[2].Play();    
                 }
                 if(key_pressed==true)
 				{
@@ -163,11 +170,13 @@ public class MainMenuController : MonoBehaviour
                 screen_text[3].gameObject.GetComponent<Text>().color = select_color;
                 if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow))
                 {
+                    interface_sound[0].Play();
                     option = 2;
                     screen_text[3].gameObject.GetComponent<Text>().color = unselect_color;
                 }
                 if(Input.GetKeyUp(KeyCode.Return))
 				{
+                    interface_sound[2].Play();
                     key_pressed = true;
 				}
                 if(key_pressed==true)
@@ -196,6 +205,7 @@ public class MainMenuController : MonoBehaviour
                     screen_text_inside[0].gameObject.GetComponent<Text>().color = select_color;
                     if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow))
                     {
+                        interface_sound[0].Play();
                         option_inside = 1;
                         //Debug.Log("options is 1 now");
                         screen_text_inside[0].gameObject.GetComponent<Text>().color = unselect_color;
@@ -211,12 +221,14 @@ public class MainMenuController : MonoBehaviour
                     screen_text_inside[1].gameObject.GetComponent<Text>().color = select_color;
                     if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.UpArrow))
                     {
+                        interface_sound[0].Play();
                         option_inside = 0;
                        // Debug.Log("options is0 now");
                         screen_text_inside[1].gameObject.GetComponent<Text>().color = unselect_color;
                     }
                     if (Input.GetKeyUp(KeyCode.Return))
                     {
+                        interface_sound[1].Play();
                         key_pressed = true;
                     }
                     if (key_pressed == true)
@@ -239,6 +251,7 @@ public class MainMenuController : MonoBehaviour
 			{
                 if(Input.GetKeyUp(KeyCode.Return))
 				{
+                    interface_sound[2].Play();
                     can_press_key = false;
                     fader.SetActive(true);
                     fader.gameObject.GetComponent<Animator>().Play("Fade_in_blue");   
@@ -250,6 +263,7 @@ public class MainMenuController : MonoBehaviour
                 }
                 if (can_press_key==true&&Input.GetKeyUp(KeyCode.Escape))
                 {
+                    interface_sound[1].Play();
                     key_pressed = true;
                 }
                 if(key_pressed==true)
@@ -271,6 +285,7 @@ public class MainMenuController : MonoBehaviour
             {
                 if (Input.GetKeyUp(KeyCode.Return))
                 {
+                    interface_sound[1].Play();
                     screen[0].SetActive(true);
                     key_pressed = true;
                 }
@@ -294,6 +309,7 @@ public class MainMenuController : MonoBehaviour
 			{
                 if(Input.GetKeyUp(KeyCode.Return))
 				{
+                    interface_sound[1].Play();
                     key_pressed = true;
 				}
                 if (key_pressed == true)

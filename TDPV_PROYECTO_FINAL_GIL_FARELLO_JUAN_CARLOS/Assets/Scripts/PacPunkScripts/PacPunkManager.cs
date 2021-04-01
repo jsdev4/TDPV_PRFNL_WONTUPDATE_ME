@@ -34,6 +34,7 @@ public class PacPunkManager : MonoBehaviour
     public GameObject score_text;
     public Text screen_score;
     private string score_string;
+    public AudioSource[] interaction_sound;
     void Awake()
     {
         fader.SetActive(true);
@@ -62,6 +63,7 @@ public class PacPunkManager : MonoBehaviour
         {
             if (Input.GetKeyUp(KeyCode.Return))
 			{
+                interaction_sound[0].Play();
                 fader.SetActive(true);
             }
             if(fader.gameObject.GetComponent<FaderScript>().Return_animation_complete()==true)
@@ -110,6 +112,7 @@ public class PacPunkManager : MonoBehaviour
             }
             if (icons_collected == numberOfTaggedObjects + numberOfSpecialTaggedObject)
             {
+                player.gameObject.GetComponent<CharControllerForPacPunk>().Set_stop_music(); 
                 Keep_characters_static();
                 life_icon.SetActive(false);
                 score_text.SetActive(false);
@@ -117,6 +120,7 @@ public class PacPunkManager : MonoBehaviour
                 ManagerKeeper.Set_if_mini_game_was_completed(true);
                 if (Input.GetKeyUp(KeyCode.Return))
                 {
+                    interaction_sound[0].Play(); 
                     random_respawn = Random.Range(0, 5);
                     Debug.Log(random_respawn);
                     start_timer = true;
@@ -131,16 +135,19 @@ public class PacPunkManager : MonoBehaviour
             {
                 if (Input.GetKeyUp(KeyCode.Escape))
                 {
+                    interaction_sound[1].Play();
                     Keep_characters_static();
                     start_timer = true;
+                    player.gameObject.GetComponent<CharControllerForPacPunk>().Set_stop_music();
                 }
                 if (start_timer == true)
-                {
+                {  
                     fader.SetActive(true);
                     ManagerKeeper.Set_if_mini_game_was_completed(false);
                     timer_to_back_to_level03 += Time.deltaTime;
                     if (timer_to_back_to_level03 >=3f&&timer_to_back_to_level03<=5f)
                     {
+                       // player.gameObject.GetComponent<CharControllerForPacPunk>().Set_stop_music();
                         fader.SetActive(false);
                         life_icon.SetActive(false);
                         score_text.SetActive(false);
@@ -166,6 +173,7 @@ public class PacPunkManager : MonoBehaviour
             }
            if (player.gameObject.GetComponent<CharControllerForPacPunk>().Return_number_of_lifes() == 0)
             {
+                player.gameObject.GetComponent<CharControllerForPacPunk>().Set_stop_music();
                 Keep_characters_static();
                 fader.SetActive(true);
                 timer_to_back_to_level03 += Time.deltaTime;
@@ -239,4 +247,8 @@ public class PacPunkManager : MonoBehaviour
         }
         player.gameObject.GetComponent<CharControllerForPacPunk>().Set_if_player_is_alive(false, true);
     }
+    public bool Return_if_game_started()
+	{
+        return game_started;
+	}
 }

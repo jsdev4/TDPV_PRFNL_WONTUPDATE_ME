@@ -79,31 +79,31 @@ public class CharController : MonoBehaviour
                 rb.MovePosition(transform.position + translation * speed * Time.deltaTime);
                 if (on_ground == true)
                 {
-                    if (Input.GetKey(KeyCode.A))
+                    if (Input.GetKey(KeyCode.A)||Input.GetKey(KeyCode.LeftArrow))
                     {
                         flipped = false;
                         is_moving = true;
                         rotation_sprite = new Vector3(-1, 1, 1);
                         transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime,10);
                     }
-                    if (Input.GetKey(KeyCode.D))
+                    if (Input.GetKey(KeyCode.D)||Input.GetKey(KeyCode.RightArrow))
                     {
                         flipped = true;
                         is_moving = true;
                         rotation_sprite = new Vector3(1, 1, 1);
                         transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime,10);
                     }
-                    if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+                    if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)||Input.GetKey(KeyCode.UpArrow)||Input.GetKey(KeyCode.DownArrow))
                     {
                         is_moving = true;
                         speed = speed_on_z_axis;
 
                     }
-                    if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+                    if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)||Input.GetKeyUp(KeyCode.LeftArrow)||Input.GetKeyUp(KeyCode.RightArrow))
                     {
                         is_moving = false;
                     }
-                    if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
+                    if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S)||Input.GetKeyUp(KeyCode.UpArrow)||Input.GetKeyUp(KeyCode.DownArrow))
                     {
                         speed = reset_speed;
                         is_moving = false;
@@ -191,21 +191,21 @@ public class CharController : MonoBehaviour
                         emit_particles = true;
                         
                     }
-                    if(Input.GetKey(KeyCode.A))
+                    if(Input.GetKey(KeyCode.A)||Input.GetKey(KeyCode.LeftArrow))
 					{
                         rotation_sprite = new Vector3(-1, 1, 1);
                         transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime,10);
                     }
-                    if (Input.GetKey(KeyCode.D))
+                    if (Input.GetKey(KeyCode.D)||Input.GetKey(KeyCode.RightArrow))
                     {
                         rotation_sprite = new Vector3(1, 1, 1);
                         transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime,10);
                     }
-                    if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+                    if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)||Input.GetKeyUp(KeyCode.LeftArrow)||Input.GetKeyUp(KeyCode.RightArrow))
                     {
                         is_moving = false;
                     }
-                    if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
+                    if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S)||Input.GetKeyUp(KeyCode.UpArrow)||Input.GetKeyUp(KeyCode.DownArrow))
                     {
                         speed = reset_speed;
                         is_moving = false;

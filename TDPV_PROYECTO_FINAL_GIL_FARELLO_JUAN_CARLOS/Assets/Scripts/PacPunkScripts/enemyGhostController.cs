@@ -37,6 +37,7 @@ public class enemyGhostController : MonoBehaviour
         float distance = Vector3.Distance(transform.position, player.gameObject.GetComponent<Transform>().position);
         if (pac_punk_manager.gameObject.GetComponent<PacPunkManager>().Get_if_special_icon_collected() == false)
         {
+            player.gameObject.GetComponent<CharControllerForPacPunk>().Set_music_change(false);
             if (hit_the_player == false)
             {
                quad_animator.Play("enemyghostIdle");
@@ -52,8 +53,8 @@ public class enemyGhostController : MonoBehaviour
         }
             if (pac_punk_manager.gameObject.GetComponent<PacPunkManager>().Get_if_special_icon_collected() == true)
             {
-
-                if (hit_the_player == false)
+            player.gameObject.GetComponent<CharControllerForPacPunk>().Set_music_change(true);
+            if (hit_the_player == false)
                 {
                     ghost.SetDestination(safeHouse.gameObject.GetComponent<Transform>().position);
                     quad_animator.Play("enemyghostIdlealerted");

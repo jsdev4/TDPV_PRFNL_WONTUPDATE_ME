@@ -12,6 +12,7 @@ public class TransitionSceneController : MonoBehaviour
     public bool is_game_over_scene_final;
     private bool to_main_menu;
     public bool is_game_over_scene;
+    public AudioSource[] interface_sound;
     void Start()
     {
         timer = 0;
@@ -29,6 +30,7 @@ public class TransitionSceneController : MonoBehaviour
                 {
                     if (Input.GetKeyUp(KeyCode.Return))
                     {
+                        interface_sound[0].Play();
                         key_was_pressed = true;
                         screen_text[0].gameObject.GetComponent<Animator>().Play("TextControllerOut");
                         screen_text[1].gameObject.GetComponent<Animator>().Play("PressTextOut");
@@ -45,6 +47,7 @@ public class TransitionSceneController : MonoBehaviour
                 {
                     if (Input.GetKeyUp(KeyCode.Escape))
                     {
+                        interface_sound[1].Play();
                         screen_text[0].gameObject.GetComponent<Animator>().Play("GameOverFadeOut");
                         screen_text[1].gameObject.GetComponent<Animator>().Play("ToMainMenuOutInBlue");
                         to_main_menu = true;
@@ -63,6 +66,7 @@ public class TransitionSceneController : MonoBehaviour
                 {
                     if (Input.GetKeyUp(KeyCode.Return))
                     {
+                        interface_sound[0].Play();
                         to_main_menu = false;
                         screen_text[0].gameObject.GetComponent<Animator>().Play("GameOverFadeOut");
                         screen_text[1].gameObject.GetComponent<Animator>().Play("PressTextOutInBlue");
@@ -71,6 +75,7 @@ public class TransitionSceneController : MonoBehaviour
                     }
                     if (Input.GetKeyUp(KeyCode.Escape))
                     {
+                        interface_sound[1].Play();
                         to_main_menu = true;
                         screen_text[0].gameObject.GetComponent<Animator>().Play("GameOverFadeOut");
                         screen_text[1].gameObject.GetComponent<Animator>().Play("PressTextFadeOut");

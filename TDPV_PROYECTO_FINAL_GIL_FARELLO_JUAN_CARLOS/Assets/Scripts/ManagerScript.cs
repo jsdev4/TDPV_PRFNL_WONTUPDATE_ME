@@ -45,6 +45,7 @@ public class ManagerScript : MonoBehaviour
     private Color32 select_color;
     public GameObject[] objects_to_hide_when_paused;
     public GameObject fader;
+    public AudioSource[] interface_sounds;
 	void Awake()
 	{
         fader.SetActive(true);
@@ -191,9 +192,11 @@ public class ManagerScript : MonoBehaviour
                         {
                             option = 1;
                             continue_text.gameObject.GetComponent<Text>().color = unselect_color;
+                            interface_sounds[0].Play();
                         }
                         if (Input.GetKeyUp(KeyCode.Return))
                         {
+                            interface_sounds[1].Play();
                             paused = false;
                         }
                     }
@@ -204,9 +207,11 @@ public class ManagerScript : MonoBehaviour
                         {
                             option = 0;
                             return_text.gameObject.GetComponent<Text>().color = unselect_color;
+                            interface_sounds[0].Play();
                         }
                         if(Input.GetKeyUp(KeyCode.Return))
 						{
+                            interface_sounds[1].Play();
                             to_main_menu = true;
                             paused = false;
                         }
