@@ -771,11 +771,11 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Alright! Here we have a situation. runs the 2052 ac and droids like you
-    a fully mind developed. That means you can think and feel in your own. Due to
-    thinking capacity, authorities from Stereo City wants to put a chip for supervision
-    inside droids. Very controversial update, right? You were transferred to the
-    factory, which means a good oportunity to won't update you if you escape. Let's
-    try to skip the update!
+    are fully mind developed. That means you can think and feel in your own. Due
+    to thinking capacity, authorities from Stereo City wants to put a chip for supervision
+    inside. Very controversial update, right? You were transferred to the factory,
+    which means a good oportunity to won't update you if you escape. Let's try to
+    skip the update!
 --- !u!222 &506784435
 CanvasRenderer:
   m_ObjectHideFlags: 0

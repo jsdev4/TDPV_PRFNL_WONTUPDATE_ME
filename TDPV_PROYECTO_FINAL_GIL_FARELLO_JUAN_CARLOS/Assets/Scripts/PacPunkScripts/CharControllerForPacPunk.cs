@@ -131,6 +131,13 @@ public class CharControllerForPacPunk : MonoBehaviour
             }
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Wall"))
+        {
+            player_sound[2].Play();
+        }
+    }
     public void Set_if_player_is_alive(bool move, bool alive)
     {
         can_move = move;

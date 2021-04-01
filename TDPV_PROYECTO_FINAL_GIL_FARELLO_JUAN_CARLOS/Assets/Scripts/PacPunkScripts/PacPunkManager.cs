@@ -191,7 +191,8 @@ public class PacPunkManager : MonoBehaviour
             }
         }
     }
-    public void Increase_icons_collected()
+	
+	public void Increase_icons_collected()
 	{
         icons_collected += 1;
         score += 10;
