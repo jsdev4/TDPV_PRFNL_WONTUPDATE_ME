@@ -12,6 +12,7 @@ public class ManagerScript : MonoBehaviour
     public float time_counter;
     private float time_counter_script_inside;
     private float delay_for_reset_game;
+    private float timer_for_music_start;
     //
     private float timer_to_restart_level;
     private bool paused;
@@ -20,6 +21,8 @@ public class ManagerScript : MonoBehaviour
     private bool run_out_of_cells;
     private bool to_main_menu;
     private bool go_to_retry;
+    private bool start_music;
+    private bool music_to_zero;
     public int number_of_level;//comment for security purposes
     public GameObject[] enemy;
     public Texture aTexture;
@@ -40,12 +43,13 @@ public class ManagerScript : MonoBehaviour
     private int seconds;
     private int cells_on_timer;
     private int option;
-
+    private int song_number;
     private Color32 unselect_color;
     private Color32 select_color;
     public GameObject[] objects_to_hide_when_paused;
     public GameObject fader;
     public AudioSource[] interface_sounds;
+    public AudioSource[] music;
 	void Awake()
 	{
         fader.SetActive(true);
@@ -54,6 +58,8 @@ public class ManagerScript : MonoBehaviour
 	void Start()
     {
         to_main_menu = false;
+        start_music = false;
+        song_number = 0;
         if (number_of_level == 0)
 		{
             ManagerKeeper.Set_current_level(0);
@@ -124,6 +130,7 @@ public class ManagerScript : MonoBehaviour
         go_to_retry = false;
         option = 0;
         timer_to_restart_level = 0;
+        timer_for_music_start = 0;
         select_color= new Color32(72, 58, 176,255);
         unselect_color = new Color32(149,13,76,255);
 ;        if(time_counter_script_inside>0&&time_counter_script_inside<=60)
@@ -154,9 +161,56 @@ public class ManagerScript : MonoBehaviour
     }
     void Update()
     {
+        
         if (ManagerKeeper.Get_number_of_tries_availables() > 0)
         {
             time_counter_script_inside -= Time.deltaTime;
+            if (start_music == false)
+            {
+                timer_for_music_start += Time.deltaTime;
+            if (timer_for_music_start > 2f)
+            {
+                if(song_number==0)
+				{
+                    music[0].enabled = true;
+                    music[0].Play();
+                    music[1].enabled = false;
+                }
+                if (song_number == 1)
+                {
+                    music[1].enabled = true;
+                    music[1].Play();
+                    music[0].enabled = false;
+                }
+               // music[song_number].Play();
+                start_music = true;
+            }
+            }
+
+            if (start_music==true)
+			{
+                if(music[song_number].volume<.1f)
+				{
+                    music[song_number].volume+= .02f * Time.deltaTime;
+                }
+                else
+				{
+                    music[song_number].volume = 0.1f;
+
+                }
+
+			}
+            if(music[song_number].isPlaying==false&&paused==false)
+			{
+                song_number += 1;
+                if(song_number==2)
+				{
+                    song_number = 0;
+				}
+                start_music = false;
+			}
+            
+            
             if (time_counter_script_inside > 0)
             {
                 if (Input.GetKeyUp(KeyCode.P))
@@ -167,6 +221,18 @@ public class ManagerScript : MonoBehaviour
                 if (paused == true)
                 {
                     Time.timeScale = 0;
+                    if(start_music==true)
+					{
+                        if(song_number==0)
+						{
+                            music[0].Pause();
+                        }
+                        if (song_number == 1)
+                        {
+                            music[1].Pause();
+                        }
+
+                    }
                     player.gameObject.GetComponent<CharController>().Set_if_player_can_move(false);
                     foreach (GameObject child in enemy)
                     {
@@ -220,6 +286,18 @@ public class ManagerScript : MonoBehaviour
                 if (paused == false)
                 {
                     Time.timeScale = 1;
+                    if (start_music == true)
+                    {
+                        if (song_number == 0)
+                        {
+                            music[0].UnPause();
+                        }
+                        if (song_number == 1)
+                        {
+                            music[1].UnPause();
+                        }
+
+                    }
                     minutes = Mathf.FloorToInt(time_counter_script_inside / 60F);
                     seconds = Mathf.FloorToInt(time_counter_script_inside - minutes * 60);
                     string niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
@@ -291,6 +369,14 @@ public class ManagerScript : MonoBehaviour
                     if(go_to_retry==true)
 					{
                         timer_to_restart_level += Time.deltaTime;
+                        if (start_music == true)
+                        {
+                            music[song_number].volume -= .05f * Time.deltaTime;
+                            if (music[song_number].volume < 0)
+                            {
+                                music[song_number].Stop();
+                            }
+                        }
                         if (timer_to_restart_level > 3f)
                         {
                             for (int i = 0; i < 1; i++)
@@ -305,8 +391,10 @@ public class ManagerScript : MonoBehaviour
                             }
                         }
                     }
+
                     if (to_main_menu == true)
                     {
+                        music[song_number].Stop();
                         gray_quad_for_pause.gameObject.GetComponent<MeshRenderer>().enabled = true;
                         foreach (GameObject child in enemy)
                         {
@@ -350,6 +438,14 @@ public class ManagerScript : MonoBehaviour
         else
 		{
             timer_to_restart_level += Time.deltaTime;
+            if (start_music == true)
+            {
+                music[song_number].volume-=.05f*Time.deltaTime;
+                if(music[song_number].volume<0)
+				{
+                    music[song_number].Stop();
+				}
+            }
             if (timer_to_restart_level > 3f)
             {
                 for (int i = 0; i < 1; i++)
@@ -384,5 +480,21 @@ public class ManagerScript : MonoBehaviour
     public bool Return_if_paused()
 	{
         return paused;
+	}
+    public void Set_volume_down(bool set_to_zero)
+	{
+        music_to_zero = set_to_zero;
+        if (music_to_zero == true)
+        {
+            music[song_number].volume -= 0.05f * Time.deltaTime;
+        }
+		else
+		{
+            music[song_number].volume -= 0.05f * Time.deltaTime;
+            if(music[song_number].volume<0.03f)
+			{
+                music[song_number].volume=0.03f;
+			}
+        }
 	}
 }

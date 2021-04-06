@@ -18,6 +18,7 @@ public class FinalSceneController : MonoBehaviour
     public GameObject first_text_outland_guy;
     public GameObject second_text;
     public GameObject second_text_outland_guy;
+    public AudioSource music;
 	 void Awake()
 	{
         fader.SetActive(true);
@@ -39,7 +40,12 @@ public class FinalSceneController : MonoBehaviour
         if(trnsfrm.position.x<=32f)
 		{
             first_text.gameObject.GetComponent<Animator>().enabled = true;
-            first_text.gameObject.GetComponent<Animator>().Play("finalScene_firstText");  
+            first_text.gameObject.GetComponent<Animator>().Play("finalScene_firstText");
+            music.volume += .025f * Time.deltaTime;
+            if(music.volume>.1f)
+			{
+                music.volume = 0.1f;
+			}
 		} 
         if (trnsfrm.position.x>=37f)
 		{
@@ -127,8 +133,10 @@ public class FinalSceneController : MonoBehaviour
         second_text_outland_guy.gameObject.GetComponent<Animator>().Play("secondTextOutlandGuyOut");
 	}
     IEnumerator To_the_main_menu()
-	{
+    {
+        music.volume -= .025f * Time.deltaTime;
         yield return new WaitForSeconds(10);
+       
         SceneManager.LoadScene("MainMenu");
 	}
 }
