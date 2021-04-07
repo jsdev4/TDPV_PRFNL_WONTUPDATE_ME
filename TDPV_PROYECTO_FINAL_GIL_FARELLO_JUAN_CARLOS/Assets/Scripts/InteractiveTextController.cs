@@ -7,6 +7,7 @@ public class InteractiveTextController : MonoBehaviour
     private Text text;
     private float timer;
     private bool fade_the_text;
+    public GameObject manager;
     void Start()
     {
         text = GetComponent<Text>();
@@ -17,18 +18,26 @@ public class InteractiveTextController : MonoBehaviour
     
     void Update()
     {
-        if (timer < 3f)
+        if (manager.gameObject.GetComponent<ManagerScript>().Return_if_paused() == false)
         {
-            timer += Time.deltaTime;
+            text.enabled = true;
+            if (timer < 3f)
+            {
+                timer += Time.deltaTime;
+            }
+            if (timer > 3f)
+            {
+                timer = 0;
+                fade_the_text = true;
+            }
+            if (fade_the_text == true)
+            {
+                text.CrossFadeAlpha(0f, .5f, false);
+            }
         }
-        if(timer>3f)
+		else
 		{
-            timer = 0;
-            fade_the_text = true;
-		}
-        if(fade_the_text==true)
-		{
-            text.CrossFadeAlpha(0f, .5f, false);
+            text.enabled = false;
 		}
     }
 }

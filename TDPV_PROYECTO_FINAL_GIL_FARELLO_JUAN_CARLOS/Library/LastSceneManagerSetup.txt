@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Level_05_The_Outlands.unity
+- path: Assets/Scenes/MainMenu.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

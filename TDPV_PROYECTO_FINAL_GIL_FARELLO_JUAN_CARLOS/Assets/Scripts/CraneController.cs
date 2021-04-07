@@ -16,6 +16,8 @@ public class CraneController : MonoBehaviour
     private Vector3 translation_to_left;
     private bool delay_the_boolean;
     public GameObject[] wheels;
+    public GameObject manager;
+    private AudioSource diesel_sound;
     void Start()
     {
         splatted_something = false;
@@ -25,50 +27,60 @@ public class CraneController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
          translation = new Vector3(1, 0, 0);
         translation_to_left = new Vector3(-1, 0, 0);
+        diesel_sound = GetComponent<AudioSource>();
+        diesel_sound.Play();
     }
     void Update()
     {
-        if (splatted_something == false)
+        if (manager.gameObject.GetComponent<ManagerScript>().Return_if_paused() == false)
         {
-            if (delay_the_boolean == true)
+            diesel_sound.enabled = true;
+            if (splatted_something == false)
             {
-                current_speed = 0;
-                timer += Time.deltaTime;
-                if (timer >= delay_to_restart)
+                if (delay_the_boolean == true)
                 {
-                    delay_the_boolean = false;
-                    timer = 0;
-                    //   Debug.Log("time is " + timer);
+                    current_speed = 0;
+                    timer += Time.deltaTime;
+                    if (timer >= delay_to_restart)
+                    {
+                        delay_the_boolean = false;
+                        timer = 0;
+                        //   Debug.Log("time is " + timer);
+                    }
+                }
+                if (delay_the_boolean == false)
+                {
+                    if (direction == true)
+                    {
+                        //  Debug.Log(current_speed);
+                        current_speed += acceleration * Time.deltaTime;
+                        rb.MovePosition(transform.position + translation * current_speed);
+                        for (int i = 0; i < 4; i++)
+                        {
+                            wheels[i].gameObject.GetComponent<Transform>().Rotate(0, 0, current_speed * wheel_rotation);
+                        }
+                    }
+                    else if (direction == false)
+                    {
+                        //     Debug.Log(current_speed);
+                        current_speed += acceleration * Time.deltaTime;
+                        rb.MovePosition(transform.position + translation_to_left * current_speed);
+                        for (int i = 0; i < 4; i++)
+                        {
+                            wheels[i].gameObject.GetComponent<Transform>().Rotate(0, 0, -current_speed * wheel_rotation);
+                        }
+                    }
                 }
             }
-            if (delay_the_boolean == false)
+            else
             {
-                if (direction == true)
-                {
-                    //  Debug.Log(current_speed);
-                    current_speed += acceleration * Time.deltaTime;
-                    rb.MovePosition(transform.position + translation * current_speed);
-                    for (int i = 0; i < 4; i++)
-                    {
-                        wheels[i].gameObject.GetComponent<Transform>().Rotate(0, 0, current_speed * wheel_rotation);
-                    }
-                }
-                else if (direction == false)
-                {
-                    //     Debug.Log(current_speed);
-                    current_speed += acceleration * Time.deltaTime;
-                    rb.MovePosition(transform.position + translation_to_left * current_speed);
-                    for (int i = 0; i < 4; i++)
-                    {
-                        wheels[i].gameObject.GetComponent<Transform>().Rotate(0, 0, -current_speed * wheel_rotation);
-                    }
-                }
+                delay_the_boolean = true;
+                current_speed = 0;
             }
         }
-		else
+        else
 		{
-            delay_the_boolean = true;
-            current_speed = 0;
+            diesel_sound.enabled = false;
 		}
     }
 	private void OnTriggerEnter(Collider other)

@@ -8,6 +8,7 @@ public class WaitingIconBall : MonoBehaviour
     private Transform trnsfrm;
     public float rotation_speed;
     private bool collected;
+    public AudioSource collected_sound;
     void Start()
     {
         trnsfrm = GetComponentInChildren<Transform>();
@@ -33,6 +34,7 @@ public class WaitingIconBall : MonoBehaviour
 		if(other.CompareTag("Player"))
 		{
             collected = true;
+            collected_sound.Play();
 		}
 	}
 }

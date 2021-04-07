@@ -14,12 +14,14 @@ public class ElevatorFinal : MonoBehaviour
     private Rigidbody rb;
     private Transform trnsfrm;
     private bool has_stopped;
+    private AudioSource elevator_sound;
     void Start()
     {
         on_board = false;
         has_stopped = false;
         trnsfrm = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
+        elevator_sound = GetComponent<AudioSource>();
     }
     void FixedUpdate()
     {
@@ -36,8 +38,9 @@ public class ElevatorFinal : MonoBehaviour
 
             }
         }
-        if (transform.position.y == trigger01.transform.position.y)
+        if (transform.position.y >= trigger01.transform.position.y)
         {
+            elevator_sound.Stop();
             rb.MovePosition(trnsfrm.position + trnsfrm.up * 0 * Time.fixedDeltaTime);
             is_up = true;
         }
@@ -63,6 +66,7 @@ public class ElevatorFinal : MonoBehaviour
     }
     public void Set_if_is_up(bool up)
     {
+        elevator_sound.Play();
         is_up = up;
     }
     public bool Return_if_on_board()

@@ -9,9 +9,11 @@ public class BuildingEntrance : MonoBehaviour
     public GameObject fader;
     private bool player_here;
     public Text text;
+    private AudioSource interacting_sound;
     void Start()
     {
         player_here = false;
+        interacting_sound = GetComponent<AudioSource>();
     }
 
  
@@ -22,6 +24,7 @@ public class BuildingEntrance : MonoBehaviour
 		{
             if (Input.GetKeyUp(KeyCode.F))
             {
+                interacting_sound.Play();
                 fader.SetActive(true);
                 player.gameObject.GetComponent<CharController>().Set_if_is_interacting(true);
                 ManagerKeeper.Is_ed102_entering_some_place(true);
@@ -44,7 +47,10 @@ public class BuildingEntrance : MonoBehaviour
 		if(other.CompareTag("Player"))
 		{
             player_here = true;
-            text.gameObject.GetComponent<InteractiveTextController02>().Set_if_display(true);
+            if (text != null)
+            {
+                text.gameObject.GetComponent<InteractiveTextController02>().Set_if_display(true);
+            }
 		}
 	}
     private void OnTriggerExit(Collider other)
@@ -52,7 +58,10 @@ public class BuildingEntrance : MonoBehaviour
         if(other.CompareTag("Player"))
 		{
             player_here = false;
-            text.gameObject.GetComponent<InteractiveTextController02>().Set_if_display(false);
+            if (text != null)
+            {
+                text.gameObject.GetComponent<InteractiveTextController02>().Set_if_display(false);
+            }
         }
 	}
 }

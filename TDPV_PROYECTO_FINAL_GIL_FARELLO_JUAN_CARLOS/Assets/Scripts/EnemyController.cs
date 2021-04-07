@@ -40,7 +40,9 @@ public class EnemyController : MonoBehaviour
     private float delay;
     public float max_time_to_reset;
     private bool check_node;
-   
+    private bool emit_particles;
+    public ParticleSystem particles;
+    public AudioSource[] enemy_sounds;
     void Start()
     {
         enemy_alive =true;
@@ -56,6 +58,15 @@ public class EnemyController : MonoBehaviour
         Timer = 0;
         startPosition =light_gun.transform.position;
         CurrentPositionHolder = PathNode[CurrentNode].transform.position;
+
+        if (particles != null)
+        {
+            var em = particles.emission;
+            em.enabled = false;
+
+            emit_particles = false;
+        }
+       
     }
     void Update()
     {
@@ -83,6 +94,7 @@ public class EnemyController : MonoBehaviour
                         {
                             quad.gameObject.GetComponent<Animator>().Play("EnemyAttacking");
                             Light_slider(true);
+                            
                             Increase_number_of_hits();
                         }
                         else if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == false)
@@ -124,7 +136,10 @@ public class EnemyController : MonoBehaviour
                         }
                         if (random_to_patrol == 1)
                         {
-                            quad.gameObject.GetComponent<Animator>().Play("EnemyRunning");
+                            if (quad.gameObject.GetComponent<Animator>().enabled == true)//newly added condition
+                            {
+                                quad.gameObject.GetComponent<Animator>().Play("EnemyRunning");
+                            }
                             if (direction == true)
                             {
                                 rb.MovePosition(transform.position + translation * speed * Time.deltaTime);
@@ -140,7 +155,10 @@ public class EnemyController : MonoBehaviour
                         }
                         else
                         {
-                            quad.gameObject.GetComponent<Animator>().Play("EnemyIdle");
+                            if (quad.gameObject.GetComponent<Animator>().enabled == true)//added condition
+                            {
+                                quad.gameObject.GetComponent<Animator>().Play("EnemyIdle");
+                            }
                         }
                     }
 
@@ -152,6 +170,11 @@ public class EnemyController : MonoBehaviour
                             if (player.gameObject.GetComponent<CharController>().Return_number_of_cells() == 0)
                             {
                                 Set_new_status();
+                                Set_if_can_attack(false);
+                            }
+							else
+							{
+                                Set_if_can_attack(true);
                             }
                         }
                     }
@@ -163,6 +186,11 @@ public class EnemyController : MonoBehaviour
                             if (player.gameObject.GetComponent<CharController>().Return_number_of_cells() == 0)
                             {
                                 Set_new_status();
+                                Set_if_can_attack(false);
+                            }
+							else
+							{
+                                Set_if_can_attack(true);
                             }
                         }
                     }
@@ -201,10 +229,15 @@ public class EnemyController : MonoBehaviour
             {
                 delay_for_dead += Time.deltaTime;
                 quad.gameObject.GetComponent<Animator>().Play("EnemyDying");
+                
+
+
+
+
                 if (delay_for_dead >= 1.5f)
                 {
                     Destroy(gameObject);
-                    Debug.Log("Enemy is dead");
+                    //Debug.Log("Enemy is dead");
                     delay_for_dead = 0;
                 }
             }
@@ -247,6 +280,7 @@ public class EnemyController : MonoBehaviour
     }
     private void Light_slider(bool chck)
     {
+        
         Timer += Time.deltaTime * MoveSpeed;
         check_node = chck;
         if (light_gun.transform.localPosition != CurrentPositionHolder)
@@ -277,10 +311,22 @@ public class EnemyController : MonoBehaviour
         if (check_node == true)
         {
             light_gun.gameObject.GetComponent<Light>().enabled = true;
+            if (enemy_sounds[1] != null)
+            {
+
+                enemy_sounds[1].enabled = true;
+                enemy_sounds[1].volume = 1;
+            }
         }
         else
         {
             light_gun.gameObject.GetComponent<Light>().enabled = false;
+            if (enemy_sounds[1] != null)
+            {
+              //  enemy_sounds[1].volume = 0;
+                enemy_sounds[1].enabled = false;
+               
+            }
         }
     }
     public void Set_if_in_dead_zone_or_dead(bool alv)
@@ -292,13 +338,24 @@ public class EnemyController : MonoBehaviour
         if(other.CompareTag("TriggerForSplat"))
         {
             enemy_alive = false;
+            if (particles != null)
+            {
+                var em01 = particles.emission;
+                em01.enabled = true;
+                particles.Play();
+                enemy_sounds[0].Play();
+            }
+            if (enemy_sounds[2] != null)
+            {
+                enemy_sounds[2].Play();
+            }
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if(other.CompareTag("TriggerForSplat"))
         {
-            enemy_alive = true;
+            //enemy_alive = true;
         }
     }
 	private void OnBecameVisible()

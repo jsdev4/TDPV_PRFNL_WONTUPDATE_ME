@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Elevator : MonoBehaviour
 {
-
+    
     private bool on_board;
     public float speed_up;
     public float speed_down;
@@ -13,13 +13,20 @@ public class Elevator : MonoBehaviour
     public GameObject trigger01;
     private bool has_stopped;
     public bool is_final_elevator;
+    public bool is_one_way_elevator;
     private Rigidbody rb;
     private Transform trnsfrm;
+    private AudioSource elevator_sound;
     void Start()
     {
        on_board = false;
         trnsfrm = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
+        elevator_sound = GetComponent<AudioSource>();
+        if(is_one_way_elevator==true)
+		{
+            Set_if_is_up(true);
+		}
     }
 
     void FixedUpdate()
@@ -28,37 +35,48 @@ public class Elevator : MonoBehaviour
         Vector3 sizeVec01 = trigger01.GetComponent<Collider>().bounds.size;
         if (is_up == true)
         {
-            if (trnsfrm.position.y <= trigger01.transform.position.y+sizeVec01.y/2)
+
+            if (trnsfrm.position.y <= trigger01.transform.position.y + sizeVec01.y / 2)
             {
                 rb.MovePosition(trnsfrm.position + trnsfrm.up * speed_up * Time.fixedDeltaTime);
+
             }
-        }
-        if(transform.position.y==trigger01.transform.position.y+sizeVec01.y/2)
-        {
-            rb.MovePosition(trnsfrm.position + trnsfrm.up * 0 * Time.fixedDeltaTime);
-            is_up = true;
+
+            if (transform.position.y >= trigger01.transform.position.y + sizeVec01.y / 2)
+            {
+                elevator_sound.Stop();
+                rb.MovePosition(trnsfrm.position + trnsfrm.up * 0 * Time.fixedDeltaTime);
+                is_up = true;
+            }
         }
         if (is_up == false)
-        { 
+        {
+           
             if (trnsfrm.position.y > trigger.transform.position.y+sizeVec.y/2&&has_stopped == false)
             {
+               
                 rb.MovePosition(trnsfrm.position - trnsfrm.up * speed_down * Time.fixedDeltaTime);
             }
-            if (transform.position.y  == trigger.transform.position.y+sizeVec.y/4 )
+            if (transform.position.y  <= trigger.transform.position.y+sizeVec.y/2 )
             {
+                elevator_sound.Stop();
                 rb.MovePosition(trnsfrm.position - trnsfrm.up * 0 * Time.fixedDeltaTime);
                 is_up = false;
             }
             if (has_stopped == true )
             {
+                
                 rb.MovePosition(trnsfrm.position - trnsfrm.up * speed_down * Time.fixedDeltaTime);
             }  
         } 
+       
     }
     public void Set_if_is_up(bool up)
     {
+        elevator_sound.Play();
         is_up = up;
     }
+    
     public bool Return_if_on_board()
     {
         return on_board;
@@ -69,6 +87,7 @@ public class Elevator : MonoBehaviour
     }
     public void Set_if_stopped(bool stp)
     {
+        elevator_sound.Stop();
         has_stopped = stp;
     }
     private void OnCollisionEnter(Collision collision)
