@@ -42,6 +42,7 @@ public class EnemyController : MonoBehaviour
     private bool check_node;
     private bool emit_particles;
     public ParticleSystem particles;
+    public AudioSource[] enemy_sounds;
     void Start()
     {
         enemy_alive =true;
@@ -64,11 +65,10 @@ public class EnemyController : MonoBehaviour
             em.enabled = false;
 
             emit_particles = false;
-        }
+        }  
     }
-    void Update()
-    {
-        
+    void FixedUpdate()
+    {   
         if (enable_on_screen == true)
         {
             if (enemy_alive == true)
@@ -85,13 +85,14 @@ public class EnemyController : MonoBehaviour
                             Vector3 newPos = transform.position - dirToTarget;
                             rotation_sprite = new Vector3(1, 1, 1);
                             transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime, 10);
-                            rb.MovePosition(Vector3.Lerp(transform.position, newPos, speed_when_spots_player * Time.deltaTime));
+                            rb.MovePosition(Vector3.Lerp(transform.position, newPos, speed_when_spots_player * Time.fixedDeltaTime));
                             Light_slider(false);
                         }
                         if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == true)
                         {
                             quad.gameObject.GetComponent<Animator>().Play("EnemyAttacking");
                             Light_slider(true);
+                            
                             Increase_number_of_hits();
                         }
                         else if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == false)
@@ -109,7 +110,7 @@ public class EnemyController : MonoBehaviour
                             Vector3 newPos = transform.position - dirToTarget;
                             rotation_sprite = new Vector3(-1, 1, 1);
                             transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime, 10);
-                            rb.MovePosition(Vector3.Lerp(transform.position, newPos, speed_when_spots_player * Time.deltaTime));
+                            rb.MovePosition(Vector3.Lerp(transform.position, newPos, speed_when_spots_player * Time.fixedDeltaTime));
                             Light_slider(false);
                         }
                         if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == true)
@@ -126,33 +127,38 @@ public class EnemyController : MonoBehaviour
                     }
                     else
                     {
-                        delay_to_random_patrol += Time.deltaTime;
+                        delay_to_random_patrol += Time.fixedDeltaTime;
                         if (delay_to_random_patrol >= 3)
                         {
                             Generate_random_number();
                         }
                         if (random_to_patrol == 1)
                         {
-                            quad.gameObject.GetComponent<Animator>().Play("EnemyRunning");
+                            if (quad.gameObject.GetComponent<Animator>().enabled == true)//newly added condition
+                            {
+                                quad.gameObject.GetComponent<Animator>().Play("EnemyRunning");
+                            }
                             if (direction == true)
                             {
-                                rb.MovePosition(transform.position + translation * speed * Time.deltaTime);
+                                rb.MovePosition(transform.position + translation * speed * Time.fixedDeltaTime);
                                 rotation_sprite = new Vector3(1, 1, 1);
                                 transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime, 10);
                             }
                             else
                             {
-                                rb.MovePosition(transform.position + translation_to_left * speed * Time.deltaTime);
+                                rb.MovePosition(transform.position + translation_to_left * speed * Time.fixedDeltaTime);
                                 rotation_sprite = new Vector3(-1, 1, 1);
                                 transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime, 10);
                             }
                         }
                         else
                         {
-                            quad.gameObject.GetComponent<Animator>().Play("EnemyIdle");
+                            if (quad.gameObject.GetComponent<Animator>().enabled == true)//added condition
+                            {
+                                quad.gameObject.GetComponent<Animator>().Play("EnemyIdle");
+                            }
                         }
                     }
-
                     if (enemy_difficulty == 0)
                     {
                         if (numbers_of_hitted == 100 || numbers_of_hitted == 200 || numbers_of_hitted == 300 || numbers_of_hitted == 400 || numbers_of_hitted == 500)
@@ -161,6 +167,11 @@ public class EnemyController : MonoBehaviour
                             if (player.gameObject.GetComponent<CharController>().Return_number_of_cells() == 0)
                             {
                                 Set_new_status();
+                                Set_if_can_attack(false);
+                            }
+							else
+							{
+                                Set_if_can_attack(true);
                             }
                         }
                     }
@@ -172,6 +183,11 @@ public class EnemyController : MonoBehaviour
                             if (player.gameObject.GetComponent<CharController>().Return_number_of_cells() == 0)
                             {
                                 Set_new_status();
+                                Set_if_can_attack(false);
+                            }
+							else
+							{
+                                Set_if_can_attack(true);
                             }
                         }
                     }
@@ -208,17 +224,12 @@ public class EnemyController : MonoBehaviour
             }
             if (enemy_alive == false)
             {
-                delay_for_dead += Time.deltaTime;
+                delay_for_dead += Time.fixedDeltaTime;
                 quad.gameObject.GetComponent<Animator>().Play("EnemyDying");
-  
-                   
-
-               
-                
                 if (delay_for_dead >= 1.5f)
                 {
                     Destroy(gameObject);
-                    Debug.Log("Enemy is dead");
+                    //Debug.Log("Enemy is dead");
                     delay_for_dead = 0;
                 }
             }
@@ -261,7 +272,8 @@ public class EnemyController : MonoBehaviour
     }
     private void Light_slider(bool chck)
     {
-        Timer += Time.deltaTime * MoveSpeed;
+        
+        Timer += Time.fixedDeltaTime * MoveSpeed;
         check_node = chck;
         if (light_gun.transform.localPosition != CurrentPositionHolder)
         {
@@ -280,7 +292,7 @@ public class EnemyController : MonoBehaviour
             }
             if (CurrentNode == PathNode.Length - 1)
             {
-                delay += Time.deltaTime;
+                delay += Time.fixedDeltaTime;
                 if (delay >= max_time_to_reset)
                 {
                     CurrentNode = -1;
@@ -291,10 +303,20 @@ public class EnemyController : MonoBehaviour
         if (check_node == true)
         {
             light_gun.gameObject.GetComponent<Light>().enabled = true;
+            if (enemy_sounds[1] != null)
+            {
+                enemy_sounds[1].enabled = true;
+                enemy_sounds[1].volume = 1;
+            }
         }
         else
         {
             light_gun.gameObject.GetComponent<Light>().enabled = false;
+            if (enemy_sounds[1] != null)
+            {
+              //  enemy_sounds[1].volume = 0;
+                enemy_sounds[1].enabled = false; 
+            }
         }
     }
     public void Set_if_in_dead_zone_or_dead(bool alv)
@@ -311,8 +333,12 @@ public class EnemyController : MonoBehaviour
                 var em01 = particles.emission;
                 em01.enabled = true;
                 particles.Play();
+                enemy_sounds[0].Play();
             }
-
+            if (enemy_sounds[2] != null)
+            {
+                enemy_sounds[2].Play();
+            }
         }
     }
     private void OnTriggerExit(Collider other)

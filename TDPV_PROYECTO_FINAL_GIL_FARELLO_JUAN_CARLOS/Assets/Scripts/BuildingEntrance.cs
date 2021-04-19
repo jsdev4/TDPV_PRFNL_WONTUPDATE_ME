@@ -9,19 +9,22 @@ public class BuildingEntrance : MonoBehaviour
     public GameObject fader;
     private bool player_here;
     public Text text;
+    private AudioSource interacting_sound;
     void Start()
     {
         player_here = false;
+        interacting_sound = GetComponent<AudioSource>();
     }
 
  
-    void Update()
+    void FixedUpdate()
     {
         //poner el fader antes de cambiar a otro escenario modificar el objecto publico player por fader
         if(player_here == true)
 		{
             if (Input.GetKeyUp(KeyCode.F))
             {
+                interacting_sound.Play();
                 fader.SetActive(true);
                 player.gameObject.GetComponent<CharController>().Set_if_is_interacting(true);
                 ManagerKeeper.Is_ed102_entering_some_place(true);

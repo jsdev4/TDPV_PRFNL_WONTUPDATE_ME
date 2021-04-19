@@ -14,13 +14,19 @@ public class HookWithTheBox : MonoBehaviour
     public GameObject hook;
     public GameObject player;
     public GameObject[] PathNode;
+    public GameObject manager;
+    private AudioSource hook_rail_sound;
     public int CurrentNode;
     void Start()
     {
-        
+        hook_rail_sound = GetComponent<AudioSource>();
+        hook_rail_sound.Play();
     }
     void Update()
     {
+        if (manager.gameObject.GetComponent<ManagerScript>().Return_if_paused() == false)
+        {
+            hook_rail_sound.enabled = true;
             Timer += Time.deltaTime * MoveSpeed;
             if (hook.gameObject.GetComponent<Transform>().position != CurrentPositionHolder)
             {
@@ -43,6 +49,11 @@ public class HookWithTheBox : MonoBehaviour
                     }
                 }
             }
+        }
+        else
+		{
+            hook_rail_sound.enabled = false;
+		}
     }
     void CheckNode()
     {

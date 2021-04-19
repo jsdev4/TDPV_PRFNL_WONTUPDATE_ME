@@ -16,7 +16,7 @@ public class TriggerForSplat : MonoBehaviour
         stop_elevator = false;
         splatted = false;
     }
-    void Update()
+    void FixedUpdate()
     {
         if(splatted==true&&elevator.gameObject.GetComponent<Elevator>().Return_if_is_up()==false)
         {

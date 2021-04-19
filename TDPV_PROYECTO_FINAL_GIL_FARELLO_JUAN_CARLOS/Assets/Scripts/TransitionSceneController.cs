@@ -12,16 +12,25 @@ public class TransitionSceneController : MonoBehaviour
     public bool is_game_over_scene_final;
     private bool to_main_menu;
     public bool is_game_over_scene;
+    public AudioSource[] interface_sound;
+    public AudioSource music;
+    private bool volume_down;
     void Start()
     {
         timer = 0;
         key_was_pressed = false;
         to_main_menu = false;
+        volume_down = false;
     }
     void Update()
     {
         if (is_game_over_scene == false)////code for transition scene
         {
+            music.volume += 0.025f * Time.deltaTime;
+            if(music.volume>0.1f)
+			{
+                music.volume = 0.1f;
+			}
             if (screen_text[1].gameObject.GetComponent<TextEventsController>().Return_if_start_timer() == true)
             {
                 timer += Time.deltaTime;
@@ -29,6 +38,8 @@ public class TransitionSceneController : MonoBehaviour
                 {
                     if (Input.GetKeyUp(KeyCode.Return))
                     {
+                        volume_down = true;
+                        interface_sound[0].Play();
                         key_was_pressed = true;
                         screen_text[0].gameObject.GetComponent<Animator>().Play("TextControllerOut");
                         screen_text[1].gameObject.GetComponent<Animator>().Play("PressTextOut");
@@ -45,8 +56,11 @@ public class TransitionSceneController : MonoBehaviour
                 {
                     if (Input.GetKeyUp(KeyCode.Escape))
                     {
+                        volume_down = true;
+                        interface_sound[1].Play();
                         screen_text[0].gameObject.GetComponent<Animator>().Play("GameOverFadeOut");
                         screen_text[1].gameObject.GetComponent<Animator>().Play("ToMainMenuOutInBlue");
+                        ManagerKeeper.Reset_number_of_tries_availables();
                         to_main_menu = true;
                     }
                 }
@@ -54,6 +68,14 @@ public class TransitionSceneController : MonoBehaviour
         }
         else if(is_game_over_scene==true&&is_game_over_scene_final==false)//code fot game over with retry
         {
+            if (volume_down == false)
+            {
+                music.volume += 0.05f * Time.deltaTime;
+                if (music.volume > 0.1f)
+                {
+                    music.volume = 0.1f;
+                }
+            }
             Debug.Log("tries are " + ManagerKeeper.Get_number_of_tries_availables());
             Debug.Log("number of reached level is " + ManagerKeeper.Get_number_of_reached_level());
             if (screen_text[1].gameObject.GetComponent<TextEventsController>().Return_if_start_timer() == true)
@@ -63,6 +85,8 @@ public class TransitionSceneController : MonoBehaviour
                 {
                     if (Input.GetKeyUp(KeyCode.Return))
                     {
+                        volume_down = true;
+                        interface_sound[0].Play();
                         to_main_menu = false;
                         screen_text[0].gameObject.GetComponent<Animator>().Play("GameOverFadeOut");
                         screen_text[1].gameObject.GetComponent<Animator>().Play("PressTextOutInBlue");
@@ -71,17 +95,25 @@ public class TransitionSceneController : MonoBehaviour
                     }
                     if (Input.GetKeyUp(KeyCode.Escape))
                     {
+                        volume_down = true;
+                        interface_sound[1].Play();
                         to_main_menu = true;
                         screen_text[0].gameObject.GetComponent<Animator>().Play("GameOverFadeOut");
                         screen_text[1].gameObject.GetComponent<Animator>().Play("PressTextFadeOut");
                         screen_text[2].gameObject.GetComponent<Animator>().Play("ToMainMenuOutInBlue");
+                        ManagerKeeper.Reset_number_of_tries_availables();
                         ManagerKeeper.Reset_number_of_level();
                     }
                 }
             }
         }
+        if (volume_down == true)
+        {
+            music.volume -= 0.05f * Time.deltaTime;
+        }
         if (screen_text[1].gameObject.GetComponent<TextEventsController>().Return_if_to_next_scene() == true && to_main_menu == false)
         {
+           
             if (ManagerKeeper.Get_number_of_reached_level() == 0)
             {
                 SceneManager.LoadScene("Level_01_Depo");
@@ -109,6 +141,7 @@ public class TransitionSceneController : MonoBehaviour
         }
         if (screen_text[1].gameObject.GetComponent<TextEventsController>().Return_if_to_next_scene() == true && to_main_menu == true)
 		{
+            ManagerKeeper.Reset_number_of_tries_availables();
             SceneManager.LoadScene("MainMenu");
 		}
     }

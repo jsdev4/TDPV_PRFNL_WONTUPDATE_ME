@@ -30,7 +30,7 @@ public class ScriptToLevelTransition : MonoBehaviour
             if (fader == true)
             {
                 timer += Time.deltaTime;
-                if (timer >= 1.5f)
+                if (timer >= 1f)
                 {
                     SceneManager.LoadScene("TransitionScene");//poner aca la escena de transicion con el mensaje de complete level
                 }

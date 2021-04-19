@@ -26,14 +26,14 @@ public class FalseGround : MonoBehaviour
         transform0 = GetComponent<Transform>();
         rb.isKinematic = true;
         respawnPoint = transform0.position;
-        displacement = new Vector3(0, 0, speed_on_z_axis * Time.deltaTime);
+        displacement = new Vector3(0, 0, speed_on_z_axis * Time.fixedDeltaTime);
         original_rotation = transform0.rotation;
     }
-    void Update()
+    void FixedUpdate()
     {
         if(on_board==true)
         {
-            delay += Time.deltaTime;
+            delay += Time.fixedDeltaTime;
             if (delay > time_for_falling)
             {
                     rb.isKinematic =false;
@@ -47,7 +47,7 @@ public class FalseGround : MonoBehaviour
         }
         if(has_touched_the_trigger==true)
         {
-            delay_for_respawn += Time.deltaTime;
+            delay_for_respawn += Time.fixedDeltaTime;
             if (delay_for_respawn > 2)
             {
                 Reset_Object();

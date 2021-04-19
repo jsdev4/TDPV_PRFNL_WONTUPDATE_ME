@@ -21,9 +21,9 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 2100000, guid: 719f4b59ba7e9a84e8f3ec2d4bf10438, type: 2}
-    - time: 0.25
+    - time: 0.18333334
       value: {fileID: 2100000, guid: 1ba1cefee5036a64eb92ee4ec043f1e2, type: 2}
-    - time: 0.41666666
+    - time: 0.38333333
       value: {fileID: 2100000, guid: f62125fe11181f34abc39164b19eef40, type: 2}
     - time: 0.6666667
       value: {fileID: 2100000, guid: ac6684f4142a8444680d4a32887988a6, type: 2}
@@ -33,7 +33,7 @@ AnimationClip:
     path: 
     classID: 23
     script: {fileID: 0}
-  m_SampleRate: 30
+  m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -77,4 +77,39 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0
+    functionName: Set_first_step
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.18333334
+    functionName: Set_second_step
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.38333333
+    functionName: Set_second_step
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.6666667
+    functionName: Set_first_step
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1
+    functionName: Set_second_step
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

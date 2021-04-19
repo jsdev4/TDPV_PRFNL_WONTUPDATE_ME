@@ -103,5 +103,9 @@ public static class ManagerKeeper
 	{
 		number_of_level = lvl;
 	}
+	public static void Reset_number_of_tries_availables()
+	{
+		number_of_tries = 2;
+	}
 }
 

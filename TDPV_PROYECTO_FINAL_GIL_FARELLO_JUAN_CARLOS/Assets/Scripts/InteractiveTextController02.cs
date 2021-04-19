@@ -15,7 +15,7 @@ public class InteractiveTextController02 : MonoBehaviour
     }
 
     
-    void Update()
+    void LateUpdate()
     {
         if(display_text==true&& manager.gameObject.GetComponent<ManagerScript>().Return_if_paused() == false)
 		{

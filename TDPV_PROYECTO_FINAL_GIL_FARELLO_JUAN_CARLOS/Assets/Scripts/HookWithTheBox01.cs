@@ -14,34 +14,45 @@ public class HookWithTheBox01 : MonoBehaviour
     public GameObject player;
     public GameObject[] PathNode;
     public int CurrentNode;
+    private AudioSource hook_sound;
+    public GameObject manager;
 void Start()
 {
-
+        hook_sound = GetComponent<AudioSource>();
+        hook_sound.Play();
 }
 void Update()
 {
-    Timer += Time.deltaTime * MoveSpeed;
-    if (hook.gameObject.GetComponent<Transform>().position != CurrentPositionHolder)
-    {
-        hook.gameObject.GetComponent<Transform>().position = Vector3.Lerp(startPosition, CurrentPositionHolder, 1 * Timer);
-    }
-    else
-    {
-        if (CurrentNode < PathNode.Length - 1)
+        if (manager.gameObject.GetComponent<ManagerScript>().Return_if_paused() == false)
         {
-            CurrentNode++;
-            CheckNode();
-        }
-        if (CurrentNode == PathNode.Length - 1)
-        {
-            delay += Time.deltaTime;
-            if (delay >= max_time_to_reset)
+            hook_sound.enabled = true;
+            Timer += Time.deltaTime * MoveSpeed;
+            if (hook.gameObject.GetComponent<Transform>().position != CurrentPositionHolder)
             {
-                CurrentNode = -1;
-                delay = 0;
+                hook.gameObject.GetComponent<Transform>().position = Vector3.Lerp(startPosition, CurrentPositionHolder, 1 * Timer);
+            }
+            else
+            {
+                if (CurrentNode < PathNode.Length - 1)
+                {
+                    CurrentNode++;
+                    CheckNode();
+                }
+                if (CurrentNode == PathNode.Length - 1)
+                {
+                    delay += Time.deltaTime;
+                    if (delay >= max_time_to_reset)
+                    {
+                        CurrentNode = -1;
+                        delay = 0;
+                    }
+                }
             }
         }
-    }
+        else
+		{
+            hook_sound.enabled = false;
+		}
 }
 void CheckNode()
 {

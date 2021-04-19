@@ -10,6 +10,8 @@ public class SpecialIconsController : MonoBehaviour
     public float speed;
     public GameObject manager;
     private Transform trnsfrm;
+    //public GameObject player;
+    public AudioSource collected_sound;
     void Start()
     {
         trnsfrm = GetComponent<Transform>();
@@ -19,7 +21,7 @@ public class SpecialIconsController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (is_up == false)
         {
@@ -49,6 +51,7 @@ public class SpecialIconsController : MonoBehaviour
 		if(other.CompareTag("Player"))
 		{
             collected = true;
+            collected_sound.Play(); 
 		}
 	}
 }

@@ -20,21 +20,16 @@ public class ObjectDisplacementController : MonoBehaviour
         max_displacement = false;
         acceleration_aux = acceleration;
     }
-
     void Update()
     {
         if(max_displacement==false)
 		{
-           // acceleration*Time.deltaTime;
-           
             if(trnsfrm.position.y>Object_for_max_displacement.gameObject.GetComponent<Transform>().position.y+clearance_to_rebound)
 			{
 
                 float aux = initial_speed;
                 aux+= acceleration * Time.deltaTime;
                 mov_speed = aux;
-        
-
                 trnsfrm.Translate(Vector3.down * mov_speed);
             }
 			if(trnsfrm.position.y < Object_for_max_displacement.gameObject.GetComponent<Transform>().position.y+ clearance_to_rebound)
@@ -43,8 +38,6 @@ public class ObjectDisplacementController : MonoBehaviour
                 float aux = mov_speed;
                     aux-= acceleration * Time.deltaTime;
                     mov_speed = aux;
- 
-
                 trnsfrm.Translate(Vector3.down * mov_speed);
             }
 		}

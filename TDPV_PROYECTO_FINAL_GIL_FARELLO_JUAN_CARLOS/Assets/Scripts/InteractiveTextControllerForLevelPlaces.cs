@@ -25,7 +25,7 @@ public class InteractiveTextControllerForLevelPlaces : MonoBehaviour
             if (on_trigger == true)
             {
                 very_interactive_text.enabled = true;
-                Debug.Log(very_interactive_text.IsActive());
+                //Debug.Log(very_interactive_text.IsActive());
                 timer += Time.deltaTime;
                 if (timer < 5f)
                 {

@@ -16,7 +16,7 @@ public class TriggerForWheelSplat : MonoBehaviour
         stopped = false;
         timer = 0;
     }
-    void Update()
+    void FixedUpdate()
     {
         if(splatted==true&&stopped==false)
 		{

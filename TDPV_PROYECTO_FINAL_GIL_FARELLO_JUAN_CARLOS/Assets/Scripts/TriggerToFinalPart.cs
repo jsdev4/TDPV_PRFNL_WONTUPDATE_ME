@@ -7,9 +7,11 @@ public class TriggerToFinalPart : MonoBehaviour
     public GameObject fader;
     public GameObject player;
     public GameObject respawn_point;
+    private AudioSource interactive_sound;
     void Start()
     {
         on_the_trigger = false;
+        interactive_sound = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -17,6 +19,7 @@ public class TriggerToFinalPart : MonoBehaviour
 		{
             if(Input.GetKeyUp(KeyCode.F))
 			{
+                interactive_sound.Play();
                 fader.SetActive(true);
                 player.gameObject.GetComponent<CharController>().Set_if_is_interacting(true);
 			}

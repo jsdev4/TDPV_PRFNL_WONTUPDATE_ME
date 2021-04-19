@@ -15,7 +15,7 @@ public class TriggerForSplatSpecial : MonoBehaviour
         stop_elevator = false;
         splatted = false;
     }
-    void Update()
+    void FixedUpdate()
     {
         if (splatted == true && elevator.gameObject.GetComponent<ElevatorSpecial>().Return_if_is_up() == false)
         {

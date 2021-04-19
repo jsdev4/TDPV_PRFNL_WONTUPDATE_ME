@@ -11,7 +11,7 @@ public class BatteryController : MonoBehaviour
     {
         battery_mesh = GetComponent<MeshRenderer>();
     }
-    void Update()
+    void LateUpdate()
     {
         if(player.gameObject.GetComponent<CharController>().Return_number_of_cells()==5)
         {

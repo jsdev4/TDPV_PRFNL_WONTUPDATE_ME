@@ -11,7 +11,7 @@ public class MortalBox : MonoBehaviour
 	{
 		hit_the_player = false;
 	}
-    void Update()
+    void FixedUpdate()
     {
 		if(hit_the_player==true)
 		{

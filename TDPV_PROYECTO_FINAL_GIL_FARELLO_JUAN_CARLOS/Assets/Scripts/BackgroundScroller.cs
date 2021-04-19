@@ -7,7 +7,7 @@ public class BackgroundScroller : MonoBehaviour
     public GameObject cam;
     public float speed;
 
-    void Update()
+    void LateUpdate()
     {
         float interpolation = speed * Time.time;
 

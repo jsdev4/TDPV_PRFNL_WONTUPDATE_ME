@@ -19,15 +19,15 @@ AnimationClip:
   m_FloatCurves: []
   m_PPtrCurves:
   - curve:
-    - time: 0.3
+    - time: 0.15
       value: {fileID: 2100000, guid: 6f03c0a152925a94abacc7ee34106e10, type: 2}
-    - time: 0.56666666
+    - time: 0.33333334
       value: {fileID: 2100000, guid: 9f84863f70dcb1643be06bad81e7ee6f, type: 2}
-    - time: 0.73333335
+    - time: 0.53333336
       value: {fileID: 2100000, guid: 350fba73eca9d7b4abb83b1605920e62, type: 2}
-    - time: 1.0666667
+    - time: 0.78333336
       value: {fileID: 2100000, guid: 07d0ba690d58c1c41b03af20ddc61f50, type: 2}
-    - time: 1.2666667
+    - time: 1.05
       value: {fileID: 2100000, guid: 70173b2edf9ec3245ab235563c04fa18, type: 2}
     - time: 1.3333334
       value: {fileID: 2100000, guid: 86b58902c78bc6a4db5319ab9ba59888, type: 2}
@@ -35,7 +35,7 @@ AnimationClip:
     path: 
     classID: 23
     script: {fileID: 0}
-  m_SampleRate: 30
+  m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -61,7 +61,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.3666667
+    m_StopTime: 1.35
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

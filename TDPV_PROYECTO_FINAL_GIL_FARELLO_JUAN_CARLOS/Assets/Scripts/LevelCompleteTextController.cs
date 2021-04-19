@@ -12,8 +12,7 @@ public class LevelCompleteTextController : MonoBehaviour
         text_is_out = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         
     }

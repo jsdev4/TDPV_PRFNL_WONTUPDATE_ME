@@ -15,7 +15,7 @@ public class LifeIconController : MonoBehaviour
         rect_transform = GetComponent<RectTransform>();
     }
 
-    void Update()
+    void LateUpdate()
     {
         if(player.gameObject.GetComponent<CharController>().Return_number_of_lifes()==3)
         {

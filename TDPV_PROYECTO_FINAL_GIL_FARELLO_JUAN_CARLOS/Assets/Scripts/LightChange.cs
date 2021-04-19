@@ -18,27 +18,19 @@ public class LightChange : MonoBehaviour
         colorHex02 = "#1BCF00";
         colorHex03 = "#00CF3D";
         colorHex04 = "#27D495";
-        colors = new ArrayList { colorHex01, colorHex02, colorHex03, colorHex04, colorHex01 };
-        
+        colors = new ArrayList { colorHex01, colorHex02, colorHex03, colorHex04, colorHex01 };    
     }
     IEnumerator ChangeLights()
     {
         yield return new WaitForSeconds(.3f);
         Color newCol;
-
-     
             if (ColorUtility.TryParseHtmlString(colors[j].ToString(), out newCol))
             {
-                gameObject.GetComponentInChildren<Light>().color = newCol;
-               
-            }
-       
-        
+                gameObject.GetComponentInChildren<Light>().color = newCol;   
+            }  
     }
-    // Update is called once per frame
     void Update()
     {
-
         delay += Time.deltaTime;
         if(delay>=.3f)
         {
@@ -49,7 +41,6 @@ public class LightChange : MonoBehaviour
         if(j==4)
         {
             j = 0;
-        }
-        
+        }    
     }
 }

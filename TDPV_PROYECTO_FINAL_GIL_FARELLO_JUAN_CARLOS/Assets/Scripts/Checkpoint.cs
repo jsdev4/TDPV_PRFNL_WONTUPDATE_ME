@@ -15,6 +15,7 @@ public class Checkpoint : MonoBehaviour
     private float delay;
     public Text[] very_interactive_text;
     public GameObject manager;
+    public AudioSource keyboard_sound;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -41,7 +42,7 @@ public class Checkpoint : MonoBehaviour
                     checkpoint_number += 1;
                     player.gameObject.GetComponent<CharController>().Set_respawn_point(checkpoint_number);
                     trigger_to_save.gameObject.GetComponentInChildren<BoxCollider>().enabled = false;
-
+                    keyboard_sound.Play();
                     Debug.Log("checkppoint :" + checkpoint_number);
                     checkpoint_passed = false;
                     checkpoint_enabled = true;

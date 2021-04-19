@@ -13,20 +13,21 @@ public class ElevatorSpecial : MonoBehaviour
     public GameObject trigger02;
     public GameObject trigger03;
     public GameObject trigger04;
-
+    private AudioSource elevator_sound;
+    private Rigidbody rb;
     private int level;
 
     private bool has_stopped;
     void Start()
     {
-       
+        rb = GetComponent<Rigidbody>();
         level = 0;
         is_up = false;
-
+        elevator_sound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector3 sizeVec = trigger.GetComponent<Collider>().bounds.size;
         
@@ -37,13 +38,13 @@ public class ElevatorSpecial : MonoBehaviour
 
                 if (transform.position.y <= (trigger01.transform.position.y))
                 {
-                    transform.Translate(Vector3.up * speed_up * Time.deltaTime);
-                
+                    rb.MovePosition(transform.position + transform.up * speed_up * Time.fixedDeltaTime);
+
                 }
-                if (transform.position.y == (trigger01.transform.position.y))
+                if (transform.position.y >= (trigger01.transform.position.y))
                 {
-                      transform.Translate(Vector3.up * 0 * Time.deltaTime);
-                   
+                    rb.MovePosition(transform.position + transform.up * 0 * Time.fixedDeltaTime);
+                    elevator_sound.Stop();
                 }
 
             }
@@ -52,13 +53,13 @@ public class ElevatorSpecial : MonoBehaviour
 
                 if (transform.position.y <= (trigger02.transform.position.y))
                 {
-                    transform.Translate(Vector3.up * speed_up * Time.deltaTime);
+                    rb.MovePosition(transform.position + transform.up * speed_up * Time.fixedDeltaTime);
 
                 }
-                if (transform.position.y == (trigger02.transform.position.y))
+                if (transform.position.y >= (trigger02.transform.position.y))
                 {
-                    transform.Translate(Vector3.up * 0 * Time.deltaTime);
-
+                    rb.MovePosition(transform.position + transform.up *0 * Time.fixedDeltaTime);
+                    elevator_sound.Stop();
                 }
             }
             if (level == 3)
@@ -66,12 +67,12 @@ public class ElevatorSpecial : MonoBehaviour
 
                 if (transform.position.y <= trigger03.transform.position.y)
                 {
-                    transform.Translate(Vector3.up * speed_up * Time.deltaTime);
+                    rb.MovePosition(transform.position + transform.up * speed_up * Time.fixedDeltaTime);
                 }
-                if (transform.position.y == trigger03.transform.position.y)
+                if (transform.position.y >= trigger03.transform.position.y)
                 {
-                    transform.Translate(Vector3.up * 0 * Time.deltaTime);
-
+                    rb.MovePosition(transform.position + transform.up * 0 * Time.fixedDeltaTime);
+                    elevator_sound.Stop();
                 }
             }
             if (level == 4)
@@ -79,12 +80,12 @@ public class ElevatorSpecial : MonoBehaviour
                 //  is_up = true;
                 if (transform.position.y <= trigger04.transform.position.y)
                 {
-                    transform.Translate(Vector3.up * speed_up * Time.deltaTime);
+                    rb.MovePosition(transform.position + transform.up * speed_up * Time.fixedDeltaTime);
                 }
-                if (transform.position.y == trigger04.transform.position.y)
+                if (transform.position.y >= trigger04.transform.position.y)
                 {
-                    transform.Translate(Vector3.up * 0 * Time.deltaTime);
-
+                    rb.MovePosition(transform.position + transform.up *0 * Time.fixedDeltaTime);
+                    elevator_sound.Stop();
                 }
             }
             if(level==5)
@@ -99,20 +100,20 @@ public class ElevatorSpecial : MonoBehaviour
             {
                 if (has_stopped == false)
                 {
-                    transform.Translate(Vector3.down * speed_down * Time.deltaTime);
+                    rb.MovePosition(transform.position - transform.up * speed_up * Time.fixedDeltaTime);
                 }
             }
 
-            if (transform.position.y == trigger.transform.position.y+sizeVec.y)
+            if (transform.position.y <= trigger.transform.position.y+sizeVec.y)
             {
-
-                transform.Translate(Vector3.down * 0 * Time.deltaTime);
+                elevator_sound.Stop();
+                rb.MovePosition(transform.position - transform.up * 0 * Time.fixedDeltaTime);
                 level = 0;
 
             }
             if (has_stopped == true)
             {
-                transform.Translate(Vector3.down * 0 * Time.deltaTime);
+                rb.MovePosition(transform.position - transform.up * 0 * Time.fixedDeltaTime);
             }
            
 
@@ -128,6 +129,7 @@ public class ElevatorSpecial : MonoBehaviour
     }
     public void Set_if_is_up(bool up)
     {
+        elevator_sound.Play();
         is_up = up;
     }
     public bool Return_if_is_up()

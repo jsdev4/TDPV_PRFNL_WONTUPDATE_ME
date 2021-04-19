@@ -13,7 +13,7 @@ public class TriggerForRespawnOnSide : MonoBehaviour
     {
        // trnsfrm = GetComponent<Transform>();
     }
-    void Update()
+    void FixedUpdate()
     {
         if (trigger_side ==false)
         {
