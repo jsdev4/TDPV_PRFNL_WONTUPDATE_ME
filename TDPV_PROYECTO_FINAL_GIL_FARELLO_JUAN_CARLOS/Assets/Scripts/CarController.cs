@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
@@ -9,7 +7,6 @@ public class CarController : MonoBehaviour
 	public GameObject trigger_for_detection;
     private Vector3 CurrentPositionHolder;
     public int CurrentNode;
-    private Vector3 startPosition;
 	public float max_speed;
     public float acceleration;
 	private float current_speed;
@@ -18,10 +15,10 @@ public class CarController : MonoBehaviour
 	public bool is_car_to_right;
 	public GameObject manager;
 	private AudioSource car_sound;
-	private bool sound_on;
+	
     void Start()
     {
-		sound_on = false;
+
 		touched = false;
 		car_sound = GetComponent<AudioSource>();
 		car_sound.Play();
@@ -30,7 +27,7 @@ public class CarController : MonoBehaviour
 	void CheckNode()
 	{
 		current_speed = 0;
-		startPosition = car.gameObject.GetComponent<Transform>().position;
+
 		CurrentPositionHolder = PathNode[CurrentNode].gameObject.GetComponent<Transform>().position;
 	}
 	void Update()

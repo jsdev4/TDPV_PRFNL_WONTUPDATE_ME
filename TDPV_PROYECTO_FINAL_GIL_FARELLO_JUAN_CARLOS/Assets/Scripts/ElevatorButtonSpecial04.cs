@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
-using UnityEngine.UI;
 public class ElevatorButtonSpecial04 : MonoBehaviour
 {
     private bool can_use;

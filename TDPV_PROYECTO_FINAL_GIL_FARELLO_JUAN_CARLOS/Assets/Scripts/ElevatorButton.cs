@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 public class ElevatorButton : MonoBehaviour
 {
     private bool can_use;
@@ -25,10 +22,6 @@ public class ElevatorButton : MonoBehaviour
     {
         if (can_use==true&&elevator.gameObject.GetComponent<Elevator>().Return_if_is_up()==false)
         {
-
-
-           
-
             if (Input.GetKeyDown(KeyCode.F))
             {
                 button_sound.Play();

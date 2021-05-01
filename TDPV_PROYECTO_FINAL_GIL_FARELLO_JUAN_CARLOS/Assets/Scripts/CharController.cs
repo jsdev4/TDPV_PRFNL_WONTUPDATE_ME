@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
+
 
 public class CharController : MonoBehaviour
 {
@@ -69,7 +67,40 @@ public class CharController : MonoBehaviour
         emit_particles = false;
         timer_for_particle_emission = 0;
     }
-    void FixedUpdate()
+	 void Update()
+	{
+		if(is_alive==true)
+		{
+            if (Input.GetKeyUp(KeyCode.L))
+            {
+                is_light_on = !is_light_on;
+                switch_light.Play();
+            }
+            ///endl light function----------------------------
+            ///
+            if (is_light_on == true)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    low_beam_light[i].gameObject.GetComponent<Light>().enabled = true;
+                }
+            }
+            else if (is_light_on == false)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    low_beam_light[i].gameObject.GetComponent<Light>().enabled = false;
+                }
+            }
+            
+        }
+        else
+		{
+            is_light_on = false;
+		}
+
+	}
+	void FixedUpdate()
     {
         Vector3 translation = new Vector3(Input.GetAxis("Horizontal"), 0, (Input.GetAxis("Vertical")));
         if (can_move == true)
@@ -101,6 +132,7 @@ public class CharController : MonoBehaviour
                     }
                     if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)||Input.GetKeyUp(KeyCode.LeftArrow)||Input.GetKeyUp(KeyCode.RightArrow))
                     {
+                        speed = reset_speed;
                         is_moving = false;
                     }
                     if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S)||Input.GetKeyUp(KeyCode.UpArrow)||Input.GetKeyUp(KeyCode.DownArrow))
@@ -108,13 +140,7 @@ public class CharController : MonoBehaviour
                         speed = reset_speed;
                         is_moving = false;
                     }
-                    ///Light function--------------------------------
-                    if (Input.GetKeyUp(KeyCode.L))
-                    {
-                        is_light_on = !is_light_on;
-                        switch_light.Play();
-                    }
-                    ///endl light function----------------------------
+                   
                     if (is_moving == false && is_jumping == false)
                     {
                         if (is_interacting == true)
@@ -194,11 +220,13 @@ public class CharController : MonoBehaviour
                     }
                     if(Input.GetKey(KeyCode.A)||Input.GetKey(KeyCode.LeftArrow))
 					{
+                        speed = reset_speed;
                         rotation_sprite = new Vector3(-1, 1, 1);
                         transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime,10);
                     }
                     if (Input.GetKey(KeyCode.D)||Input.GetKey(KeyCode.RightArrow))
                     {
+                        speed = reset_speed;
                         rotation_sprite = new Vector3(1, 1, 1);
                         transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime,10);
                     }
@@ -222,6 +250,7 @@ public class CharController : MonoBehaviour
                         rb.useGravity = true;
                     }
                 }
+                ///Light function--------------------------------
                 
             }
             if (is_alive == false)
@@ -289,20 +318,7 @@ public class CharController : MonoBehaviour
                 has_respawned = false;
             }
 
-            if (is_light_on == true)
-            {
-                for (int i = 0; i < 3; i++)
-                {
-                    low_beam_light[i].gameObject.GetComponent<Light>().enabled = true;
-                }
-            }
-            else
-            {
-                for (int i = 0; i < 3; i++)
-                {
-                    low_beam_light[i].gameObject.GetComponent<Light>().enabled = false;
-                }
-            } 
+            
         }
     }
     public void Set_if_is_dead_zone_or_dead(bool alv)
@@ -462,5 +478,10 @@ public class CharController : MonoBehaviour
 	{
         go_to_retry= rtry;
 	}
+    public void Set_correct_player_rotation()
+	{
+        rotation_sprite = new Vector3(1, 1, 1);
+        transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime, 10);
+    }
 }
 

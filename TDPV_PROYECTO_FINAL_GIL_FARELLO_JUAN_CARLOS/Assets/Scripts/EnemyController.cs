@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Build;
+﻿
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -40,7 +38,7 @@ public class EnemyController : MonoBehaviour
     private float delay;
     public float max_time_to_reset;
     private bool check_node;
-    private bool emit_particles;
+ 
     public ParticleSystem particles;
     public AudioSource[] enemy_sounds;
     void Start()
@@ -63,8 +61,6 @@ public class EnemyController : MonoBehaviour
         {
             var em = particles.emission;
             em.enabled = false;
-
-            emit_particles = false;
         }  
     }
     void FixedUpdate()
@@ -92,7 +88,6 @@ public class EnemyController : MonoBehaviour
                         {
                             quad.gameObject.GetComponent<Animator>().Play("EnemyAttacking");
                             Light_slider(true);
-                            
                             Increase_number_of_hits();
                         }
                         else if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == false)

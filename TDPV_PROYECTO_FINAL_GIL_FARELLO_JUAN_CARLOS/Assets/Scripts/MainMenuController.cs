@@ -1,19 +1,18 @@
-﻿
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-
+using System.Collections;
 public class MainMenuController : MonoBehaviour
 {
+
+
     private int screen_number;
     private int option;
     private int option_inside;
     private float timer;
     private float timer_for_music_play;
+    
     private Color32 unselect_color;
     private Color32 select_color;
     public Text[] screen_text;
@@ -26,6 +25,7 @@ public class MainMenuController : MonoBehaviour
     private bool can_press_key;
     private bool key_pressed;
     private bool start_music;
+    //private bool start_game;
     private Vector3 targetPosition;
     private Vector3 targetPosition01;
     private Vector3 targetPosition02;
@@ -33,6 +33,7 @@ public class MainMenuController : MonoBehaviour
     private Vector3 targetPosition04;
     public AudioSource[] interface_sound;
     public AudioSource music_to_play;
+    private AsyncOperation asyncLoadLevel;
     void Start()
     {
         screen_number = 0;
@@ -45,12 +46,16 @@ public class MainMenuController : MonoBehaviour
         unselect_color = new Color32(214, 5, 127, 255);
         key_pressed = false;
         can_press_key = true;
+       // start_game = false;
         targetPosition =screen[1].gameObject.GetComponent<RectTransform>().position;
         targetPosition01 = screen[0].gameObject.GetComponent<RectTransform>().position;
         targetPosition02= screen[3].gameObject.GetComponent<RectTransform>().position;
         targetPosition03 = screen[1].gameObject.GetComponent<RectTransform>().position;
         targetPosition04 = screen[2].gameObject.GetComponent<RectTransform>().position;
         Debug.Log("number of tries are " + ManagerKeeper.Get_number_of_tries_availables());
+        // 
+          StartCoroutine(LoadLevel());
+       
     }
 
     void Update()
@@ -262,8 +267,8 @@ public class MainMenuController : MonoBehaviour
                     if (Input.GetKeyUp(KeyCode.Return))
                     {
                         can_press_key = false;
-                        //Application.Quit();
-                        Debug.Log("Key");
+                        Application.Quit();
+                       /// Debug.Log("Key");
                     }
                 }
                 if (option_inside == 1)
@@ -301,19 +306,29 @@ public class MainMenuController : MonoBehaviour
 			{
                 if(Input.GetKeyUp(KeyCode.Return))
 				{
-                 
-                        
+                    
                     interface_sound[2].Play();
                     can_press_key = false;
-                    fader.SetActive(true);
-                    fader.gameObject.GetComponent<Animator>().Play("Fade_in_blue");   
-				}
-                if (fader.gameObject.GetComponent<FaderScript>().Return_animation_complete() == true)
-                {
-                    SceneManager.LoadScene("Level_01_Depo");
-                    //Debug.Log("next scene is here");
+                    //start_game = true;
+                   
+                    //  timer_for_start_game += Time.deltaTime;
+                    //  Debug.Log(timer_for_start_game);
+                    //SceneManager.LoadScene("EmptySceneForTestingPurposes");
+                    //SceneManager.LoadScene("Level_01_Depo");
+                    // StartCoroutine(Start_Game());
+                    asyncLoadLevel.allowSceneActivation = true;
                 }
-               
+             /*   if(start_game==true)
+				{
+                    fader.SetActive(true);
+                    fader.gameObject.GetComponent<Animator>().Play("Fade_in_blue");
+                    if (fader.gameObject.GetComponent<FaderScript>().Return_animation_complete() == true)
+                    {
+                        StartCoroutine(Start_Game());
+                    }
+                }*/
+                
+                
                 if (can_press_key==true&&Input.GetKeyUp(KeyCode.Escape))
                 {
                     interface_sound[1].Play();
@@ -382,5 +397,20 @@ public class MainMenuController : MonoBehaviour
                 }
             }
         }
+        
     }
+  
+   IEnumerator LoadLevel()
+    {
+        yield return new WaitForSeconds(.2f);
+        asyncLoadLevel = SceneManager.LoadSceneAsync("Level_01_Depo");
+        asyncLoadLevel.allowSceneActivation = false;
+       // StartCoroutine(Start_Game(asyncLoadLevel));
+    }
+  /*IEnumerator Start_Game()
+	{
+        
+        yield return new WaitForSeconds(7);
+        asyncLoadLevel.allowSceneActivation = true;
+    }*/
 }

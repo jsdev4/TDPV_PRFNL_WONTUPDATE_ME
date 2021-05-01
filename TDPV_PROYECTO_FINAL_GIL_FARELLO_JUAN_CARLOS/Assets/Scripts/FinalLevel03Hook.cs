@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FinalLevel03Hook : MonoBehaviour
 {
@@ -14,25 +12,31 @@ public class FinalLevel03Hook : MonoBehaviour
     private float timer;
     private Vector3 start_position;
     private bool on_board;
+    private float currentPosY;
+    private Vector3 rotation_sprite;
+    private float smoothTime;
+    private Vector3 velocity;
     void Start()
     {
-       
+        smoothTime = 0.05f;
         timer = 0;
         on_board = false;
         trnsfrm = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
         start_position = first_object.gameObject.GetComponent<Transform>().position;
         trnsfrm.position = start_position;
+        currentPosY =trnsfrm.position.y - 1f;
     }
 
 
     void FixedUpdate()
     {
-
-        if(on_board==true)
+        currentPosY = trnsfrm.position.y - 1.7f;
+        Vector3 currentPos = transform.position;
+        Vector3 currentPosFixed = new Vector3(currentPos.x, currentPosY, currentPos.z);
+        if (on_board==true)
 		{
-            Vector3 currentPos = transform.position;
-            Vector3 currentPosFixed = new Vector3(currentPos.x, currentPos.y - 2f, currentPos.z);
+           
             timer += Time.fixedDeltaTime;
            // trnsfrm.transform.position = Vector3.SmoothDamp(trnsfrm.position, last_object.gameObject.GetComponent<Transform>().position, ref speed, 0.8f);
               rb.MovePosition(Vector3.Lerp(start_position, last_object.gameObject.GetComponent<Transform>().position, speed * timer));
@@ -40,6 +44,11 @@ public class FinalLevel03Hook : MonoBehaviour
             player.gameObject.GetComponent<Rigidbody>().constraints &= ~RigidbodyConstraints.FreezePositionZ;
             player.gameObject.GetComponent<CharController>().Set_if_is_on_the_hook(true);
             player.gameObject.GetComponent<Rigidbody>().MovePosition(currentPosFixed);
+            player.gameObject.GetComponent<Rigidbody>().useGravity = false;
+           player.gameObject.GetComponent<CharController>().Set_if_player_can_move(false);
+            player.gameObject.GetComponent<CharController>().Set_correct_player_rotation();
+            //rotation_sprite = new Vector3(1, 1, 1);
+            // player.gameObject.GetComponent<Transform>().localScale= Vector3.SmoothDamp(player.gameObject.GetComponent<Transform>().transform.localScale, rotation_sprite, ref velocity, smoothTime, 10);
             wall_to_remove.gameObject.SetActive(false);
            
 		}

@@ -1,14 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿using UnityEngine;
 public class FaderScript : MonoBehaviour
 {
     private Animator anim;
     //public GameObject player;
     private bool playing_fade_in;
     private bool playing_fade_out;
-
 
     private bool animation_complete;
     void Start()
@@ -29,7 +25,7 @@ public class FaderScript : MonoBehaviour
             anim.Play("Fade_in");
             playing_fade_in = false;
         }
-
+        
     }
     public void Set_the_fade_out()
 	{
@@ -60,4 +56,5 @@ public class FaderScript : MonoBehaviour
 	{
         animation_complete = is_complete;
 	}
+
 }

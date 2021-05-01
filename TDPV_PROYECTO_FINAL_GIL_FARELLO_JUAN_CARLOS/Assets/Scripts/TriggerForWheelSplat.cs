@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 public class TriggerForWheelSplat : MonoBehaviour
 {
-    private float timer;
     private bool splatted;
     private bool stopped;
     private BoxCollider bx;
@@ -14,7 +12,6 @@ public class TriggerForWheelSplat : MonoBehaviour
         bx = GetComponent<BoxCollider>();
         splatted = false;
         stopped = false;
-        timer = 0;
     }
     void FixedUpdate()
     {

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
+﻿
 using UnityEngine;
 
 public class CharControllerForPacPunk : MonoBehaviour
@@ -12,7 +10,6 @@ public class CharControllerForPacPunk : MonoBehaviour
     private bool can_move;
     private bool is_alive;
     private bool moving_up;
-    private bool moving_down;
     private int lifes;
     private Vector3 firstPos;
     private Transform trnsfrm;
@@ -28,7 +25,6 @@ public class CharControllerForPacPunk : MonoBehaviour
         can_move = true;
         is_alive = true;
         moving_up = false;
-        moving_down = false;
         firstPos = trnsfrm.position;
         player_sound[0].enabled = false;
         player_sound[1].enabled = false;
@@ -63,7 +59,7 @@ public class CharControllerForPacPunk : MonoBehaviour
                     if (Input.GetKey(KeyCode.S))
                     {
                         is_moving_for_sound_play = true;
-                        moving_down = true;
+
                     }
                     if (Input.GetKeyUp(KeyCode.W))
                     {
@@ -73,7 +69,6 @@ public class CharControllerForPacPunk : MonoBehaviour
                     if (Input.GetKeyUp(KeyCode.S))
                     {
                         is_moving_for_sound_play = false;
-                        moving_down = false;
                     }
                     if (Input.GetKeyUp(KeyCode.A) || (Input.GetKeyUp(KeyCode.D)))
                     {

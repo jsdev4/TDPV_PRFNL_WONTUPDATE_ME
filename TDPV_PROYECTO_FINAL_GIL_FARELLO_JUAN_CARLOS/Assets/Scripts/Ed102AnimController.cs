@@ -1,11 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Ed102AnimController : MonoBehaviour
 {
     private bool key_was_pressed;
-    private bool ed102_is_out;
     private Animator anim;
     public GameObject screen_object;
     public GameObject computer;
@@ -13,7 +10,6 @@ public class Ed102AnimController : MonoBehaviour
     void Start()
     {
         key_was_pressed = false;
-        ed102_is_out = false;
         anim = GetComponent<Animator>();
     }
 
