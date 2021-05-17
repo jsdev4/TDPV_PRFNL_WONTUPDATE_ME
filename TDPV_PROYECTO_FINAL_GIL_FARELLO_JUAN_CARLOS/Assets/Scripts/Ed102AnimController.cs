@@ -14,7 +14,7 @@ public class Ed102AnimController : MonoBehaviour
     }
 
    
-    void Update()
+    void LateUpdate()
     {
 
         if (key_was_pressed == false)

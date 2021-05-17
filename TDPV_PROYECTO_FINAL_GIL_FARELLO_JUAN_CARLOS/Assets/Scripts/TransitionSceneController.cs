@@ -74,8 +74,8 @@ public class TransitionSceneController : MonoBehaviour
                     music.volume = 0.1f;
                 }
             }
-            Debug.Log("tries are " + ManagerKeeper.Get_number_of_tries_availables());
-            Debug.Log("number of reached level is " + ManagerKeeper.Get_number_of_reached_level());
+            //Debug.Log("tries are " + ManagerKeeper.Get_number_of_tries_availables());
+            //Debug.Log("number of reached level is " + ManagerKeeper.Get_number_of_reached_level());
             if (screen_text[1].gameObject.GetComponent<TextEventsController>().Return_if_start_timer() == true)
             {
                 timer += Time.deltaTime;

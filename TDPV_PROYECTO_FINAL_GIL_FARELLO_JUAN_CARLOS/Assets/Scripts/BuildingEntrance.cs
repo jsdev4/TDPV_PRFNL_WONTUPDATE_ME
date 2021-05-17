@@ -26,8 +26,7 @@ public class BuildingEntrance : MonoBehaviour
                 fader.SetActive(true);
                 player.gameObject.GetComponent<CharController>().Set_if_is_interacting(true);
                 ManagerKeeper.Is_ed102_entering_some_place(true);
-               /* player.gameObject.GetComponent<Transform>().position = respawnPoint.gameObject.GetComponent<Transform>().position;
-                player_here = false;*/
+              
             }
             if(fader.gameObject.GetComponent<FaderScript>().Return_animation_complete()==true)
 			{

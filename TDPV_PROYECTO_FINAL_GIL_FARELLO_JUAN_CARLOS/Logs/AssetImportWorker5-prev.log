@@ -1,0 +1,110 @@
+Using pre-set license
+Built from '2021.1/release' branch; Version is '2021.1.4f1 (4cd64a618c1b) revision 5035594'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Pro; OS build 19042.985; Version 2009; 64bit' Language: 'es' Physical Memory: 6022 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.1.4f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker5
+-projectPath
+C:/Users/USER/Documents/TDPV_PROYECTO_FINAL_GIL_FARELLO_JUAN_CARLOS
+-logFile
+Logs/AssetImportWorker5.log
+-srvPort
+55882
+Successfully changed project path to: C:/Users/USER/Documents/TDPV_PROYECTO_FINAL_GIL_FARELLO_JUAN_CARLOS
+C:/Users/USER/Documents/TDPV_PROYECTO_FINAL_GIL_FARELLO_JUAN_CARLOS
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 263.41 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.1.4f1 (4cd64a618c1b)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.1.4f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/USER/Documents/TDPV_PROYECTO_FINAL_GIL_FARELLO_JUAN_CARLOS/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GT 640M (ID=0xfd2)
+    Vendor:   NVIDIA
+    VRAM:     2007 MB
+    Driver:   25.21.14.2531
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.1.4f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.1.4f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.1.4f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56352
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.1.4f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.005506 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 366.79 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  4.813 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.002613 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.19 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  4.747 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.64 seconds
+Refreshing native plugins compatible for Editor in 1.37 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1253 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 89.1 MB.
+System memory in use after: 89.2 MB.
+
+Unloading 8 unused Assets to reduce memory usage. Loaded Objects now: 1750.
+Total: 4.218500 ms (FindLiveObjects: 0.238300 ms CreateObjectMapping: 0.075300 ms MarkObjects: 3.855500 ms  DeleteObjects: 0.047100 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/Scenes/Level_04_Stereo_City.unity
+  artifactKey: Guid(e9d08c7c4ce3b624db9e450b9c64037a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Level_04_Stereo_City.unity using Guid(e9d08c7c4ce3b624db9e450b9c64037a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ffce4baed6003c24f305585d5a23aca1') in 0.261442 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 156.761173 seconds.
+  path: Assets/Scenes/MainMenu.unity
+  artifactKey: Guid(e00f2505ef5d26544914930323e3548c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/MainMenu.unity using Guid(e00f2505ef5d26544914930323e3548c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2d09566d4ae79effaac54ce6243e5102') in 0.037479 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.468217 seconds.
+  path: Assets/Scenes/Level_05_The_Outlands.unity
+  artifactKey: Guid(736ea0ae8e7a29946a34c88fe04e0fe2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Level_05_The_Outlands.unity using Guid(736ea0ae8e7a29946a34c88fe04e0fe2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e058e9d23898d0be0686ace2705cd4dc') in 0.041925 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 119.334875 seconds.
+  path: Assets/Scenes/Level_04_Stereo_City.unity
+  artifactKey: Guid(e9d08c7c4ce3b624db9e450b9c64037a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Level_04_Stereo_City.unity using Guid(e9d08c7c4ce3b624db9e450b9c64037a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8b2cadcbe12e42fa92f07c130cb52719') in 0.021288 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 4.845869 seconds.
+  path: Assets/Scenes/Level_03_Lab.unity
+  artifactKey: Guid(5189677c74c35184ea0d0deb22db4fed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/Level_03_Lab.unity using Guid(5189677c74c35184ea0d0deb22db4fed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e121be4cfcbd41619a0c6fc0f016b2d7') in 0.015158 seconds 
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 3.23 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 63.8 MB.
+System memory in use after: 63.9 MB.
+
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 1750.
+Total: 4.235800 ms (FindLiveObjects: 0.501700 ms CreateObjectMapping: 0.120600 ms MarkObjects: 3.582100 ms  DeleteObjects: 0.027800 ms)
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

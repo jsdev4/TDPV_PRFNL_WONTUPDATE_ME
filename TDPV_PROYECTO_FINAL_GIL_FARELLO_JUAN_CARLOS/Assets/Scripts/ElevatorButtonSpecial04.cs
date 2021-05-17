@@ -35,6 +35,7 @@ public class ElevatorButtonSpecial04 : MonoBehaviour
                     //elevator.gameObject.GetComponent<ElevatorSpecial>().Set_if_is_up(true);
                     elevator.gameObject.GetComponent<ElevatorSpecial>().Set_if_is_up(false);
                     delay_for_elevator = 0;
+                   
                     going_move = false;
                 }
             }

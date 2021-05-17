@@ -6,7 +6,6 @@ public class FlashingLights01 : MonoBehaviour
     private Light lamp;
     private bool increase_intensity;
     public float intensity;
-    //public float intensity;
     private float timer;
     public float max_time_shine;
     void Start()
@@ -15,7 +14,7 @@ public class FlashingLights01 : MonoBehaviour
         increase_intensity =true;
     }
 
-    void Update()
+    void LateUpdate()
     {
         if(increase_intensity==true)
 		{

@@ -36,7 +36,7 @@ public class CheckpointVendingMachine : MonoBehaviour
                     trigger_to_save.gameObject.GetComponentInChildren<BoxCollider>().enabled = false;
                     soda_object.gameObject.SetActive(true);
                     soda_object.gameObject.GetComponent<Rigidbody>().AddForce(targetDir * 1.5f, ForceMode.Impulse);
-                    Debug.Log("checkppoint :" + checkpoint_number);
+                   // Debug.Log("checkppoint :" + checkpoint_number);
                     checkpoint_passed = false;
                     checkpoint_enabled = true;
                     keyboard_sound.Play();

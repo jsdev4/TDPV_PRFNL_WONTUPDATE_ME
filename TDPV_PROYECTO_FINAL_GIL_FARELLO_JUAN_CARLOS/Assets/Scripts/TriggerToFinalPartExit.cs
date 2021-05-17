@@ -5,10 +5,7 @@ public class TriggerToFinalPartExit : MonoBehaviour
 {
     public GameObject fader;
     private bool player_here;
-    void Start()
-    {
-        
-    }
+
     void Update()
     {
         if(player_here==true)

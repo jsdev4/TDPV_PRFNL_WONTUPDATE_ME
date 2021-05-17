@@ -6,10 +6,7 @@ public class DeadZoneTrigger01 : MonoBehaviour
     private bool others_npc_fallen;
     public GameObject npc;
     GameObject clone;
-    void Start()
-    {
-
-    }
+    
     void Update()
     {
         if (player_is_here == true && others_npc_fallen == false)

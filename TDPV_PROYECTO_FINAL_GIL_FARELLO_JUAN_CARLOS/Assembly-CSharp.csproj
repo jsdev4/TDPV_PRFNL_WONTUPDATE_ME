@@ -139,6 +139,7 @@
     <Compile Include="Assets\Scripts\Elevator.cs" />
     <Compile Include="Assets\Scripts\PacPunkScripts\SpecialIconsController.cs" />
     <Compile Include="Assets\Scripts\TriggerToFinalPart.cs" />
+    <Compile Include="Assets\Scripts\ParticleSystemController.cs" />
     <Compile Include="Assets\Scripts\ScriptForPlayingSound02.cs" />
     <Compile Include="Assets\Scripts\PacPunkScripts\PacPunkManager.cs" />
   </ItemGroup>

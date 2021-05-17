@@ -10,8 +10,6 @@ public class ScriptForPlayingSound02 : MonoBehaviour
         sound_to_play = GetComponent<AudioSource>();
 		player_is_here = false;
     }
-
-    // Update is called once per frame
     void LateUpdate()
     {
         if(manager.gameObject.GetComponent<ManagerScript>().Return_if_paused()==false)

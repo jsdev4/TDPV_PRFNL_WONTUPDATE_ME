@@ -346,6 +346,7 @@
 "Assets/Scripts/PacPunkScripts/SpecialIconsController.cs"
 "Assets/Scripts/PacPunkScripts/TriggerForRespawnOnSide.cs"
 "Assets/Scripts/PacPunkScripts/WaitingIconBall.cs"
+"Assets/Scripts/ParticleSystemController.cs"
 "Assets/Scripts/RespawnableObjectOnFalseGround.cs"
 "Assets/Scripts/ScriptForPlayingSound.cs"
 "Assets/Scripts/ScriptForPlayingSound01.cs"

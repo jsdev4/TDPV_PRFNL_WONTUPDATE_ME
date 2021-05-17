@@ -17,13 +17,11 @@ public class FinalSceneController : MonoBehaviour
     public GameObject second_text;
     public GameObject second_text_outland_guy;
     public AudioSource music;
-	 void Awake()
-	{
-        fader.SetActive(true);
-        fader.gameObject.GetComponent<FaderScript>().Set_the_fade_out();
-    }
+
 	void Start()
     {
+        fader.SetActive(true);
+        fader.gameObject.GetComponent<FaderScript>().Set_the_fade_out();
         Ed_finished_running = false;
         Ed_stopped_the_idle = false;
         key_pressed = false;

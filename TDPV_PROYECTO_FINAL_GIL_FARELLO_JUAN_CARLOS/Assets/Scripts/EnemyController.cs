@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
@@ -16,6 +15,10 @@ public class EnemyController : MonoBehaviour
     public bool direction;
     private bool can_attack;
     private bool enemy_alive;
+    private bool play_running_anim;
+    private bool play_attack_anim;
+    private bool play_idle_anim;
+    private bool play_die_anim;
     private Vector3 translation;
     private Vector3 translation_to_left;
     private Vector3 rotation_sprite;
@@ -28,7 +31,6 @@ public class EnemyController : MonoBehaviour
     private Transform this_object;
     public GameObject player;
     public GameObject light_gun;
-    //
     public GameObject[] PathNode;
     public float MoveSpeed;
     float Timer;
@@ -45,6 +47,10 @@ public class EnemyController : MonoBehaviour
     {
         enemy_alive =true;
         can_attack = true;
+        play_attack_anim = false;
+        play_idle_anim = false;
+        play_running_anim = false;
+        play_die_anim = false;
         delay_for_dead=0;
         numbers_of_hitted = 0;
         rb = GetComponent<Rigidbody>();
@@ -63,7 +69,26 @@ public class EnemyController : MonoBehaviour
             em.enabled = false;
         }  
     }
-    void FixedUpdate()
+	void Update()
+	{
+		if(play_attack_anim==true)
+		{
+            quad.gameObject.GetComponent<Animator>().Play("EnemyAttacking");
+        }
+        if(play_idle_anim==true)
+		{
+            quad.gameObject.GetComponent<Animator>().Play("EnemyIdle");
+        }
+        if(play_running_anim==true)
+		{
+            quad.gameObject.GetComponent<Animator>().Play("EnemyRunning");
+        }
+        if(play_die_anim==true)
+		{
+            quad.gameObject.GetComponent<Animator>().Play("EnemyDying");
+        }
+	}
+	void FixedUpdate()
     {   
         if (enable_on_screen == true)
         {
@@ -76,7 +101,9 @@ public class EnemyController : MonoBehaviour
                     {
                         if (distance > min_distance)
                         {
-                            quad.gameObject.GetComponent<Animator>().Play("EnemyRunning");
+                            play_attack_anim = false;
+                            play_idle_anim = false;
+                            play_running_anim = true;
                             Vector3 dirToTarget = transform.position - player.transform.position;
                             Vector3 newPos = transform.position - dirToTarget;
                             rotation_sprite = new Vector3(1, 1, 1);
@@ -86,13 +113,17 @@ public class EnemyController : MonoBehaviour
                         }
                         if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == true)
                         {
-                            quad.gameObject.GetComponent<Animator>().Play("EnemyAttacking");
+                            play_attack_anim = true;
+                            play_idle_anim = false;
+                            play_running_anim = false;
                             Light_slider(true);
                             Increase_number_of_hits();
                         }
                         else if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == false)
                         {
-                            quad.gameObject.GetComponent<Animator>().Play("EnemyIdle");
+                            play_attack_anim = false;
+                            play_idle_anim = true;
+                            play_running_anim = false;
                             Light_slider(false);
                         }
                     }
@@ -100,7 +131,9 @@ public class EnemyController : MonoBehaviour
                     {
                         if (distance > min_distance)
                         {
-                            quad.gameObject.GetComponent<Animator>().Play("EnemyRunning");
+                            play_attack_anim = false;
+                            play_idle_anim = false;
+                            play_running_anim = true;
                             Vector3 dirToTarget = transform.position - player.transform.position;
                             Vector3 newPos = transform.position - dirToTarget;
                             rotation_sprite = new Vector3(-1, 1, 1);
@@ -110,13 +143,17 @@ public class EnemyController : MonoBehaviour
                         }
                         if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == true)
                         {
-                            quad.gameObject.GetComponent<Animator>().Play("EnemyAttacking");
+                            play_attack_anim = true;
+                            play_idle_anim = false;
+                            play_running_anim = false;
                             Light_slider(true);
                             Increase_number_of_hits();
                         }
                         else if (distance < min_distance && player.gameObject.GetComponent<CharController>().Player_is_alive() == false)
                         {
-                            quad.gameObject.GetComponent<Animator>().Play("EnemyIdle");
+                            play_attack_anim = false;
+                            play_idle_anim = true;
+                            play_running_anim = false;
                             Light_slider(false);
                         }
                     }
@@ -131,7 +168,9 @@ public class EnemyController : MonoBehaviour
                         {
                             if (quad.gameObject.GetComponent<Animator>().enabled == true)//newly added condition
                             {
-                                quad.gameObject.GetComponent<Animator>().Play("EnemyRunning");
+                                play_attack_anim = false;
+                                play_idle_anim = false;
+                                play_running_anim = true;
                             }
                             if (direction == true)
                             {
@@ -150,7 +189,9 @@ public class EnemyController : MonoBehaviour
                         {
                             if (quad.gameObject.GetComponent<Animator>().enabled == true)//added condition
                             {
-                                quad.gameObject.GetComponent<Animator>().Play("EnemyIdle");
+                                play_attack_anim = false;
+                                play_idle_anim = true;
+                                play_running_anim = false;
                             }
                         }
                     }
@@ -186,17 +227,6 @@ public class EnemyController : MonoBehaviour
                             }
                         }
                     }
-                    /*if (enemy_difficulty == 2)
-                    {
-                        if (numbers_of_hitted == 3 || numbers_of_hitted == 8 || numbers_of_hitted == 13 || numbers_of_hitted == 18 || numbers_of_hitted == 23)
-                        {
-                            player.gameObject.GetComponent<CharController>().Decrease_number_of_cells();
-                            if (player.gameObject.GetComponent<CharController>().Return_number_of_cells() == 0)
-                            {
-                                Set_new_status();
-                            }
-                        }
-                    }*/
                 }
                 if (ManagerKeeper.Get_if_other_scene() == true)//to avoid enemy hit played when entering the minigame level03
                 {
@@ -220,11 +250,13 @@ public class EnemyController : MonoBehaviour
             if (enemy_alive == false)
             {
                 delay_for_dead += Time.fixedDeltaTime;
-                quad.gameObject.GetComponent<Animator>().Play("EnemyDying");
+                play_attack_anim = false;
+                play_idle_anim = false;
+                play_running_anim = false;
+                play_die_anim = true;
                 if (delay_for_dead >= 1.5f)
                 {
                     Destroy(gameObject);
-                    //Debug.Log("Enemy is dead");
                     delay_for_dead = 0;
                 }
             }
@@ -309,7 +341,6 @@ public class EnemyController : MonoBehaviour
             light_gun.gameObject.GetComponent<Light>().enabled = false;
             if (enemy_sounds[1] != null)
             {
-              //  enemy_sounds[1].volume = 0;
                 enemy_sounds[1].enabled = false; 
             }
         }
@@ -336,21 +367,13 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.CompareTag("TriggerForSplat"))
-        {
-            //enemy_alive = true;
-        }
-    }
 	private void OnBecameVisible()
 	{
         enable_on_screen = true;
-      //  Debug.Log("is visible");
+
 	}
     private void OnBecameInvisible()
     {
         enable_on_screen = false;
-   //     Debug.Log("is not visible");
     }
 }

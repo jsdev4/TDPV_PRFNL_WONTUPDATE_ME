@@ -9,10 +9,7 @@ public class TextEventsController : MonoBehaviour
         start_timer = false;
         to_next_level = false;
     }
-   /* void Update()
-    {
-        
-    }*/
+
     public void Text_is_centered()
     {
         start_timer = true;

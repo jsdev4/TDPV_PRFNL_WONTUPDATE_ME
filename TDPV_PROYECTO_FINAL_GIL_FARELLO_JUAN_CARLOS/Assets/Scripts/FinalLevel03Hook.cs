@@ -13,12 +13,10 @@ public class FinalLevel03Hook : MonoBehaviour
     private Vector3 start_position;
     private bool on_board;
     private float currentPosY;
-    private Vector3 rotation_sprite;
-    private float smoothTime;
-    private Vector3 velocity;
+ 
     void Start()
     {
-        smoothTime = 0.05f;
+        
         timer = 0;
         on_board = false;
         trnsfrm = GetComponent<Transform>();
@@ -47,8 +45,7 @@ public class FinalLevel03Hook : MonoBehaviour
             player.gameObject.GetComponent<Rigidbody>().useGravity = false;
            player.gameObject.GetComponent<CharController>().Set_if_player_can_move(false);
             player.gameObject.GetComponent<CharController>().Set_correct_player_rotation();
-            //rotation_sprite = new Vector3(1, 1, 1);
-            // player.gameObject.GetComponent<Transform>().localScale= Vector3.SmoothDamp(player.gameObject.GetComponent<Transform>().transform.localScale, rotation_sprite, ref velocity, smoothTime, 10);
+            
             wall_to_remove.gameObject.SetActive(false);
            
 		}

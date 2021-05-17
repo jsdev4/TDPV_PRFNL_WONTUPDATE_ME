@@ -10,10 +10,6 @@ public class LevelCompleteTextController : MonoBehaviour
         text_is_out = false;
     }
 
-    void LateUpdate()
-    {
-        
-    }
     public void Text_is_centered()
 	{
         text_is_centered = true;

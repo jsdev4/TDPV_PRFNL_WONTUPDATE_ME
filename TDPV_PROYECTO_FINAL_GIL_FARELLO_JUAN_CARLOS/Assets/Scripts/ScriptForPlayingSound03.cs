@@ -6,10 +6,6 @@ public class ScriptForPlayingSound03 : MonoBehaviour
     private bool player_is_here;
     private bool player_is_finally_here;
     public GameObject manager;
-    void Start()
-    {
-        
-    }
 
     
     void LateUpdate()

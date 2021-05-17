@@ -3,16 +3,7 @@ using UnityEngine.UI;
 public class InteractiveTextDisplayForLevelPlaces01 : MonoBehaviour
 {
     public Text text;
-    void Start()
-    {
-        
-    }
 
-    
-    void Update()
-    {
-        
-    }
 	private void OnTriggerEnter(Collider other)
 	{
 		if(other.CompareTag("Player"))

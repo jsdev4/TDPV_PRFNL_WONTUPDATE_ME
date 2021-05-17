@@ -30,7 +30,7 @@ public class CarController : MonoBehaviour
 
 		CurrentPositionHolder = PathNode[CurrentNode].gameObject.GetComponent<Transform>().position;
 	}
-	void Update()
+	void LateUpdate()
 	{
 		if (manager.gameObject.GetComponent<ManagerScript>().Return_if_paused() == false)
 		{

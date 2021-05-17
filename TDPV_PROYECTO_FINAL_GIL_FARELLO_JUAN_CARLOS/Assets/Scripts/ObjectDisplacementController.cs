@@ -47,10 +47,7 @@ public class ObjectDisplacementController : MonoBehaviour
             }
             if (trnsfrm.position.y >= first_pos.y)
             {
-               // initial_speed = 0;
-            //    acceleration = acceleration_aux;
                 max_displacement = false;
-           //     mov_speed = 0;
             }
         }
     }

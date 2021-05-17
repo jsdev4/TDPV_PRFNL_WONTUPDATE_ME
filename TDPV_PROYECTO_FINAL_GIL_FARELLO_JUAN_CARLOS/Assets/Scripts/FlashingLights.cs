@@ -14,9 +14,9 @@ public class FlashingLights : MonoBehaviour
 
 	}
 
-	void Update()
+	void LateUpdate()
 	{
-		if (lamp != null)
+		//if (lamp != null)
 		{
 			time_elapsed += Time.deltaTime;
 			if (time_elapsed >= delay)
@@ -29,7 +29,7 @@ public class FlashingLights : MonoBehaviour
 	}
 	private void Make_light_flash()
 	{
-		if (lamp != null)
+	//	if (lamp != null)
 		{
 			if (lamp.intensity == min_intensity)
 			{

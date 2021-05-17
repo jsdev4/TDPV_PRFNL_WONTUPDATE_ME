@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 public class ElevatorButtonSpecial01 : MonoBehaviour
 {
+
     private bool can_use;
     private bool going_move;
     public float max_time;
@@ -9,8 +10,10 @@ public class ElevatorButtonSpecial01 : MonoBehaviour
     public GameObject elevator;
     public GameObject text;
     private AudioSource button_sound;
+
     void Start()
     {
+
         can_use = false;
         going_move = false;
         button_sound = GetComponentInChildren<AudioSource>();
@@ -57,4 +60,5 @@ public class ElevatorButtonSpecial01 : MonoBehaviour
             text.gameObject.GetComponent<InteractiveTextController02>().Set_if_display(false);
         }
     }
+
 }

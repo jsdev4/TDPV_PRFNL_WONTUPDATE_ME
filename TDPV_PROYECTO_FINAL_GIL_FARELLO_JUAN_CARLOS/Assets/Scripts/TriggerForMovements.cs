@@ -6,10 +6,7 @@ public class TriggerForMovements : MonoBehaviour
     public GameObject[] enemy;
   
     public bool triggers_side;
-    void Start()
-    {
-        
-    }
+
 
     void Update()
     {

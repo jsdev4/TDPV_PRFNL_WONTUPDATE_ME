@@ -9,7 +9,6 @@ public class ManagerScript : MonoBehaviour
     private float time_counter_script_inside;
     private float delay_for_reset_game;
     private float timer_for_music_start;
-    //
     private float timer_to_restart_level;
     private bool paused;
     private bool changed;
@@ -47,121 +46,30 @@ public class ManagerScript : MonoBehaviour
     public GameObject fader;
     public AudioSource[] interface_sounds;
     public AudioSource[] music;
-
 	void Awake()
 	{
-        Application.targetFrameRate = 60;
-        fader.SetActive(true);
-        fader.gameObject.GetComponent<FaderScript>().Set_the_fade_out();
+        Application.targetFrameRate = 60; 
     }
 	void Start()
     {
+        fader.SetActive(true);
+        fader.gameObject.GetComponent<FaderScript>().Set_the_fade_out();
         to_main_menu = false;
         start_music = false;
         song_number = 0;
-        if (number_of_level == 0)
-		{
-            ManagerKeeper.Set_current_level(0);
-		}
-        if (number_of_level == 1)
-        {
-            ManagerKeeper.Set_current_level(1);
-        }
-        if (number_of_level == 2)
-        {
-            ManagerKeeper.Set_current_level(2);
-        }
-        if (number_of_level == 3)
-        {
-            ManagerKeeper.Set_current_level(3);
-        }
-        if (number_of_level == 4)
-        {
-            ManagerKeeper.Set_current_level(4);
-        }
-        if (number_of_level == 5)
-        {
-            ManagerKeeper.Set_current_level(5);
-        }
-        //condition for the returning from other scenes when lose
-        if (ManagerKeeper.Get_if_other_scene() == true&&ManagerKeeper.Get_if_mini_game_completed()==false)
-        {
-            time_counter_script_inside = ManagerKeeper.Get_old_time_script_inside();
-            special_computer_mini_game.gameObject.GetComponent<BoxCollider>().enabled = false;
-            player.gameObject.GetComponent<Transform>().position = ManagerKeeper.Get_old_players_position();
-            player.gameObject.GetComponent<CharController>().Set_lifes(ManagerKeeper.Get_old_number_of_lifes());
-            player.gameObject.GetComponent<CharController>().Keep_respawn_point(ManagerKeeper.Get_old_respawn_point());
-        }
-        if (ManagerKeeper.Get_if_other_scene() == true && ManagerKeeper.Get_if_mini_game_completed() == true)//when winning
-        {
-            Debug.Log(ManagerKeeper.Get_respawn_point());
-            time_counter_script_inside = ManagerKeeper.Get_old_time_script_inside();
-            special_computer_mini_game.gameObject.GetComponent<BoxCollider>().enabled = false;
-            player.gameObject.GetComponent<CharController>().Keep_respawn_point(ManagerKeeper.Get_old_respawn_point());
-            ManagerKeeper.Set_if_mini_game_was_completed(false);
-            ManagerKeeper.Is_in_other_scene(false);
-            came_from_mini_game = true;
-        }
-        //else
-        else if (ManagerKeeper.Get_if_other_scene() == false && ManagerKeeper.Get_if_mini_game_completed() == false)
-        {
-            time_counter_script_inside = time_counter;
-        }
-        if(came_from_mini_game==true)
-		{
-            if (ManagerKeeper.Get_respawn_point() == 0)
-            {
-                player.gameObject.GetComponent<Transform>().position = respawn_point[0].gameObject.GetComponent<Transform>().position;
-            }
-            if (ManagerKeeper.Get_respawn_point() == 1)
-            {
-                player.gameObject.GetComponent<Transform>().position = respawn_point[1].gameObject.GetComponent<Transform>().position;
-            }
-            if (ManagerKeeper.Get_respawn_point() == 2)
-            {
-                player.gameObject.GetComponent<Transform>().position = respawn_point[2].gameObject.GetComponent<Transform>().position;
-            }
-            if (ManagerKeeper.Get_respawn_point() == 3)
-            {
-                player.gameObject.GetComponent<Transform>().position = respawn_point[3].gameObject.GetComponent<Transform>().position;
-            }
-        }
-            delay_for_reset_game = 0;
-            changed = false;
-            paused = false;
-            out_of_time = false;
-            run_out_of_cells = false;
-            go_to_retry = false;
-            option = 0;
-            timer_to_restart_level = 0;
-            timer_for_music_start = 0;
-            select_color = new Color32(72, 58, 176, 255);
-            unselect_color = new Color32(149, 13, 76, 255);
-            ; if (time_counter_script_inside > 0 && time_counter_script_inside <= 60)
-            {
-                player.gameObject.GetComponent<CharController>().Set_number_of_cells(1);
-                cells_on_timer = 1;
-            }
-            if (time_counter_script_inside > 60 && time_counter_script_inside <= 120)
-            {
-                player.gameObject.GetComponent<CharController>().Set_number_of_cells(2);
-                cells_on_timer = 2;
-            }
-            if (time_counter_script_inside > 120 && time_counter_script_inside <= 180)
-            {
-                player.gameObject.GetComponent<CharController>().Set_number_of_cells(3);
-                cells_on_timer = 3;
-            }
-            if (time_counter_script_inside > 180 && time_counter_script_inside <= 240)
-            {
-                player.gameObject.GetComponent<CharController>().Set_number_of_cells(4);
-                cells_on_timer = 4;
-            }
-            if (time_counter_script_inside > 240 && time_counter_script_inside <= 999999999)
-            {
-                player.gameObject.GetComponent<CharController>().Set_number_of_cells(5);
-                cells_on_timer = 5;
-            } 
+        Set_current_level();     
+        delay_for_reset_game = 0;
+        changed = false;
+        paused = false;
+        out_of_time = false;
+        run_out_of_cells = false;
+        go_to_retry = false;
+        option = 0;
+        timer_to_restart_level = 0;
+        timer_for_music_start = 0;
+        select_color = new Color32(72, 58, 176, 255);
+        unselect_color = new Color32(149, 13, 76, 255);
+        Set_start_timer_and_cells(); 
     }
     void Update()
     {
@@ -409,13 +317,15 @@ public class ManagerScript : MonoBehaviour
                     }
                 }
             }
-            else if (time_counter_script_inside <= 0 && out_of_time == false)
+            else if (time_counter_script_inside <= 0)
             {
-                player.gameObject.GetComponent<CharController>().Set_if_is_dead_zone_or_dead(false);
-                out_of_time = true;
-                if (out_of_time == true && player.gameObject.GetComponent<CharController>().Return_number_of_lifes() > 0)
+                if (out_of_time == false)
                 {
-                    time_counter_script_inside = 0;
+                    player.gameObject.GetComponent<CharController>().Set_if_is_dead_zone_or_dead(false);
+                    out_of_time = true;
+                }
+                if(out_of_time== true && player.gameObject.GetComponent<CharController>().Return_number_of_lifes() > 0)
+                {
                     delay_for_reset_game += Time.deltaTime;
                     if (delay_for_reset_game > 3)
                     {
@@ -429,7 +339,6 @@ public class ManagerScript : MonoBehaviour
                 {
                     time_counter_script_inside = 0;
                     ManagerKeeper.Decrease_number_of_tries();
-                    //Debug.Log(ManagerKeeper.Get_number_of_tries_availables());
                 }
             }   
         }
@@ -495,4 +404,103 @@ public class ManagerScript : MonoBehaviour
 			}
         }
 	}
+
+    private void Set_current_level()
+	{
+        if (number_of_level == 0)
+        {
+            ManagerKeeper.Set_current_level(0);
+        }
+        if (number_of_level == 1)
+        {
+            ManagerKeeper.Set_current_level(1);
+        }
+        if (number_of_level == 2)
+        {
+            ManagerKeeper.Set_current_level(2);
+        }
+        if (number_of_level == 3)
+        {
+            ManagerKeeper.Set_current_level(3);
+        }
+        if (number_of_level == 4)
+        {
+            ManagerKeeper.Set_current_level(4);
+        }
+        if (number_of_level == 5)
+        {
+            ManagerKeeper.Set_current_level(5);
+        }
+        //condition for the returning from other scenes when lose
+        if (ManagerKeeper.Get_if_other_scene() == true && ManagerKeeper.Get_if_mini_game_completed() == false)
+        {
+            time_counter_script_inside = ManagerKeeper.Get_old_time_script_inside();
+            special_computer_mini_game.gameObject.GetComponent<BoxCollider>().enabled = false;
+            player.gameObject.GetComponent<Transform>().position = ManagerKeeper.Get_old_players_position();
+            player.gameObject.GetComponent<CharController>().Set_lifes(ManagerKeeper.Get_old_number_of_lifes());
+            player.gameObject.GetComponent<CharController>().Keep_respawn_point(ManagerKeeper.Get_old_respawn_point());
+        }
+        if (ManagerKeeper.Get_if_other_scene() == true && ManagerKeeper.Get_if_mini_game_completed() == true)//when winning
+        {
+            Debug.Log(ManagerKeeper.Get_respawn_point());
+            time_counter_script_inside = ManagerKeeper.Get_old_time_script_inside();
+            special_computer_mini_game.gameObject.GetComponent<BoxCollider>().enabled = false;
+            player.gameObject.GetComponent<CharController>().Keep_respawn_point(ManagerKeeper.Get_old_respawn_point());
+            ManagerKeeper.Set_if_mini_game_was_completed(false);
+            ManagerKeeper.Is_in_other_scene(false);
+            came_from_mini_game = true;
+        }
+        //else
+        else if (ManagerKeeper.Get_if_other_scene() == false && ManagerKeeper.Get_if_mini_game_completed() == false)
+        {
+            time_counter_script_inside = time_counter;
+        }
+        if (came_from_mini_game == true)
+        {
+            if (ManagerKeeper.Get_respawn_point() == 0)
+            {
+                player.gameObject.GetComponent<Transform>().position = respawn_point[0].gameObject.GetComponent<Transform>().position;
+            }
+            if (ManagerKeeper.Get_respawn_point() == 1)
+            {
+                player.gameObject.GetComponent<Transform>().position = respawn_point[1].gameObject.GetComponent<Transform>().position;
+            }
+            if (ManagerKeeper.Get_respawn_point() == 2)
+            {
+                player.gameObject.GetComponent<Transform>().position = respawn_point[2].gameObject.GetComponent<Transform>().position;
+            }
+            if (ManagerKeeper.Get_respawn_point() == 3)
+            {
+                player.gameObject.GetComponent<Transform>().position = respawn_point[3].gameObject.GetComponent<Transform>().position;
+            }
+        }
+    }
+    private void Set_start_timer_and_cells()
+	{
+        if (time_counter_script_inside > 0 && time_counter_script_inside <= 60)
+        {
+            player.gameObject.GetComponent<CharController>().Set_number_of_cells(1);
+            cells_on_timer = 1;
+        }
+        if (time_counter_script_inside > 60 && time_counter_script_inside <= 120)
+        {
+            player.gameObject.GetComponent<CharController>().Set_number_of_cells(2);
+            cells_on_timer = 2;
+        }
+        if (time_counter_script_inside > 120 && time_counter_script_inside <= 180)
+        {
+            player.gameObject.GetComponent<CharController>().Set_number_of_cells(3);
+            cells_on_timer = 3;
+        }
+        if (time_counter_script_inside > 180 && time_counter_script_inside <= 240)
+        {
+            player.gameObject.GetComponent<CharController>().Set_number_of_cells(4);
+            cells_on_timer = 4;
+        }
+        if (time_counter_script_inside > 240 && time_counter_script_inside <= 999999999)
+        {
+            player.gameObject.GetComponent<CharController>().Set_number_of_cells(5);
+            cells_on_timer = 5;
+        }
+    }
 }

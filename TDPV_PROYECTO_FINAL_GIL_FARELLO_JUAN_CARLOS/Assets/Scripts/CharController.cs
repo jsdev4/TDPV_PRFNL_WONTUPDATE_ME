@@ -71,6 +71,36 @@ public class CharController : MonoBehaviour
 	{
 		if(is_alive==true)
 		{
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            {
+                flipped = false;
+                is_moving = true;
+                rotation_sprite = new Vector3(-1, 1, 1);
+                transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime, 10);
+            }
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            {
+                flipped = true;
+                is_moving = true;
+                rotation_sprite = new Vector3(1, 1, 1);
+                transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime, 10);
+            }
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow))
+            {
+                is_moving = true;
+                speed = speed_on_z_axis;
+
+            }
+            if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
+            {
+                speed = reset_speed;
+                is_moving = false;
+            }
+            if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow))
+            {
+                speed = reset_speed;
+                is_moving = false;
+            }
             if (Input.GetKeyUp(KeyCode.L))
             {
                 is_light_on = !is_light_on;
@@ -92,7 +122,33 @@ public class CharController : MonoBehaviour
                     low_beam_light[i].gameObject.GetComponent<Light>().enabled = false;
                 }
             }
-            
+            if (is_moving == true && is_jumping == false)
+            {
+                quad.gameObject.GetComponent<Animator>().Play("RunningPlayer");
+            }
+            if (is_jumping == true && on_the_hook == false)
+            {
+                quad.gameObject.GetComponent<Animator>().Play("JumpPlayer");
+
+
+            }
+            if (is_moving == false && is_jumping == false)
+            {
+                if (is_interacting == false)
+                {
+
+                    quad.gameObject.GetComponent<Animator>().Play("IdlePlayer");
+
+                }
+                if (is_interacting == true)
+                {
+                    quad.gameObject.GetComponent<Animator>().Play("InteractingPlayer");
+                }
+            }
+            if(on_ground==false)
+			{
+                quad.gameObject.GetComponent<Animator>().Play("JumpPlayer");
+            }
         }
         else
 		{
@@ -110,80 +166,28 @@ public class CharController : MonoBehaviour
                 rb.MovePosition(transform.position + translation * speed * Time.fixedDeltaTime);
                 if (on_ground == true)
                 {
-                    if (Input.GetKey(KeyCode.A)||Input.GetKey(KeyCode.LeftArrow))
-                    {
-                        flipped = false;
-                        is_moving = true;
-                        rotation_sprite = new Vector3(-1, 1, 1);
-                        transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime,10);
-                    }
-                    if (Input.GetKey(KeyCode.D)||Input.GetKey(KeyCode.RightArrow))
-                    {
-                        flipped = true;
-                        is_moving = true;
-                        rotation_sprite = new Vector3(1, 1, 1);
-                        transform.localScale = Vector3.SmoothDamp(transform.localScale, rotation_sprite, ref velocity, smoothTime,10);
-                    }
-                    if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)||Input.GetKey(KeyCode.UpArrow)||Input.GetKey(KeyCode.DownArrow))
-                    {
-                        is_moving = true;
-                        speed = speed_on_z_axis;
-
-                    }
-                    if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)||Input.GetKeyUp(KeyCode.LeftArrow)||Input.GetKeyUp(KeyCode.RightArrow))
-                    {
-                        speed = reset_speed;
-                        is_moving = false;
-                    }
-                    if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S)||Input.GetKeyUp(KeyCode.UpArrow)||Input.GetKeyUp(KeyCode.DownArrow))
-                    {
-                        speed = reset_speed;
-                        is_moving = false;
-                    }
-                   
                     if (is_moving == false && is_jumping == false)
                     {
                         if (is_interacting == true)
                         {
                             delay_for_interacting += Time.fixedDeltaTime;
-                            quad.gameObject.GetComponent<Animator>().Play("InteractingPlayer");
                             if (delay_for_interacting >= 1.2f)
                             {
                                 delay_for_interacting = 0;
                                 is_interacting = false;
                             }
                         }
-                        if (is_interacting == false)
-                        {
-                           
-                            quad.gameObject.GetComponent<Animator>().Play("IdlePlayer");
-                            
-                        }
                     }
                     if (can_jump == true)
                     {
                         timer_for_jump = 0;
-                       // Debug.Log("time is " + timer_for_jump);
-                        if (Input.GetKeyDown(KeyCode.Space))
-                        {
-
-                           // is_jumping = true;
-                          //  rb.AddForce(Vector3.up * jump_speed, ForceMode.Impulse);
-
-                        }
                         if (Input.GetKey(KeyCode.Space))
                         {
-                            //is_jumping = true;
                             rb.AddForce(Vector3.up * jump_speed, ForceMode.Impulse);
                             is_jumping = true;
                             on_ground = false;
                             can_jump = false;
-                            //Debug.Log("jumpspeed is " + jump_speed);
                         }
-                    }
-                    if (is_moving == true && is_jumping == false)
-                    {
-                        quad.gameObject.GetComponent<Animator>().Play("RunningPlayer");
                     }
                     if (can_jump == false)
                     {
@@ -192,12 +196,6 @@ public class CharController : MonoBehaviour
                         {
                             can_jump = true;
 
-                        }
-                        if (is_jumping == true && on_the_hook == false)
-                        {
-                            quad.gameObject.GetComponent<Animator>().Play("JumpPlayer");
-                            
-                           
                         }
                     }
                     if(emit_particles==true)
@@ -212,11 +210,9 @@ public class CharController : MonoBehaviour
                 if (on_ground==false)
 				{   
                     timer_for_particle_emission += Time.fixedDeltaTime;
-                   // Debug.Log(timer_for_particle_emission);
                     if (timer_for_particle_emission > 1.5f)
                     {
-                        emit_particles = true;
-                        
+                        emit_particles = true;    
                     }
                     if(Input.GetKey(KeyCode.A)||Input.GetKey(KeyCode.LeftArrow))
 					{
@@ -239,19 +235,8 @@ public class CharController : MonoBehaviour
                         speed = reset_speed;
                         is_moving = false;
                     }
-                    if (on_the_hook == true)
-                    {
-                        quad.gameObject.GetComponent<Animator>().Play("ElectrifiedPlayer");
-                        rb.useGravity = false;
-                    }
-                    else
-                    {
-                        quad.gameObject.GetComponent<Animator>().Play("JumpPlayer");
-                        rb.useGravity = true;
-                    }
-                }
-                ///Light function--------------------------------
-                
+                    rb.useGravity = true;
+                }    
             }
             if (is_alive == false)
             {
@@ -269,8 +254,6 @@ public class CharController : MonoBehaviour
                         //number of cells are time dependent
                         number_of_cells = manager.gameObject.GetComponent<ManagerScript>().Get_cells_for_timer();
                         manager.gameObject.GetComponent<ManagerScript>().Reset_run_out_of_cells(false);
-                      
-
                         Set_if_dead_by_enemy(false);
                     }
                 }
@@ -307,13 +290,13 @@ public class CharController : MonoBehaviour
             }
             if (has_respawned == true && respawn_point == 4)
             {
-                transform.position = respawn[1].gameObject.GetComponent<Transform>().position;
+                transform.position = respawn[2].gameObject.GetComponent<Transform>().position;
                 transform.Translate(0, 0, 0.4f);
                 has_respawned = false;
             }
             if (has_respawned == true && respawn_point == 5)
             {
-                transform.position = respawn[1].gameObject.GetComponent<Transform>().position;
+                transform.position = respawn[2].gameObject.GetComponent<Transform>().position;
                 transform.Translate(0, 0, 0.4f);
                 has_respawned = false;
             }
@@ -327,7 +310,6 @@ public class CharController : MonoBehaviour
         fully_discharged.Play();
         is_alive = alv;
         lifes -= 1;
-       // Debug.Log("lifes :" + lifes);
     }
     public void Set_if_dead_by_enemy(bool enemy)
     {
@@ -348,7 +330,6 @@ public class CharController : MonoBehaviour
     public void Decrease_one_life()
     {
         lifes -= 1;
-       //Debug.Log("lifes :" + lifes);
     }
     public void Set_respawn_point(int rspwn)
     {
@@ -378,14 +359,9 @@ public class CharController : MonoBehaviour
             on_ground = true;
             is_jumping = false;
         }
-
     }
 	private void OnCollisionEnter(Collision collision)
 	{
-        if (collision.collider.CompareTag("ground") || collision.collider.CompareTag("Elevator") || collision.collider.CompareTag("MetallicStructure"))
-        {
-            //hit_sound.Play();
-        }
         if(collision.collider.CompareTag("Wall"))
 		{
             hit_sound[0].Play();
@@ -405,8 +381,7 @@ public class CharController : MonoBehaviour
         if (collision.collider.CompareTag("bootle"))
         {
             hit_sound[5].Play();
-		}
-        
+		} 
     }
 	private void OnCollisionExit(Collision collision)
     {
@@ -420,7 +395,6 @@ public class CharController : MonoBehaviour
 		{
             hit_sound[3].Stop();
 		}
-
     }
 	private void OnTriggerEnter(Collider other)
 	{
@@ -429,7 +403,6 @@ public class CharController : MonoBehaviour
             hit_sound[1].Play();
         }
     }
-
 	public void Set_if_is_on_the_hook(bool electrified)
     {
         on_the_hook = electrified;  
@@ -442,7 +415,6 @@ public class CharController : MonoBehaviour
     {
         discharging_sound.Play();
         number_of_cells -= 1;
-       // Debug.Log(number_of_cells);
     }
     public void Set_number_of_cells(float cells)
     {
@@ -467,7 +439,6 @@ public class CharController : MonoBehaviour
     public void Increase_number_of_cells()
     {
         number_of_cells+=1;
-       // Debug.Log(number_of_cells);
     }
 
     public bool Get_if_go_to_retry()

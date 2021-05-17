@@ -102,7 +102,6 @@ public class NpcController : MonoBehaviour
                 if (timer >= delay)
                 {
                     Generate_direction();
-                    // Generate_action();
                     timer = 0;
                 }
                 if (is_male_npc == false)
@@ -163,11 +162,9 @@ public class NpcController : MonoBehaviour
 	private void OnBecameVisible()
 	{
         on_screen = true;
-     //   Debug.Log("npc is on screen");
 	}
 	private void OnBecameInvisible()
 	{
         on_screen = false;
-      ///  Debug.Log("npc is not on screen");
 	}
 }

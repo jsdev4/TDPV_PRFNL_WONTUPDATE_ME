@@ -12,12 +12,6 @@ public class LightPathFollower : MonoBehaviour
 	private Vector3 startPosition;
 	private float delay;
 
-	void Start()
-	{
-		//CurrentNode = 0;
-
-	}
-
 	void CheckNode()
 	{
 		Timer = 0;
@@ -60,6 +54,5 @@ public class LightPathFollower : MonoBehaviour
 					}
 				}
 			}
-
 	}
 }

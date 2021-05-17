@@ -12,9 +12,7 @@ public class StopLightsController : MonoBehaviour
     private string colorHex00;
     private string colorHex01;
     private string colorHex02;
-    //  private Light light_bulb;
     public GameObject trigger_to_stop_car;
-   // public GameObject car;
     void Start()
     {
         delay = 0;
@@ -24,11 +22,8 @@ public class StopLightsController : MonoBehaviour
         colorHex00 = "#FF0000";
         colorHex01 = "#FFC600";
         colorHex02 = "#00FF31";
-    //    light_bulb = GetComponentInChildren<Light>();
         light_list = new ArrayList { colorHex00, colorHex01, colorHex02 };
-    }
-
-    
+    } 
     void Update()
     {
         sincro_delay += Time.deltaTime;

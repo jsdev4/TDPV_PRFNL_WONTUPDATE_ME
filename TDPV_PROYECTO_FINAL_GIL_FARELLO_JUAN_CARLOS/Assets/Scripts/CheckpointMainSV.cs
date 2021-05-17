@@ -43,7 +43,7 @@ public class CheckpointMainSV : MonoBehaviour
                     anim.Play("main_sv_unlocked");
                     keyboard_sound.Play();
                     gameObject.GetComponentInChildren<Light>().color = newCol;
-                    Debug.Log("pressed0");
+                  //  Debug.Log("pressed0");
                     checkpoint_passed = false;
                     checkpoint_enabled = true;
                 }

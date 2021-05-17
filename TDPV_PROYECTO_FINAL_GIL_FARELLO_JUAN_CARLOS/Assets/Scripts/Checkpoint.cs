@@ -41,7 +41,7 @@ public class Checkpoint : MonoBehaviour
                     player.gameObject.GetComponent<CharController>().Set_respawn_point(checkpoint_number);
                     trigger_to_save.gameObject.GetComponentInChildren<BoxCollider>().enabled = false;
                     keyboard_sound.Play();
-                    Debug.Log("checkppoint :" + checkpoint_number);
+                  //  Debug.Log("checkppoint :" + checkpoint_number);
                     checkpoint_passed = false;
                     checkpoint_enabled = true;
                 }
